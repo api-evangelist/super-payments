@@ -1,0 +1,430 @@
+openapi: 3.1.0
+info:
+  title: Super Payments Checkout Sessions Payment Methods API
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  version: '2026-04-01'
+  contact:
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments
+    identifier: https://www.superpayments.com/terms-and-conditions
+servers:
+- url: https://api.superpayments.com/2026-04-01
+  description: Live Environment
+- url: https://api.test.superpayments.com/2026-04-01
+  description: Sandbox Environment
+tags:
+- name: Payment Methods
+paths:
+  /payment-methods:
+    post:
+      operationId: create-payment-method
+      summary: Create Payment Method
+      description: This endpoint creates a new payment method that will be associated with a particular customer. This payment method, once set up, can be used to create off-session payments against a given customer.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentMethodRequestDto'
+      responses:
+        '201':
+          description: The newly created payment method
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodResponseDto'
+      security:
+      - api_key: []
+      tags:
+      - Payment Methods
+    get:
+      operationId: list-payment-methods
+      summary: List Payment Methods
+      description: This endpoint lists your previously created payment methods in a paged list. Additional filters and sorting criteria may be provided as query parameters.
+      parameters:
+      - name: brandId
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      - name: customerId
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: type
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+          const: CARD
+        x-enumNames:
+        - CARD
+      - name: usage
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+          const: OFF_SESSION
+        x-enumNames:
+        - OFF_SESSION
+      - name: status
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+          enum:
+          - DISABLED
+          - ENABLED
+          - REQUIRES_ACTION
+        x-enumNames:
+        - DISABLED
+        - ENABLED
+        - REQUIRES_ACTION
+      - name: direction
+        in: query
+        required: false
+        schema:
+          type: string
+          default: DESC
+          enum:
+          - ASC
+          - DESC
+      - name: by
+        in: query
+        required: false
+        schema:
+          type: string
+          default: createdAt
+          enum:
+          - createdAt
+          - updatedAt
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 100
+          maximum: 1000
+          minimum: 1
+      responses:
+        '200':
+          description: Paginated list of payment methods
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPaymentMethodListOutput'
+      security:
+      - api_key: []
+      tags:
+      - Payment Methods
+  /payment-methods/{id}/setup-intents:
+    post:
+      operationId: create-setup-intent
+      summary: Create Setup Intent
+      description: This endpoint creates a setup intent against a previously created payment method. The setup intent is used to orchestrate the process that allows a customer to set up their payment method (e.g. debit card) for future usage in off-session payments. It returns a session token that may be passed to the <super-card> Web Component to begin the setup process.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/PaymentMethodIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetupIntentSessionInputDto'
+      responses:
+        '201':
+          description: The newly created setup intent & next action options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupIntentSessionOutputDto'
+      security:
+      - api_key: []
+      tags:
+      - Payment Methods
+  /payment-methods/{id}:
+    get:
+      operationId: get-payment-method
+      summary: Get Payment Method
+      description: This endpoint returns a previously created payment method, including its current status. It requires the Super payment method ID that was provided upon successful creation of the payment method.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/PaymentMethodIdParam'
+      responses:
+        '200':
+          description: Existing payment method
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodResponseDto'
+      security:
+      - api_key: []
+      tags:
+      - Payment Methods
+  /payment-methods/setup-intents:
+    get:
+      operationId: list-setup-intents
+      summary: List Setup Intents
+      description: This endpoint lists all existing setup intents.
+      parameters: []
+      responses:
+        '200':
+          description: List all setup intent sessions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupIntentSessionListOutputDto'
+      security:
+      - api_key: []
+      tags:
+      - Payment Methods
+components:
+  schemas:
+    SetupIntentSessionInputDto:
+      type: object
+      properties:
+        redirectUrl:
+          type: string
+          format: uri
+    PaymentMethodResponseDto:
+      type: object
+      properties:
+        id: {}
+        customerId: {}
+        type:
+          type: string
+          const: CARD
+          x-enumNames:
+          - CARD
+        usage:
+          type: string
+          const: OFF_SESSION
+          x-enumNames:
+          - OFF_SESSION
+        status:
+          type: string
+          enum:
+          - DISABLED
+          - ENABLED
+          - REQUIRES_ACTION
+          x-enumNames:
+          - DISABLED
+          - ENABLED
+          - REQUIRES_ACTION
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        createdAt: {}
+        updatedAt: {}
+      required:
+      - id
+      - customerId
+      - type
+      - usage
+      - status
+      - metadata
+      - createdAt
+      - updatedAt
+    SetupIntentSessionOutputDto:
+      type: object
+      properties:
+        id:
+          type: string
+        sessionToken:
+          type: string
+        redirectUrl:
+          type: string
+          format: uri
+      required:
+      - id
+      - sessionToken
+    PaymentMethodIdParam:
+      type: string
+    PaginatedPaymentMethodListOutput:
+      type: object
+      properties:
+        pageInfo:
+          type: object
+          properties:
+            hasNextPage:
+              type: boolean
+            currentPage:
+              type: number
+            lastPage:
+              type: number
+            pageSize:
+              type: number
+          required:
+          - hasNextPage
+          - currentPage
+          - lastPage
+          - pageSize
+        totalCount:
+          type: number
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id: {}
+              customerId: {}
+              type:
+                type: string
+                const: CARD
+                x-enumNames:
+                - CARD
+              usage:
+                type: string
+                const: OFF_SESSION
+                x-enumNames:
+                - OFF_SESSION
+              status:
+                type: string
+                enum:
+                - DISABLED
+                - ENABLED
+                - REQUIRES_ACTION
+                x-enumNames:
+                - DISABLED
+                - ENABLED
+                - REQUIRES_ACTION
+              metadata:
+                type:
+                - object
+                - 'null'
+                additionalProperties:
+                  type: string
+                  pattern: ^[^\r\n\t\b\f\v]+$
+                  maxLength: 200
+              createdAt: {}
+              updatedAt: {}
+            required:
+            - id
+            - customerId
+            - type
+            - usage
+            - status
+            - metadata
+            - createdAt
+            - updatedAt
+      required:
+      - pageInfo
+      - totalCount
+      - items
+    SetupIntentSessionListOutputDto:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+                enum:
+                - FAILED
+                - PROCESSING
+                - SUCCESS
+              createdAt: {}
+              updatedAt: {}
+              paymentMethodId:
+                type: string
+              customerId:
+                type: string
+              brandId:
+                type: string
+              providerData:
+                type:
+                - object
+                - 'null'
+                properties:
+                  provider:
+                    type: string
+                    const: STRIPE
+                  providerPaymentMethodId:
+                    type: string
+                required:
+                - provider
+                - providerPaymentMethodId
+            required:
+            - id
+            - status
+            - createdAt
+            - updatedAt
+            - paymentMethodId
+            - customerId
+            - brandId
+      required:
+      - items
+    CreatePaymentMethodRequestDto:
+      type: object
+      properties:
+        customerId:
+          type: string
+        type:
+          type: string
+          const: CARD
+          x-enumNames:
+          - CARD
+        usage:
+          type: string
+          const: OFF_SESSION
+          x-enumNames:
+          - OFF_SESSION
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+      required:
+      - customerId
+      - type
+      - usage
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Merchant API key
+    HMAC:
+      type: apiKey
+      in: header
+      name: super-signature
+      description: Header used to validate the webhook request

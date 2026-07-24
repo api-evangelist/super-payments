@@ -1,0 +1,561 @@
+openapi: 3.1.0
+info:
+  title: Super Payments Checkout Sessions Rewards API
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  version: '2026-04-01'
+  contact:
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments
+    identifier: https://www.superpayments.com/terms-and-conditions
+servers:
+- url: https://api.superpayments.com/2026-04-01
+  description: Live Environment
+- url: https://api.test.superpayments.com/2026-04-01
+  description: Sandbox Environment
+tags:
+- name: Rewards
+  description: Rewards configuration and calculation and management
+paths:
+  /reward-calculations:
+    post:
+      operationId: generate-reward-calculation
+      summary: Generate a reward calculation for a given amount and brand
+      description: This endpoint calculates the reward percentage and issuable rewards based on the provided amount and brand ID.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRewardCalculationInput'
+      responses:
+        '200':
+          description: Successful reward calculation generation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateRewardCalculationOutputDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+      security:
+      - api_key: []
+      tags:
+      - Rewards
+  /brands/{brandId}/reward-configuration:
+    get:
+      operationId: get-reward-configuration
+      summary: Get the reward configuration for a brand
+      description: This endpoint retrieves the reward configuration for a specific brand, including the reward percentage, minimum spend, and rewards expiration time.
+      parameters:
+      - name: brandId
+        in: path
+        description: The unique identifier for the brand (UUID format)
+        required: true
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - f47ac10b-58cc-4372-a567-0e02b2c3d479
+      responses:
+        '200':
+          description: Successful retrieval of reward configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardConfigurationOutputDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+      security:
+      - api_key: []
+      tags:
+      - Rewards
+    put:
+      operationId: upsert-brand-reward-configuration
+      summary: Upsert the reward configuration for a brand
+      description: This endpoint allows you to create or update the reward configuration for a specific brand, including the reward percentage, minimum spend, and rewards expiration time.
+      parameters:
+      - name: brandId
+        in: path
+        description: The unique identifier for the brand (UUID format)
+        required: true
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - f47ac10b-58cc-4372-a567-0e02b2c3d479
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutRewardConfigurationInputBody'
+      responses:
+        '200':
+          description: Successful upsert of reward configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardConfigurationOutputDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+      security:
+      - api_key: []
+      tags:
+      - Rewards
+components:
+  schemas:
+    GenerateRewardCalculationOutputDto:
+      type: object
+      properties:
+        id:
+          description: Unique identifier for the reward calculation
+          type: string
+          examples:
+          - 687a0a84-88f2-40f7-8c3b-e74c7388d63d
+        rewardPercentage:
+          description: The percentage rate used for the reward calculation
+          type: number
+          examples:
+          - 2.5
+        rewardsIssuable:
+          type: object
+          properties:
+            amount:
+              description: The amount
+              type: number
+            currency:
+              description: The currency code
+              type: string
+              examples:
+              - GBP
+          required:
+          - amount
+          - currency
+      required:
+      - id
+      - rewardPercentage
+      - rewardsIssuable
+    GenerateRewardCalculationInput:
+      type: object
+      properties:
+        brandId:
+          description: The unique identifier for the brand
+          type: string
+          examples:
+          - f47ac10b-58cc-4372-a567-0e02b2c3d479
+        currency:
+          description: The currency code, currently only GBP is supported
+          type: string
+          examples:
+          - GBP
+          const: GBP
+        amount:
+          description: The transaction amount in the specified currency
+          type: number
+          examples:
+          - 25.99
+          minimum: 0
+        externalReference:
+          description: Optional external reference for tracking purposes
+          type: string
+          examples:
+          - order-12345
+      required:
+      - brandId
+      - currency
+      - amount
+    RewardConfigurationOutputDto:
+      type: object
+      properties:
+        rewardPercentage:
+          description: The percentage of the transaction amount that will be rewarded
+          type: number
+          examples:
+          - 2.5
+        minimumSpend:
+          description: The minimum spend required to qualify for the reward
+          type: object
+          examples:
+          - currency: GBP
+            amount: 1000
+          properties:
+            currency:
+              description: The currency code for the minimum spend amount
+              type: string
+              examples:
+              - GBP
+              const: GBP
+            amount:
+              description: The minimum spend amount
+              type: number
+              examples:
+              - 1000
+          required:
+          - currency
+          - amount
+        rewardsExpireAfter:
+          description: The number of seconds after which the rewards will expire
+          type: number
+          examples:
+          - 31536000
+      required:
+      - rewardPercentage
+      - minimumSpend
+      - rewardsExpireAfter
+    PutRewardConfigurationInputBody:
+      type: object
+      properties:
+        rewardPercentage:
+          description: The percentage of the transaction amount that will be rewarded
+          type: number
+          examples:
+          - 2.5
+          maximum: 100
+          minimum: 0
+        minimumSpend:
+          description: The minimum spend required to qualify for the reward
+          type: object
+          examples:
+          - currency: GBP
+            amount: 1000
+          properties:
+            currency:
+              description: The currency code for the minimum spend amount
+              type: string
+              examples:
+              - GBP
+              default: GBP
+              const: GBP
+            amount:
+              description: The minimum spend amount
+              type: integer
+              examples:
+              - 1000
+              minimum: 0
+          required:
+          - amount
+        rewardsExpireAfter:
+          description: The number of seconds after which the rewards will expire
+          type: integer
+          examples:
+          - 31536000
+          minimum: 0
+      required:
+      - rewardPercentage
+      - minimumSpend
+      - rewardsExpireAfter
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Merchant API key
+    HMAC:
+      type: apiKey
+      in: header
+      name: super-signature
+      description: Header used to validate the webhook request

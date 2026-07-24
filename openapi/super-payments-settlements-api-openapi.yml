@@ -1,0 +1,541 @@
+openapi: 3.1.0
+info:
+  title: Super Payments Checkout Sessions Settlements API
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  version: '2026-04-01'
+  contact:
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments
+    identifier: https://www.superpayments.com/terms-and-conditions
+servers:
+- url: https://api.superpayments.com/2026-04-01
+  description: Live Environment
+- url: https://api.test.superpayments.com/2026-04-01
+  description: Sandbox Environment
+tags:
+- name: Settlements
+  description: Settlement batches, details, and reconciliation
+paths:
+  /settlements/{settlementId}:
+    get:
+      operationId: get-settlement-detail-2025-11-01
+      summary: Get settlement detail
+      description: Fetch a single settlement and its payments/statistics. Provide Accept
+      parameters:
+      - name: settlementId
+        in: path
+        description: Settlement identifier.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Accept
+        in: header
+        description: Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.
+        required: false
+        schema:
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: Settlement detail response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementDetailResponse'
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - api_key: []
+      tags:
+      - Settlements
+  /settlements/{settlementId}/reconciliation:
+    get:
+      operationId: get-settlement-reconciliation-2025-11-01
+      summary: Get settlement reconciliation rows
+      description: Return ledger reconciliation items for a settlement, with pagination. Provide Accept
+      parameters:
+      - name: settlementId
+        in: path
+        description: Settlement identifier.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: pageSize
+        in: query
+        description: Number of reconciliation rows per page.
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+      - name: page
+        in: query
+        description: Opaque cursor returned by previous responses.
+        required: false
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.
+        required: false
+        schema:
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: Settlement reconciliation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementReconciliationResponse'
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - api_key: []
+      tags:
+      - Settlements
+  /settlements:
+    get:
+      operationId: list-settlements-2025-11-01
+      summary: List settlements
+      description: Retrieve paginated settlement batches for the current merchant. Provide Accept
+      parameters:
+      - name: settlementReference
+        in: query
+        description: Filter by prefix of settlement reference (case-insensitive).
+        required: false
+        schema:
+          type: string
+          maxLength: 64
+      - name: pageSize
+        in: query
+        description: Number of results to return per page.
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+      - name: page
+        in: query
+        description: Opaque cursor returned by previous responses.
+        required: false
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.
+        required: false
+        schema:
+          type: string
+          examples:
+          - application/json
+      responses:
+        '200':
+          description: List settlements response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementListResponse'
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - api_key: []
+      tags:
+      - Settlements
+components:
+  schemas:
+    SettlementListItem:
+      type: object
+      properties:
+        settlementId:
+          description: Unique identifier for the settlement.
+          type: string
+        settlementReference:
+          description: Settlement reference supplied by the merchant, when available.
+          type:
+          - string
+          - 'null'
+        settledAt:
+          description: ISO timestamp when the settlement was completed.
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          description: Current status of the settlement.
+          allOf:
+          - $ref: '#/components/schemas/SettlementStatus'
+        minorUnitAmount:
+          description: Amount in minor units (integer).
+          type: integer
+        currency:
+          description: Currency code.
+          type: string
+        createdAt:
+          description: ISO timestamp when the settlement row was created.
+          type: string
+          format: date-time
+      required:
+      - settlementId
+      - settlementReference
+      - settledAt
+      - status
+      - minorUnitAmount
+      - currency
+      - createdAt
+    SettlementListResponse:
+      type: object
+      properties:
+        pageSize:
+          description: Number of items per page.
+          type: integer
+        nextPage:
+          description: Token for the next page of results.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results.
+          type: boolean
+        items:
+          description: List of settlements.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementListItem'
+      required:
+      - pageSize
+      - hasNext
+      - items
+    ProblemDetails:
+      type: object
+      properties:
+        status:
+          description: The HTTP status code.
+          type: integer
+          examples:
+          - 400
+        type:
+          description: A URI reference that identifies the problem type.
+          type: string
+          examples:
+          - https://api.superpayments.com/errors/request_validation_error
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+          examples:
+          - Bad Request
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - Request validation failed
+        instance:
+          description: A unique identifier for the error.
+          type: string
+          examples:
+          - '4186980260999334757'
+    SettlementPaymentStatus:
+      description: Status of an individual payment included in a settlement.
+      type: string
+      enum:
+      - CREATED
+      - FAILED
+      - PENDING
+      - SETTLED
+    SettlementReconciliationItem:
+      type: object
+      properties:
+        reconciliationItemId:
+          description: Unique identifier for the reconciliation item.
+          type: string
+        transactionId:
+          description: Identifier of the transaction associated with this reconciliation item.
+          type: string
+        transactionType:
+          description: Type of transaction represented by this reconciliation row.
+          type: string
+          enum:
+          - ABOUND_REFUND_HOLD
+          - ABOUND_REFUND_HOLD_RELEASE
+          - DISPUTE_AMOUNT_COLLECTION
+          - DISPUTE_AMOUNT_RETURN
+          - FEE_COLLECTION
+          - FEE_LIABILITY_HOLD
+          - FLOAT_HOLD
+          - MANUAL_ADJUSTMENT_CREDIT
+          - MANUAL_ADJUSTMENT_DEBIT
+          - MANUAL_ALLOCATION
+          - PAYMENT
+          - PAYOUT
+          - PUBLISHER_COMMISSION_PAYOUT
+          - REFUND
+          - REFUND_RESERVATION_RELEASE
+          - REFUND_TOPUP_TRANSFER_CLAWBACK
+          - REWARD_SETTLEMENT
+          - ROUNDING_ADJUSTMENT
+          - TOPUP_TRANSFER
+        paymentIntentId:
+          description: Payment intent identifier associated with the transaction. Will be null when not applicable to the transaction type.
+          type:
+          - string
+          - 'null'
+        paymentIntentReference:
+          description: Payment intent reference associated with the transaction. Will be null when not applicable to the transaction type.
+          type:
+          - string
+          - 'null'
+        paymentIntentExternalReference:
+          description: Payment intent external reference provided when the payment intent was created. Will be null when not applicable.
+          type:
+          - string
+          - 'null'
+        refundId:
+          description: Refund identifier associated with the transaction. Will be null when not applicable to the transaction type.
+          type:
+          - string
+          - 'null'
+        refundReference:
+          description: Refund reference associated with the transaction. Will be null when not applicable to the transaction type.
+          type:
+          - string
+          - 'null'
+        refundExternalReference:
+          description: Refund external reference provided when the refund was created. Will be null when not applicable.
+          type:
+          - string
+          - 'null'
+        amountSettled:
+          description: Amount settled as an integer. Interpret using amountScale.
+          type: integer
+        amountScale:
+          description: Scale (number of decimal places) applied to amountSettled.
+          type: integer
+          examples:
+          - 2
+        currency:
+          description: Currency code.
+          type: string
+        isCredit:
+          description: True when the row represents a credit, false for a debit.
+          type: boolean
+      required:
+      - reconciliationItemId
+      - transactionId
+      - transactionType
+      - paymentIntentId
+      - paymentIntentReference
+      - paymentIntentExternalReference
+      - refundId
+      - refundReference
+      - refundExternalReference
+      - amountSettled
+      - amountScale
+      - currency
+      - isCredit
+    SettlementStatus:
+      description: Current status of the settlement batch.
+      type: string
+      enum:
+      - CREATED
+      - ERRORED
+      - SETTLED
+      - SETTLED_AFTER_RETRY
+    SettlementPayment:
+      type: object
+      properties:
+        paymentReference:
+          description: Reference for the payment or payout included in the settlement.
+          type: string
+        status:
+          description: Payment status within the settlement.
+          allOf:
+          - $ref: '#/components/schemas/SettlementPaymentStatus'
+        minorUnitAmount:
+          description: Amount in minor units (integer).
+          type: integer
+        currency:
+          description: Currency code for the payment.
+          type: string
+      required:
+      - paymentReference
+      - status
+      - minorUnitAmount
+      - currency
+    SettlementStatistics:
+      type: object
+      properties:
+        openingBalanceAmount:
+          description: Opening balance as an integer. Interpret using amountScale.
+          type: integer
+        reservedFeesAmount:
+          description: Reserved fees amount as an integer. Interpret using amountScale.
+          type: integer
+        amountScale:
+          description: Scale (number of decimal places) shared by the statistics amounts.
+          type: integer
+          examples:
+          - 2
+      required:
+      - openingBalanceAmount
+      - reservedFeesAmount
+      - amountScale
+    SettlementDetailResponse:
+      type: object
+      properties:
+        settlementId:
+          description: Unique identifier for the settlement.
+          type: string
+        settlementReference:
+          description: External reference for the settlement, if provided.
+          type:
+          - string
+          - 'null'
+        settlementTs:
+          description: ISO timestamp when the settlement was processed. Same timestamp as settledAt in list responses.
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          description: Current status of the settlement.
+          allOf:
+          - $ref: '#/components/schemas/SettlementStatus'
+        minorUnitAmount:
+          description: Amount in minor units (integer).
+          type: integer
+        currency:
+          description: Currency code.
+          type: string
+        payments:
+          description: List of payments included in this settlement.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementPayment'
+        settlementStatistics:
+          description: Statistical information for the settlement.
+          $ref: '#/components/schemas/SettlementStatistics'
+        createdAt:
+          description: ISO timestamp when the settlement row was created.
+          type: string
+          format: date-time
+      required:
+      - settlementId
+      - settlementReference
+      - settlementTs
+      - status
+      - minorUnitAmount
+      - currency
+      - payments
+      - settlementStatistics
+      - createdAt
+    SettlementReconciliationResponse:
+      type: object
+      properties:
+        pageSize:
+          description: Number of reconciliation rows per page.
+          type: integer
+        nextPage:
+          description: Opaque cursor returned by previous responses.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results.
+          type: boolean
+        items:
+          description: Reconciliation items for the settlement.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementReconciliationItem'
+      required:
+      - pageSize
+      - hasNext
+      - items
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Merchant API key
+    HMAC:
+      type: apiKey
+      in: header
+      name: super-signature
+      description: Header used to validate the webhook request

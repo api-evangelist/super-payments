@@ -1,0 +1,1181 @@
+openapi: 3.1.0
+info:
+  title: Super Payments Checkout Sessions Refunds API
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  version: '2026-04-01'
+  contact:
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments
+    identifier: https://www.superpayments.com/terms-and-conditions
+servers:
+- url: https://api.superpayments.com/2026-04-01
+  description: Live Environment
+- url: https://api.test.superpayments.com/2026-04-01
+  description: Sandbox Environment
+tags:
+- name: Refunds
+  description: Refund management
+paths:
+  /refunds/payouts:
+    post:
+      operationId: create-payout-refund
+      summary: Create Payout Refund (Restricted)
+      description: This endpoint is used to initiate a payout refund to a provided payment method. This is a restricted endpoint, contact customer support to request access.
+      parameters:
+      - name: authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiatePayoutRefundInputDto'
+      responses:
+        '200':
+          description: Successful payout refund initiation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiatePayoutRefundOutputDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Refunds
+  /refunds:
+    post:
+      operationId: create-refund
+      summary: Create Refund
+      description: This endpoint is used to initiate a refund for a payment transaction.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiateRefundInputDto'
+      responses:
+        '200':
+          description: Successful refund initiation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiateRefundOutputDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Refunds
+  /refunds/{transactionId}:
+    get:
+      operationId: get-refund-transaction-2025-11-01
+      summary: Get refund transaction
+      description: Poll for an individual refund transaction status to check its current state. Returns detailed information about the refund transaction including its status and payment details.
+      parameters:
+      - name: transactionId
+        in: path
+        description: Id of the refund transaction
+        required: true
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - 9eb0ee73-3922-4be3-bdbb-1404b38cca86
+      responses:
+        '200':
+          description: Refund transaction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRefundTransactionOutput'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Refunds
+  /refunds/search:
+    get:
+      operationId: search-refund-transactions-2025-11-01
+      summary: Search refund transactions
+      description: Retrieve a list of refund transactions with filtering options. Results are paginated and can be filtered by various criteria including status, payment ID, and date range. Refund transactions are returned in reverse chronological order (newest first). If no filters are specified, all available refund transactions will be returned subject to pagination limits.
+      parameters:
+      - name: transactionStatus
+        in: query
+        description: Filter by refund transaction status. Can be a single status or an array of statuses.
+        required: false
+        schema:
+          description: Filter by refund transaction status. Can be a single status or an array of statuses.
+          type: array
+          items:
+            type: string
+      - name: startDate
+        in: query
+        description: Filter by start date (ISO 8601 format). Inclusive.
+        required: false
+        schema:
+          description: Filter by start date (ISO 8601 format). Inclusive.
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Filter by end date (ISO 8601 format). Inclusive.
+        required: false
+        schema:
+          description: Filter by end date (ISO 8601 format). Inclusive.
+          type: string
+          format: date-time
+      - name: pageSize
+        in: query
+        description: Number of items to return per page.
+        required: false
+        schema:
+          description: Number of items to return per page.
+          type: integer
+      - name: page
+        in: query
+        description: Page token for pagination (cursor).
+        required: false
+        schema:
+          description: Page token for pagination (cursor).
+          type: string
+      - name: paymentExternalReference
+        in: query
+        description: Filter by the external reference of the original payment.
+        required: false
+        schema:
+          description: Filter by the external reference of the original payment.
+          type: string
+      - name: paymentTransactionId
+        in: query
+        description: Filter by the original payment transaction ID.
+        required: false
+        schema:
+          description: Filter by the original payment transaction ID.
+          type: string
+      - name: transactionId
+        in: query
+        description: Filter by refund transaction ID.
+        required: false
+        schema:
+          description: Filter by refund transaction ID.
+          type: string
+      responses:
+        '200':
+          description: List of refund transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRefundsListOutput'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Refunds
+components:
+  schemas:
+    BuyNowPayLaterRefundType:
+      description: Type identifier for Buy Now, Pay Later refund funding details. Used when refunds are processed through a BNPL provider like Klarna or Afterpay, typically reducing or canceling the customer's outstanding balance.
+      type: string
+      const: BUY_NOW_PAY_LATER
+    RefundPaymentCard:
+      type: object
+      properties:
+        lastFourDigits:
+          description: The last four digits of the card used for the refund payment.
+          type: string
+        brand:
+          description: The brand of the card used for the refund payment (e.g., Visa, Mastercard).
+          type: string
+      required:
+      - lastFourDigits
+      - brand
+    OpenBankingRefundType:
+      description: Type identifier for open banking refund funding details. Used when refunds are processed directly to a customer's bank account using Open Banking payment rails.
+      type: string
+      const: OPEN_BANKING
+    InitiateRefundOutputDto:
+      type: object
+      properties:
+        transactionId:
+          description: The unique identifier of the refund
+          type: string
+          format: uuid
+        transactionReference:
+          description: The reference number for the refund
+          type: string
+        fundingSummary:
+          description: Summary of funding sources for the refund
+          type: object
+          properties:
+            cashPayableToMerchant:
+              description: Amount payable to merchant
+              type: object
+              properties:
+                amount:
+                  description: Amount in minor units
+                  type: integer
+                  minimum: 0
+                currency:
+                  description: Currency code
+                  type: string
+                  const: GBP
+              required:
+              - amount
+              - currency
+            customerFundedAmount:
+              description: Amount funded by customer
+              type: object
+              properties:
+                amount:
+                  description: Amount in minor units
+                  type: integer
+                  minimum: 0
+                currency:
+                  description: Currency code
+                  type: string
+                  const: GBP
+              required:
+              - amount
+              - currency
+            superFundedAmount:
+              description: Amount funded by Super
+              type: object
+              properties:
+                amount:
+                  description: Amount in minor units
+                  type: integer
+                  minimum: 0
+                currency:
+                  description: Currency code
+                  type: string
+                  const: GBP
+              required:
+              - amount
+              - currency
+            merchantFundedAmount:
+              description: Amount funded by merchant
+              type: object
+              properties:
+                amount:
+                  description: Amount in minor units
+                  type: integer
+                  minimum: 0
+                currency:
+                  description: Currency code
+                  type: string
+                  const: GBP
+              required:
+              - amount
+              - currency
+          required:
+          - cashPayableToMerchant
+          - customerFundedAmount
+          - superFundedAmount
+          - merchantFundedAmount
+      required:
+      - transactionId
+      - transactionReference
+      - fundingSummary
+    GetRefundTransactionOutput:
+      type: object
+      properties:
+        transactionId:
+          description: Unique identifier for the payment transaction
+          type: string
+        transactionReference:
+          description: Reference code for the transaction
+          type: string
+        transactionStatus:
+          description: Current status of the refund transaction
+          allOf:
+          - $ref: '#/components/schemas/RefundOutputStatus'
+        brandId:
+          description: Brand identifier associated with the transaction
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payments:
+          description: List of refund payments
+          type: array
+          items:
+            $ref: '#/components/schemas/RefundPayment'
+        paymentMethodId:
+          description: Payment method identifier associated with the refund, if applicable
+          type:
+          - string
+          - 'null'
+      required:
+      - transactionId
+      - transactionReference
+      - transactionStatus
+      - brandId
+      - payments
+    InitiatePayoutRefundOutputDto:
+      type: object
+      properties:
+        transactionId:
+          description: The unique identifier of the refund
+          type: string
+          format: uuid
+        transactionReference:
+          description: The reference number for the refund
+          type: string
+      required:
+      - transactionId
+      - transactionReference
+    InitiateRefundInputDto:
+      type: object
+      properties:
+        transactionId:
+          description: The transaction ID to refund
+          type: string
+          format: uuid
+        amount:
+          description: The amount to refund in minor units (e.g. pence for GBP)
+          type: integer
+          exclusiveMinimum: 0
+        currency:
+          description: The currency of the refund
+          type: string
+          const: GBP
+        externalReference:
+          description: The merchant's reference for the refund
+          type: string
+        brandId:
+          description: Brand ID for the refund
+          type: string
+      required:
+      - transactionId
+      - amount
+      - currency
+    GetRefundsListTransaction:
+      type: object
+      properties:
+        transactionId:
+          description: Unique identifier for the refund transaction
+          type: string
+        paymentTransactionId:
+          description: Identifier of the original payment transaction
+          type: string
+        paymentExternalReference:
+          description: External reference of the payment
+          type:
+          - string
+          - 'null'
+        transactionReference:
+          description: Reference code for the refund transaction
+          type: string
+        minorUnitAmount:
+          description: Amount in minor units of the currency
+          type: number
+        currency:
+          description: Currency code
+          type: string
+        transactionStatus:
+          description: Current status of the refund transaction
+          allOf:
+          - $ref: '#/components/schemas/RefundOutputStatus'
+        transactionStatusChangedAt:
+          description: Date when the transaction status was last changed
+          type: string
+          format: date-time
+        brandId:
+          description: Brand identifier associated with the transaction
+          type:
+          - string
+          - 'null'
+          format: uuid
+        paymentMethodId:
+          description: Identifier for the refunded payment method
+          type:
+          - string
+          - 'null'
+      required:
+      - transactionId
+      - paymentTransactionId
+      - paymentExternalReference
+      - transactionReference
+      - minorUnitAmount
+      - currency
+      - transactionStatus
+      - transactionStatusChangedAt
+      - brandId
+    RefundPayment:
+      type: object
+      properties:
+        amountInMinorUnits:
+          description: The amount of this refund payment in minor units (e.g., cents).
+          type: number
+        fundingInstitution:
+          description: 'The name of the funding institution for this refund payment, if applicable (e.g., bank name). Deprecated: use the institutionName field in the fundingDetails object instead.'
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        fundingCard:
+          description: 'Details of the card used for this refund payment, if applicable. Deprecated: use the card details in the fundingDetails object instead.'
+          allOf:
+          - $ref: '#/components/schemas/RefundPaymentCard'
+          deprecated: true
+        reference:
+          description: A reference identifier for this refund payment, if applicable. Nullable.
+          type:
+          - string
+          - 'null'
+        referenceStatus:
+          description: The status of the reference for this refund payment, if applicable. Nullable.
+          type:
+          - string
+          - 'null'
+        referenceType:
+          description: The type of reference for this refund payment, if applicable (e.g., acquirer_reference_number). Nullable.
+          type:
+          - string
+          - 'null'
+        fundingDetails:
+          description: Detailed information about the funding method used for this specific refund payment.
+          discriminator:
+            propertyName: type
+            mapping:
+              CARD: '#/components/schemas/CardRefundFundingDetails'
+              OPEN_BANKING: '#/components/schemas/OpenBankingRefundFundingDetails'
+              CASH_REWARD: '#/components/schemas/CashRewardRefundFundingDetails'
+              BUY_NOW_PAY_LATER: '#/components/schemas/BuyNowPayLaterRefundFundingDetails'
+          oneOf:
+          - $ref: '#/components/schemas/CardRefundFundingDetails'
+            title: Card Payment
+          - $ref: '#/components/schemas/OpenBankingRefundFundingDetails'
+            title: Open Banking Payment
+          - $ref: '#/components/schemas/CashRewardRefundFundingDetails'
+            title: Cash Reward Payment
+          - $ref: '#/components/schemas/BuyNowPayLaterRefundFundingDetails'
+            title: Buy Now Pay Later Payment
+          - type: 'null'
+      required:
+      - amountInMinorUnits
+      - fundingInstitution
+      - fundingCard
+    OpenBankingRefundFundingDetails:
+      type: object
+      properties:
+        type:
+          description: Type identifier for open banking refund funding details. Used when refunds are processed directly to a customer's bank account using Open Banking payment rails.
+          example: OPEN_BANKING
+          allOf:
+          - $ref: '#/components/schemas/OpenBankingRefundType'
+        institutionName:
+          description: Display name of the financial institution used for the open banking refund provider
+          type:
+          - string
+          - 'null'
+          examples:
+          - Barclays Bank
+      required:
+      - type
+      - institutionName
+    CashRewardRefundType:
+      description: Type identifier for cash reward refund funding details. Used when refunds are credited back to the customer's Super Payments cash reward balance instead of their original payment method.
+      type: string
+      const: CASH_REWARD
+    GetRefundsListOutput:
+      type: object
+      properties:
+        pageSize:
+          description: Number of items per page
+          type: number
+        nextPage:
+          description: Token for the next page of results.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results
+          type: boolean
+        items:
+          description: List of refund transactions
+          type: array
+          items:
+            $ref: '#/components/schemas/GetRefundsListTransaction'
+      required:
+      - pageSize
+      - nextPage
+      - hasNext
+      - items
+    InitiatePayoutRefundInputDto:
+      type: object
+      properties:
+        paymentMethodId:
+          description: A previously charged payment method ID to refund
+          type: string
+          format: uuid
+        amount:
+          description: The amount to refund in minor units (e.g. pence for GBP)
+          type: integer
+          exclusiveMinimum: 0
+        currency:
+          description: The currency of the refund
+          type: string
+          const: GBP
+        externalReference:
+          description: The merchant's reference for the refund
+          type: string
+      required:
+      - paymentMethodId
+      - amount
+      - currency
+    CardRefundType:
+      description: Type identifier for card refund funding details. Used when refunds are processed back to the original payment card or to a different card specified by the customer.
+      type: string
+      const: CARD
+    CardRefundFundingDetails:
+      type: object
+      properties:
+        type:
+          description: Type identifier for card refund funding details. Used when refunds are processed back to the original payment card or to a different card specified by the customer.
+          example: CARD
+          allOf:
+          - $ref: '#/components/schemas/CardRefundType'
+        brand:
+          description: Card brand (e.g., Visa, MasterCard, etc.)
+          type:
+          - string
+          - 'null'
+          examples:
+          - visa
+        last4:
+          description: Last 4 digits of the card number
+          type:
+          - string
+          - 'null'
+          examples:
+          - '4242'
+        reference:
+          description: '[DEPRECATED] A reference identifier for this refund, if applicable. Use the top-level reference field instead. Nullable.'
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        referenceStatus:
+          description: '[DEPRECATED] The status of the reference for this refund, if applicable. Use the top-level referenceStatus field instead. Nullable.'
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        referenceType:
+          description: '[DEPRECATED] The type of reference for this refund, if applicable. Use the top-level referenceType field instead. Nullable.'
+          type:
+          - string
+          - 'null'
+          deprecated: true
+      required:
+      - type
+      - brand
+      - last4
+    BuyNowPayLaterRefundFundingDetails:
+      type: object
+      properties:
+        type:
+          description: Type identifier for Buy Now, Pay Later refund funding details. Used when refunds are processed through a BNPL provider like Klarna or Afterpay, typically reducing or canceling the customer's outstanding balance.
+          example: BUY_NOW_PAY_LATER
+          allOf:
+          - $ref: '#/components/schemas/BuyNowPayLaterRefundType'
+        institutionName:
+          description: Display name of the financial institution used for the buy now, pay later refund provider
+          type:
+          - string
+          - 'null'
+          examples:
+          - Frasers Plus
+      required:
+      - type
+      - institutionName
+    RefundOutputStatus:
+      description: Current status of the refund transaction
+      type: string
+      enum:
+      - RefundAbandoned
+      - RefundFailed
+      - RefundPending
+      - RefundSuccess
+    CashRewardRefundFundingDetails:
+      type: object
+      properties:
+        type:
+          description: Type identifier for cash reward refund funding details. Used when refunds are credited back to the customer's Super Payments cash reward balance instead of their original payment method.
+          example: CASH_REWARD
+          allOf:
+          - $ref: '#/components/schemas/CashRewardRefundType'
+        institutionName:
+          description: Display name of the financial institution used for the cash reward refund provider
+          type:
+          - string
+          - 'null'
+          examples:
+          - Super Payments
+      required:
+      - type
+      - institutionName
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Merchant API key
+    HMAC:
+      type: apiKey
+      in: header
+      name: super-signature
+      description: Header used to validate the webhook request

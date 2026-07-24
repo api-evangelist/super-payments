@@ -1,0 +1,461 @@
+openapi: 3.1.0
+info:
+  title: Super Payments Checkout Sessions Customer API
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  version: '2026-04-01'
+  contact:
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments
+    identifier: https://www.superpayments.com/terms-and-conditions
+servers:
+- url: https://api.superpayments.com/2026-04-01
+  description: Live Environment
+- url: https://api.test.superpayments.com/2026-04-01
+  description: Sandbox Environment
+tags:
+- name: Customer
+paths:
+  /customers:
+    post:
+      operationId: create-customer
+      summary: Create Customer
+      description: This endpoint is used to create a representation of a known customer. You may supply your own identifier for a given customer, and will return a Super customer ID upon successful creation.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomer20260401RequestDto'
+      responses:
+        '201':
+          description: Newly created customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer20260401ResponseDto'
+      security:
+      - api_key: []
+      tags:
+      - Customer
+    get:
+      operationId: list-customers
+      summary: List Customers
+      description: This endpoint lists your previously created customers in a paged list. Additional filters and sorting criteria may be provided as query parameters.
+      parameters:
+      - name: brandId
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      - name: externalReference
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: emailAddress
+        in: query
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+          format: email
+      - name: direction
+        in: query
+        required: false
+        schema:
+          type: string
+          default: DESC
+          enum:
+          - ASC
+          - DESC
+      - name: by
+        in: query
+        required: false
+        schema:
+          type: string
+          default: createdAt
+          enum:
+          - createdAt
+          - updatedAt
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 100
+          maximum: 1000
+          minimum: 1
+      responses:
+        '200':
+          description: List of customers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCustomer20260401ListResponse'
+      security:
+      - api_key: []
+      tags:
+      - Customer
+  /customers/{id}:
+    get:
+      operationId: get-customer
+      summary: Get Customer
+      description: This endpoint returns a previously created customer. It requires the Super customer ID that was provided upon successful creation of the customer.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/CustomerIdParam'
+      responses:
+        '200':
+          description: Existing customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer20260401ResponseDto'
+      security:
+      - api_key: []
+      tags:
+      - Customer
+    patch:
+      operationId: patch-customer
+      summary: Update Customer
+      description: This endpoint is used to update the information of an existing customer. It requires the Super customer ID that was provided upon successful creation of the customer.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/CustomerIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomer20260401RequestDto'
+      responses:
+        '200':
+          description: Updated customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer20260401ResponseDto'
+      security:
+      - api_key: []
+      tags:
+      - Customer
+components:
+  schemas:
+    UpdateCustomer20260401RequestDto:
+      type: object
+      properties:
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        firstName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        lastName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          format: email
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+          pattern: ^\+?[\d\s\-().]+$
+    Customer20260401ResponseDto:
+      type: object
+      properties:
+        id: {}
+        externalReference:
+          type: string
+        paymentMethods:
+          type: array
+          items:
+            type: object
+            properties:
+              id: {}
+              type:
+                type: string
+                const: CARD
+                x-enumNames:
+                - CARD
+              usage:
+                type: string
+                const: OFF_SESSION
+                x-enumNames:
+                - OFF_SESSION
+              status:
+                type: string
+                enum:
+                - DISABLED
+                - ENABLED
+                - REQUIRES_ACTION
+                x-enumNames:
+                - DISABLED
+                - ENABLED
+                - REQUIRES_ACTION
+              metadata:
+                type:
+                - object
+                - 'null'
+                additionalProperties:
+                  type: string
+                  pattern: ^[^\r\n\t\b\f\v]+$
+                  maxLength: 200
+              createdAt: {}
+              updatedAt: {}
+            required:
+            - id
+            - type
+            - usage
+            - status
+            - metadata
+            - createdAt
+            - updatedAt
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        brandId:
+          type: string
+          format: uuid
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          format: email
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+        createdAt: {}
+        updatedAt: {}
+      required:
+      - id
+      - externalReference
+      - paymentMethods
+      - metadata
+      - brandId
+      - firstName
+      - lastName
+      - emailAddress
+      - phoneNumber
+      - createdAt
+      - updatedAt
+    PaginatedCustomer20260401ListResponse:
+      type: object
+      properties:
+        pageInfo:
+          type: object
+          properties:
+            hasNextPage:
+              type: boolean
+            currentPage:
+              type: number
+            lastPage:
+              type: number
+            pageSize:
+              type: number
+          required:
+          - hasNextPage
+          - currentPage
+          - lastPage
+          - pageSize
+        totalCount:
+          type: number
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id: {}
+              externalReference:
+                type: string
+              paymentMethods:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: {}
+                    type:
+                      type: string
+                      const: CARD
+                      x-enumNames:
+                      - CARD
+                    usage:
+                      type: string
+                      const: OFF_SESSION
+                      x-enumNames:
+                      - OFF_SESSION
+                    status:
+                      type: string
+                      enum:
+                      - DISABLED
+                      - ENABLED
+                      - REQUIRES_ACTION
+                      x-enumNames:
+                      - DISABLED
+                      - ENABLED
+                      - REQUIRES_ACTION
+                    metadata:
+                      type:
+                      - object
+                      - 'null'
+                      additionalProperties:
+                        type: string
+                        pattern: ^[^\r\n\t\b\f\v]+$
+                        maxLength: 200
+                    createdAt: {}
+                    updatedAt: {}
+                  required:
+                  - id
+                  - type
+                  - usage
+                  - status
+                  - metadata
+                  - createdAt
+                  - updatedAt
+              metadata:
+                type:
+                - object
+                - 'null'
+                additionalProperties:
+                  type: string
+              brandId:
+                type: string
+                format: uuid
+              firstName:
+                type:
+                - string
+                - 'null'
+              lastName:
+                type:
+                - string
+                - 'null'
+              emailAddress:
+                type:
+                - string
+                - 'null'
+                format: email
+              phoneNumber:
+                type:
+                - string
+                - 'null'
+              createdAt: {}
+              updatedAt: {}
+            required:
+            - id
+            - externalReference
+            - paymentMethods
+            - metadata
+            - brandId
+            - firstName
+            - lastName
+            - emailAddress
+            - phoneNumber
+            - createdAt
+            - updatedAt
+      required:
+      - pageInfo
+      - totalCount
+      - items
+    CustomerIdParam:
+      type: string
+    CreateCustomer20260401RequestDto:
+      type: object
+      properties:
+        externalReference:
+          type: string
+          minLength: 1
+        brandId:
+          type: string
+          format: uuid
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        firstName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        lastName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          format: email
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+          pattern: ^\+?[\d\s\-().]+$
+      required:
+      - externalReference
+      - brandId
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Merchant API key
+    HMAC:
+      type: apiKey
+      in: header
+      name: super-signature
+      description: Header used to validate the webhook request

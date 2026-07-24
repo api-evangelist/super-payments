@@ -1,0 +1,1351 @@
+openapi: 3.1.0
+info:
+  title: Super Payments Checkout Sessions API
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  version: '2026-04-01'
+  contact:
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments
+    identifier: https://www.superpayments.com/terms-and-conditions
+servers:
+- url: https://api.superpayments.com/2026-04-01
+  description: Live Environment
+- url: https://api.test.superpayments.com/2026-04-01
+  description: Sandbox Environment
+tags:
+- name: Checkout Sessions
+  description: Checkout Session management
+paths:
+  /checkout-sessions:
+    post:
+      operationId: create-checkout-session
+      summary: Create a new checkout session
+      description: Creates a new checkout session for a payment initiator.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCheckoutSessionRequestDto'
+      responses:
+        '200':
+          description: Checkout session created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCheckoutSessionResponseDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 403
+                    const: 403
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/forbidden
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Forbidden
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Action not allowed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Checkout Sessions
+  /checkout-sessions/{checkoutSessionId}:
+    get:
+      operationId: get-checkout-session
+      summary: Retrieve a checkout session by ID
+      description: Fetches the details of a checkout session using its ID.
+      parameters:
+      - name: checkoutSessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Checkout session details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCheckoutSessionResponseDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 403
+                    const: 403
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/forbidden
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Forbidden
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Action not allowed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Checkout Sessions
+  /checkout-sessions/{checkoutSessionId}/proceed:
+    post:
+      operationId: proceed-payment-via-checkout-session
+      summary: Proceed with payment via checkout session
+      description: Processes a payment using an existing checkout session. Requires the payment initiator ID and session details.
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: checkoutSessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProceedPaymentViaCheckoutSessionRequestDto'
+      responses:
+        '200':
+          description: Payment processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProceedPaymentViaCheckoutSessionResponseDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '402':
+          description: Payment Required
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 402
+                    const: 402
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/payment_required
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Payment Required
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Payment details provided by customer could not be used
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+                  extensions:
+                    description: Extensions to the standard error response structure that may contain additional error details.
+                    type: object
+                    properties:
+                      issues:
+                        description: Information about the issues with the payment attempt that resulted in the error.
+                        type: object
+                        properties:
+                          declineReason:
+                            description: A customer-friendly description of the reason their payment method was declined for payment.
+                            type: string
+                            examples:
+                            - The CVC number is incorrect.
+                          declineCode:
+                            description: A code that identifies the reason why a card was declined, sourced from the card provider.
+                            type: string
+                            examples:
+                            - AUTHENTICATION_REQUIRED
+                            enum:
+                            - AUTHENTICATION_REQUIRED
+                            - DUPLICATE_SUSPECTED
+                            - FRAUD_SUSPECTED
+                            - GENERIC_DECLINE
+                            - INSUFFICIENT_FUNDS
+                            - INVALID_ADDRESS
+                            - INVALID_AMOUNT
+                            - INVALID_CVC
+                            - INVALID_EXPIRY_MONTH
+                            - INVALID_EXPIRY_YEAR
+                            - INVALID_NUMBER
+                            - INVALID_PIN
+                            - MERCHANT_BLACKLIST
+                            - PAYMENT_METHOD_ATTEMPTS_EXCEEDED
+                            - PAYMENT_METHOD_EXPIRED
+                            - PAYMENT_METHOD_NOT_SUPPORTED
+                            - PAYMENT_METHOD_REVOKED
+                            - PROCESSING_ERROR
+                          declineClassification:
+                            description: The classification of the decline code. If the decline code is "RESTRICTED" then the decline code must not be shown to the customer. Instead replace the decline code value with "GENERIC_DECLINE"
+                            type: string
+                            examples:
+                            - UNRESTRICTED
+                            enum:
+                            - RESTRICTED
+                            - UNRESTRICTED
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 403
+                    const: 403
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/forbidden
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Forbidden
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Action not allowed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Checkout Sessions
+  /checkout-sessions/{checkoutSessionId}/order-details:
+    post:
+      operationId: upsert-order-details
+      summary: Upsert order details for a checkout session
+      description: Updates or inserts order details (shipping address, billing address, and/or line items) for an existing checkout session. At least one of the three fields must be provided.
+      parameters:
+      - name: checkoutSessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertOrderDetailsRequestDto'
+      responses:
+        '200':
+          description: Order details updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpsertOrderDetailsResponseDto'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 403
+                    const: 403
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/forbidden
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Forbidden
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Action not allowed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Checkout Sessions
+components:
+  schemas:
+    LineItemDto:
+      description: 'A line item, one of: airline, car rental, lodging, or product'
+      discriminator:
+        propertyName: type
+        mapping:
+          AIRLINE: '#/components/schemas/AirlineLineItemDto'
+          CAR_RENTAL: '#/components/schemas/CarRentalLineItemDto'
+          LODGING: '#/components/schemas/LodgingLineItemDto'
+          PRODUCT: '#/components/schemas/ProductLineItemDto'
+      oneOf:
+      - $ref: '#/components/schemas/AirlineLineItemDto'
+      - $ref: '#/components/schemas/CarRentalLineItemDto'
+      - $ref: '#/components/schemas/LodgingLineItemDto'
+      - $ref: '#/components/schemas/ProductLineItemDto'
+    CreateCheckoutSessionRequestDto:
+      type: object
+      properties:
+        paymentInitiatorId:
+          description: The ID of the payment initiator
+          type: string
+          format: uuid
+        customer:
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionCustomerDto'
+      required:
+      - paymentInitiatorId
+    CheckoutSessionCustomerDto:
+      description: To save this payment method for later use, use the customer ID from a previous call to /customers
+      type: object
+      properties:
+        id:
+          description: The customer ID (cus_...) to assign the payment method to
+          type: string
+        savePaymentMethod:
+          description: Save the payment method for later off-session payments
+          type:
+          - boolean
+          - 'null'
+        paymentMethodMetadata:
+          description: Additional metadata for the payment method (only for savePaymentMethod true)
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+      required:
+      - id
+    CheckoutSessionAddressDto:
+      description: Address with all fields optional
+      type: object
+      properties:
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          default: null
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          default: null
+        addressLine3:
+          type:
+          - string
+          - 'null'
+          default: null
+        city:
+          type:
+          - string
+          - 'null'
+          default: null
+        country:
+          type:
+          - string
+          - 'null'
+          default: null
+        postCode:
+          type:
+          - string
+          - 'null'
+          default: null
+        firstName:
+          type:
+          - string
+          - 'null'
+          default: null
+        lastName:
+          type:
+          - string
+          - 'null'
+          default: null
+        phone:
+          type:
+          - string
+          - 'null'
+          default: null
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          default: null
+    AirlineLineItemDto:
+      type: object
+      properties:
+        type:
+          type: string
+          const: AIRLINE
+        data:
+          type: object
+          properties:
+            flightNumber:
+              description: The flight identifier
+              type: string
+            flightDate:
+              description: Date and time of the flight in ISO 8601 format with timezone (e.g., 2026-03-15T10:30:00+00:00)
+              type: string
+              format: date-time
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    CheckoutSessionAddressResponseDto:
+      description: Address with all fields present but nullable
+      type: object
+      properties:
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        addressLine3:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        postCode:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+    ProceedPaymentViaCheckoutSessionRequestDto:
+      type: object
+      properties:
+        paymentInitiatorId:
+          description: The ID of the payment initiator
+          type: string
+          format: uuid
+        amount:
+          description: The payment amount in the smallest currency unit (e.g., pence for GBP)
+          type: integer
+          exclusiveMinimum: 0
+        currency:
+          description: The currency code
+          type: string
+          const: GBP
+        successUrl:
+          description: URL to redirect the user after successful payment
+          type: string
+          format: uri
+        failureUrl:
+          description: URL to redirect the user after failed payment
+          type: string
+          format: uri
+        cancelUrl:
+          description: URL to redirect the user after cancelled payment
+          type: string
+          format: uri
+        externalReference:
+          description: External reference for the payment
+          type:
+          - string
+          - 'null'
+        metadata:
+          description: Custom metadata for the payment (max 10 key-value pairs, keys 1-30 chars, values 1-200 chars)
+          type: object
+          additionalProperties:
+            type: string
+            minLength: 1
+            maxLength: 200
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
+        lineItems:
+          description: Array of line items, each being either airline, car rental, lodging, or product data
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LineItemDto'
+      required:
+      - paymentInitiatorId
+      - amount
+      - currency
+      - successUrl
+      - failureUrl
+      - cancelUrl
+    CreateCheckoutSessionResponseDto:
+      type: object
+      properties:
+        checkoutSessionId:
+          description: The unique identifier for the checkout session
+          type: string
+          format: uuid
+        checkoutSessionToken:
+          description: The token used to authenticate the checkout session
+          type: string
+      required:
+      - checkoutSessionId
+      - checkoutSessionToken
+    UpsertOrderDetailsResponseDto:
+      type: object
+      properties:
+        checkoutSessionId:
+          description: The ID of the checkout session
+          type: string
+          format: uuid
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressResponseDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressResponseDto'
+        lineItems:
+          description: Array of line items
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LineItemDto'
+      required:
+      - checkoutSessionId
+    LodgingLineItemDto:
+      type: object
+      properties:
+        type:
+          type: string
+          const: LODGING
+        data:
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Check-in date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              type: string
+              format: date-time
+            checkOutDate:
+              description: Check-out date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              type: string
+              format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    ProductLineItemDto:
+      type: object
+      properties:
+        type:
+          type: string
+          const: PRODUCT
+        data:
+          type: object
+          properties:
+            productDescription:
+              description: Description of the product
+              type: string
+            sku:
+              description: Stock Keeping Unit (SKU) identifier for the product
+              type: string
+            quantity:
+              description: Quantity of the product
+              type: number
+              minimum: 1
+            unitPrice:
+              description: Unit price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+            expectedDeliveryDate:
+              description: When delivery is expected to take place (YYYY-MM-DD)
+              type:
+              - string
+              - 'null'
+      required:
+      - type
+      - data
+    GetCheckoutSessionResponseDto:
+      type: object
+      properties:
+        checkoutSessionId:
+          description: The unique identifier for the checkout session
+          type: string
+          format: uuid
+      required:
+      - checkoutSessionId
+    ProceedPaymentViaCheckoutSessionResponseDto:
+      type: object
+      properties:
+        checkoutSessionId:
+          description: The unique identifier for the checkout session
+          type: string
+          format: uuid
+        paymentIntentId:
+          description: The unique identifier for the payment intent
+          type: string
+          format: uuid
+        redirectUrl:
+          description: URL to redirect the user to the payment provider
+          type: string
+          format: uri
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressResponseDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressResponseDto'
+        lineItems:
+          description: Line items provided
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LineItemDto'
+      required:
+      - checkoutSessionId
+      - paymentIntentId
+      - redirectUrl
+    UpsertOrderDetailsRequestDto:
+      type: object
+      properties:
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
+        lineItems:
+          description: Array of line items, each being either airline, car rental, lodging, or product data
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LineItemDto'
+    CarRentalLineItemDto:
+      type: object
+      properties:
+        type:
+          type: string
+          const: CAR_RENTAL
+        data:
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Pickup date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              type: string
+              format: date-time
+            checkOutDate:
+              description: Return date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              type: string
+              format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Merchant API key
+    HMAC:
+      type: apiKey
+      in: header
+      name: super-signature
+      description: Header used to validate the webhook request

@@ -1,0 +1,1856 @@
+openapi: 3.1.0
+info:
+  title: Super Checkout Sessions Payments API
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  version: '2026-04-01'
+  contact:
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments
+    identifier: https://www.superpayments.com/terms-and-conditions
+servers:
+- url: https://api.superpayments.com/2026-04-01
+  description: Live Environment
+- url: https://api.test.superpayments.com/2026-04-01
+  description: Sandbox Environment
+tags:
+- name: Payments
+  description: Payment processing and management
+paths:
+  /payments:
+    post:
+      operationId: create-payment-intent
+      summary: Create Payment Intent
+      description: This endpoint is used to create a payment intent for e-commerce transactions. It requires the merchant integration to be set up and will return a payment intent object upon successful creation.
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentIntentInput'
+      responses:
+        '200':
+          description: Initiate a payment intent
+          content:
+            application/json:
+              schema:
+                discriminator:
+                  propertyName: offSession
+                  mapping:
+                    'true': '#/components/schemas/CreateOffSessionPaymentIntentOutput'
+                    'false': '#/components/schemas/CreateOnSessionPaymentIntentOutput'
+                oneOf:
+                - $ref: '#/components/schemas/CreateOnSessionPaymentIntentOutput'
+                - $ref: '#/components/schemas/CreateOffSessionPaymentIntentOutput'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '402':
+          description: Payment Required
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 402
+                    const: 402
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/payment_required
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Payment Required
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Payment details provided by customer could not be used
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+                  extensions:
+                    description: Extensions to the standard error response structure that may contain additional error details.
+                    type: object
+                    properties:
+                      issues:
+                        description: Information about the issues with the payment attempt that resulted in the error.
+                        type: object
+                        properties:
+                          declineReason:
+                            description: A customer-friendly description of the reason their payment method was declined for payment.
+                            type: string
+                            examples:
+                            - The CVC number is incorrect.
+                          declineCode:
+                            description: A code that identifies the reason why a card was declined, sourced from the card provider.
+                            type: string
+                            examples:
+                            - AUTHENTICATION_REQUIRED
+                            enum:
+                            - AUTHENTICATION_REQUIRED
+                            - DUPLICATE_SUSPECTED
+                            - FRAUD_SUSPECTED
+                            - GENERIC_DECLINE
+                            - INSUFFICIENT_FUNDS
+                            - INVALID_ADDRESS
+                            - INVALID_AMOUNT
+                            - INVALID_CVC
+                            - INVALID_EXPIRY_MONTH
+                            - INVALID_EXPIRY_YEAR
+                            - INVALID_NUMBER
+                            - INVALID_PIN
+                            - MERCHANT_BLACKLIST
+                            - PAYMENT_METHOD_ATTEMPTS_EXCEEDED
+                            - PAYMENT_METHOD_EXPIRED
+                            - PAYMENT_METHOD_NOT_SUPPORTED
+                            - PAYMENT_METHOD_REVOKED
+                            - PROCESSING_ERROR
+                          declineClassification:
+                            description: The classification of the decline code. If the decline code is "RESTRICTED" then the decline code must not be shown to the customer. Instead replace the decline code value with "GENERIC_DECLINE"
+                            type: string
+                            examples:
+                            - RESTRICTED
+                            enum:
+                            - RESTRICTED
+                            - UNRESTRICTED
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 403
+                    const: 403
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/forbidden
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Forbidden
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Action not allowed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      - merchant_authorization_header_api_key: []
+      tags:
+      - Payments
+  /payments/{transactionId}:
+    get:
+      operationId: get-payment-transaction-2025-11-01
+      summary: Get payment transaction
+      description: Poll for an individual payment transaction status to check its current state. Returns detailed information about the payment including its status, amount, and funding details with associated card metadata. This endpoint includes detailed information about payment intent funding attempts and their associated card metadata. Use this endpoint if your integration has not been configured to use webhooks. Payment transactions are returned in real-time as they update in our system.
+      parameters:
+      - name: transactionId
+        in: path
+        description: Id of the payment transaction
+        required: true
+        schema:
+          type: string
+          format: uuid
+          examples:
+          - 9eb0ee73-3922-4be3-bdbb-1404b38cca86
+      responses:
+        '200':
+          description: Payment transaction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPaymentTransactionOutput'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Payments
+  /payments/search:
+    get:
+      operationId: search-payment-transactions-2025-11-01
+      summary: Search payment transactions
+      description: Retrieve a list of payment transactions with filtering options. Results are paginated and can be filtered by various criteria including status, reference, and date range. Payment transactions are returned in reverse chronological order (newest first). If no filters are specified, all available payment transactions will be returned subject to pagination limits. Note that funding details and card metadata are not included in search results for performance reasons - use the individual payment transaction endpoint to access these details.
+      parameters:
+      - name: transactionStatus
+        in: query
+        description: Filter by transaction status. Can be a single status or an array of statuses.
+        required: false
+        schema:
+          description: Filter by transaction status. Can be a single status or an array of statuses.
+          type: array
+          items:
+            type: string
+      - name: transactionReference
+        in: query
+        description: Filter by transaction reference.
+        required: false
+        schema:
+          description: Filter by transaction reference.
+          type: string
+      - name: externalReference
+        in: query
+        description: Filter by external reference (e.g., order ID).
+        required: false
+        schema:
+          description: Filter by external reference (e.g., order ID).
+          type: string
+      - name: startDate
+        in: query
+        description: Filter by start date (ISO 8601 format). Inclusive.
+        required: false
+        schema:
+          description: Filter by start date (ISO 8601 format). Inclusive.
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Filter by end date (ISO 8601 format). Inclusive.
+        required: false
+        schema:
+          description: Filter by end date (ISO 8601 format). Inclusive.
+          type: string
+          format: date-time
+      - name: pageSize
+        in: query
+        description: Number of items to return per page.
+        required: false
+        schema:
+          description: Number of items to return per page.
+          type: integer
+      - name: page
+        in: query
+        description: Page token for pagination (cursor).
+        required: false
+        schema:
+          description: Page token for pagination (cursor).
+          type: string
+      responses:
+        '200':
+          description: List of payment transactions matching the search criteria.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPaymentsListOutput'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 400
+                    const: 400
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/request_validation_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Bad Request
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Request validation failed
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 401
+                    const: 401
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/unauthorized
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Unauthorized
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Invalid credentials provided
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 404
+                    const: 404
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/not_found
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Not Found
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - Resource not found
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+        '406':
+          description: Not Acceptable
+          content:
+            application/problem+json: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    description: The HTTP status code.
+                    type: integer
+                    examples:
+                    - 500
+                    const: 500
+                  type:
+                    description: A URI reference that identifies the problem type
+                    type: string
+                    examples:
+                    - https://api.superpayments.com/errors/internal_server_error
+                  title:
+                    description: A short, human-readable summary of the problem type
+                    type: string
+                    examples:
+                    - Internal Server Error
+                  detail:
+                    description: A human-readable explanation specific to this occurrence of the problem
+                    type: string
+                    examples:
+                    - An unexpected error occurred
+                  instance:
+                    description: A unique identifier for the error
+                    type: string
+                    examples:
+                    - '4186980260999334757'
+      security:
+      - api_key: []
+      tags:
+      - Payments
+components:
+  schemas:
+    ThreeDSDto:
+      type: object
+      properties:
+        status:
+          description: Status of 3DS authentication (e.g., authenticated, attempted, failed)
+          type:
+          - string
+          - 'null'
+        version:
+          description: Version of 3DS used for authentication
+          type:
+          - string
+          - 'null'
+        authentication_flow:
+          description: Authentication flow (e.g., challenge, frictionless)
+          type:
+          - string
+          - 'null'
+        electronic_commerce_indicator:
+          description: Electronic commerce indicator
+          type:
+          - string
+          - 'null'
+        exemption_indicator:
+          description: Exemption indicator
+          type:
+          - string
+          - 'null'
+        result:
+          description: Authentication result
+          type:
+          - string
+          - 'null'
+        result_reason:
+          description: Reason for the authentication result
+          type:
+          - string
+          - 'null'
+        transaction_id:
+          description: Transaction ID for the 3DS authentication
+          type:
+          - string
+          - 'null'
+      required:
+      - status
+      - version
+      - authentication_flow
+      - electronic_commerce_indicator
+      - exemption_indicator
+      - result
+      - result_reason
+      - transaction_id
+    CashRewardPaymentFundingDetailsDto:
+      type: object
+      properties:
+        type:
+          description: Type identifier for cash reward payment funding details. Cash rewards payments use stored value from the customer's Super Payments account balance.
+          example: CASH_REWARD
+          allOf:
+          - $ref: '#/components/schemas/CashRewardPaymentType'
+      required:
+      - type
+    PaymentIntentAddressDto:
+      description: Address information for shipping or billing
+      type: object
+      properties:
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          default: null
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          default: null
+        addressLine3:
+          type:
+          - string
+          - 'null'
+          default: null
+        city:
+          type:
+          - string
+          - 'null'
+          default: null
+        country:
+          type:
+          - string
+          - 'null'
+          default: null
+        postCode:
+          type:
+          - string
+          - 'null'
+          default: null
+        firstName:
+          type:
+          - string
+          - 'null'
+          default: null
+        lastName:
+          type:
+          - string
+          - 'null'
+          default: null
+        phone:
+          type:
+          - string
+          - 'null'
+          default: null
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          default: null
+    PaymentIntentProductDto:
+      description: Product line item with type and data fields
+      type: object
+      properties:
+        type:
+          description: The line item type
+          type: string
+          const: PRODUCT
+        data:
+          description: Product line item data
+          type: object
+          properties:
+            productDescription:
+              description: Description of the product
+              type: string
+            sku:
+              description: Stock Keeping Unit (SKU) identifier for the product
+              type: string
+            quantity:
+              description: Quantity of the product
+              type: number
+              minimum: 1
+            unitPrice:
+              description: Unit price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+            expectedDeliveryDate:
+              description: When delivery is expected to take place, either as a date (YYYY-MM-DD) or datetime with timezone
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+              - type: 'null'
+      required:
+      - type
+      - data
+    CreatePaymentIntentInput:
+      discriminator:
+        propertyName: offSession
+        mapping:
+          'true': '#/components/schemas/CreateOffSessionPaymentIntentInput'
+          'false': '#/components/schemas/CreateOnSessionPaymentIntentInput'
+      oneOf:
+      - $ref: '#/components/schemas/CreateOffSessionPaymentIntentInput'
+      - $ref: '#/components/schemas/CreateOnSessionPaymentIntentInput'
+    CreateOnSessionPaymentIntentInput:
+      type: object
+      properties:
+        externalReference:
+          description: External reference for the payment
+          type: string
+          examples:
+          - order-12345
+          maxLength: 255
+        amount:
+          description: Amount in minor units (pence for GBP)
+          type: integer
+          examples:
+          - 1234
+          maximum: 9999999
+          minimum: 1
+        currency:
+          description: Currency code
+          type: string
+          examples:
+          - GBP
+          const: GBP
+        metadata:
+          description: Additional metadata for the payment
+          type: object
+          examples:
+          - customerId: customer-123
+            orderId: '12345'
+          additionalProperties:
+            type: string
+        successUrl:
+          description: URL to redirect to on successful payment
+          type: string
+          examples:
+          - https://example.com/success
+          pattern: ^https?:\/\/.+$
+        failureUrl:
+          description: URL to redirect to on failed payment
+          type: string
+          examples:
+          - https://example.com/failure
+          pattern: ^https?:\/\/.+$
+        cancelUrl:
+          description: URL to redirect to on cancelled payment
+          type: string
+          examples:
+          - https://example.com/cancel
+          pattern: ^https?:\/\/.+$
+        brandId:
+          description: Brand ID to use for this payment
+          type: string
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        paymentInitiatorId:
+          description: The payment initiator ID (integration ID) to use for this payment
+          type: string
+          format: uuid
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        offSession:
+          description: Whether or not the payment is an 'off session' payment. An off session payment is when the customer Payment Method is charged separately from collecting their Payment Method (e.g. card details).
+          type: boolean
+          examples:
+          - false
+          const: false
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/PaymentIntentAddressDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/PaymentIntentAddressDto'
+        lineItems:
+          description: Array of line items, each being either airline, car rental, lodging, or product data
+          type:
+          - array
+          - 'null'
+          items:
+            discriminator:
+              propertyName: type
+              mapping:
+                AIRLINE: '#/components/schemas/PaymentIntentAirlineDto'
+                CAR_RENTAL: '#/components/schemas/PaymentIntentCarRentalDto'
+                LODGING: '#/components/schemas/PaymentIntentLodgingDto'
+                PRODUCT: '#/components/schemas/PaymentIntentProductDto'
+            oneOf:
+            - $ref: '#/components/schemas/PaymentIntentAirlineDto'
+            - $ref: '#/components/schemas/PaymentIntentCarRentalDto'
+            - $ref: '#/components/schemas/PaymentIntentLodgingDto'
+            - $ref: '#/components/schemas/PaymentIntentProductDto'
+        rewardCalculationId:
+          description: Reward calculation ID
+          type: string
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        paymentMethodId: {}
+        customer:
+          description: '**Warning: This feature is not yet implemented.** To save this payment method for later use, use the customer ID from a previous call to /customers'
+          type:
+          - object
+          - 'null'
+          properties:
+            id:
+              description: The customer ID (cus_...) to assign the payment method to
+              type: string
+              examples:
+              - cus_01kaxxrevce8dt6vp581rhnznx
+            savePaymentMethod:
+              description: Save the payment method for later off-session payments
+              type:
+              - boolean
+              - 'null'
+              default: false
+            paymentMethodMetadata:
+              description: 'Additional metadata for the payment method (only for savePaymentMethod: true)'
+              type:
+              - object
+              - 'null'
+              examples:
+              - mySubscriptionId: sub-123
+              additionalProperties:
+                type: string
+          required:
+          - id
+      required:
+      - amount
+      - currency
+      - paymentInitiatorId
+    DisputeDto:
+      type: object
+      properties:
+        disputeId:
+          type: string
+        fundingAttemptId:
+          type: string
+        provider:
+          type: string
+        providerRef:
+          type: string
+        disputeReason:
+          type: string
+        disputeStatus:
+          type: string
+          enum:
+          - lost
+          - needs_response
+          - under_review
+          - warning_closed
+          - warning_needs_response
+          - warning_under_review
+          - won
+        disputedAmount:
+          $ref: '#/components/schemas/TransactionCurrencyAmount'
+        feeAmount:
+          $ref: '#/components/schemas/TransactionCurrencyAmount'
+        hasEvidence:
+          type: boolean
+        submissionDeadline:
+          type:
+          - string
+          - 'null'
+        submissionCount:
+          type: number
+        resolved:
+          type: boolean
+        isRefundable:
+          type: boolean
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        stripeDestinationPaymentId:
+          type:
+          - string
+          - 'null'
+      required:
+      - disputeId
+      - fundingAttemptId
+      - provider
+      - providerRef
+      - disputeReason
+      - disputeStatus
+      - disputedAmount
+      - feeAmount
+      - hasEvidence
+      - submissionDeadline
+      - submissionCount
+      - resolved
+      - isRefundable
+      - createdAt
+      - updatedAt
+      - stripeDestinationPaymentId
+    PaymentIntentAirlineDto:
+      description: Airline line item with type and data fields
+      type: object
+      properties:
+        type:
+          description: The line item type
+          type: string
+          const: AIRLINE
+        data:
+          description: Airline data for enhanced scheme data
+          type: object
+          properties:
+            flightNumber:
+              description: The flight identifier
+              type: string
+            flightDate:
+              description: Date of the flight, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T10:30:00+00:00)
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    OpenBankingPaymentFundingDetailsDto:
+      type: object
+      properties:
+        type:
+          description: Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank account through secure bank APIs without using cards.
+          example: OPEN_BANKING
+          allOf:
+          - $ref: '#/components/schemas/OpenBankingPaymentType'
+        institutionId:
+          description: Identifier of the financial institution used for the open banking payment
+          type:
+          - string
+          - 'null'
+          examples:
+          - barclays_uk
+        institutionName:
+          description: Display name of the financial institution used for the open banking payment
+          type:
+          - string
+          - 'null'
+          examples:
+          - Barclays Bank
+      required:
+      - type
+      - institutionId
+      - institutionName
+    CreateOffSessionPaymentIntentOutput:
+      description: Off Session Payment Intent
+      type: object
+      properties:
+        id:
+          type: string
+        paymentInitiatorId:
+          type: string
+        brandId:
+          type: string
+        externalReference:
+          type: string
+        status:
+          type: string
+          enum:
+          - PaymentAbandoned
+          - PaymentFailed
+          - PaymentPending
+          - PaymentSuccess
+        offSession:
+          type: boolean
+          const: true
+        paymentReference:
+          type: string
+      required:
+      - id
+      - paymentInitiatorId
+      - brandId
+      - status
+      - offSession
+      - paymentReference
+    CreateOnSessionPaymentIntentOutput:
+      description: On Session Payment Intent
+      type: object
+      properties:
+        id:
+          type: string
+        paymentInitiatorId:
+          type: string
+        brandId:
+          type: string
+        externalReference:
+          type: string
+        status:
+          type: string
+          enum:
+          - PaymentAbandoned
+          - PaymentFailed
+          - PaymentPending
+          - PaymentSuccess
+        offSession:
+          type: boolean
+          const: false
+        redirectUrl:
+          type: string
+      required:
+      - id
+      - paymentInitiatorId
+      - brandId
+      - status
+      - offSession
+      - redirectUrl
+    AddressDto:
+      type: object
+      properties:
+        city:
+          description: City of the billing address
+          type:
+          - string
+          - 'null'
+        line1:
+          description: First line of the billing address
+          type:
+          - string
+          - 'null'
+        line2:
+          description: Second line of the billing address
+          type:
+          - string
+          - 'null'
+        postalCode:
+          description: Postal or ZIP code
+          type:
+          - string
+          - 'null'
+        state:
+          description: State, county, province, or region
+          type:
+          - string
+          - 'null'
+        country:
+          description: Two-letter country code (ISO 3166-1 alpha-2)
+          type:
+          - string
+          - 'null'
+      required:
+      - city
+      - line1
+      - line2
+      - postalCode
+      - state
+      - country
+    TransactionCurrencyAmount:
+      type: object
+      properties:
+        amount:
+          description: Integer after multiplying the value with amountMultiplier
+          type: number
+          examples:
+          - 10000
+        amountMultiplier:
+          description: Divide amount with amountMultiplier to get the decimal value
+          type: number
+          examples:
+          - 100
+        currency:
+          type: string
+          const: GBP
+      required:
+      - amount
+      - amountMultiplier
+      - currency
+    OpenBankingPaymentType:
+      description: Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank account through secure bank APIs without using cards.
+      type: string
+      const: OPEN_BANKING
+    PaymentIntentLodgingDto:
+      description: Lodging line item with type and data fields
+      type: object
+      properties:
+        type:
+          description: The line item type
+          type: string
+          const: LODGING
+        data:
+          description: Lodging reservation data
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Check-in date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+            checkOutDate:
+              description: Check-out date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    PaymentOutputStatus:
+      description: Current status of the payment transaction
+      type: string
+      enum:
+      - PaymentAbandoned
+      - PaymentCancelled
+      - PaymentDelayed
+      - PaymentFailed
+      - PaymentPending
+      - PaymentSuccess
+    PaymentIntentCarRentalDto:
+      description: Car rental line item with type and data fields
+      type: object
+      properties:
+        type:
+          description: The line item type
+          type: string
+          const: CAR_RENTAL
+        data:
+          description: Car rental reservation data
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Pickup date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+            checkOutDate:
+              description: Return date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    PaymentFunding:
+      type: object
+      properties:
+        amount:
+          description: Amount of funds transferred with this funding source
+          example:
+            amount: '1000'
+            currency: GBP
+          allOf:
+          - $ref: '#/components/schemas/TransactionCurrencyAmount'
+        reference:
+          description: Reference identifier for the funding transaction
+          type:
+          - string
+          - 'null'
+          examples:
+          - INV-12345
+        institutionId:
+          description: 'Identifier of the financial institution used for the payment. Deprecated: use the institutionId field in the fundingDetails object instead.'
+          type:
+          - string
+          - 'null'
+          examples:
+          - uk_ob_aib
+          deprecated: true
+        institutionName:
+          description: 'Display name of the financial institution used for the payment. Deprecated: use the institutionName field in the fundingDetails object instead.'
+          type:
+          - string
+          - 'null'
+          examples:
+          - Allied Irish Bank
+          deprecated: true
+        dispute:
+          description: Information about an associated dispute, if any
+          allOf:
+          - $ref: '#/components/schemas/DisputeDto'
+        type:
+          description: Type of funding source used for the payment or refund
+          type: string
+          examples:
+          - CARD
+          enum:
+          - BNPL
+          - CARD
+          - CASH_REWARD
+          - OPEN_BANKING
+        fundingDetails:
+          description: Detailed metadata about the specific funding method used. The type field determines which schema to use.
+          discriminator:
+            propertyName: type
+            mapping:
+              CARD: '#/components/schemas/CardPaymentFundingDetailsDto'
+              OPEN_BANKING: '#/components/schemas/OpenBankingPaymentFundingDetailsDto'
+              CASH_REWARD: '#/components/schemas/CashRewardPaymentFundingDetailsDto'
+              BUY_NOW_PAY_LATER: '#/components/schemas/BuyNowPayLaterPaymentFundingDetailsDto'
+          oneOf:
+          - $ref: '#/components/schemas/CardPaymentFundingDetailsDto'
+            title: Card Payment
+          - $ref: '#/components/schemas/OpenBankingPaymentFundingDetailsDto'
+            title: Open Banking Payment
+          - $ref: '#/components/schemas/CashRewardPaymentFundingDetailsDto'
+            title: Cash Reward Payment
+          - $ref: '#/components/schemas/BuyNowPayLaterPaymentFundingDetailsDto'
+            title: Buy Now Pay Later Payment
+          - type: 'null'
+      required:
+      - amount
+      - reference
+      - institutionId
+      - institutionName
+      - type
+    CardPaymentFundingDetailsDto:
+      type: object
+      properties:
+        type:
+          description: Type of funding details - always "CARD" for card payments. Card payments include credit and debit card transactions processed through payment networks like Visa, Mastercard, etc.
+          example: CARD
+          allOf:
+          - $ref: '#/components/schemas/CardPaymentType'
+        threeDSAuthentication:
+          description: 3D Secure authentication details for the card payment
+          allOf:
+          - $ref: '#/components/schemas/ThreeDSDto'
+        cvcCheck:
+          description: Result of the CVC check (pass, fail, unavailable, etc.)
+          type:
+          - string
+          - 'null'
+        zipCheck:
+          description: Result of the postal/zip code check (pass, fail, unavailable, etc.)
+          type:
+          - string
+          - 'null'
+        riskFactor:
+          description: Risk factor score for the transaction (higher indicates higher risk)
+          type:
+          - number
+          - 'null'
+        riskLevel:
+          description: Risk level assessment for the transaction (e.g., low, medium, high)
+          type:
+          - string
+          - 'null'
+        fingerprint:
+          description: Unique fingerprint identifier for the card
+          type:
+          - string
+          - 'null'
+        issuer:
+          description: Issuing bank or financial institution for the card
+          type:
+          - string
+          - 'null'
+        address:
+          description: Billing address associated with the card
+          allOf:
+          - $ref: '#/components/schemas/AddressDto'
+        country:
+          description: Country code where the card was issued
+          type:
+          - string
+          - 'null'
+        nameOnCard:
+          description: Cardholder name as it appears on the card
+          type:
+          - string
+          - 'null'
+        product:
+          description: Card product type (e.g., credit, debit, prepaid)
+          type:
+          - string
+          - 'null'
+        funding:
+          description: Funding type of the card (e.g., credit, debit, prepaid)
+          type:
+          - string
+          - 'null'
+        authorisationCode:
+          description: Authorization code provided by the card issuer
+          type:
+          - string
+          - 'null'
+        failureCode:
+          description: Code indicating the reason for transaction failure, if applicable
+          type:
+          - string
+          - 'null'
+        last4:
+          description: Last 4 digits of the card number
+          type:
+          - string
+          - 'null'
+        cardDescription:
+          description: Description of the card type (e.g., Visa Credit, Mastercard Debit)
+          type:
+          - string
+          - 'null'
+        cardClassification:
+          description: Classification of the card as either CORPORATE or CONSUMER
+          type:
+          - string
+          - 'null'
+          enum:
+          - CONSUMER
+          - CORPORATE
+        walletType:
+          description: Type of digital wallet used (e.g., Apple Pay, Google Pay)
+          type:
+          - string
+          - 'null'
+        walletLast4:
+          description: Last 4 digits of the card stored in the digital wallet
+          type:
+          - string
+          - 'null'
+        providerData:
+          description: Provider-specific data for the card payment (e.g. Stripe metadata)
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+      required:
+      - type
+      - threeDSAuthentication
+      - cvcCheck
+      - zipCheck
+      - riskFactor
+      - riskLevel
+      - fingerprint
+      - issuer
+      - address
+      - country
+      - nameOnCard
+      - product
+      - funding
+      - authorisationCode
+      - failureCode
+      - last4
+      - cardDescription
+      - cardClassification
+      - walletType
+      - walletLast4
+      - providerData
+    BuyNowPayLaterPaymentFundingDetailsDto:
+      type: object
+      properties:
+        type:
+          description: Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often in installments through providers like Klarna, Afterpay, etc.
+          example: BUY_NOW_PAY_LATER
+          allOf:
+          - $ref: '#/components/schemas/BuyNowPayLaterPaymentType'
+        institutionId:
+          description: Identifier of the BNPL provider used for the payment
+          type:
+          - string
+          - 'null'
+          examples:
+          - frasers_uk
+        institutionName:
+          description: Display name of the BNPL provider used for the payment
+          type:
+          - string
+          - 'null'
+          examples:
+          - Frasers
+      required:
+      - type
+      - institutionId
+      - institutionName
+    CashRewardPaymentType:
+      description: Type identifier for cash reward payment funding details. Cash rewards payments use stored value from the customer's Super Payments account balance.
+      type: string
+      const: CASH_REWARD
+    GetPaymentTransactionOutput:
+      type: object
+      properties:
+        transactionId:
+          description: Unique identifier for the payment transaction
+          type: string
+        transactionReference:
+          description: Reference code for the transaction
+          type: string
+        externalReference:
+          description: External Reference, usually the order identifier associated with the transaction
+          type:
+          - string
+          - 'null'
+        transactionStatus:
+          description: Current status of the payment transaction
+          allOf:
+          - $ref: '#/components/schemas/PaymentOutputStatus'
+        transactionAmount:
+          description: Amount of the transaction
+          type: number
+        metadata:
+          description: Additional metadata associated with the transaction
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        brandId:
+          description: Brand identifier associated with the transaction
+          type:
+          - string
+          - 'null'
+          format: uuid
+        fees:
+          description: Fees associated with the transaction
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentIntentFeeDto'
+        funding:
+          description: Funding sources for the transaction
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentFunding'
+      required:
+      - transactionId
+      - transactionReference
+      - transactionStatus
+      - transactionAmount
+      - metadata
+      - brandId
+      - fees
+      - funding
+    CardPaymentType:
+      description: Type of funding details - always "CARD" for card payments. Card payments include credit and debit card transactions processed through payment networks like Visa, Mastercard, etc.
+      type: string
+      const: CARD
+    GetPaymentsListTransaction:
+      type: object
+      properties:
+        metadata:
+          description: Additional metadata associated with the transaction
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        transactionId:
+          description: Unique identifier for the payment transaction
+          type: string
+        transactionReference:
+          description: Reference code for the transaction
+          type: string
+        externalReference:
+          description: External reference (e.g., order ID)
+          type:
+          - string
+          - 'null'
+        minorUnitAmount:
+          description: Amount in minor units of the currency
+          type: number
+        currency:
+          description: Currency code
+          type: string
+        discountedAmount:
+          description: Discounted amount in minor units
+          type: number
+        discountPercentage:
+          description: Discount percentage applied
+          type:
+          - number
+          - 'null'
+        transactionStatus:
+          description: Current status of the payment transaction
+          allOf:
+          - $ref: '#/components/schemas/PaymentOutputStatus'
+        transactionStatusChangedAt:
+          description: Date when the transaction status was last changed
+          type: string
+          format: date-time
+        createdAt:
+          description: Date when the transaction was created
+          type: string
+          format: date-time
+        payerName:
+          description: Name of the payer
+          type:
+          - string
+          - 'null'
+        settlementReference:
+          description: Settlement reference
+          type:
+          - string
+          - 'null'
+        brandId:
+          description: Brand identifier associated with the transaction
+          type:
+          - string
+          - 'null'
+          format: uuid
+      required:
+      - metadata
+      - transactionId
+      - transactionReference
+      - externalReference
+      - minorUnitAmount
+      - currency
+      - discountedAmount
+      - discountPercentage
+      - transactionStatus
+      - transactionStatusChangedAt
+      - createdAt
+      - payerName
+      - settlementReference
+      - brandId
+    BuyNowPayLaterPaymentType:
+      description: Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often in installments through providers like Klarna, Afterpay, etc.
+      type: string
+      const: BUY_NOW_PAY_LATER
+    PaymentIntentFeeDto:
+      type: object
+      properties:
+        currency:
+          description: The currency of the fee
+          type: string
+        feeCode:
+          description: The fee code
+          type: string
+        feeAmountInMinorUnits:
+          description: The calculated fee amount before VAT. Calculated as (fixedAmountInEffectInMinorUnits + rateInEffect * chargeableAmountInMinorUnits)
+          type: number
+        chargeableAmountInMinorUnits:
+          description: the amount from which the fee amount was calculated eg. the payment amount for an AMEX transaction.
+          type: number
+        fixedAmountInEffectInMinorUnits:
+          description: A fixed charge applied for the fee code
+          type: number
+        vatAmountInMinorUnits:
+          description: The VAT amount calculated from the feeAmountInMinorUnits
+          type:
+          - number
+          - 'null'
+        vatRateInEffect:
+          description: The VAT rate e.g. for 20% the rateInEffect is "20.0000"
+          type:
+          - number
+          - 'null'
+        rateInEffect:
+          description: The rate used to calculate the variable portion of the fee from the chargeableAmountInMinorUnits eg. for 2.49% the rateInEffect is "2.4900"
+          type: number
+        totalFeeAmountInclVatInMinorUnits:
+          description: The total fee amount including VAT
+          type: number
+      required:
+      - currency
+      - feeCode
+      - feeAmountInMinorUnits
+      - chargeableAmountInMinorUnits
+      - fixedAmountInEffectInMinorUnits
+      - vatAmountInMinorUnits
+      - vatRateInEffect
+      - rateInEffect
+      - totalFeeAmountInclVatInMinorUnits
+    GetPaymentsListOutput:
+      type: object
+      properties:
+        pageSize:
+          description: Number of items per page
+          type: number
+        nextPage:
+          description: Token for the next page of results.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results
+          type: boolean
+        items:
+          description: List of payment transactions
+          type: array
+          items:
+            $ref: '#/components/schemas/GetPaymentsListTransaction'
+      required:
+      - pageSize
+      - nextPage
+      - hasNext
+      - items
+    CreateOffSessionPaymentIntentInput:
+      type: object
+      properties:
+        externalReference:
+          description: External reference for the payment
+          type: string
+          examples:
+          - order-12345
+          maxLength: 255
+        amount:
+          description: Amount in minor units (pence for GBP)
+          type: integer
+          examples:
+          - 1234
+          maximum: 9999999
+          minimum: 1
+        currency:
+          description: Currency code
+          type: string
+          examples:
+          - GBP
+          const: GBP
+        metadata:
+          description: Additional metadata for the payment
+          type: object
+          examples:
+          - customerId: customer-123
+            orderId: '12345'
+          additionalProperties:
+            type: string
+        paymentInitiatorId:
+          description: The payment initiator ID (integration ID) to use for this payment
+          type: string
+          format: uuid
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        offSession:
+          description: Whether or not the payment is an 'off session' payment. An off session payment is when the customer Payment Method is charged separately from collecting their Payment Method (e.g. card details).
+          type: boolean
+          examples:
+          - true
+          const: true
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/PaymentIntentAddressDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/PaymentIntentAddressDto'
+        lineItems:
+          description: Array of line items, each being either airline, car rental, lodging, or product data
+          type:
+          - array
+          - 'null'
+          items:
+            discriminator:
+              propertyName: type
+              mapping:
+                AIRLINE: '#/components/schemas/PaymentIntentAirlineDto'
+                CAR_RENTAL: '#/components/schemas/PaymentIntentCarRentalDto'
+                LODGING: '#/components/schemas/PaymentIntentLodgingDto'
+                PRODUCT: '#/components/schemas/PaymentIntentProductDto'
+            oneOf:
+            - $ref: '#/components/schemas/PaymentIntentAirlineDto'
+            - $ref: '#/components/schemas/PaymentIntentCarRentalDto'
+            - $ref: '#/components/schemas/PaymentIntentLodgingDto'
+            - $ref: '#/components/schemas/PaymentIntentProductDto'
+        paymentMethodId:
+          description: The payment method ID to charge for this payment.
+          type: string
+          examples:
+          - pm_01kaxxrevce8dt6vp581rhnznr
+      required:
+      - amount
+      - currency
+      - paymentInitiatorId
+      - offSession
+      - paymentMethodId
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Merchant API key
+    HMAC:
+      type: apiKey
+      in: header
+      name: super-signature
+      description: Header used to validate the webhook request
