@@ -1,0 +1,125 @@
+asyncapi: 2.6.0
+# generated: '2026-07-21'
+# method: searched
+# source: https://docs.superpayments.com/reference/webhooks and the per-event
+#   webhook reference pages on docs.superpayments.com/reference. Channel/event
+#   surface captured from the provider docs; Super publishes no AsyncAPI file, so
+#   this document models the webhook catalog. Payload fields are not fabricated.
+info:
+  title: Super Payments Webhooks
+  version: '2026-04-01'
+  description: >-
+    Super Payments delivers real-time event notifications to merchant-configured
+    endpoints. Webhooks are configured per Integration in the Business Portal.
+    Every request carries a super-signature header (HMAC-SHA256) so receivers can
+    verify authenticity: the header is 't:<unix-ms>,v1:<base64-hmac>'; the signed
+    message is timestamp + raw request body, verified against the raw bytes with a
+    constant-time compare, rejecting anything older than 5 minutes.
+  contact:
+    name: Super Payments
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments Terms
+    url: https://www.superpayments.com/terms-and-conditions
+externalDocs:
+  description: Super Payments Webhooks documentation
+  url: https://docs.superpayments.com/reference/webhooks
+defaultContentType: application/json
+components:
+  securitySchemes:
+    superSignature:
+      type: httpApiKey
+      in: header
+      name: super-signature
+      description: HMAC-SHA256 signature (t:<timestamp>,v1:<base64>) over timestamp + raw body; reject if older than 5 minutes.
+  messageTraits:
+    signed:
+      headers:
+        type: object
+        properties:
+          super-signature:
+            type: string
+            description: 't:<unix-ms-timestamp>,v1:<base64-hmac-sha256>'
+channels:
+  payment.status-update:
+    description: Payment status changed. Configure against a specific Integration in your Business Portal.
+    subscribe:
+      operationId: onPaymentStatusUpdate
+      message:
+        name: PaymentStatusUpdate
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Payment status update event payload.}
+  payment.success:
+    description: Sent when a payment is successfully completed.
+    subscribe:
+      operationId: onPaymentSuccess
+      message:
+        name: PaymentSuccess
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Successful payment event payload.}
+  payment.failed:
+    description: Sent when a payment fails.
+    subscribe:
+      operationId: onPaymentFailed
+      message:
+        name: PaymentFailed
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Failed payment event payload.}
+  refund.status-update:
+    description: Refund status changed. Configure against a specific Integration in your Business Portal.
+    subscribe:
+      operationId: onRefundStatusUpdate
+      message:
+        name: RefundStatusUpdate
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Refund status update event payload.}
+  refund.success:
+    description: Sent when a refund is successfully completed.
+    subscribe:
+      operationId: onRefundSuccess
+      message:
+        name: RefundSuccess
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Successful refund event payload.}
+  refund.failed:
+    description: Sent when a refund fails.
+    subscribe:
+      operationId: onRefundFailed
+      message:
+        name: RefundFailed
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Failed refund event payload.}
+  customer.payment-method.requires-action:
+    description: Sent when a customer payment method is created and requires action to complete setup.
+    subscribe:
+      operationId: onCustomerPaymentMethodRequiresAction
+      message:
+        name: CustomerPaymentMethodRequiresAction
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Payment method requires-action event payload.}
+  customer.payment-method.enabled:
+    description: Sent when a customer payment method becomes enabled and ready for use.
+    subscribe:
+      operationId: onCustomerPaymentMethodEnabled
+      message:
+        name: CustomerPaymentMethodEnabled
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Payment method enabled event payload.}
+  customer.payment-method.disabled:
+    description: Sent when a customer payment method is disabled.
+    subscribe:
+      operationId: onCustomerPaymentMethodDisabled
+      message:
+        name: CustomerPaymentMethodDisabled
+        traits: [{$ref: '#/components/messageTraits/signed'}]
+        payload: {type: object, description: Payment method disabled event payload.}
+
+# --- API Evangelist provenance -------------------------------------------
+x-superseded-by:
+  reason: >-
+    Provider publishes this event surface themselves in as-published OpenAPI; this document was authored by API Evangelist before that source was harvested.
+  published_spec: all/super-payments/openapi/_original/super-payments-openapi.yml
+  published_event_object: webhooks
+  published_events: 9
+  status: superseded
+  reviewed: '2026-07-31'
