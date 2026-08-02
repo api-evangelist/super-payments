@@ -1,0 +1,77 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/super-payments-openapi.yml 4xx/5xx responses + https://docs.superpayments.com/reference/errors.md
+format: rfc9457
+description: Super Payments returns errors as RFC 9457 problem+json documents with type, title, status,
+  detail, instance, plus an errors[] array of field-level issues on validation failures. Error type URIs
+  are namespaced under https://api.superpayments.com/errors/. Card declines surface as 402 with a structured
+  decline code in extensions.issues (see super-payments-decline-codes.yml).
+docs: https://docs.superpayments.com/reference/errors
+error_type_namespace: https://api.superpayments.com/errors/
+envelope:
+  media_type: application/problem+json
+  fields:
+  - type
+  - title
+  - status
+  - detail
+  - instance
+  - errors[]
+  - extensions
+problems:
+- status: 400
+  type: https://api.superpayments.com/errors/request_validation_error
+  title: Bad Request
+  occurrences: 22
+  problem_json: true
+  remediation: Check required fields and parameter formats before retrying.
+  example_operation: openapi/super-payments-openapi.yml#create-checkout-session
+- status: 401
+  title: Unauthorized
+  occurrences: 22
+  problem_json: true
+  remediation: Provide a valid sk_prod_/sk_test_ API key in the Authorization header.
+  example_operation: openapi/super-payments-openapi.yml#create-checkout-session
+- status: 402
+  title: Payment Required
+  occurrences: 7
+  problem_json: true
+  remediation: Payment was declined; inspect extensions.issues.declineCode (see errors/super-payments-decline-codes.yml)
+    and prompt the customer accordingly.
+  example_operation: openapi/super-payments-openapi.yml#create-link
+- status: 403
+  title: Forbidden
+  occurrences: 10
+  problem_json: true
+  remediation: The key lacks permission for this action, or the endpoint is restricted (contact support).
+  example_operation: openapi/super-payments-openapi.yml#create-checkout-session
+- status: 404
+  title: Not Found
+  occurrences: 21
+  problem_json: true
+  remediation: Verify the resource id and the API version date in the URL path.
+  example_operation: openapi/super-payments-openapi.yml#create-checkout-session
+- status: 406
+  title: Not Acceptable
+  occurrences: 4
+  problem_json: true
+  remediation: Set an Accept header the endpoint supports (application/json or the CSV variant for settlements).
+  example_operation: openapi/super-payments-openapi.yml#get-payment-transaction-2025-11-01
+- status: 409
+  title: Conflict
+  occurrences: 14
+  problem_json: true
+  remediation: The resource is in a conflicting state; re-read it and reconcile before retrying.
+  example_operation: openapi/super-payments-openapi.yml#create-checkout-session
+- status: 422
+  title: Unprocessable Entity
+  occurrences: 2
+  problem_json: true
+  remediation: The request was well-formed but semantically invalid; fix the flagged fields.
+  example_operation: openapi/super-payments-openapi.yml#create-payout-refund
+- status: 500
+  title: Internal Server Error
+  occurrences: 19
+  problem_json: true
+  remediation: Transient server error; retry with backoff and contact support if it persists.
+  example_operation: openapi/super-payments-openapi.yml#create-checkout-session

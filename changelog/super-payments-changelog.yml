@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.superpayments.com/changelog
+description: >-
+  Super Payments publishes a dated changelog aligned with its date-based API
+  versions. Each version marks a set of additions and backward-incompatible
+  changes. Recent window captured below.
+scheme: date-based
+current_version: '2026-04-01'
+docs: https://docs.superpayments.com/changelog
+entries:
+  - version: '2026-04-01'
+    date: '2026-04-01'
+    highlights: Customer update support, expanded filtering, flexible order-metadata date formats, and recurring-payment support.
+    additions:
+      - PATCH /2026-04-01/customers/{id} (Update Customer)
+    changes:
+      - List Customers now filterable by emailAddress
+      - Order metadata line-item dates accept both date and datetime formats (payments, payment links)
+      - Checkout Session updated with latest request/response structure and a customer object for recurring payments
+      - Checkout Session lineItems accept additional airline data
+  - version: '2025-11-01'
+    date: '2025-11-01'
+    breaking: true
+    highlights: Major release introducing Payment Methods, Settlements, Transaction reporting, and structured decline codes.
+    additions:
+      - Payment Methods resource (create/list/get + setup intents)
+      - Settlements resource (list/detail/reconciliation)
+      - Payment Transaction search
+      - Create Payment Intent resource
+      - Restricted Create Payout Refund
+    changes:
+      - Create Payment Intent and Proceed Checkout now return 402 with structured declineCode/declineReason/declineClassification
+      - List Customers gains externalReference filter
+  - version: '2025-06-01'
+    date: '2025-06-01'
+    highlights: API key management moved to a new Business Portal location; keys from earlier versions must be regenerated.
+  - version: '2025-02-01'
+    date: '2025-02-01'
+    highlights: Dated version release.
+  - version: '2024-10-01'
+    date: '2024-10-01'
+    highlights: Earliest documented date-based version.

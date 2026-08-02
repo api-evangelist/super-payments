@@ -1,0 +1,28 @@
+{
+  "provider": "super-payments",
+  "sources": [
+    "super-payments-checkout-sessions-api-openapi.yml",
+    "super-payments-customer-api-openapi.yml",
+    "super-payments-payment-links-api-openapi.yml",
+    "super-payments-payment-methods-api-openapi.yml",
+    "super-payments-payments-api-openapi.yml",
+    "super-payments-refunds-api-openapi.yml",
+    "super-payments-rewards-api-openapi.yml",
+    "super-payments-settlements-api-openapi.yml"
+  ],
+  "outputs": [
+    "super-payments-checkout-sessions-api-openapi.yml",
+    "super-payments-customer-api-openapi.yml",
+    "super-payments-payment-links-api-openapi.yml",
+    "super-payments-payment-methods-api-openapi.yml",
+    "super-payments-payments-api-openapi.yml",
+    "super-payments-refunds-api-openapi.yml",
+    "super-payments-rewards-api-openapi.yml",
+    "super-payments-settlements-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

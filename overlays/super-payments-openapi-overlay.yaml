@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Super Payments API
+  version: 1.0.0
+# Provenance: API Evangelist enrichment pipeline (local-v1), 2026-07-21.
+# Non-mutating enhancement layer over the harvested spec. Apply with an
+# Overlay 1.0.0 processor against openapi/super-payments-openapi.yml.
+extends: openapi/super-payments-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-rating: 4
+      x-apievangelist-provenance: >-
+        Reconstructed verbatim from Super Payments' own per-operation OpenAPI
+        3.1 fragments published on docs.superpayments.com/reference (ReadMe).
+        24 paths / 31 operations / 99 schemas merged.
+      x-api-style: REST over HTTPS, JSON request/response, date-versioned URL path
+  - target: $.info
+    update:
+      x-authentication: authentication/super-payments-authentication.yml
+      x-conventions: conventions/super-payments-conventions.yml
+      x-error-catalog: errors/super-payments-problem-types.yml
+      x-decline-codes: errors/super-payments-decline-codes.yml
+      x-lifecycle: lifecycle/super-payments-lifecycle.yml
+      x-webhooks: asyncapi/super-payments-webhooks-asyncapi.yml
+  - target: $.servers
+    update:
+      - url: https://api.superpayments.com/2026-04-01
+        description: Live Environment
+      - url: https://api.test.superpayments.com/2026-04-01
+        description: Sandbox Environment (sk_test_ keys)

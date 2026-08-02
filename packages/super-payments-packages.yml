@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  npm registry (registry.npmjs.org) + docs.superpayments.com SDK reference +
+  github.com/superpayments. Searched npm, PyPI, RubyGems, Packagist, NuGet,
+  pkg.go.dev, Maven Central and crates.io for first-party libraries.
+description: >-
+  First-party Super Payments client libraries. Super publishes a React Native
+  SDK on npm and maintains e-commerce platform plugins (Magento, WooCommerce,
+  Shopify, BigCommerce) on its GitHub org rather than server-side SDKs per
+  language. No first-party PyPI / RubyGems / NuGet / Go / Maven / crates.io
+  package was found.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@superpayments/super-react-native"
+    url: https://www.npmjs.com/package/@superpayments/super-react-native
+    install: npm install @superpayments/super-react-native
+    version: 0.1.31
+    official: true
+    description: Super Payments SDK for React Native (Android + iOS). Presents payment and offers sheets in native apps.
+plugins:
+  - {platform: Magento 2, repo: https://github.com/superpayments/magento-plugin-public, official: true}
+  - {platform: Magento (Hyvä), repo: https://github.com/superpayments/magento-plugin-hyva, official: true}
+  - {platform: WooCommerce, docs: https://docs.superpayments.com/docs/woo-commerce, official: true}
+  - {platform: Shopify, docs: https://docs.superpayments.com/docs/shopify, official: true}
+  - {platform: BigCommerce, docs: https://docs.superpayments.com/docs/bigcommerce, official: true}
+  - {platform: Salesforce Commerce, docs: https://docs.superpayments.com/docs/e-commerce-platforms, official: true}
+registries_checked:
+  npm: found (@superpayments/super-react-native)
+  pypi: none
+  rubygems: none
+  packagist: none
+  nuget: none
+  go: none
+  maven: none
+  crates: none

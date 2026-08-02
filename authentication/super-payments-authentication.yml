@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/super-payments-openapi.yml
+docs: https://docs.superpayments.com/reference/authentication
+description: >-
+  Super Payments authenticates server-side requests with a static secret API key
+  passed raw in the Authorization header (no Bearer prefix). Two key types exist:
+  secret keys (sk_prod_ / sk_test_) for server-side use, and public keys (PUB_)
+  safe for client-side/front-end use. There is no OAuth2/OIDC. Webhooks are
+  authenticated separately via an HMAC-SHA256 super-signature header. All calls
+  must be over HTTPS.
+key_types:
+  - {name: secret, prefixes: [sk_prod_, sk_test_], usage: server-side, header: Authorization}
+  - {name: public, prefixes: [PUB_], usage: client-side / front-end}
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: api_key
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Merchant API key
+  sources:
+  - openapi/super-payments-openapi.yml
+- name: HMAC
+  type: apiKey
+  in: header
+  parameter: super-signature
+  description: Header used to validate the webhook request
+  sources:
+  - openapi/super-payments-openapi.yml

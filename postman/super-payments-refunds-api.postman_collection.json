@@ -1,0 +1,1935 @@
+{
+  "info": {
+    "_postman_id": "c8b557a5-6a13-43c5-9d48-b8923711983c",
+    "name": "Super Payments Checkout Sessions Refunds API",
+    "description": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:58.000Z",
+    "updatedAt": "2026-07-28T03:05:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c8b557a5-6a13-43c5-9d48-b8923711983c"
+  },
+  "item": [
+    {
+      "name": "refunds",
+      "item": [
+        {
+          "name": "payouts",
+          "item": [
+            {
+              "name": "Create Payout Refund (Restricted)",
+              "id": "f2c4907e-f40a-47c8-a610-3b193e4a19d2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentMethodId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds/payouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds",
+                    "payouts"
+                  ]
+                },
+                "description": "This endpoint is used to initiate a payout refund to a provided payment method. This is a restricted endpoint, contact customer support to request access."
+              },
+              "response": [
+                {
+                  "id": "ee33367b-d4d4-418d-84d9-bcf4139e595e",
+                  "name": "Successful payout refund initiation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/payouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "payouts"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"transactionId\": \"<uuid>\",\n  \"transactionReference\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-ee33367b-d4d4-418d-84d9-bcf4139e595e"
+                },
+                {
+                  "id": "f78de3c5-87a0-4025-9eb1-698192dfe29e",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/payouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "payouts"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-f78de3c5-87a0-4025-9eb1-698192dfe29e"
+                },
+                {
+                  "id": "75556888-2ec4-4080-a02b-ccffb8f08781",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/payouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "payouts"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-75556888-2ec4-4080-a02b-ccffb8f08781"
+                },
+                {
+                  "id": "9f26e04c-8682-4f41-827c-5dfee602143d",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/payouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "payouts"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-9f26e04c-8682-4f41-827c-5dfee602143d"
+                },
+                {
+                  "id": "c5f9f0c0-6bb1-45cd-8b4c-e0a79adffd74",
+                  "name": "Conflict",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/payouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "payouts"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-c5f9f0c0-6bb1-45cd-8b4c-e0a79adffd74"
+                },
+                {
+                  "id": "03c63b34-bc8f-4fe8-bbfb-03e0cc8b6341",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/payouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "payouts"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-03c63b34-bc8f-4fe8-bbfb-03e0cc8b6341"
+                },
+                {
+                  "id": "53c6bee4-181c-4b52-a537-9c29152fa829",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/payouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "payouts"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-53c6bee4-181c-4b52-a537-9c29152fa829"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-f2c4907e-f40a-47c8-a610-3b193e4a19d2"
+            }
+          ],
+          "id": "5439a8f3-4353-48f9-8846-1f0195b6fbc4",
+          "createdAt": "2026-07-28T03:05:58.000Z",
+          "updatedAt": "2026-07-28T03:05:58.000Z",
+          "uid": "35240-5439a8f3-4353-48f9-8846-1f0195b6fbc4"
+        },
+        {
+          "name": "{transactionId}",
+          "item": [
+            {
+              "name": "Get refund transaction",
+              "id": "2bb79aa2-2f45-4b6f-8a1a-f314168db82b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/refunds/:transactionId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds",
+                    ":transactionId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "5feed88a-cb84-45ed-b9c4-f72e06b4c1ab",
+                      "key": "transactionId",
+                      "value": "<uuid>",
+                      "description": "(Required) Id of the refund transaction"
+                    }
+                  ]
+                },
+                "description": "Poll for an individual refund transaction status to check its current state. Returns detailed information about the refund transaction including its status and payment details."
+              },
+              "response": [
+                {
+                  "id": "8b82c8ed-2e95-481f-9ec1-0e71c88c92fd",
+                  "name": "Refund transaction details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:transactionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":transactionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"transactionId\": \"<string>\",\n  \"transactionReference\": \"<string>\",\n  \"transactionStatus\": \"RefundFailed\",\n  \"brandId\": \"<string,null-uuid>\",\n  \"payments\": [\n    {\n      \"amountInMinorUnits\": \"<number>\",\n      \"fundingInstitution\": \"<string,null>\",\n      \"fundingCard\": {\n        \"lastFourDigits\": \"<string>\",\n        \"brand\": \"<string>\"\n      },\n      \"reference\": \"<string,null>\",\n      \"referenceStatus\": \"<string,null>\",\n      \"referenceType\": \"<string,null>\",\n      \"fundingDetails\": {\n        \"type\": \"<string>\",\n        \"brand\": \"<string,null>\",\n        \"last4\": \"<string,null>\",\n        \"reference\": \"<string,null>\",\n        \"referenceStatus\": \"<string,null>\",\n        \"referenceType\": \"<string,null>\"\n      }\n    },\n    {\n      \"amountInMinorUnits\": \"<number>\",\n      \"fundingInstitution\": \"<string,null>\",\n      \"fundingCard\": {\n        \"lastFourDigits\": \"<string>\",\n        \"brand\": \"<string>\"\n      },\n      \"reference\": \"<string,null>\",\n      \"referenceStatus\": \"<string,null>\",\n      \"referenceType\": \"<string,null>\",\n      \"fundingDetails\": {\n        \"type\": \"<string>\",\n        \"brand\": \"<string,null>\",\n        \"last4\": \"<string,null>\",\n        \"reference\": \"<string,null>\",\n        \"referenceStatus\": \"<string,null>\",\n        \"referenceType\": \"<string,null>\"\n      }\n    }\n  ],\n  \"paymentMethodId\": \"<string,null>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-8b82c8ed-2e95-481f-9ec1-0e71c88c92fd"
+                },
+                {
+                  "id": "99076c2d-27be-48ed-9ffa-c13173d357ee",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:transactionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":transactionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-99076c2d-27be-48ed-9ffa-c13173d357ee"
+                },
+                {
+                  "id": "5af4b326-ae15-4f24-96ef-e0f35e97be83",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:transactionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":transactionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-5af4b326-ae15-4f24-96ef-e0f35e97be83"
+                },
+                {
+                  "id": "a73de83f-f234-4817-a692-b13a46a6fb70",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:transactionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":transactionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-a73de83f-f234-4817-a692-b13a46a6fb70"
+                },
+                {
+                  "id": "96758385-bed6-41e1-85ca-cbceede32956",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:transactionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":transactionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-96758385-bed6-41e1-85ca-cbceede32956"
+                },
+                {
+                  "id": "14e02bc3-b88c-4535-b786-23c43be3c9c2",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:transactionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":transactionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-14e02bc3-b88c-4535-b786-23c43be3c9c2"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-2bb79aa2-2f45-4b6f-8a1a-f314168db82b"
+            }
+          ],
+          "id": "e8b133b9-d35a-4579-8392-70745cb904c3",
+          "createdAt": "2026-07-28T03:05:58.000Z",
+          "updatedAt": "2026-07-28T03:05:58.000Z",
+          "uid": "35240-e8b133b9-d35a-4579-8392-70745cb904c3"
+        },
+        {
+          "name": "search",
+          "item": [
+            {
+              "name": "Search refund transactions",
+              "id": "77239d8a-7f86-4546-9b38-d364f5a3e33d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/refunds/search?transactionStatus=<string>&transactionStatus=<string>&startDate=<dateTime>&endDate=<dateTime>&pageSize=<integer>&page=<string>&paymentExternalReference=<string>&paymentTransactionId=<string>&transactionId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by refund transaction status. Can be a single status or an array of statuses.",
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by refund transaction status. Can be a single status or an array of statuses.",
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by start date (ISO 8601 format). Inclusive.",
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by end date (ISO 8601 format). Inclusive.",
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Number of items to return per page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Page token for pagination (cursor).",
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the external reference of the original payment.",
+                      "key": "paymentExternalReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the original payment transaction ID.",
+                      "key": "paymentTransactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by refund transaction ID.",
+                      "key": "transactionId",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve a list of refund transactions with filtering options. Results are paginated and can be filtered by various criteria including status, payment ID, and date range. Refund transactions are returned in reverse chronological order (newest first). If no filters are specified, all available refund transactions will be returned subject to pagination limits."
+              },
+              "response": [
+                {
+                  "id": "c2011669-39ac-4342-adb3-dc0167d68885",
+                  "name": "List of refund transactions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/search?transactionStatus=<string>&startDate=<dateTime>&endDate=<dateTime>&pageSize=<integer>&page=<string>&paymentExternalReference=<string>&paymentTransactionId=<string>&transactionId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by refund transaction status. Can be a single status or an array of statuses.",
+                          "key": "transactionStatus",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by start date (ISO 8601 format). Inclusive.",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by end date (ISO 8601 format). Inclusive.",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of items to return per page.",
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page token for pagination (cursor).",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the external reference of the original payment.",
+                          "key": "paymentExternalReference",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the original payment transaction ID.",
+                          "key": "paymentTransactionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by refund transaction ID.",
+                          "key": "transactionId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"pageSize\": \"<number>\",\n  \"nextPage\": \"<string,null>\",\n  \"hasNext\": \"<boolean>\",\n  \"items\": [\n    {\n      \"transactionId\": \"<string>\",\n      \"paymentTransactionId\": \"<string>\",\n      \"paymentExternalReference\": \"<string,null>\",\n      \"transactionReference\": \"<string>\",\n      \"minorUnitAmount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"transactionStatus\": \"RefundPending\",\n      \"transactionStatusChangedAt\": \"<dateTime>\",\n      \"brandId\": \"<string,null-uuid>\",\n      \"paymentMethodId\": \"<string,null>\"\n    },\n    {\n      \"transactionId\": \"<string>\",\n      \"paymentTransactionId\": \"<string>\",\n      \"paymentExternalReference\": \"<string,null>\",\n      \"transactionReference\": \"<string>\",\n      \"minorUnitAmount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"transactionStatus\": \"RefundPending\",\n      \"transactionStatusChangedAt\": \"<dateTime>\",\n      \"brandId\": \"<string,null-uuid>\",\n      \"paymentMethodId\": \"<string,null>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-c2011669-39ac-4342-adb3-dc0167d68885"
+                },
+                {
+                  "id": "d1df991b-2316-4ff2-bad8-2e3184062261",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/search?transactionStatus=<string>&startDate=<dateTime>&endDate=<dateTime>&pageSize=<integer>&page=<string>&paymentExternalReference=<string>&paymentTransactionId=<string>&transactionId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by refund transaction status. Can be a single status or an array of statuses.",
+                          "key": "transactionStatus",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by start date (ISO 8601 format). Inclusive.",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by end date (ISO 8601 format). Inclusive.",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of items to return per page.",
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page token for pagination (cursor).",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the external reference of the original payment.",
+                          "key": "paymentExternalReference",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the original payment transaction ID.",
+                          "key": "paymentTransactionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by refund transaction ID.",
+                          "key": "transactionId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-d1df991b-2316-4ff2-bad8-2e3184062261"
+                },
+                {
+                  "id": "d8cd597d-54f5-4bca-940d-507317f0c1e3",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/search?transactionStatus=<string>&startDate=<dateTime>&endDate=<dateTime>&pageSize=<integer>&page=<string>&paymentExternalReference=<string>&paymentTransactionId=<string>&transactionId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by refund transaction status. Can be a single status or an array of statuses.",
+                          "key": "transactionStatus",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by start date (ISO 8601 format). Inclusive.",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by end date (ISO 8601 format). Inclusive.",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of items to return per page.",
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page token for pagination (cursor).",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the external reference of the original payment.",
+                          "key": "paymentExternalReference",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the original payment transaction ID.",
+                          "key": "paymentTransactionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by refund transaction ID.",
+                          "key": "transactionId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-d8cd597d-54f5-4bca-940d-507317f0c1e3"
+                },
+                {
+                  "id": "88dc32d1-688a-4b30-a621-a3e6477a0894",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/search?transactionStatus=<string>&startDate=<dateTime>&endDate=<dateTime>&pageSize=<integer>&page=<string>&paymentExternalReference=<string>&paymentTransactionId=<string>&transactionId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by refund transaction status. Can be a single status or an array of statuses.",
+                          "key": "transactionStatus",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by start date (ISO 8601 format). Inclusive.",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by end date (ISO 8601 format). Inclusive.",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of items to return per page.",
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page token for pagination (cursor).",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the external reference of the original payment.",
+                          "key": "paymentExternalReference",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the original payment transaction ID.",
+                          "key": "paymentTransactionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by refund transaction ID.",
+                          "key": "transactionId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-88dc32d1-688a-4b30-a621-a3e6477a0894"
+                },
+                {
+                  "id": "c8af3498-6885-485a-b615-6b365c2879ed",
+                  "name": "Not Acceptable",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/search?transactionStatus=<string>&startDate=<dateTime>&endDate=<dateTime>&pageSize=<integer>&page=<string>&paymentExternalReference=<string>&paymentTransactionId=<string>&transactionId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by refund transaction status. Can be a single status or an array of statuses.",
+                          "key": "transactionStatus",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by start date (ISO 8601 format). Inclusive.",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by end date (ISO 8601 format). Inclusive.",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of items to return per page.",
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page token for pagination (cursor).",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the external reference of the original payment.",
+                          "key": "paymentExternalReference",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the original payment transaction ID.",
+                          "key": "paymentTransactionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by refund transaction ID.",
+                          "key": "transactionId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-c8af3498-6885-485a-b615-6b365c2879ed"
+                },
+                {
+                  "id": "8971d80d-5a67-4a4a-83b1-760d193dc94f",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/search?transactionStatus=<string>&startDate=<dateTime>&endDate=<dateTime>&pageSize=<integer>&page=<string>&paymentExternalReference=<string>&paymentTransactionId=<string>&transactionId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by refund transaction status. Can be a single status or an array of statuses.",
+                          "key": "transactionStatus",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by start date (ISO 8601 format). Inclusive.",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by end date (ISO 8601 format). Inclusive.",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of items to return per page.",
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page token for pagination (cursor).",
+                          "key": "page",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the external reference of the original payment.",
+                          "key": "paymentExternalReference",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the original payment transaction ID.",
+                          "key": "paymentTransactionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by refund transaction ID.",
+                          "key": "transactionId",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:05:58.000Z",
+                  "updatedAt": "2026-07-28T03:05:58.000Z",
+                  "uid": "35240-8971d80d-5a67-4a4a-83b1-760d193dc94f"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-77239d8a-7f86-4546-9b38-d364f5a3e33d"
+            }
+          ],
+          "id": "069b1a5e-ddd9-4ddf-ac96-0e0599fc1237",
+          "createdAt": "2026-07-28T03:05:58.000Z",
+          "updatedAt": "2026-07-28T03:05:58.000Z",
+          "uid": "35240-069b1a5e-ddd9-4ddf-ac96-0e0599fc1237"
+        },
+        {
+          "name": "Create Refund",
+          "id": "f0ca9302-98b4-4c25-8995-2d740652fd35",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/refunds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "refunds"
+              ]
+            },
+            "description": "This endpoint is used to initiate a refund for a payment transaction."
+          },
+          "response": [
+            {
+              "id": "ce8bd23a-02fd-4c72-9d90-16c718f81f9d",
+              "name": "Successful refund initiation",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"transactionId\": \"<uuid>\",\n  \"transactionReference\": \"<string>\",\n  \"fundingSummary\": {\n    \"cashPayableToMerchant\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\"\n    },\n    \"customerFundedAmount\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\"\n    },\n    \"superFundedAmount\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\"\n    },\n    \"merchantFundedAmount\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-ce8bd23a-02fd-4c72-9d90-16c718f81f9d"
+            },
+            {
+              "id": "6b3a915f-2660-4240-bb77-92ef1e2d9119",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-6b3a915f-2660-4240-bb77-92ef1e2d9119"
+            },
+            {
+              "id": "11d01c08-c973-4a45-8570-98c3589e80b6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-11d01c08-c973-4a45-8570-98c3589e80b6"
+            },
+            {
+              "id": "3d1d5e08-9753-4377-9080-b46d862c31e6",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-3d1d5e08-9753-4377-9080-b46d862c31e6"
+            },
+            {
+              "id": "fa9e9bef-7174-4043-a1d0-45da48f8e2f3",
+              "name": "Conflict",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-fa9e9bef-7174-4043-a1d0-45da48f8e2f3"
+            },
+            {
+              "id": "5b84045f-2711-4d5f-b696-7d5777e911b0",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-5b84045f-2711-4d5f-b696-7d5777e911b0"
+            },
+            {
+              "id": "df52e97b-9730-4aca-98c1-180c01be969a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:05:58.000Z",
+              "updatedAt": "2026-07-28T03:05:58.000Z",
+              "uid": "35240-df52e97b-9730-4aca-98c1-180c01be969a"
+            }
+          ],
+          "createdAt": "2026-07-28T03:05:58.000Z",
+          "updatedAt": "2026-07-28T03:05:58.000Z",
+          "uid": "35240-f0ca9302-98b4-4c25-8995-2d740652fd35"
+        }
+      ],
+      "id": "3d8e4b2d-eeac-4c3d-b899-788a049bea0b",
+      "createdAt": "2026-07-28T03:05:58.000Z",
+      "updatedAt": "2026-07-28T03:05:58.000Z",
+      "uid": "35240-3d8e4b2d-eeac-4c3d-b899-788a049bea0b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.superpayments.com/2026-04-01"
+    }
+  ]
+}

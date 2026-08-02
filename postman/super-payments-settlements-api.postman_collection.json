@@ -1,0 +1,1029 @@
+{
+  "info": {
+    "_postman_id": "c6ae9819-3f31-4fac-b7df-e7b881fdf457",
+    "name": "Super Payments Checkout Sessions Settlements API",
+    "description": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:06:00.000Z",
+    "updatedAt": "2026-07-28T03:06:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c6ae9819-3f31-4fac-b7df-e7b881fdf457"
+  },
+  "item": [
+    {
+      "name": "settlements",
+      "item": [
+        {
+          "name": "{settlementId}",
+          "item": [
+            {
+              "name": "reconciliation",
+              "item": [
+                {
+                  "name": "Get settlement reconciliation rows",
+                  "id": "5973afac-8b20-430f-9539-9aba2609d2f1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/settlements/:settlementId/reconciliation?pageSize=<integer>&page=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "settlements",
+                        ":settlementId",
+                        "reconciliation"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of reconciliation rows per page.",
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Opaque cursor returned by previous responses.",
+                          "key": "page",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "7bc154ca-b3fb-4be5-bfde-9e8b11e78b43",
+                          "key": "settlementId",
+                          "value": "<uuid>",
+                          "description": "(Required) Settlement identifier."
+                        }
+                      ]
+                    },
+                    "description": "Return ledger reconciliation items for a settlement, with pagination. Provide Accept"
+                  },
+                  "response": [
+                    {
+                      "id": "de3ffbcb-4fea-4595-aadd-449f558fa4b7",
+                      "name": "Settlement reconciliation response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/settlements/:settlementId/reconciliation?pageSize=<integer>&page=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "settlements",
+                            ":settlementId",
+                            "reconciliation"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of reconciliation rows per page.",
+                              "key": "pageSize",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Opaque cursor returned by previous responses.",
+                              "key": "page",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "settlementId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"pageSize\": \"<integer>\",\n  \"hasNext\": \"<boolean>\",\n  \"items\": [\n    {\n      \"reconciliationItemId\": \"<string>\",\n      \"transactionId\": \"<string>\",\n      \"transactionType\": \"FLOAT_HOLD\",\n      \"paymentIntentId\": \"<string,null>\",\n      \"paymentIntentReference\": \"<string,null>\",\n      \"paymentIntentExternalReference\": \"<string,null>\",\n      \"refundId\": \"<string,null>\",\n      \"refundReference\": \"<string,null>\",\n      \"refundExternalReference\": \"<string,null>\",\n      \"amountSettled\": \"<integer>\",\n      \"amountScale\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"isCredit\": \"<boolean>\"\n    },\n    {\n      \"reconciliationItemId\": \"<string>\",\n      \"transactionId\": \"<string>\",\n      \"transactionType\": \"REWARD_SETTLEMENT\",\n      \"paymentIntentId\": \"<string,null>\",\n      \"paymentIntentReference\": \"<string,null>\",\n      \"paymentIntentExternalReference\": \"<string,null>\",\n      \"refundId\": \"<string,null>\",\n      \"refundReference\": \"<string,null>\",\n      \"refundExternalReference\": \"<string,null>\",\n      \"amountSettled\": \"<integer>\",\n      \"amountScale\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"isCredit\": \"<boolean>\"\n    }\n  ],\n  \"nextPage\": \"<string,null>\"\n}",
+                      "createdAt": "2026-07-28T03:06:00.000Z",
+                      "updatedAt": "2026-07-28T03:06:00.000Z",
+                      "uid": "35240-de3ffbcb-4fea-4595-aadd-449f558fa4b7"
+                    },
+                    {
+                      "id": "9bff2f6d-5dd4-466f-b150-e642ef8328e9",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/settlements/:settlementId/reconciliation?pageSize=<integer>&page=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "settlements",
+                            ":settlementId",
+                            "reconciliation"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of reconciliation rows per page.",
+                              "key": "pageSize",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Opaque cursor returned by previous responses.",
+                              "key": "page",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "settlementId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:06:00.000Z",
+                      "updatedAt": "2026-07-28T03:06:00.000Z",
+                      "uid": "35240-9bff2f6d-5dd4-466f-b150-e642ef8328e9"
+                    },
+                    {
+                      "id": "836798fe-d2d4-44b2-907a-7bc8c91cb142",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/settlements/:settlementId/reconciliation?pageSize=<integer>&page=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "settlements",
+                            ":settlementId",
+                            "reconciliation"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of reconciliation rows per page.",
+                              "key": "pageSize",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Opaque cursor returned by previous responses.",
+                              "key": "page",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "settlementId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:06:00.000Z",
+                      "updatedAt": "2026-07-28T03:06:00.000Z",
+                      "uid": "35240-836798fe-d2d4-44b2-907a-7bc8c91cb142"
+                    },
+                    {
+                      "id": "81517c16-3b0d-4e89-a08c-3db1a5b8145c",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/settlements/:settlementId/reconciliation?pageSize=<integer>&page=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "settlements",
+                            ":settlementId",
+                            "reconciliation"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of reconciliation rows per page.",
+                              "key": "pageSize",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Opaque cursor returned by previous responses.",
+                              "key": "page",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "settlementId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:06:00.000Z",
+                      "updatedAt": "2026-07-28T03:06:00.000Z",
+                      "uid": "35240-81517c16-3b0d-4e89-a08c-3db1a5b8145c"
+                    },
+                    {
+                      "id": "b13e7cc3-2d89-4c0e-850f-65a6d3f4e3aa",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/settlements/:settlementId/reconciliation?pageSize=<integer>&page=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "settlements",
+                            ":settlementId",
+                            "reconciliation"
+                          ],
+                          "query": [
+                            {
+                              "description": "Number of reconciliation rows per page.",
+                              "key": "pageSize",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Opaque cursor returned by previous responses.",
+                              "key": "page",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "settlementId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:06:00.000Z",
+                      "updatedAt": "2026-07-28T03:06:00.000Z",
+                      "uid": "35240-b13e7cc3-2d89-4c0e-850f-65a6d3f4e3aa"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:06:00.000Z",
+                  "updatedAt": "2026-07-28T03:06:00.000Z",
+                  "uid": "35240-5973afac-8b20-430f-9539-9aba2609d2f1"
+                }
+              ],
+              "id": "18788a0c-2182-4ace-8fad-709099065a5b",
+              "createdAt": "2026-07-28T03:06:00.000Z",
+              "updatedAt": "2026-07-28T03:06:00.000Z",
+              "uid": "35240-18788a0c-2182-4ace-8fad-709099065a5b"
+            },
+            {
+              "name": "Get settlement detail",
+              "id": "fe6deb62-3356-4049-88c0-8884441fdcde",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/settlements/:settlementId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6d986c92-2c89-4bcc-9137-3bba9d8f0686",
+                      "key": "settlementId",
+                      "value": "<uuid>",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "description": "Fetch a single settlement and its payments/statistics. Provide Accept"
+              },
+              "response": [
+                {
+                  "id": "caab4d7b-4b7f-4870-b9a6-7b0618d74d2b",
+                  "name": "Settlement detail response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/settlements/:settlementId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "settlements",
+                        ":settlementId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "settlementId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"settlementId\": \"<string>\",\n  \"settlementReference\": \"<string,null>\",\n  \"settlementTs\": \"<string,null-date-time>\",\n  \"status\": \"ERRORED\",\n  \"minorUnitAmount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"payments\": [\n    {\n      \"paymentReference\": \"<string>\",\n      \"status\": \"PENDING\",\n      \"minorUnitAmount\": \"<integer>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"paymentReference\": \"<string>\",\n      \"status\": \"SETTLED\",\n      \"minorUnitAmount\": \"<integer>\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"settlementStatistics\": {\n    \"openingBalanceAmount\": \"<integer>\",\n    \"reservedFeesAmount\": \"<integer>\",\n    \"amountScale\": \"<integer>\"\n  },\n  \"createdAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:06:00.000Z",
+                  "updatedAt": "2026-07-28T03:06:00.000Z",
+                  "uid": "35240-caab4d7b-4b7f-4870-b9a6-7b0618d74d2b"
+                },
+                {
+                  "id": "619b788c-0a74-4425-8475-28c8146bd963",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/settlements/:settlementId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "settlements",
+                        ":settlementId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "settlementId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:06:00.000Z",
+                  "updatedAt": "2026-07-28T03:06:00.000Z",
+                  "uid": "35240-619b788c-0a74-4425-8475-28c8146bd963"
+                },
+                {
+                  "id": "cacd8021-f3cf-4f07-81a5-108f536ad25f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/settlements/:settlementId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "settlements",
+                        ":settlementId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "settlementId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:06:00.000Z",
+                  "updatedAt": "2026-07-28T03:06:00.000Z",
+                  "uid": "35240-cacd8021-f3cf-4f07-81a5-108f536ad25f"
+                },
+                {
+                  "id": "0f57c527-3740-4b6d-8b28-1dca9deb3412",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/settlements/:settlementId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "settlements",
+                        ":settlementId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "settlementId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:06:00.000Z",
+                  "updatedAt": "2026-07-28T03:06:00.000Z",
+                  "uid": "35240-0f57c527-3740-4b6d-8b28-1dca9deb3412"
+                },
+                {
+                  "id": "302e011c-d4d1-40f2-b249-3c6c4e0c1615",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/problem+json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/settlements/:settlementId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "settlements",
+                        ":settlementId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "settlementId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/problem+json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:06:00.000Z",
+                  "updatedAt": "2026-07-28T03:06:00.000Z",
+                  "uid": "35240-302e011c-d4d1-40f2-b249-3c6c4e0c1615"
+                }
+              ],
+              "createdAt": "2026-07-28T03:06:00.000Z",
+              "updatedAt": "2026-07-28T03:06:00.000Z",
+              "uid": "35240-fe6deb62-3356-4049-88c0-8884441fdcde"
+            }
+          ],
+          "id": "ea334f04-a2c4-4544-884c-3862a2f686a4",
+          "createdAt": "2026-07-28T03:06:00.000Z",
+          "updatedAt": "2026-07-28T03:06:00.000Z",
+          "uid": "35240-ea334f04-a2c4-4544-884c-3862a2f686a4"
+        },
+        {
+          "name": "List settlements",
+          "id": "9a3ef934-f501-465c-9f3c-85250b74be3e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/settlements?settlementReference=<string>&pageSize=<integer>&page=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "settlements"
+              ],
+              "query": [
+                {
+                  "description": "Filter by prefix of settlement reference (case-insensitive).",
+                  "key": "settlementReference",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Number of results to return per page.",
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Opaque cursor returned by previous responses.",
+                  "key": "page",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve paginated settlement batches for the current merchant. Provide Accept"
+          },
+          "response": [
+            {
+              "id": "6ccd9a64-3b55-41ad-9e2e-2c2e5433df7e",
+              "name": "List settlements response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/settlements?settlementReference=<string>&pageSize=<integer>&page=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "settlements"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by prefix of settlement reference (case-insensitive).",
+                      "key": "settlementReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results to return per page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Opaque cursor returned by previous responses.",
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"pageSize\": \"<integer>\",\n  \"hasNext\": \"<boolean>\",\n  \"items\": [\n    {\n      \"settlementId\": \"<string>\",\n      \"settlementReference\": \"<string,null>\",\n      \"settledAt\": \"<string,null-date-time>\",\n      \"status\": \"SETTLED\",\n      \"minorUnitAmount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"settlementId\": \"<string>\",\n      \"settlementReference\": \"<string,null>\",\n      \"settledAt\": \"<string,null-date-time>\",\n      \"status\": \"CREATED\",\n      \"minorUnitAmount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ],\n  \"nextPage\": \"<string,null>\"\n}",
+              "createdAt": "2026-07-28T03:06:00.000Z",
+              "updatedAt": "2026-07-28T03:06:00.000Z",
+              "uid": "35240-6ccd9a64-3b55-41ad-9e2e-2c2e5433df7e"
+            },
+            {
+              "id": "7e194c1a-85ca-4267-81e9-52124f7a21e3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/settlements?settlementReference=<string>&pageSize=<integer>&page=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "settlements"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by prefix of settlement reference (case-insensitive).",
+                      "key": "settlementReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results to return per page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Opaque cursor returned by previous responses.",
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:06:00.000Z",
+              "updatedAt": "2026-07-28T03:06:00.000Z",
+              "uid": "35240-7e194c1a-85ca-4267-81e9-52124f7a21e3"
+            },
+            {
+              "id": "7b698606-ccc7-4093-b666-3e644f0f8f46",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/settlements?settlementReference=<string>&pageSize=<integer>&page=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "settlements"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by prefix of settlement reference (case-insensitive).",
+                      "key": "settlementReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results to return per page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Opaque cursor returned by previous responses.",
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:06:00.000Z",
+              "updatedAt": "2026-07-28T03:06:00.000Z",
+              "uid": "35240-7b698606-ccc7-4093-b666-3e644f0f8f46"
+            },
+            {
+              "id": "1cc9eb41-1fa6-4cf9-9135-03f92f3d5f37",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/settlements?settlementReference=<string>&pageSize=<integer>&page=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "settlements"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by prefix of settlement reference (case-insensitive).",
+                      "key": "settlementReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results to return per page.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Opaque cursor returned by previous responses.",
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:06:00.000Z",
+              "updatedAt": "2026-07-28T03:06:00.000Z",
+              "uid": "35240-1cc9eb41-1fa6-4cf9-9135-03f92f3d5f37"
+            }
+          ],
+          "createdAt": "2026-07-28T03:06:00.000Z",
+          "updatedAt": "2026-07-28T03:06:00.000Z",
+          "uid": "35240-9a3ef934-f501-465c-9f3c-85250b74be3e"
+        }
+      ],
+      "id": "7ee3c722-bcaa-4019-8c1c-01fb154360de",
+      "createdAt": "2026-07-28T03:06:00.000Z",
+      "updatedAt": "2026-07-28T03:06:00.000Z",
+      "uid": "35240-7ee3c722-bcaa-4019-8c1c-01fb154360de"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.superpayments.com/2026-04-01"
+    }
+  ]
+}

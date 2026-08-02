@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: generated
+source: >-
+  Packaged Agent Skills generated from openapi/super-payments-openapi.yml. Every
+  step is grounded in an operationId verified verbatim in the harvested spec;
+  cross-cutting rules cite ../conventions/, ../errors/, ../authentication/ and
+  ../sandbox/. No provider-published skills/AGENTS.md were found.
+skills:
+  - file: super-payments-accept-a-payment.md
+    name: Accept a payment via a checkout session
+    api: openapi/super-payments-openapi.yml
+    operations: [create-checkout-session, upsert-order-details, proceed-payment-via-checkout-session, get-payment-transaction-2025-11-01]
+  - file: super-payments-refund-a-payment.md
+    name: Refund a payment
+    api: openapi/super-payments-openapi.yml
+    operations: [search-payment-transactions-2025-11-01, create-refund, get-refund-transaction-2025-11-01]
+  - file: super-payments-save-and-charge-card.md
+    name: Save a card and charge it off-session
+    api: openapi/super-payments-openapi.yml
+    operations: [create-customer, create-payment-method, create-setup-intent, create-payment-intent]
+  - file: super-payments-reconcile-settlements.md
+    name: Reconcile settlements
+    api: openapi/super-payments-openapi.yml
+    operations: [list-settlements-2025-11-01, get-settlement-detail-2025-11-01, get-settlement-reconciliation-2025-11-01]

@@ -1,0 +1,18 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.superpayments.com/reference/rate-limiting
+description: >-
+  Super Payments applies per-second request-rate limits plus a concurrency
+  limiter to protect API stability. Exceeding a limit returns HTTP 429; clients
+  should implement backoff. Limits may be raised for high-traffic applications
+  or lowered to prevent abuse.
+docs: https://docs.superpayments.com/reference/rate-limiting
+throttled_status: 429
+limits:
+  - {name: read, limit_count: 20, window: 1s, scope: most APIs}
+  - {name: write, limit_count: 20, window: 1s, scope: most APIs}
+concurrency_limiter: true
+retry_guidance: Implement a delay / back-off strategy before retrying on 429.
+headers:
+  documented: false
+  notes: No RateLimit/Retry-After response headers are documented.

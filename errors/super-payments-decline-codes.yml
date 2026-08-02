@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  openapi/super-payments-openapi.yml — the declineCode enum on the 402 Payment
+  Required response of Create Payment Intent and Proceed Checkout Session
+  (extensions.issues), plus the 2025-11-01 changelog note introducing structured
+  decline codes.
+description: >-
+  Super Payments surfaces card declines as HTTP 402 with a structured decline
+  object under the RFC 9457 problem+json extensions.issues field. Cards are
+  processed via Adyen; declineCode is the issuer/processor reason. The
+  declineClassification field marks whether a code may be shown to the shopper:
+  RESTRICTED codes must NOT be revealed and should be replaced with
+  GENERIC_DECLINE in buyer-facing messaging.
+docs: https://docs.superpayments.com/reference/create-payment-intent
+envelope_field: extensions.issues.declineCode   # present on 402 Payment Required
+also_returned:
+  - {field: extensions.issues.declineReason, description: Customer-friendly description of the decline.}
+  - {field: extensions.issues.declineClassification, description: RESTRICTED (mask to GENERIC_DECLINE) or UNRESTRICTED (safe to show).}
+returned_on:
+  - POST /2026-04-01/payments (Create Payment Intent)
+  - POST /2026-04-01/checkout-sessions/{id}/proceed (Proceed Checkout Session)
+classification:
+  RESTRICTED: Do not reveal to the shopper; present as GENERIC_DECLINE.
+  UNRESTRICTED: Safe to surface the declineReason to the shopper.
+decline_codes:
+  - {code: AUTHENTICATION_REQUIRED, meaning: 3D Secure / strong customer authentication is required, action: Trigger authentication and retry.}
+  - {code: DUPLICATE_SUSPECTED, meaning: A duplicate transaction was suspected, action: Check for an existing recent payment before retrying.}
+  - {code: FRAUD_SUSPECTED, meaning: Transaction suspected to be fraudulent, action: Present as GENERIC_DECLINE; do not reveal detail.}
+  - {code: GENERIC_DECLINE, meaning: Declined for an unspecified reason, action: Ask the customer to contact their card issuer or use another method.}
+  - {code: INSUFFICIENT_FUNDS, meaning: The card has insufficient funds, action: Customer uses another payment method.}
+  - {code: INVALID_ADDRESS, meaning: The billing address is invalid, action: Retry with a corrected address.}
+  - {code: INVALID_AMOUNT, meaning: The amount is invalid for this card/transaction, action: Verify the amount and currency.}
+  - {code: INVALID_CVC, meaning: The CVC/security code is incorrect, action: Retry with the correct CVC.}
+  - {code: INVALID_EXPIRY_MONTH, meaning: The expiry month is invalid, action: Retry with the correct expiry.}
+  - {code: INVALID_EXPIRY_YEAR, meaning: The expiry year is invalid, action: Retry with the correct expiry.}
+  - {code: INVALID_NUMBER, meaning: The card number is invalid, action: Retry with the correct card number.}
+  - {code: INVALID_PIN, meaning: The PIN is incorrect, action: Customer re-enters the PIN or uses another method.}
+  - {code: MERCHANT_BLACKLIST, meaning: The card is on a merchant block list, action: Present as GENERIC_DECLINE; customer uses another method.}
+  - {code: PAYMENT_METHOD_ATTEMPTS_EXCEEDED, meaning: Too many attempts on this payment method, action: Customer uses another method or retries later.}
+  - {code: PAYMENT_METHOD_EXPIRED, meaning: The payment method has expired, action: Customer uses another card.}
+  - {code: PAYMENT_METHOD_NOT_SUPPORTED, meaning: The payment method is not supported, action: Customer uses a supported method.}
+  - {code: PAYMENT_METHOD_REVOKED, meaning: The payment method has been revoked, action: Customer uses another method.}
+  - {code: PROCESSING_ERROR, meaning: A processing error occurred at the network/issuer, action: Retry; if it persists the customer contacts their issuer.}

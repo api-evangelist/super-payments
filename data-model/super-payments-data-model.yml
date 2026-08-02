@@ -1,0 +1,63 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  openapi/super-payments-openapi.yml — resource paths, path/query id parameters
+  (customerId, paymentTransactionId, settlementId, linkId, brandId,
+  externalReference) and request/response schema references.
+description: >-
+  Entity-relationship graph for the Super Payments API, derived from the
+  harvested OpenAPI. Core money-movement entities (Payment Intent, Refund,
+  Settlement) and stored-credential entities (Customer, Payment Method, Setup
+  Intent) plus the checkout-orchestration entities (Checkout Session, Payment
+  Link) and Reward configuration.
+entities:
+  - name: PaymentIntent
+    resource: /payments
+    id_field: id (transactionId)
+    notes: Created for e-commerce transactions; searchable via /payments/search. 402 on decline.
+  - name: PaymentTransaction
+    resource: /payments/search, /payments/{transactionId}
+    id_field: transactionId
+    notes: The settled/queryable view of a payment, with funding attempts and card metadata.
+  - name: Refund
+    resource: /refunds
+    id_field: transactionId
+    notes: Initiated against a payment transaction; payout refunds are a restricted variant.
+  - name: Settlement
+    resource: /settlements
+    id_field: settlementId
+    notes: Batch of payments paid out to the merchant, with reconciliation rows.
+  - name: CheckoutSession
+    resource: /checkout-sessions
+    id_field: id (checkoutSessionId)
+    notes: Orchestrates a payment; can carry a customer for recurring payments and order line items.
+  - name: PaymentLink
+    resource: /payment-links
+    id_field: linkId
+    notes: No-code hosted link that yields a payment.
+  - name: Customer
+    resource: /customers
+    id_field: id (customerId)
+    notes: Merchant-known customer; may carry an externalReference and emailAddress.
+  - name: PaymentMethod
+    resource: /payment-methods
+    id_field: id
+    notes: Reusable payment instrument associated with a customer for off-session payments.
+  - name: SetupIntent
+    resource: /payment-methods/{id}/setup-intents
+    id_field: id
+    notes: Orchestrates setting up a payment method (e.g. via the super-card component).
+  - name: RewardConfiguration
+    resource: /rewards (by brand)
+    id_field: brandId
+    notes: Cash-reward percentage / minimum spend / expiry configured per brand.
+relationships:
+  - {from: Refund, to: PaymentTransaction, type: belongs_to, via: transactionId}
+  - {from: Settlement, to: PaymentTransaction, type: has_many, via: settlement reconciliation rows}
+  - {from: PaymentTransaction, to: PaymentIntent, type: belongs_to, via: id}
+  - {from: CheckoutSession, to: Customer, type: has_one, via: customer (recurring)}
+  - {from: PaymentMethod, to: Customer, type: belongs_to, via: customerId}
+  - {from: SetupIntent, to: PaymentMethod, type: belongs_to, via: payment-method id}
+  - {from: PaymentIntent, to: Customer, type: has_one, via: customer (off-session)}
+  - {from: PaymentLink, to: PaymentIntent, type: has_many, via: link payments}
+  - {from: RewardConfiguration, to: Brand, type: belongs_to, via: brandId}

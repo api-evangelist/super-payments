@@ -1,0 +1,79 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://docs.superpayments.com/reference (authentication, errors, pagination,
+  versioning, rate-limiting, webhooks) + openapi/super-payments-openapi.yml.
+description: >-
+  Cross-cutting request/response semantics that apply across every Super
+  Payments endpoint: authentication, pagination, versioning, error envelope,
+  webhook signing, and rate-limit behaviour. Idempotency is NOT provided as a
+  first-class contract (no Idempotency-Key header); deduplication is handled via
+  client-supplied reference fields.
+base_url: https://api.superpayments.com/{version}
+test_base_url: https://api.test.superpayments.com/{version}
+api_style: REST over HTTPS, JSON request/response, date-versioned URL path
+
+authentication:
+  scheme: API key in the Authorization header (raw key value, no Bearer prefix)
+  key_types:
+    - {name: secret, prefixes: [sk_prod_, sk_test_], usage: server-side requests}
+    - {name: public, prefixes: [PUB_], usage: client-side / front-end}
+  detail: authentication/super-payments-authentication.yml
+  docs: https://docs.superpayments.com/reference/authentication
+
+idempotency:
+  supported: false
+  mechanism: null
+  notes: >-
+    No Idempotency-Key header is documented and none appears in the OpenAPI.
+    Callers avoid duplicate processing by supplying their own reference on
+    creation (e.g. externalReference / transactionReference), which can then be
+    used to look up an existing transaction via the search endpoints before
+    retrying.
+
+pagination:
+  style: cursor
+  request_params:
+    page: opaque token taken from the prior response's nextPage (omit for the first page)
+    pageSize: number of results per page
+  response_fields:
+    nextPage: string cursor token for the next page (absent on the last page)
+    hasNext: boolean — whether more results exist
+    pageSize: size of the page returned
+  docs: https://docs.superpayments.com/reference/pagination
+
+versioning:
+  scheme: date-based, mandatory in the URL path
+  current: '2026-04-01'
+  detail: lifecycle/super-payments-lifecycle.yml
+  docs: https://docs.superpayments.com/reference/versioning
+
+error_envelope:
+  format: rfc9457
+  media_type: application/problem+json
+  fields: [type, title, status, detail, instance, "errors[]", extensions]
+  detail: errors/super-payments-problem-types.yml
+  decline_codes: errors/super-payments-decline-codes.yml
+
+webhooks:
+  signing: HMAC-SHA256
+  header: super-signature
+  header_format: 't:<unix-ms-timestamp>,v1:<base64-hmac-sha256>'
+  signed_message: timestamp + raw_request_body (verify against raw bytes, constant-time compare)
+  replay_window: reject requests older than 5 minutes
+  detail: asyncapi/super-payments-webhooks-asyncapi.yml
+  docs: https://docs.superpayments.com/reference/webhooks
+
+rate_limiting:
+  read: 20 requests/second
+  write: 20 requests/second
+  concurrency_limiter: true
+  throttled_status: 429
+  retry_guidance: back off and retry on 429
+  detail: rate-limits/super-payments-rate-limits.yml
+  docs: https://docs.superpayments.com/reference/rate-limiting
+
+network:
+  egress_ips_documented: true
+  detail: https://docs.superpayments.com/reference/external-ips
+  note: Super publishes fixed production/sandbox source IPs for firewall allow-listing.

@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://docs.superpayments.com/docs/embedded-payments,
+  https://docs.superpayments.com/docs/hosted-payment-page,
+  https://docs.superpayments.com/reference/create-setup-intent,
+  https://docs.superpayments.com/reference/getting-started-with-your-api (React Native SDK)
+description: >-
+  Super Payments' client-side / embeddable payment surfaces, distinct from the
+  server-side integration. Card and open-banking capture happens in Super-hosted
+  UI (a web component and a hosted page), keeping PCI scope off the merchant
+  server. A React Native SDK wraps the same surfaces for native apps.
+loaders:
+  - {name: Super.js, url: https://cdn.superpayments.com/js, test_url: https://cdn.superpayments.com/js/test, purpose: Loads Super web components on the page.}
+families:
+  web_components:
+    description: Custom elements mounted client-side and driven by a session token from the API.
+    components:
+      - {name: super-card, tag: <super-card>, description: Embedded card / payment method capture element; consumes a setup-intent or checkout session token to collect and tokenise card details.}
+  embedded_checkout:
+    description: Multi-payment-method embedded checkout offering Card (Apple Pay & Google Pay), Open Banking, and Credit (Pay Later) within one secure component.
+    docs: https://docs.superpayments.com/docs/embedded-payments
+  hosted_page:
+    description: Super-hosted payment page — redirect/prebuilt surface where Super renders the full payment UX.
+    docs: https://docs.superpayments.com/docs/hosted-payment-page
+  payment_links:
+    description: No-code hosted payment links created via the Payment Links API or Portal.
+    docs: https://docs.superpayments.com/docs/payments-payment-links
+  messaging:
+    description: On-site Super checkout messaging / marketing assets to promote Super earlier in the shopping journey.
+    docs: https://docs.superpayments.com/docs/super-checkout-messaging
+mobile:
+  - {name: Super React Native SDK, package: "@superpayments/super-react-native", platforms: [iOS, Android], description: Presents the payment sheet and offers sheet in native apps via a WebView-backed component; catalogued in packages/.}

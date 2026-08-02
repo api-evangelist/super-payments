@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  Probed the /.well-known/ discovery surface on the Super Payments API and web
+  hosts. None of the standard discovery documents are published (all 404). This
+  is a recorded negative result, not a gap in the probe.
+hosts:
+  - https://api.superpayments.com
+  - https://www.superpayments.com
+  - https://docs.superpayments.com
+documents:
+  - {path: /.well-known/security.txt, host: https://api.superpayments.com, status: 404}
+  - {path: /.well-known/security.txt, host: https://www.superpayments.com, status: 404}
+  - {path: /.well-known/security.txt, host: https://docs.superpayments.com, status: 404}
+  - {path: /.well-known/openid-configuration, host: https://api.superpayments.com, status: 404}
+  - {path: /.well-known/oauth-authorization-server, host: https://api.superpayments.com, status: 404}
+notes: >-
+  Super Payments authenticates with static API keys (Authorization header), not
+  OAuth/OIDC, so no openid-configuration / oauth-authorization-server is
+  expected. No security.txt, api-catalog, or ai-plugin.json is published.

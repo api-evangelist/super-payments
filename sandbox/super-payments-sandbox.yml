@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://docs.superpayments.com/reference/sandbox-environment,
+  https://docs.superpayments.com/docs/testing-your-super-integration,
+  https://docs.superpayments.com/docs/test-with-cards,
+  https://docs.superpayments.com/docs/test-with-open-banking,
+  https://docs.superpayments.com/reference/authentication
+description: >-
+  Super Payments provides an isolated sandbox. Payments created in the sandbox
+  are never processed by real banks or card networks. Test and live are
+  separated by API key prefix and by base URL/CDN host. Sandbox access is
+  provisioned by your Super Account Manager.
+docs:
+  - https://docs.superpayments.com/reference/sandbox-environment
+  - https://docs.superpayments.com/docs/testing-your-super-integration
+  - https://docs.superpayments.com/docs/go-live
+access: Request sandbox access from your Super Account Manager.
+modes:
+  - name: test
+    base_url: https://api.test.superpayments.com
+    key_prefix: sk_test_
+    js_cdn: https://cdn.superpayments.com/js/test
+    notes: Payments are not processed by card networks or banks; safe to exercise end-to-end.
+  - name: live
+    base_url: https://api.superpayments.com
+    key_prefix: sk_prod_
+    js_cdn: https://cdn.superpayments.com/js
+    notes: A live key will not work against the test host and vice versa.
+key_formats:
+  secret: {test: sk_test_..., live: sk_prod_...}
+  public: {both: PUB_...}
+test_cards:
+  provider: Adyen
+  source: https://docs.adyen.com/development-resources/test-cards-and-credentials/test-card-numbers
+  notes: >-
+    Card processing runs on Adyen; use Adyen's standard test card numbers to
+    simulate success, decline and authentication scenarios. Super does not
+    publish its own card PANs — no real card details are needed in sandbox.
+test_open_banking:
+  provider: Yapily Mock
+  notes: >-
+    Use Yapily Mock as the test bank to simulate the full open-banking / pay-by-bank
+    payment journey. No real bank account or credentials are needed.
+test_credit:
+  notes: Super Credit can be exercised in the sandbox (see docs/test-with-super-credit).
+network_allowlist:
+  production_ips: [13.40.58.109, 3.11.253.153, 18.130.107.168]
+  sandbox_ips: [3.10.186.196, 3.8.179.142, 35.178.218.159]
+  docs: https://docs.superpayments.com/reference/external-ips

@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://docs.superpayments.com/reference (errors, pagination, versioning,
+  authentication, rate-limiting) + openapi/super-payments-openapi.yml. Standards
+  conformance asserted from documented behaviour and the harvested spec.
+description: >-
+  Cross-cutting standards the Super Payments API conforms to (or does not).
+  Super Payments is a UK payments provider; it authenticates with static API
+  keys (no OAuth2/OIDC) and uses RFC 9457 problem+json errors, cursor
+  pagination, date-based URL versioning, and HMAC-signed webhooks.
+standards:
+  - id: rfc9457-problem-details
+    conforms: true
+    evidence: Errors returned as application/problem+json with type/title/status/detail/instance; docs cite RFC 9457 explicitly.
+  - id: rfc8259-json
+    conforms: true
+    evidence: JSON request/response bodies throughout the OpenAPI.
+  - id: openapi-3.1
+    conforms: true
+    evidence: Provider publishes OpenAPI 3.1.0 per-operation definitions on docs.superpayments.com/reference.
+  - id: oauth2
+    conforms: false
+    evidence: Authentication is static API key (Authorization header), not OAuth2.
+  - id: oidc
+    conforms: false
+  - id: pci-dss
+    conforms: true
+    evidence: >-
+      PCI-DSS scope minimised via hosted/embedded card capture (super-card web
+      component, hosted payment page); card data is captured by Super/Adyen, not
+      the merchant server. Security guide emphasises PCI compliance.
+  - id: cursor-pagination
+    conforms: true
+    evidence: List endpoints use an opaque nextPage cursor token with pageSize + hasNext.
+  - id: date-based-versioning
+    conforms: true
+    evidence: Mandatory YYYY-MM-DD version segment in the URL path (e.g. /2026-04-01/payments).
+  - id: hmac-webhook-signatures
+    conforms: true
+    evidence: >-
+      Webhooks signed with HMAC-SHA256 in a super-signature header (t timestamp,
+      v1 signature) with a 5-minute replay window.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: Deprecation is communicated via new dated versions + changelog, not Sunset/Deprecation headers.
+  - id: json-api
+    conforms: false
+  - id: fapi
+    conforms: false
+  - id: psd2-open-banking
+    conforms: partial
+    evidence: >-
+      Offers open-banking / pay-by-bank payments (Yapily rails), but does not
+      itself publish a PSD2 dedicated-interface conformance spec.

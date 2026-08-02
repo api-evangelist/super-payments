@@ -1,0 +1,687 @@
+{
+  "info": {
+    "_postman_id": "788799f5-5701-419d-b6e4-3796de9e2eac",
+    "name": "Super Payments Checkout Sessions Payment Methods API",
+    "description": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:55.000Z",
+    "updatedAt": "2026-07-28T03:05:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-788799f5-5701-419d-b6e4-3796de9e2eac"
+  },
+  "item": [
+    {
+      "name": "payment-methods",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "setup-intents",
+              "item": [
+                {
+                  "name": "Create Setup Intent",
+                  "id": "879703f6-492c-435f-9a42-b42fdab47cfc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"redirectUrl\": \"<uri>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-methods/:id/setup-intents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-methods",
+                        ":id",
+                        "setup-intents"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a688b2fa-9f47-4f68-aed4-a56bff74d5c7",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "This endpoint creates a setup intent against a previously created payment method. The setup intent is used to orchestrate the process that allows a customer to set up their payment method (e.g. debit card) for future usage in off-session payments. It returns a session token that may be passed to the <super-card> Web Component to begin the setup process."
+                  },
+                  "response": [
+                    {
+                      "id": "79d17a1d-3155-4e1d-a8cc-86d0bf07517c",
+                      "name": "The newly created setup intent & next action options",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"redirectUrl\": \"<uri>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/payment-methods/:id/setup-intents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payment-methods",
+                            ":id",
+                            "setup-intents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"sessionToken\": \"<string>\",\n  \"redirectUrl\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T03:05:56.000Z",
+                      "updatedAt": "2026-07-28T03:05:56.000Z",
+                      "uid": "35240-79d17a1d-3155-4e1d-a8cc-86d0bf07517c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:05:56.000Z",
+                  "updatedAt": "2026-07-28T03:05:56.000Z",
+                  "uid": "35240-879703f6-492c-435f-9a42-b42fdab47cfc"
+                }
+              ],
+              "id": "0f5e2491-17f5-4c72-97a6-2c8479bd3050",
+              "createdAt": "2026-07-28T03:05:56.000Z",
+              "updatedAt": "2026-07-28T03:05:56.000Z",
+              "uid": "35240-0f5e2491-17f5-4c72-97a6-2c8479bd3050"
+            },
+            {
+              "name": "Get Payment Method",
+              "id": "c9f98a0b-e4fc-4a4e-9957-e8bf5756877d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payment-methods/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-methods",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d2fcc825-9dbb-41ba-93da-6c12ad3817f1",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "This endpoint returns a previously created payment method, including its current status. It requires the Super payment method ID that was provided upon successful creation of the payment method."
+              },
+              "response": [
+                {
+                  "id": "5d2efdcf-00ec-40a8-b17c-11d0f7f93a13",
+                  "name": "Existing payment method",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": {},\n  \"customerId\": {},\n  \"type\": \"<string>\",\n  \"usage\": \"<string>\",\n  \"status\": \"DISABLED\",\n  \"metadata\": null,\n  \"createdAt\": {},\n  \"updatedAt\": {}\n}",
+                  "createdAt": "2026-07-28T03:05:56.000Z",
+                  "updatedAt": "2026-07-28T03:05:56.000Z",
+                  "uid": "35240-5d2efdcf-00ec-40a8-b17c-11d0f7f93a13"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:56.000Z",
+              "updatedAt": "2026-07-28T03:05:56.000Z",
+              "uid": "35240-c9f98a0b-e4fc-4a4e-9957-e8bf5756877d"
+            }
+          ],
+          "id": "5d4b5fea-06a9-43ae-9b97-888b00920209",
+          "createdAt": "2026-07-28T03:05:56.000Z",
+          "updatedAt": "2026-07-28T03:05:56.000Z",
+          "uid": "35240-5d4b5fea-06a9-43ae-9b97-888b00920209"
+        },
+        {
+          "name": "setup-intents",
+          "item": [
+            {
+              "name": "List Setup Intents",
+              "id": "0dfd568f-5120-46c1-9008-c262228c922c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payment-methods/setup-intents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-methods",
+                    "setup-intents"
+                  ]
+                },
+                "description": "This endpoint lists all existing setup intents."
+              },
+              "response": [
+                {
+                  "id": "e261dfdc-ac47-48a6-8a70-f9963fc88ded",
+                  "name": "List all setup intent sessions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-methods/setup-intents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-methods",
+                        "setup-intents"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"FAILED\",\n      \"createdAt\": {},\n      \"updatedAt\": {},\n      \"paymentMethodId\": \"<string>\",\n      \"customerId\": \"<string>\",\n      \"brandId\": \"<string>\",\n      \"providerData\": null\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"SUCCESS\",\n      \"createdAt\": {},\n      \"updatedAt\": {},\n      \"paymentMethodId\": \"<string>\",\n      \"customerId\": \"<string>\",\n      \"brandId\": \"<string>\",\n      \"providerData\": {\n        \"provider\": \"<string>\",\n        \"providerPaymentMethodId\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:05:56.000Z",
+                  "updatedAt": "2026-07-28T03:05:56.000Z",
+                  "uid": "35240-e261dfdc-ac47-48a6-8a70-f9963fc88ded"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:56.000Z",
+              "updatedAt": "2026-07-28T03:05:56.000Z",
+              "uid": "35240-0dfd568f-5120-46c1-9008-c262228c922c"
+            }
+          ],
+          "id": "3af80f9d-6847-4269-b837-053c608b69c7",
+          "createdAt": "2026-07-28T03:05:56.000Z",
+          "updatedAt": "2026-07-28T03:05:56.000Z",
+          "uid": "35240-3af80f9d-6847-4269-b837-053c608b69c7"
+        },
+        {
+          "name": "Create Payment Method",
+          "id": "2662150e-dc3f-460f-b9cf-c99a4421eadd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"usage\": \"<string>\",\n  \"metadata\": null\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/payment-methods",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payment-methods"
+              ]
+            },
+            "description": "This endpoint creates a new payment method that will be associated with a particular customer. This payment method, once set up, can be used to create off-session payments against a given customer."
+          },
+          "response": [
+            {
+              "id": "b1ce37a3-448f-42a1-9c0e-acdd77a91694",
+              "name": "The newly created payment method",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"type\": \"<string>\",\n  \"usage\": \"<string>\",\n  \"metadata\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment-methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-methods"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": {},\n  \"customerId\": {},\n  \"type\": \"<string>\",\n  \"usage\": \"<string>\",\n  \"status\": \"DISABLED\",\n  \"metadata\": null,\n  \"createdAt\": {},\n  \"updatedAt\": {}\n}",
+              "createdAt": "2026-07-28T03:05:56.000Z",
+              "updatedAt": "2026-07-28T03:05:56.000Z",
+              "uid": "35240-b1ce37a3-448f-42a1-9c0e-acdd77a91694"
+            }
+          ],
+          "createdAt": "2026-07-28T03:05:56.000Z",
+          "updatedAt": "2026-07-28T03:05:56.000Z",
+          "uid": "35240-2662150e-dc3f-460f-b9cf-c99a4421eadd"
+        },
+        {
+          "name": "List Payment Methods",
+          "id": "27b45994-0b90-4c06-ad49-a2eaa945c838",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment-methods?brandId=<string,null-uuid>&customerId=<string,null>&type=<string,null>&usage=<string,null>&status=DISABLED&direction=DESC&by=createdAt&pageNumber=1&pageSize=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payment-methods"
+              ],
+              "query": [
+                {
+                  "key": "brandId",
+                  "value": "<string,null-uuid>"
+                },
+                {
+                  "key": "customerId",
+                  "value": "<string,null>"
+                },
+                {
+                  "key": "type",
+                  "value": "<string,null>"
+                },
+                {
+                  "key": "usage",
+                  "value": "<string,null>"
+                },
+                {
+                  "key": "status",
+                  "value": "DISABLED"
+                },
+                {
+                  "key": "direction",
+                  "value": "DESC"
+                },
+                {
+                  "key": "by",
+                  "value": "createdAt"
+                },
+                {
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "This endpoint lists your previously created payment methods in a paged list. Additional filters and sorting criteria may be provided as query parameters."
+          },
+          "response": [
+            {
+              "id": "3d4719ef-d665-469f-84b2-93de7fd97d60",
+              "name": "Paginated list of payment methods",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payment-methods?brandId=<string,null-uuid>&customerId=<string,null>&type=<string,null>&usage=<string,null>&status=DISABLED&direction=DESC&by=createdAt&pageNumber=1&pageSize=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-methods"
+                  ],
+                  "query": [
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "usage",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "DISABLED"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "by",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"pageInfo\": {\n    \"hasNextPage\": \"<boolean>\",\n    \"currentPage\": \"<number>\",\n    \"lastPage\": \"<number>\",\n    \"pageSize\": \"<number>\"\n  },\n  \"totalCount\": \"<number>\",\n  \"items\": [\n    {\n      \"id\": {},\n      \"customerId\": {},\n      \"type\": \"<string>\",\n      \"usage\": \"<string>\",\n      \"status\": \"ENABLED\",\n      \"metadata\": null,\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    },\n    {\n      \"id\": {},\n      \"customerId\": {},\n      \"type\": \"<string>\",\n      \"usage\": \"<string>\",\n      \"status\": \"REQUIRES_ACTION\",\n      \"metadata\": {\n        \"sunt6d\": \"FIZ\",\n        \"eabfd\": \")*cFQp\",\n        \"sunt48\": \"=,E}Dx\\\"zLrP\",\n        \"et_50a\": \"$0C)f\"\n      },\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:05:56.000Z",
+              "updatedAt": "2026-07-28T03:05:56.000Z",
+              "uid": "35240-3d4719ef-d665-469f-84b2-93de7fd97d60"
+            }
+          ],
+          "createdAt": "2026-07-28T03:05:56.000Z",
+          "updatedAt": "2026-07-28T03:05:56.000Z",
+          "uid": "35240-27b45994-0b90-4c06-ad49-a2eaa945c838"
+        }
+      ],
+      "id": "e2bf3cbe-6024-420e-8d9d-a45e18a1fb62",
+      "createdAt": "2026-07-28T03:05:56.000Z",
+      "updatedAt": "2026-07-28T03:05:56.000Z",
+      "uid": "35240-e2bf3cbe-6024-420e-8d9d-a45e18a1fb62"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.superpayments.com/2026-04-01"
+    }
+  ]
+}

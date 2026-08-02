@@ -1,0 +1,106 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/super-payments-openapi.yml
+description: No official hosted/remote MCP server was found for Super Payments (no mcp.superpayments.com,
+  no @superpayments MCP package in npm, not in the MCP registry). This is a CANDIDATE tool surface derived
+  one-tool-per-operation from the harvested OpenAPI so an agent toolkit can be generated; it is not a
+  provider-published server.
+server:
+  name: super-payments
+  transport: http
+  url: null
+tools:
+- name: create-checkout-session
+  description: Create a new checkout session
+  source_operation: openapi/super-payments-openapi.yml#create-checkout-session
+- name: create-customer
+  description: Create Customer
+  source_operation: openapi/super-payments-openapi.yml#create-customer
+- name: list-customers
+  description: List Customers
+  source_operation: openapi/super-payments-openapi.yml#list-customers
+- name: create-link
+  description: Create Payment Link
+  source_operation: openapi/super-payments-openapi.yml#create-link
+- name: list-links
+  description: List Payment Links
+  source_operation: openapi/super-payments-openapi.yml#list-links
+- name: create-payment-intent
+  description: Create Payment Intent
+  source_operation: openapi/super-payments-openapi.yml#create-payment-intent
+- name: create-payment-method
+  description: Create Payment Method
+  source_operation: openapi/super-payments-openapi.yml#create-payment-method
+- name: list-payment-methods
+  description: List Payment Methods
+  source_operation: openapi/super-payments-openapi.yml#list-payment-methods
+- name: create-payout-refund
+  description: Create Payout Refund (Restricted)
+  source_operation: openapi/super-payments-openapi.yml#create-payout-refund
+- name: create-refund
+  description: Create Refund
+  source_operation: openapi/super-payments-openapi.yml#create-refund
+- name: create-setup-intent
+  description: Create Setup Intent
+  source_operation: openapi/super-payments-openapi.yml#create-setup-intent
+- name: delete-link
+  description: Delete Payment Link
+  source_operation: openapi/super-payments-openapi.yml#delete-link
+- name: get-link
+  description: Get Payment Link by ID
+  source_operation: openapi/super-payments-openapi.yml#get-link
+- name: update-link
+  description: Update a link
+  source_operation: openapi/super-payments-openapi.yml#update-link
+- name: generate-reward-calculation
+  description: Generate a reward calculation for a given amount and brand
+  source_operation: openapi/super-payments-openapi.yml#generate-reward-calculation
+- name: get-checkout-session
+  description: Retrieve a checkout session by ID
+  source_operation: openapi/super-payments-openapi.yml#get-checkout-session
+- name: get-customer
+  description: Get Customer
+  source_operation: openapi/super-payments-openapi.yml#get-customer
+- name: patch-customer
+  description: Update Customer
+  source_operation: openapi/super-payments-openapi.yml#patch-customer
+- name: get-payment-method
+  description: Get Payment Method
+  source_operation: openapi/super-payments-openapi.yml#get-payment-method
+- name: get-payment-transaction-2025-11-01
+  description: Get payment transaction
+  source_operation: openapi/super-payments-openapi.yml#get-payment-transaction-2025-11-01
+- name: get-refund-transaction-2025-11-01
+  description: Get refund transaction
+  source_operation: openapi/super-payments-openapi.yml#get-refund-transaction-2025-11-01
+- name: get-reward-configuration
+  description: Get the reward configuration for a brand
+  source_operation: openapi/super-payments-openapi.yml#get-reward-configuration
+- name: upsert-brand-reward-configuration
+  description: Upsert the reward configuration for a brand
+  source_operation: openapi/super-payments-openapi.yml#upsert-brand-reward-configuration
+- name: get-settlement-detail-2025-11-01
+  description: Get settlement detail
+  source_operation: openapi/super-payments-openapi.yml#get-settlement-detail-2025-11-01
+- name: get-settlement-reconciliation-2025-11-01
+  description: Get settlement reconciliation rows
+  source_operation: openapi/super-payments-openapi.yml#get-settlement-reconciliation-2025-11-01
+- name: list-settlements-2025-11-01
+  description: List settlements
+  source_operation: openapi/super-payments-openapi.yml#list-settlements-2025-11-01
+- name: list-setup-intents
+  description: List Setup Intents
+  source_operation: openapi/super-payments-openapi.yml#list-setup-intents
+- name: proceed-payment-via-checkout-session
+  description: Proceed with payment via checkout session
+  source_operation: openapi/super-payments-openapi.yml#proceed-payment-via-checkout-session
+- name: search-payment-transactions-2025-11-01
+  description: Search payment transactions
+  source_operation: openapi/super-payments-openapi.yml#search-payment-transactions-2025-11-01
+- name: search-refund-transactions-2025-11-01
+  description: Search refund transactions
+  source_operation: openapi/super-payments-openapi.yml#search-refund-transactions-2025-11-01
+- name: upsert-order-details
+  description: Upsert order details for a checkout session
+  source_operation: openapi/super-payments-openapi.yml#upsert-order-details

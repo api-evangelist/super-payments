@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://docs.superpayments.com/reference/versioning,
+  https://docs.superpayments.com/reference/upgrading,
+  https://docs.superpayments.com/changelog, https://status.superpayments.com
+description: >-
+  Versioning, deprecation, status and SLA posture for the Super Payments API.
+  Versions are date-based and pinned in the URL path; backward-incompatible
+  changes ship as a new dated version. A legacy v2 API is being migrated off via
+  the Upgrading guide.
+versioning:
+  scheme: date-based
+  mechanism: mandatory YYYY-MM-DD segment in the URL path (e.g. /2026-04-01/payments)
+  current: '2026-04-01'
+  known_versions: ['2026-04-01', '2025-11-01', '2025-06-01', '2025-02-01', '2024-10-01']
+  legacy: v2 (migration documented in the Upgrading guide)
+  docs: https://docs.superpayments.com/reference/versioning
+deprecation:
+  policy: >-
+    Backward-incompatible changes are released as a new dated version; clients
+    stay on their pinned version until they choose to upgrade. There is no RFC
+    8594 Sunset/Deprecation header mechanism.
+  upgrading_guide: https://docs.superpayments.com/reference/upgrading
+  changelog: https://docs.superpayments.com/changelog
+  sunset_header: false
+sla:
+  url: null
+  public_uptime_target: null
+  notes: No public numeric uptime SLA published; availability is surfaced via the status page.
+status_page: https://status.superpayments.com/
+status_page_provider: Atlassian Statuspage
+rate_limits: https://docs.superpayments.com/reference/rate-limiting
+deprecated_operations: []
+notes: >-
+  Restricted endpoints (e.g. Create Payout Refund) require access to be granted
+  by Super Payments support rather than being generally available.

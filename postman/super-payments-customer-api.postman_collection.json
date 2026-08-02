@@ -1,0 +1,556 @@
+{
+  "info": {
+    "_postman_id": "445a9a87-5674-4704-9e95-3b64368778dc",
+    "name": "Super Payments Checkout Sessions Customer API",
+    "description": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:53.000Z",
+    "updatedAt": "2026-07-28T03:05:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-445a9a87-5674-4704-9e95-3b64368778dc"
+  },
+  "item": [
+    {
+      "name": "customers",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get Customer",
+              "id": "ec699c50-5611-45b8-a9ac-cf001b2ae8d4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "df783ac4-abc9-4cae-9bc9-16859d6931c5",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "This endpoint returns a previously created customer. It requires the Super customer ID that was provided upon successful creation of the customer."
+              },
+              "response": [
+                {
+                  "id": "8a7d6418-3947-4cac-bda7-557d00f6b11e",
+                  "name": "Existing customer",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": {},\n  \"externalReference\": \"<string>\",\n  \"paymentMethods\": [\n    {\n      \"id\": {},\n      \"type\": \"<string>\",\n      \"usage\": \"<string>\",\n      \"status\": \"DISABLED\",\n      \"metadata\": null,\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    },\n    {\n      \"id\": {},\n      \"type\": \"<string>\",\n      \"usage\": \"<string>\",\n      \"status\": \"ENABLED\",\n      \"metadata\": {\n        \"ea_14\": \"#]$TM\",\n        \"dolor_7_\": \" \"\n      },\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    }\n  ],\n  \"metadata\": {\n    \"magna_9\": \"<string>\",\n    \"proident_d10\": \"<string>\"\n  },\n  \"brandId\": \"<uuid>\",\n  \"firstName\": \"<string,null>\",\n  \"lastName\": \"<string,null>\",\n  \"emailAddress\": \"<string,null-email>\",\n  \"phoneNumber\": \"<string,null>\",\n  \"createdAt\": {},\n  \"updatedAt\": {}\n}",
+                  "createdAt": "2026-07-28T03:05:54.000Z",
+                  "updatedAt": "2026-07-28T03:05:54.000Z",
+                  "uid": "35240-8a7d6418-3947-4cac-bda7-557d00f6b11e"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:54.000Z",
+              "updatedAt": "2026-07-28T03:05:54.000Z",
+              "uid": "35240-ec699c50-5611-45b8-a9ac-cf001b2ae8d4"
+            },
+            {
+              "name": "Update Customer",
+              "id": "1a8f41e7-e294-45d5-b647-318bb19ca74d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "Authorization",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"nonbc\": \"](tjuuYpJT\",\n    \"Loremb\": \"g'\"\n  },\n  \"firstName\": \"<string,null>\",\n  \"lastName\": \"<string,null>\",\n  \"emailAddress\": \"<string,null-email>\",\n  \"phoneNumber\": \"\u2009\u2002\\t(\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "1d727df5-e467-40cc-bd4c-434e5aff4926",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "This endpoint is used to update the information of an existing customer. It requires the Super customer ID that was provided upon successful creation of the customer."
+              },
+              "response": [
+                {
+                  "id": "61fac4a9-8d6f-4c06-b340-3e19a28c0ac1",
+                  "name": "Updated customer",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"metadata\": {\n    \"nonbc\": \"](tjuuYpJT\",\n    \"Loremb\": \"g'\"\n  },\n  \"firstName\": \"<string,null>\",\n  \"lastName\": \"<string,null>\",\n  \"emailAddress\": \"<string,null-email>\",\n  \"phoneNumber\": \"\u2009\u2002\\t(\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": {},\n  \"externalReference\": \"<string>\",\n  \"paymentMethods\": [\n    {\n      \"id\": {},\n      \"type\": \"<string>\",\n      \"usage\": \"<string>\",\n      \"status\": \"DISABLED\",\n      \"metadata\": null,\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    },\n    {\n      \"id\": {},\n      \"type\": \"<string>\",\n      \"usage\": \"<string>\",\n      \"status\": \"ENABLED\",\n      \"metadata\": {\n        \"ea_14\": \"#]$TM\",\n        \"dolor_7_\": \" \"\n      },\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    }\n  ],\n  \"metadata\": {\n    \"magna_9\": \"<string>\",\n    \"proident_d10\": \"<string>\"\n  },\n  \"brandId\": \"<uuid>\",\n  \"firstName\": \"<string,null>\",\n  \"lastName\": \"<string,null>\",\n  \"emailAddress\": \"<string,null-email>\",\n  \"phoneNumber\": \"<string,null>\",\n  \"createdAt\": {},\n  \"updatedAt\": {}\n}",
+                  "createdAt": "2026-07-28T03:05:54.000Z",
+                  "updatedAt": "2026-07-28T03:05:54.000Z",
+                  "uid": "35240-61fac4a9-8d6f-4c06-b340-3e19a28c0ac1"
+                }
+              ],
+              "createdAt": "2026-07-28T03:05:54.000Z",
+              "updatedAt": "2026-07-28T03:05:54.000Z",
+              "uid": "35240-1a8f41e7-e294-45d5-b647-318bb19ca74d"
+            }
+          ],
+          "id": "c63836d3-4527-4077-9326-3811c5efd22c",
+          "createdAt": "2026-07-28T03:05:54.000Z",
+          "updatedAt": "2026-07-28T03:05:54.000Z",
+          "uid": "35240-c63836d3-4527-4077-9326-3811c5efd22c"
+        },
+        {
+          "name": "Create Customer",
+          "id": "e367bba1-7d9e-4e3a-ae64-6aa1ff7a7245",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<uuid>\",\n  \"metadata\": null,\n  \"firstName\": \"<string,null>\",\n  \"lastName\": \"<string,null>\",\n  \"emailAddress\": \"<string,null-email>\",\n  \"phoneNumber\": \"+\u20072\u2009\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            },
+            "description": "This endpoint is used to create a representation of a known customer. You may supply your own identifier for a given customer, and will return a Super customer ID upon successful creation."
+          },
+          "response": [
+            {
+              "id": "b3d915e9-ebe6-4230-82b2-95aa14a4eae2",
+              "name": "Newly created customer",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalReference\": \"<string>\",\n  \"brandId\": \"<uuid>\",\n  \"metadata\": null,\n  \"firstName\": \"<string,null>\",\n  \"lastName\": \"<string,null>\",\n  \"emailAddress\": \"<string,null-email>\",\n  \"phoneNumber\": \"+\u20072\u2009\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": {},\n  \"externalReference\": \"<string>\",\n  \"paymentMethods\": [\n    {\n      \"id\": {},\n      \"type\": \"<string>\",\n      \"usage\": \"<string>\",\n      \"status\": \"DISABLED\",\n      \"metadata\": null,\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    },\n    {\n      \"id\": {},\n      \"type\": \"<string>\",\n      \"usage\": \"<string>\",\n      \"status\": \"ENABLED\",\n      \"metadata\": {\n        \"ea_14\": \"#]$TM\",\n        \"dolor_7_\": \" \"\n      },\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    }\n  ],\n  \"metadata\": {\n    \"magna_9\": \"<string>\",\n    \"proident_d10\": \"<string>\"\n  },\n  \"brandId\": \"<uuid>\",\n  \"firstName\": \"<string,null>\",\n  \"lastName\": \"<string,null>\",\n  \"emailAddress\": \"<string,null-email>\",\n  \"phoneNumber\": \"<string,null>\",\n  \"createdAt\": {},\n  \"updatedAt\": {}\n}",
+              "createdAt": "2026-07-28T03:05:54.000Z",
+              "updatedAt": "2026-07-28T03:05:54.000Z",
+              "uid": "35240-b3d915e9-ebe6-4230-82b2-95aa14a4eae2"
+            }
+          ],
+          "createdAt": "2026-07-28T03:05:54.000Z",
+          "updatedAt": "2026-07-28T03:05:54.000Z",
+          "uid": "35240-e367bba1-7d9e-4e3a-ae64-6aa1ff7a7245"
+        },
+        {
+          "name": "List Customers",
+          "id": "3dba440b-e99c-4c9b-a04a-3169d271a677",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers?brandId=<string,null-uuid>&externalReference=<string,null>&emailAddress=<string,null-email>&direction=DESC&by=createdAt&pageNumber=1&pageSize=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ],
+              "query": [
+                {
+                  "key": "brandId",
+                  "value": "<string,null-uuid>"
+                },
+                {
+                  "key": "externalReference",
+                  "value": "<string,null>"
+                },
+                {
+                  "key": "emailAddress",
+                  "value": "<string,null-email>"
+                },
+                {
+                  "key": "direction",
+                  "value": "DESC"
+                },
+                {
+                  "key": "by",
+                  "value": "createdAt"
+                },
+                {
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "This endpoint lists your previously created customers in a paged list. Additional filters and sorting criteria may be provided as query parameters."
+          },
+          "response": [
+            {
+              "id": "5dc3cebe-e490-4885-a4f1-a89035a1a817",
+              "name": "List of customers",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customers?brandId=<string,null-uuid>&externalReference=<string,null>&emailAddress=<string,null-email>&direction=DESC&by=createdAt&pageNumber=1&pageSize=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customers"
+                  ],
+                  "query": [
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "externalReference",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "emailAddress",
+                      "value": "<string,null-email>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "DESC"
+                    },
+                    {
+                      "key": "by",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"pageInfo\": {\n    \"hasNextPage\": \"<boolean>\",\n    \"currentPage\": \"<number>\",\n    \"lastPage\": \"<number>\",\n    \"pageSize\": \"<number>\"\n  },\n  \"totalCount\": \"<number>\",\n  \"items\": [\n    {\n      \"id\": {},\n      \"externalReference\": \"<string>\",\n      \"paymentMethods\": [\n        {\n          \"id\": {},\n          \"type\": \"<string>\",\n          \"usage\": \"<string>\",\n          \"status\": \"ENABLED\",\n          \"metadata\": {\n            \"voluptate6a\": \"[C+iI'\",\n            \"est_f\": \"{+qra.\",\n            \"est_1\": \"[&RF/#-s\"\n          },\n          \"createdAt\": {},\n          \"updatedAt\": {}\n        },\n        {\n          \"id\": {},\n          \"type\": \"<string>\",\n          \"usage\": \"<string>\",\n          \"status\": \"ENABLED\",\n          \"metadata\": {\n            \"eu_81_\": \"1ETC\",\n            \"in_d\": \"IR\"\n          },\n          \"createdAt\": {},\n          \"updatedAt\": {}\n        }\n      ],\n      \"metadata\": {\n        \"sed_11\": \"<string>\"\n      },\n      \"brandId\": \"<uuid>\",\n      \"firstName\": \"<string,null>\",\n      \"lastName\": \"<string,null>\",\n      \"emailAddress\": \"<string,null-email>\",\n      \"phoneNumber\": \"<string,null>\",\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    },\n    {\n      \"id\": {},\n      \"externalReference\": \"<string>\",\n      \"paymentMethods\": [\n        {\n          \"id\": {},\n          \"type\": \"<string>\",\n          \"usage\": \"<string>\",\n          \"status\": \"DISABLED\",\n          \"metadata\": null,\n          \"createdAt\": {},\n          \"updatedAt\": {}\n        },\n        {\n          \"id\": {},\n          \"type\": \"<string>\",\n          \"usage\": \"<string>\",\n          \"status\": \"ENABLED\",\n          \"metadata\": {\n            \"voluptateb9e\": \"@!0a}t|+VM\",\n            \"ipsumea7\": \":<}\"\n          },\n          \"createdAt\": {},\n          \"updatedAt\": {}\n        }\n      ],\n      \"metadata\": null,\n      \"brandId\": \"<uuid>\",\n      \"firstName\": \"<string,null>\",\n      \"lastName\": \"<string,null>\",\n      \"emailAddress\": \"<string,null-email>\",\n      \"phoneNumber\": \"<string,null>\",\n      \"createdAt\": {},\n      \"updatedAt\": {}\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:05:54.000Z",
+              "updatedAt": "2026-07-28T03:05:54.000Z",
+              "uid": "35240-5dc3cebe-e490-4885-a4f1-a89035a1a817"
+            }
+          ],
+          "createdAt": "2026-07-28T03:05:54.000Z",
+          "updatedAt": "2026-07-28T03:05:54.000Z",
+          "uid": "35240-3dba440b-e99c-4c9b-a04a-3169d271a677"
+        }
+      ],
+      "id": "755d796c-2678-4db6-846c-9a66c10f555f",
+      "createdAt": "2026-07-28T03:05:54.000Z",
+      "updatedAt": "2026-07-28T03:05:54.000Z",
+      "uid": "35240-755d796c-2678-4db6-846c-9a66c10f555f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.superpayments.com/2026-04-01"
+    }
+  ]
+}

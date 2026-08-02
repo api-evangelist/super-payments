@@ -1,0 +1,1097 @@
+{
+  "info": {
+    "_postman_id": "adf11085-d875-401a-a7f0-2b38fc737f6e",
+    "name": "Super Payments Checkout Sessions Rewards API",
+    "description": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:05:59.000Z",
+    "updatedAt": "2026-07-28T03:05:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-adf11085-d875-401a-a7f0-2b38fc737f6e"
+  },
+  "item": [
+    {
+      "name": "reward-calculations",
+      "item": [
+        {
+          "name": "Generate a reward calculation for a given amount and brand",
+          "id": "fa6e582f-2e4a-40e2-89f5-7e4e87416b1e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"brandId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"externalReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reward-calculations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reward-calculations"
+              ]
+            },
+            "description": "This endpoint calculates the reward percentage and issuable rewards based on the provided amount and brand ID."
+          },
+          "response": [
+            {
+              "id": "b0ae6c0f-571b-4ff8-827e-6139e55cb0dc",
+              "name": "Successful reward calculation generation",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"externalReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reward-calculations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reward-calculations"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"rewardPercentage\": \"<number>\",\n  \"rewardsIssuable\": {\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T03:05:59.000Z",
+              "updatedAt": "2026-07-28T03:05:59.000Z",
+              "uid": "35240-b0ae6c0f-571b-4ff8-827e-6139e55cb0dc"
+            },
+            {
+              "id": "f1113de9-d924-43d2-8096-7e5141e13e4b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"externalReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reward-calculations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reward-calculations"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:05:59.000Z",
+              "updatedAt": "2026-07-28T03:05:59.000Z",
+              "uid": "35240-f1113de9-d924-43d2-8096-7e5141e13e4b"
+            },
+            {
+              "id": "afd34b79-4aed-4915-825c-273a91ee2abd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"externalReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reward-calculations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reward-calculations"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:05:59.000Z",
+              "updatedAt": "2026-07-28T03:05:59.000Z",
+              "uid": "35240-afd34b79-4aed-4915-825c-273a91ee2abd"
+            },
+            {
+              "id": "4967d198-ee98-4d1f-a64a-0a08f8b1e143",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"externalReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reward-calculations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reward-calculations"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:05:59.000Z",
+              "updatedAt": "2026-07-28T03:05:59.000Z",
+              "uid": "35240-4967d198-ee98-4d1f-a64a-0a08f8b1e143"
+            },
+            {
+              "id": "28234b95-11c4-4454-ab4d-67c9492bdfc7",
+              "name": "Conflict",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"externalReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reward-calculations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reward-calculations"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-07-28T03:05:59.000Z",
+              "updatedAt": "2026-07-28T03:05:59.000Z",
+              "uid": "35240-28234b95-11c4-4454-ab4d-67c9492bdfc7"
+            }
+          ],
+          "createdAt": "2026-07-28T03:05:59.000Z",
+          "updatedAt": "2026-07-28T03:05:59.000Z",
+          "uid": "35240-fa6e582f-2e4a-40e2-89f5-7e4e87416b1e"
+        }
+      ],
+      "id": "d8690b8e-77e1-45a1-85d2-0a9ee3e366d3",
+      "createdAt": "2026-07-28T03:05:59.000Z",
+      "updatedAt": "2026-07-28T03:05:59.000Z",
+      "uid": "35240-d8690b8e-77e1-45a1-85d2-0a9ee3e366d3"
+    },
+    {
+      "name": "brands",
+      "item": [
+        {
+          "name": "{brandId}",
+          "item": [
+            {
+              "name": "reward-configuration",
+              "item": [
+                {
+                  "name": "Get the reward configuration for a brand",
+                  "id": "bfc523be-97d3-42eb-a6bf-c3f5be7dc547",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "brands",
+                        ":brandId",
+                        "reward-configuration"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b942f333-3622-4828-978b-9a5f08a1807c",
+                          "key": "brandId",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier for the brand (UUID format)"
+                        }
+                      ]
+                    },
+                    "description": "This endpoint retrieves the reward configuration for a specific brand, including the reward percentage, minimum spend, and rewards expiration time."
+                  },
+                  "response": [
+                    {
+                      "id": "b19e0950-0ad8-4bd7-8374-8fbd76464b44",
+                      "name": "Successful retrieval of reward configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"rewardPercentage\": \"<number>\",\n  \"minimumSpend\": {\n    \"currency\": \"<string>\",\n    \"amount\": \"<number>\"\n  },\n  \"rewardsExpireAfter\": \"<number>\"\n}",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-b19e0950-0ad8-4bd7-8374-8fbd76464b44"
+                    },
+                    {
+                      "id": "9e0c6009-10d6-4e2b-9355-7f62f7581cae",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-9e0c6009-10d6-4e2b-9355-7f62f7581cae"
+                    },
+                    {
+                      "id": "6521e5ff-a92c-4402-bf29-910c2ac64f9c",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-6521e5ff-a92c-4402-bf29-910c2ac64f9c"
+                    },
+                    {
+                      "id": "87250d35-519c-435c-ae09-1539bb89d71e",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-87250d35-519c-435c-ae09-1539bb89d71e"
+                    },
+                    {
+                      "id": "1dc4dc69-34fd-465b-bace-45c3623a2a45",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-1dc4dc69-34fd-465b-bace-45c3623a2a45"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:05:59.000Z",
+                  "updatedAt": "2026-07-28T03:05:59.000Z",
+                  "uid": "35240-bfc523be-97d3-42eb-a6bf-c3f5be7dc547"
+                },
+                {
+                  "name": "Upsert the reward configuration for a brand",
+                  "id": "a899a736-c026-44c1-8044-9278c8ddd077",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "Authorization",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"rewardPercentage\": \"<number>\",\n  \"minimumSpend\": {\n    \"amount\": \"<integer>\",\n    \"currency\": \"GBP\"\n  },\n  \"rewardsExpireAfter\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "brands",
+                        ":brandId",
+                        "reward-configuration"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e73ae2ec-634b-49cb-9648-49bc2583cd98",
+                          "key": "brandId",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier for the brand (UUID format)"
+                        }
+                      ]
+                    },
+                    "description": "This endpoint allows you to create or update the reward configuration for a specific brand, including the reward percentage, minimum spend, and rewards expiration time."
+                  },
+                  "response": [
+                    {
+                      "id": "be0b9c39-2b04-413e-8268-9bedcd6ea56a",
+                      "name": "Successful upsert of reward configuration",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"rewardPercentage\": \"<number>\",\n  \"minimumSpend\": {\n    \"amount\": \"<integer>\",\n    \"currency\": \"GBP\"\n  },\n  \"rewardsExpireAfter\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"rewardPercentage\": \"<number>\",\n  \"minimumSpend\": {\n    \"currency\": \"<string>\",\n    \"amount\": \"<number>\"\n  },\n  \"rewardsExpireAfter\": \"<number>\"\n}",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-be0b9c39-2b04-413e-8268-9bedcd6ea56a"
+                    },
+                    {
+                      "id": "65ac958a-c197-4c3f-9aba-12ffa7726250",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"rewardPercentage\": \"<number>\",\n  \"minimumSpend\": {\n    \"amount\": \"<integer>\",\n    \"currency\": \"GBP\"\n  },\n  \"rewardsExpireAfter\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-65ac958a-c197-4c3f-9aba-12ffa7726250"
+                    },
+                    {
+                      "id": "379a4467-1d20-4827-a48b-ca526988b770",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"rewardPercentage\": \"<number>\",\n  \"minimumSpend\": {\n    \"amount\": \"<integer>\",\n    \"currency\": \"GBP\"\n  },\n  \"rewardsExpireAfter\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-379a4467-1d20-4827-a48b-ca526988b770"
+                    },
+                    {
+                      "id": "86e7416f-4254-47c8-b84c-a962771f7e4f",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"rewardPercentage\": \"<number>\",\n  \"minimumSpend\": {\n    \"amount\": \"<integer>\",\n    \"currency\": \"GBP\"\n  },\n  \"rewardsExpireAfter\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-86e7416f-4254-47c8-b84c-a962771f7e4f"
+                    },
+                    {
+                      "id": "53d2a17b-d059-44ce-a21f-539149d8dc77",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/problem+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"rewardPercentage\": \"<number>\",\n  \"minimumSpend\": {\n    \"amount\": \"<integer>\",\n    \"currency\": \"GBP\"\n  },\n  \"rewardsExpireAfter\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/brands/:brandId/reward-configuration",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "brands",
+                            ":brandId",
+                            "reward-configuration"
+                          ],
+                          "variable": [
+                            {
+                              "key": "brandId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/problem+json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "",
+                      "createdAt": "2026-07-28T03:05:59.000Z",
+                      "updatedAt": "2026-07-28T03:05:59.000Z",
+                      "uid": "35240-53d2a17b-d059-44ce-a21f-539149d8dc77"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:05:59.000Z",
+                  "updatedAt": "2026-07-28T03:05:59.000Z",
+                  "uid": "35240-a899a736-c026-44c1-8044-9278c8ddd077"
+                }
+              ],
+              "id": "6b0e5a7a-c9d5-4e93-bb8f-73895410e5ce",
+              "createdAt": "2026-07-28T03:05:59.000Z",
+              "updatedAt": "2026-07-28T03:05:59.000Z",
+              "uid": "35240-6b0e5a7a-c9d5-4e93-bb8f-73895410e5ce"
+            }
+          ],
+          "id": "d47f9118-ce9f-4161-bd6c-a53190be6bb6",
+          "createdAt": "2026-07-28T03:05:59.000Z",
+          "updatedAt": "2026-07-28T03:05:59.000Z",
+          "uid": "35240-d47f9118-ce9f-4161-bd6c-a53190be6bb6"
+        }
+      ],
+      "id": "872a90a8-ddf1-4c94-b20a-4a44f74188ed",
+      "createdAt": "2026-07-28T03:05:59.000Z",
+      "updatedAt": "2026-07-28T03:05:59.000Z",
+      "uid": "35240-872a90a8-ddf1-4c94-b20a-4a44f74188ed"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.superpayments.com/2026-04-01"
+    }
+  ]
+}
