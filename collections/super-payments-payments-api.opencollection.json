@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Super Checkout Sessions Payments API",
+    "version": "2026-04-01"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Payment Intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.superpayments.com/2026-04-01/payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is used to create a payment intent for e-commerce transactions. It requires the merchant integration to be set up and will return a payment intent object upon successful creation."
+        },
+        {
+          "info": {
+            "name": "Get payment transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.superpayments.com/2026-04-01/payments/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the payment transaction"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Poll for an individual payment transaction status to check its current state. Returns detailed information about the payment including its status, amount, and funding details with associated card metadata. This endpoint includes detailed information about payment intent funding attempts and their associated card metadata. Use this endpoint if your integration has not been configured to use webhooks. Payment transactions are returned in real-time as they update in our system."
+        },
+        {
+          "info": {
+            "name": "Search payment transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.superpayments.com/2026-04-01/payments/search",
+            "params": [
+              {
+                "name": "transactionStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transaction status. Can be a single status or an array of statuses."
+              },
+              {
+                "name": "transactionReference",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transaction reference."
+              },
+              {
+                "name": "externalReference",
+                "value": "",
+                "type": "query",
+                "description": "Filter by external reference (e.g., order ID)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by start date (ISO 8601 format). Inclusive."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by end date (ISO 8601 format). Inclusive."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page token for pagination (cursor)."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of payment transactions with filtering options. Results are paginated and can be filtered by various criteria including status, reference, and date range. Payment transactions are returned in reverse chronological order (newest first). If no filters are specified, all available payment transactions will be returned subject to pagination limits. Note that funding details and card metadata are not included in search results for performance reasons - use the individual payment trans"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

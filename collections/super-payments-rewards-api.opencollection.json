@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Super Payments Checkout Sessions Rewards API",
+    "version": "2026-04-01"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate a reward calculation for a given amount and brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.superpayments.com/2026-04-01/reward-calculations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint calculates the reward percentage and issuable rewards based on the provided amount and brand ID."
+        },
+        {
+          "info": {
+            "name": "Get the reward configuration for a brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.superpayments.com/2026-04-01/brands/:brandId/reward-configuration",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the brand (UUID format)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves the reward configuration for a specific brand, including the reward percentage, minimum spend, and rewards expiration time."
+        },
+        {
+          "info": {
+            "name": "Upsert the reward configuration for a brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.superpayments.com/2026-04-01/brands/:brandId/reward-configuration",
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the brand (UUID format)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint allows you to create or update the reward configuration for a specific brand, including the reward percentage, minimum spend, and rewards expiration time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -104,3 +104,9 @@ tools:
 - name: upsert-order-details
   description: Upsert order details for a checkout session
   source_operation: openapi/super-payments-openapi.yml#upsert-order-details
+deployment:
+  mode: none
+  verified: derived
+  tools: 31
+  checked: '2026-08-12'
+  source: catalog MCP census

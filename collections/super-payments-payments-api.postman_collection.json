@@ -1,0 +1,1388 @@
+{
+  "item": [
+    {
+      "id": "847b414f-2730-4284-8f4f-d43866900e88",
+      "name": "Payments",
+      "description": {
+        "content": "Payment processing and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1300f03a-8b14-49d2-9e5c-77b43ec40add",
+          "name": "Create Payment Intent",
+          "request": {
+            "name": "Create Payment Intent",
+            "description": {
+              "content": "This endpoint is used to create a payment intent for e-commerce transactions. It requires the merchant integration to be set up and will return a payment intent object upon successful creation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"offSession\": \"<boolean>\",\n  \"paymentMethodId\": \"<string>\",\n  \"externalReference\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<date>\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<date>\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a6f061f-b431-4fb0-be20-00e624fa863a",
+              "name": "Initiate a payment intent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1234,\n  \"currency\": \"GBP\",\n  \"paymentInitiatorId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"offSession\": true,\n  \"paymentMethodId\": \"pm_01kaxxrevce8dt6vp581rhnznr\",\n  \"externalReference\": \"order-12345\",\n  \"metadata\": {\n    \"customerId\": \"customer-123\",\n    \"orderId\": \"12345\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1962-08-02\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 7025.896765650829,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-12-08\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 2332.166355645676,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"paymentInitiatorId\": \"string\",\n  \"brandId\": \"string\",\n  \"status\": \"PaymentPending\",\n  \"offSession\": true,\n  \"redirectUrl\": \"string\",\n  \"externalReference\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d6de15e-af51-4de9-b3db-75589f21c0f0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1234,\n  \"currency\": \"GBP\",\n  \"paymentInitiatorId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"offSession\": true,\n  \"paymentMethodId\": \"pm_01kaxxrevce8dt6vp581rhnznr\",\n  \"externalReference\": \"order-12345\",\n  \"metadata\": {\n    \"customerId\": \"customer-123\",\n    \"orderId\": \"12345\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1962-08-02\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 7025.896765650829,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-12-08\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 2332.166355645676,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ace0b04a-003a-4a97-b67f-cd6f84e92376",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1234,\n  \"currency\": \"GBP\",\n  \"paymentInitiatorId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"offSession\": true,\n  \"paymentMethodId\": \"pm_01kaxxrevce8dt6vp581rhnznr\",\n  \"externalReference\": \"order-12345\",\n  \"metadata\": {\n    \"customerId\": \"customer-123\",\n    \"orderId\": \"12345\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1962-08-02\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 7025.896765650829,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-12-08\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 2332.166355645676,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db10ff0e-1e59-4dfb-afc3-7a352d810ed7",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1234,\n  \"currency\": \"GBP\",\n  \"paymentInitiatorId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"offSession\": true,\n  \"paymentMethodId\": \"pm_01kaxxrevce8dt6vp581rhnznr\",\n  \"externalReference\": \"order-12345\",\n  \"metadata\": {\n    \"customerId\": \"customer-123\",\n    \"orderId\": \"12345\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1962-08-02\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 7025.896765650829,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-12-08\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 2332.166355645676,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 402,\n  \"type\": \"https://api.superpayments.com/errors/payment_required\",\n  \"title\": \"Payment Required\",\n  \"detail\": \"Payment details provided by customer could not be used\",\n  \"instance\": \"4186980260999334757\",\n  \"extensions\": {\n    \"issues\": {\n      \"declineReason\": \"The CVC number is incorrect.\",\n      \"declineCode\": \"AUTHENTICATION_REQUIRED\",\n      \"declineClassification\": \"RESTRICTED\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2fdf713-533c-4351-91c4-e89647ddf423",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1234,\n  \"currency\": \"GBP\",\n  \"paymentInitiatorId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"offSession\": true,\n  \"paymentMethodId\": \"pm_01kaxxrevce8dt6vp581rhnznr\",\n  \"externalReference\": \"order-12345\",\n  \"metadata\": {\n    \"customerId\": \"customer-123\",\n    \"orderId\": \"12345\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1962-08-02\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 7025.896765650829,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-12-08\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 2332.166355645676,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9fa2264-cf46-4333-8f44-3d0f81f12200",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1234,\n  \"currency\": \"GBP\",\n  \"paymentInitiatorId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"offSession\": true,\n  \"paymentMethodId\": \"pm_01kaxxrevce8dt6vp581rhnznr\",\n  \"externalReference\": \"order-12345\",\n  \"metadata\": {\n    \"customerId\": \"customer-123\",\n    \"orderId\": \"12345\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1962-08-02\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 7025.896765650829,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-12-08\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 2332.166355645676,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eb988ab-a4f6-465d-bc22-eca413afda5c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1234,\n  \"currency\": \"GBP\",\n  \"paymentInitiatorId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"offSession\": true,\n  \"paymentMethodId\": \"pm_01kaxxrevce8dt6vp581rhnznr\",\n  \"externalReference\": \"order-12345\",\n  \"metadata\": {\n    \"customerId\": \"customer-123\",\n    \"orderId\": \"12345\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1962-08-02\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 7025.896765650829,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-12-08\",\n        \"travellers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"totalPrice\": 2332.166355645676,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96182c44-2771-404e-9784-831269c35d80",
+          "name": "Get payment transaction",
+          "request": {
+            "name": "Get payment transaction",
+            "description": {
+              "content": "Poll for an individual payment transaction status to check its current state. Returns detailed information about the payment including its status, amount, and funding details with associated card metadata. This endpoint includes detailed information about payment intent funding attempts and their associated card metadata. Use this endpoint if your integration has not been configured to use webhooks. Payment transactions are returned in real-time as they update in our system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transactionId",
+                  "description": "(Required) Id of the payment transaction"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d28066b1-54e5-4f1a-87ab-5a8a022d8656",
+              "name": "Payment transaction details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transactionId",
+                      "description": "(Required) Id of the payment transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionReference\": \"string\",\n  \"transactionStatus\": \"PaymentAbandoned\",\n  \"transactionAmount\": 2614.1271142318865,\n  \"metadata\": {\n    \"key_0\": \"string\"\n  },\n  \"brandId\": \"9dc73281-14d6-5e38-4ebb-a1202f8c1ca2\",\n  \"fees\": [\n    {\n      \"currency\": \"string\",\n      \"feeCode\": \"string\",\n      \"feeAmountInMinorUnits\": 6669.815178616425,\n      \"chargeableAmountInMinorUnits\": 2435.0268583279076,\n      \"fixedAmountInEffectInMinorUnits\": 2135.815321192771,\n      \"vatAmountInMinorUnits\": 2818.534220897191,\n      \"vatRateInEffect\": 6926.544528107476,\n      \"rateInEffect\": 4163.863171679042,\n      \"totalFeeAmountInclVatInMinorUnits\": 2041.571611145051\n    },\n    {\n      \"currency\": \"string\",\n      \"feeCode\": \"string\",\n      \"feeAmountInMinorUnits\": 4462.06233925565,\n      \"chargeableAmountInMinorUnits\": 3820.705927245763,\n      \"fixedAmountInEffectInMinorUnits\": 9093.239142648441,\n      \"vatAmountInMinorUnits\": 1652.680351002479,\n      \"vatRateInEffect\": 4356.90162340117,\n      \"rateInEffect\": 9905.224146683317,\n      \"totalFeeAmountInclVatInMinorUnits\": 3548.1092611796407\n    }\n  ],\n  \"funding\": [\n    {\n      \"amount\": {\n        \"amount\": 10000,\n        \"amountMultiplier\": 100,\n        \"currency\": \"string\"\n      },\n      \"reference\": \"INV-12345\",\n      \"institutionId\": \"uk_ob_aib\",\n      \"institutionName\": \"Allied Irish Bank\",\n      \"type\": \"CARD\",\n      \"dispute\": {\n        \"disputeId\": \"string\",\n        \"fundingAttemptId\": \"string\",\n        \"provider\": \"string\",\n        \"providerRef\": \"string\",\n        \"disputeReason\": \"string\",\n        \"disputeStatus\": \"won\",\n        \"disputedAmount\": {\n          \"amount\": 10000,\n          \"amountMultiplier\": 100,\n          \"currency\": \"string\"\n        },\n        \"feeAmount\": {\n          \"amount\": 10000,\n          \"amountMultiplier\": 100,\n          \"currency\": \"string\"\n        },\n        \"hasEvidence\": true,\n        \"submissionDeadline\": \"string\",\n        \"submissionCount\": 457.5481469167997,\n        \"resolved\": false,\n        \"isRefundable\": true,\n        \"createdAt\": \"string\",\n        \"updatedAt\": \"string\",\n        \"stripeDestinationPaymentId\": \"string\"\n      },\n      \"fundingDetails\": {\n        \"type\": \"CARD\",\n        \"threeDSAuthentication\": {\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"version\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"authentication_flow\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"electronic_commerce_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"exemption_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"result\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"result_reason\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"transaction_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cvcCheck\": \"string\",\n        \"zipCheck\": \"string\",\n        \"riskFactor\": 9779.85242998374,\n        \"riskLevel\": \"string\",\n        \"fingerprint\": \"string\",\n        \"issuer\": \"string\",\n        \"address\": {\n          \"city\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"line1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"line2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"postalCode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"country\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"country\": \"string\",\n        \"nameOnCard\": \"string\",\n        \"product\": \"string\",\n        \"funding\": \"string\",\n        \"authorisationCode\": \"string\",\n        \"failureCode\": \"string\",\n        \"last4\": \"string\",\n        \"cardDescription\": \"string\",\n        \"cardClassification\": \"CORPORATE\",\n        \"walletType\": \"string\",\n        \"walletLast4\": \"string\",\n        \"providerData\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    },\n    {\n      \"amount\": {\n        \"amount\": 10000,\n        \"amountMultiplier\": 100,\n        \"currency\": \"string\"\n      },\n      \"reference\": \"INV-12345\",\n      \"institutionId\": \"uk_ob_aib\",\n      \"institutionName\": \"Allied Irish Bank\",\n      \"type\": \"CARD\",\n      \"dispute\": {\n        \"disputeId\": \"string\",\n        \"fundingAttemptId\": \"string\",\n        \"provider\": \"string\",\n        \"providerRef\": \"string\",\n        \"disputeReason\": \"string\",\n        \"disputeStatus\": \"warning_closed\",\n        \"disputedAmount\": {\n          \"amount\": 10000,\n          \"amountMultiplier\": 100,\n          \"currency\": \"string\"\n        },\n        \"feeAmount\": {\n          \"amount\": 10000,\n          \"amountMultiplier\": 100,\n          \"currency\": \"string\"\n        },\n        \"hasEvidence\": false,\n        \"submissionDeadline\": \"string\",\n        \"submissionCount\": 4699.5641283551695,\n        \"resolved\": true,\n        \"isRefundable\": false,\n        \"createdAt\": \"string\",\n        \"updatedAt\": \"string\",\n        \"stripeDestinationPaymentId\": \"string\"\n      },\n      \"fundingDetails\": {\n        \"type\": \"CARD\",\n        \"threeDSAuthentication\": {\n          \"status\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"version\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"authentication_flow\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"electronic_commerce_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"exemption_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"result\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"result_reason\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"transaction_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"cvcCheck\": \"string\",\n        \"zipCheck\": \"string\",\n        \"riskFactor\": 5184.013209282848,\n        \"riskLevel\": \"string\",\n        \"fingerprint\": \"string\",\n        \"issuer\": \"string\",\n        \"address\": {\n          \"city\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"line1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"line2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"postalCode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"state\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"country\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"country\": \"string\",\n        \"nameOnCard\": \"string\",\n        \"product\": \"string\",\n        \"funding\": \"string\",\n        \"authorisationCode\": \"string\",\n        \"failureCode\": \"string\",\n        \"last4\": \"string\",\n        \"cardDescription\": \"string\",\n        \"cardClassification\": \"CONSUMER\",\n        \"walletType\": \"string\",\n        \"walletLast4\": \"string\",\n        \"providerData\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    }\n  ],\n  \"externalReference\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dae8e33-83cb-481e-af58-bda7e2f24495",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transactionId",
+                      "description": "(Required) Id of the payment transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0eb26c98-b31f-42f6-81b7-65a56dd73d54",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transactionId",
+                      "description": "(Required) Id of the payment transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77850877-5a85-4066-8eca-2b1a62cb37e1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transactionId",
+                      "description": "(Required) Id of the payment transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e42aec6d-0d65-41bd-95d1-fa942a256b3c",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transactionId",
+                      "description": "(Required) Id of the payment transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d694694-e8bb-45ee-84b7-14758ac2e2f7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transactionId",
+                      "description": "(Required) Id of the payment transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9511161-1eea-4b1f-993a-c3dca5552814",
+          "name": "Search payment transactions",
+          "request": {
+            "name": "Search payment transactions",
+            "description": {
+              "content": "Retrieve a list of payment transactions with filtering options. Results are paginated and can be filtered by various criteria including status, reference, and date range. Payment transactions are returned in reverse chronological order (newest first). If no filters are specified, all available payment transactions will be returned subject to pagination limits. Note that funding details and card metadata are not included in search results for performance reasons - use the individual payment transaction endpoint to access these details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "transactionStatus",
+                  "value": "<string>",
+                  "description": "Filter by transaction status. Can be a single status or an array of statuses."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionStatus",
+                  "value": "<string>",
+                  "description": "Filter by transaction status. Can be a single status or an array of statuses."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionReference",
+                  "value": "<string>",
+                  "description": "Filter by transaction reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "externalReference",
+                  "value": "<string>",
+                  "description": "Filter by external reference (e.g., order ID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "Filter by start date (ISO 8601 format). Inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "Filter by end date (ISO 8601 format). Inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of items to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Page token for pagination (cursor)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "35ccab8b-79b0-4955-908e-85df5d96984b",
+              "name": "List of payment transactions matching the search criteria.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageSize\": 8826.884811418984,\n  \"nextPage\": \"string\",\n  \"hasNext\": true,\n  \"items\": [\n    {\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"transactionId\": \"string\",\n      \"transactionReference\": \"string\",\n      \"externalReference\": \"string\",\n      \"minorUnitAmount\": 9491.502350972827,\n      \"currency\": \"string\",\n      \"discountedAmount\": 1653.5520761493838,\n      \"discountPercentage\": 6406.818790512077,\n      \"transactionStatus\": \"PaymentAbandoned\",\n      \"transactionStatusChangedAt\": \"1950-10-31T03:13:32.983Z\",\n      \"createdAt\": \"1973-11-29T18:15:52.777Z\",\n      \"payerName\": \"string\",\n      \"settlementReference\": \"string\",\n      \"brandId\": \"d905afff-2366-d728-0bc7-8b30cd41e1f1\"\n    },\n    {\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"transactionId\": \"string\",\n      \"transactionReference\": \"string\",\n      \"externalReference\": \"string\",\n      \"minorUnitAmount\": 5587.706705969913,\n      \"currency\": \"string\",\n      \"discountedAmount\": 4500.601362898021,\n      \"discountPercentage\": 5902.914446131721,\n      \"transactionStatus\": \"PaymentSuccess\",\n      \"transactionStatusChangedAt\": \"1981-09-17T07:35:25.329Z\",\n      \"createdAt\": \"2023-11-04T07:01:37.476Z\",\n      \"payerName\": \"string\",\n      \"settlementReference\": \"string\",\n      \"brandId\": \"06bf3ede-b6f1-11fc-08c3-5b6a668864a3\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd9d7532-8dff-4243-beca-c5f55ac76272",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfeb6222-bfe4-4c0e-b0d9-36c795b3bace",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74255fef-80d8-4f5e-b23f-40c6c4c3ee5b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43d718e6-422b-42c1-9f72-aed901763b48",
+              "name": "Not Acceptable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d86eca35-cb9c-42d9-b210-61866f06a574",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "externalReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.superpayments.com/2026-04-01",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "31bb05c4-82d8-4d8a-bd57-bd69235806ab",
+    "name": "Super Checkout Sessions Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+      "type": "text/plain"
+    }
+  }
+}

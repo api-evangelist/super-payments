@@ -1,0 +1,1114 @@
+{
+  "item": [
+    {
+      "id": "8da10010-f37c-4435-902c-f40030cfaba4",
+      "name": "Settlements",
+      "description": {
+        "content": "Settlement batches, details, and reconciliation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f7f2af5d-6074-42df-94d1-9584dcf264ab",
+          "name": "Get settlement detail",
+          "request": {
+            "name": "Get settlement detail",
+            "description": {
+              "content": "Fetch a single settlement and its payments/statistics. Provide Accept",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlementId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "settlementId",
+                  "description": "(Required) Settlement identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bc864209-7737-4df4-9be9-746b8b13da39",
+              "name": "Settlement detail response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"settlementId\": \"string\",\n  \"settlementReference\": \"string\",\n  \"settlementTs\": \"1952-01-21T21:07:25.343Z\",\n  \"status\": \"SETTLED_AFTER_RETRY\",\n  \"minorUnitAmount\": 6408,\n  \"currency\": \"string\",\n  \"payments\": [\n    {\n      \"paymentReference\": \"string\",\n      \"status\": \"PENDING\",\n      \"minorUnitAmount\": 4935,\n      \"currency\": \"string\"\n    },\n    {\n      \"paymentReference\": \"string\",\n      \"status\": \"PENDING\",\n      \"minorUnitAmount\": 4201,\n      \"currency\": \"string\"\n    }\n  ],\n  \"settlementStatistics\": {\n    \"openingBalanceAmount\": 8227,\n    \"reservedFeesAmount\": 211,\n    \"amountScale\": 2\n  },\n  \"createdAt\": \"1948-01-07T17:27:18.825Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "310ae29d-9e1f-491c-8a11-3e66b743d33e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddb4d12d-e221-4c55-888a-9b2d3cdbadba",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4ca4ce2-46bd-448d-991b-3399bcc9d812",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b08480d-ed29-478e-a2ee-f9672491f052",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5458f0c3-b40b-483d-8054-725b51442bfb",
+          "name": "Get settlement reconciliation rows",
+          "request": {
+            "name": "Get settlement reconciliation rows",
+            "description": {
+              "content": "Return ledger reconciliation items for a settlement, with pagination. Provide Accept",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements",
+                ":settlementId",
+                "reconciliation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of reconciliation rows per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Opaque cursor returned by previous responses."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "settlementId",
+                  "description": "(Required) Settlement identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5e200bb0-fc57-4cc5-a525-7822e3d7c0b9",
+              "name": "Settlement reconciliation response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "reconciliation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageSize\": 3478,\n  \"hasNext\": false,\n  \"items\": [\n    {\n      \"reconciliationItemId\": \"string\",\n      \"transactionId\": \"string\",\n      \"transactionType\": \"PAYOUT\",\n      \"paymentIntentId\": \"string\",\n      \"paymentIntentReference\": \"string\",\n      \"paymentIntentExternalReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundReference\": \"string\",\n      \"refundExternalReference\": \"string\",\n      \"amountSettled\": 7071,\n      \"amountScale\": 2,\n      \"currency\": \"string\",\n      \"isCredit\": true\n    },\n    {\n      \"reconciliationItemId\": \"string\",\n      \"transactionId\": \"string\",\n      \"transactionType\": \"ROUNDING_ADJUSTMENT\",\n      \"paymentIntentId\": \"string\",\n      \"paymentIntentReference\": \"string\",\n      \"paymentIntentExternalReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundReference\": \"string\",\n      \"refundExternalReference\": \"string\",\n      \"amountSettled\": 4392,\n      \"amountScale\": 2,\n      \"currency\": \"string\",\n      \"isCredit\": false\n    }\n  ],\n  \"nextPage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd860267-3d1e-4b0d-960d-a7b20325b350",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "reconciliation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eacd2880-7580-458e-92af-b7d09d084a00",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "reconciliation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59899988-7863-4db7-b3f6-86c64594e422",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "reconciliation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7e7f493-5f19-4715-9c29-d94803deeb93",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements",
+                    ":settlementId",
+                    "reconciliation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "settlementId",
+                      "description": "(Required) Settlement identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "440e21d3-5d08-4068-8db8-e09b1b1b9f7f",
+          "name": "List settlements",
+          "request": {
+            "name": "List settlements",
+            "description": {
+              "content": "Retrieve paginated settlement batches for the current merchant. Provide Accept",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "settlements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "settlementReference",
+                  "value": "<string>",
+                  "description": "Filter by prefix of settlement reference (case-insensitive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Opaque cursor returned by previous responses."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9af0a33a-b122-4bb4-af51-5267b1d8e8f7",
+              "name": "List settlements response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settlementReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageSize\": 4695,\n  \"hasNext\": false,\n  \"items\": [\n    {\n      \"settlementId\": \"string\",\n      \"settlementReference\": \"string\",\n      \"settledAt\": \"1966-01-15T05:08:33.316Z\",\n      \"status\": \"SETTLED\",\n      \"minorUnitAmount\": 1655,\n      \"currency\": \"string\",\n      \"createdAt\": \"2001-11-28T03:27:46.566Z\"\n    },\n    {\n      \"settlementId\": \"string\",\n      \"settlementReference\": \"string\",\n      \"settledAt\": \"2012-04-07T21:30:45.443Z\",\n      \"status\": \"SETTLED_AFTER_RETRY\",\n      \"minorUnitAmount\": 2235,\n      \"currency\": \"string\",\n      \"createdAt\": \"1959-03-24T01:59:17.877Z\"\n    }\n  ],\n  \"nextPage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49c2be68-58cc-4bd1-b5f4-4b6feb0bb166",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settlementReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91397baf-4df0-4a0a-b39c-e3056a2fa278",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settlementReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaeb244c-7491-41df-9a4e-364c67abd5e3",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "settlements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "settlementReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optional. Omit or specify application/json to receive JSON (default) or provide text/csv (or application/csv) to download CSV.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.superpayments.com/2026-04-01",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "22e76468-dfd0-4458-b2ca-1d3d44d74c5a",
+    "name": "Super Payments Checkout Sessions Settlements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+      "type": "text/plain"
+    }
+  }
+}

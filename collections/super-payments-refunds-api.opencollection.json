@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Super Payments Checkout Sessions Refunds API",
+    "version": "2026-04-01"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Payout Refund (Restricted)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.superpayments.com/2026-04-01/refunds/payouts",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is used to initiate a payout refund to a provided payment method. This is a restricted endpoint, contact customer support to request access."
+        },
+        {
+          "info": {
+            "name": "Create Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.superpayments.com/2026-04-01/refunds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is used to initiate a refund for a payment transaction."
+        },
+        {
+          "info": {
+            "name": "Get refund transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.superpayments.com/2026-04-01/refunds/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the refund transaction"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Poll for an individual refund transaction status to check its current state. Returns detailed information about the refund transaction including its status and payment details."
+        },
+        {
+          "info": {
+            "name": "Search refund transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.superpayments.com/2026-04-01/refunds/search",
+            "params": [
+              {
+                "name": "transactionStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter by refund transaction status. Can be a single status or an array of statuses."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by start date (ISO 8601 format). Inclusive."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by end date (ISO 8601 format). Inclusive."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page token for pagination (cursor)."
+              },
+              {
+                "name": "paymentExternalReference",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the external reference of the original payment."
+              },
+              {
+                "name": "paymentTransactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the original payment transaction ID."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by refund transaction ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a list of refund transactions with filtering options. Results are paginated and can be filtered by various criteria including status, payment ID, and date range. Refund transactions are returned in reverse chronological order (newest first). If no filters are specified, all available refund transactions will be returned subject to pagination limits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

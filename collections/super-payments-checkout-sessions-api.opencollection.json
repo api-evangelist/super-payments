@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Super Payments Checkout Sessions API",
+    "version": "2026-04-01"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checkout Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new checkout session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.superpayments.com/2026-04-01/checkout-sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new checkout session for a payment initiator."
+        },
+        {
+          "info": {
+            "name": "Retrieve a checkout session by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.superpayments.com/2026-04-01/checkout-sessions/:checkoutSessionId",
+            "params": [
+              {
+                "name": "checkoutSessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetches the details of a checkout session using its ID."
+        },
+        {
+          "info": {
+            "name": "Proceed with payment via checkout session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.superpayments.com/2026-04-01/checkout-sessions/:checkoutSessionId/proceed",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "checkoutSessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Processes a payment using an existing checkout session. Requires the payment initiator ID and session details."
+        },
+        {
+          "info": {
+            "name": "Upsert order details for a checkout session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.superpayments.com/2026-04-01/checkout-sessions/:checkoutSessionId/order-details",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "checkoutSessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Updates or inserts order details (shipping address, billing address, and/or line items) for an existing checkout session. At least one of the three fields must be provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

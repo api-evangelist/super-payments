@@ -1,0 +1,2030 @@
+{
+  "item": [
+    {
+      "id": "33354005-ff30-42e3-a298-900d97d9c670",
+      "name": "Checkout Sessions",
+      "description": {
+        "content": "Checkout Session management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2cacf68f-ff2d-48fb-92fc-278e01954a79",
+          "name": "Create a new checkout session",
+          "request": {
+            "name": "Create a new checkout session",
+            "description": {
+              "content": "Creates a new checkout session for a payment initiator.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkout-sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"<string>\",\n    \"savePaymentMethod\": \"<boolean,null>\",\n    \"paymentMethodMetadata\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "808eaf95-bb64-4f0e-a70c-2499cf670828",
+              "name": "Checkout session created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"string\",\n    \"savePaymentMethod\": true,\n    \"paymentMethodMetadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutSessionId\": \"2d792bc7-8572-08cc-d88e-9861ba2a4b71\",\n  \"checkoutSessionToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0a6722f-c01e-49fc-bf59-419191c5b370",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"string\",\n    \"savePaymentMethod\": true,\n    \"paymentMethodMetadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dddf2b42-6127-49c6-acee-b6057071fd67",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"string\",\n    \"savePaymentMethod\": true,\n    \"paymentMethodMetadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c36635f-03aa-4f64-b0bb-0219417745cd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"string\",\n    \"savePaymentMethod\": true,\n    \"paymentMethodMetadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7817ac2-3a63-4137-9ee2-1be8cc670db6",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"string\",\n    \"savePaymentMethod\": true,\n    \"paymentMethodMetadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f27c51ba-761a-47c2-aa79-f895a6f9211b",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"string\",\n    \"savePaymentMethod\": true,\n    \"paymentMethodMetadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a608a8-bae7-4df5-8c01-ecfd27832e38",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"string\",\n    \"savePaymentMethod\": true,\n    \"paymentMethodMetadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e762983-221a-4524-9af5-4c2fd21da4c3",
+          "name": "Retrieve a checkout session by ID",
+          "request": {
+            "name": "Retrieve a checkout session by ID",
+            "description": {
+              "content": "Fetches the details of a checkout session using its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkout-sessions",
+                ":checkoutSessionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "checkoutSessionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "78958244-8e9d-4b5c-8ca6-9291f8020c60",
+              "name": "Checkout session details retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutSessionId\": \"5daacd83-4e7b-86d3-723f-9f8ff0c6c5f4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1ee8fec-4ed1-4332-9f79-9b4b6c92cffd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8874feee-9edb-4198-9a2b-5587f840d411",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eef6b40b-754e-4f9d-88a5-c3f7631ea9a8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e738e68-2e79-44d3-8e97-90bbec6f0503",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f1e1582-7c64-4e7b-adc7-61985c63ce5f",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13a54b5c-19c1-4909-9fe8-2f9a62bd8d14",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36d408aa-e43e-4b83-9e70-dae3e50d10bd",
+          "name": "Proceed with payment via checkout session",
+          "request": {
+            "name": "Proceed with payment via checkout session",
+            "description": {
+              "content": "Processes a payment using an existing checkout session. Requires the payment initiator ID and session details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkout-sessions",
+                ":checkoutSessionId",
+                "proceed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "checkoutSessionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<dateTime>\",\n        \"travellers\": [\n          {\n            \"name\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\"\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<dateTime>\",\n        \"travellers\": [\n          {\n            \"name\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\"\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e612ca8a-7de8-4885-b3f1-3e3d2e2ea391",
+              "name": "Payment processed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "proceed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1978-01-29T20:35:38.543Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7361.843327845027,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1997-11-13T02:56:23.923Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6808.101494448887,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutSessionId\": \"7179cb4c-dd1f-bc41-d43e-6eaee0b1b119\",\n  \"paymentIntentId\": \"6fe7cd7e-149f-1817-3041-90eca24d4fd7\",\n  \"redirectUrl\": \"http://yqicOsOKd.bjlIWVJcbmYc4rAY2.5UP-Bh5G-\",\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"0JpVnKsxq4r@JCNpSyvfaqoqljtpQwNlPbcxoEZNbIA.lqb\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"BxXU1hgvLo@SaPqgBiCxZwsMJowSBELVZVRRNlwfgz.yqpi\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1967-01-01T23:32:34.267Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2103.9369709267853,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1962-02-02T19:21:30.474Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7703.161842866776,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3baa2181-b8f0-4062-92bd-33cfac7db900",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "proceed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1978-01-29T20:35:38.543Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7361.843327845027,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1997-11-13T02:56:23.923Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6808.101494448887,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a2ff145-6924-4638-b75e-2b5029999013",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "proceed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1978-01-29T20:35:38.543Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7361.843327845027,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1997-11-13T02:56:23.923Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6808.101494448887,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54c625a0-7786-45bb-a68f-c24633673aaa",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "proceed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1978-01-29T20:35:38.543Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7361.843327845027,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1997-11-13T02:56:23.923Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6808.101494448887,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 402,\n  \"type\": \"https://api.superpayments.com/errors/payment_required\",\n  \"title\": \"Payment Required\",\n  \"detail\": \"Payment details provided by customer could not be used\",\n  \"instance\": \"4186980260999334757\",\n  \"extensions\": {\n    \"issues\": {\n      \"declineReason\": \"The CVC number is incorrect.\",\n      \"declineCode\": \"AUTHENTICATION_REQUIRED\",\n      \"declineClassification\": \"UNRESTRICTED\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7e4cb06-445f-4752-a9ea-768d6c24d493",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "proceed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1978-01-29T20:35:38.543Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7361.843327845027,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1997-11-13T02:56:23.923Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6808.101494448887,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31d49cb5-7327-485e-9f5c-4c8e74ff4852",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "proceed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1978-01-29T20:35:38.543Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7361.843327845027,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1997-11-13T02:56:23.923Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6808.101494448887,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9b951ef-cc10-42a4-a16e-5498792f319a",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "proceed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1978-01-29T20:35:38.543Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7361.843327845027,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1997-11-13T02:56:23.923Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6808.101494448887,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f7ca769-b628-4fd5-a1fc-084943673d1d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "proceed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentInitiatorId\": \"<uuid>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"successUrl\": \"<uri>\",\n  \"failureUrl\": \"<uri>\",\n  \"cancelUrl\": \"<uri>\",\n  \"externalReference\": \"<string,null>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1978-01-29T20:35:38.543Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 7361.843327845027,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1997-11-13T02:56:23.923Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6808.101494448887,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3532e641-b8b4-4673-a2a2-333a3550c730",
+          "name": "Upsert order details for a checkout session",
+          "request": {
+            "name": "Upsert order details for a checkout session",
+            "description": {
+              "content": "Updates or inserts order details (shipping address, billing address, and/or line items) for an existing checkout session. At least one of the three fields must be provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkout-sessions",
+                ":checkoutSessionId",
+                "order-details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "checkoutSessionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<dateTime>\",\n        \"travellers\": [\n          {\n            \"name\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\"\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<dateTime>\",\n        \"travellers\": [\n          {\n            \"name\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\"\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "123222b1-d234-46d1-b5b6-111479757145",
+              "name": "Order details updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "order-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1959-10-29T18:11:18.274Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 4183.014355978387,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2016-03-29T06:19:25.435Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2290.101554291949,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkoutSessionId\": \"cd1a44db-48ac-c083-6442-04ebd7a8e244\",\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"wo8Zc@oHFTiVErvoKedlVEiyZFZSYuaae.tzhk\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"292FOO@EomYsSSeOBIYmtVODKC.ujq\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2009-08-14T17:56:02.027Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1124.9725657118227,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1996-10-16T16:58:06.379Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 6216.287642852014,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "162c7005-878f-4448-8bb9-e22abb6810f9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "order-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1959-10-29T18:11:18.274Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 4183.014355978387,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2016-03-29T06:19:25.435Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2290.101554291949,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64a62046-c41b-43f9-9ade-e999d1a583aa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "order-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1959-10-29T18:11:18.274Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 4183.014355978387,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2016-03-29T06:19:25.435Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2290.101554291949,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1b046d6-5fba-46f5-9674-ff4fd4f57134",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "order-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1959-10-29T18:11:18.274Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 4183.014355978387,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2016-03-29T06:19:25.435Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2290.101554291949,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e97f628-3c24-4989-8ea8-ea4168e71f2a",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "order-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1959-10-29T18:11:18.274Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 4183.014355978387,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2016-03-29T06:19:25.435Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2290.101554291949,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71587bee-445e-4c3d-815a-84041201aa18",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "order-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1959-10-29T18:11:18.274Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 4183.014355978387,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2016-03-29T06:19:25.435Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2290.101554291949,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d08d88e3-c095-4bf2-8e8f-6bb6169f0422",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout-sessions",
+                    ":checkoutSessionId",
+                    "order-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "checkoutSessionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"billingAddress\": {\n    \"addressLine1\": null,\n    \"addressLine2\": null,\n    \"addressLine3\": null,\n    \"city\": null,\n    \"country\": null,\n    \"postCode\": null,\n    \"firstName\": null,\n    \"lastName\": null,\n    \"phone\": null,\n    \"email\": null\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1959-10-29T18:11:18.274Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 4183.014355978387,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2016-03-29T06:19:25.435Z\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2290.101554291949,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.superpayments.com/2026-04-01",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "801d6502-6e64-4bc0-8264-576f15329643",
+    "name": "Super Payments Checkout Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+      "type": "text/plain"
+    }
+  }
+}

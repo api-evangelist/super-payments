@@ -1,0 +1,2631 @@
+{
+  "item": [
+    {
+      "id": "b102abc5-56ed-4da1-b0c5-01136644cbf4",
+      "name": "Payment Links",
+      "description": {
+        "content": "Manage payment links for one-time payments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f635cc0e-47f2-40ab-bdbf-0bfc1c96ec85",
+          "name": "Create Payment Link",
+          "request": {
+            "name": "Create Payment Link",
+            "description": {
+              "content": "Creates a new payment link",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-links"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string,null>\",\n    \"addressLine2\": \"<string,null>\",\n    \"addressLine3\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"country\": \"<string,null>\",\n    \"postCode\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"email\": \"<string,null>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string,null>\",\n    \"addressLine2\": \"<string,null>\",\n    \"addressLine3\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"country\": \"<string,null>\",\n    \"postCode\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"email\": \"<string,null>\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<date>\",\n        \"travellers\": [\n          {\n            \"name\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\"\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<date>\",\n        \"travellers\": [\n          {\n            \"name\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\"\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1bf97f6c-42b0-4f5a-bd17-7f0f548b3e8f",
+              "name": "Returns the created payment link.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"9295dabb-888e-c22c-c167-299f99c533ed\",\n  \"createdAt\": \"2011-06-13T01:38:29.717Z\",\n  \"updatedAt\": \"2004-10-11T17:12:57.031Z\",\n  \"brandId\": \"bc8c51f4-ac32-d2a6-c73e-dbf1e94237fb\",\n  \"externalReference\": \"string\",\n  \"amountInMinorUnits\": 1539.8175929935621,\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"2024-09-20T07:39:26.655Z\",\n  \"metadata\": {\n    \"key_0\": \"~r6-V{W\",\n    \"key_1\": \"jN&01B\"\n  },\n  \"successUrl\": \"string\",\n  \"failureUrl\": \"string\",\n  \"cancelUrl\": \"string\",\n  \"url\": \"string\",\n  \"paymentReferences\": [\n    {\n      \"paymentIntentId\": \"97653ace-8f07-cdad-b9b3-49643c8876d3\",\n      \"receiptReference\": \"string\"\n    },\n    {\n      \"paymentIntentId\": \"30618856-f50c-db19-e76e-6b1b6b2e8ad5\",\n      \"receiptReference\": \"string\"\n    }\n  ],\n  \"status\": \"PAID\",\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2004-05-04\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2685.2367239456175,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1970-12-25\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1753.151714822232,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97797258-f602-44df-a0e9-d22d858da8fa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b7bbe35-dbfb-448d-adc4-d633b80877cd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0693f363-06b0-4888-9bfd-516efad97858",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "311e8259-e7f5-431c-8e8d-8ea14eba4676",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "806c53e8-3d32-4ef1-840e-4ca143d7be2c",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88772943-559b-4470-8166-9735f740c593",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d46bc353-0c45-43aa-8694-4df7a6535e89",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66406718-2114-4ef6-b60c-ffcd02e53572",
+          "name": "List Payment Links",
+          "request": {
+            "name": "List Payment Links",
+            "description": {
+              "content": "Retrieves a list of payment links with optional filters, sorting, and pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-links"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "searchTerm",
+                  "value": "<string,null>"
+                },
+                {
+                  "disabled": false,
+                  "key": "brandId",
+                  "value": "<string,null-uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "createdAt"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "100"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "39581806-d06b-4bcc-847a-23727d8d4340",
+              "name": "Returns a paginated list of payment links.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pageInfo\": {\n    \"hasNextPage\": true,\n    \"currentPage\": 9795.47011822338,\n    \"lastPage\": 1892.389657193605,\n    \"pageSize\": 8738.71985739285\n  },\n  \"totalCount\": 523.3616640438488,\n  \"items\": [\n    {\n      \"id\": \"95f08f9c-6d6e-413c-9f75-c3c1be4b0d26\",\n      \"createdAt\": \"1988-11-26T02:21:40.642Z\",\n      \"updatedAt\": \"2019-09-27T09:18:44.521Z\",\n      \"brandId\": \"f5034f32-c0a3-a9e3-f6b0-3175eadfcf02\",\n      \"externalReference\": \"string\",\n      \"amountInMinorUnits\": 6909.9399562153585,\n      \"purpose\": \"MERCHANT_TOPUP\",\n      \"expiresAt\": \"2021-11-27T15:18:57.481Z\",\n      \"metadata\": {\n        \"key_0\": \"uL';;IXmjm\",\n        \"key_1\": \"G%(qA^_q?\",\n        \"key_2\": \"2Z\",\n        \"key_3\": \"f_EsMa*N:\"\n      },\n      \"successUrl\": \"string\",\n      \"failureUrl\": \"string\",\n      \"cancelUrl\": \"string\",\n      \"url\": \"string\",\n      \"paymentReferences\": [\n        {\n          \"paymentIntentId\": \"382a2f21-b310-7880-5294-0320fbedbe39\",\n          \"receiptReference\": \"string\"\n        },\n        {\n          \"paymentIntentId\": \"cbff31a1-3253-056c-da27-d6fac20924af\",\n          \"receiptReference\": \"string\"\n        }\n      ],\n      \"status\": \"PAID\",\n      \"billingAddress\": {\n        \"addressLine1\": \"string\",\n        \"addressLine2\": \"string\",\n        \"addressLine3\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"postCode\": \"string\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\"\n      },\n      \"shippingAddress\": {\n        \"addressLine1\": \"string\",\n        \"addressLine2\": \"string\",\n        \"addressLine3\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"postCode\": \"string\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\"\n      },\n      \"lineItems\": [\n        {\n          \"type\": \"string\",\n          \"data\": {\n            \"flightNumber\": \"string\",\n            \"flightDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"travellers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"totalPrice\": 5205.374809894474,\n            \"currency\": \"string\"\n          }\n        },\n        {\n          \"type\": \"string\",\n          \"data\": {\n            \"flightNumber\": \"string\",\n            \"flightDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"travellers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"totalPrice\": 503.402728805864,\n            \"currency\": \"string\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"b669c97b-d641-793b-613d-5ee17c94039a\",\n      \"createdAt\": \"1962-04-16T12:36:42.751Z\",\n      \"updatedAt\": \"1995-02-20T05:26:35.930Z\",\n      \"brandId\": \"1255a6cf-5958-7ddd-3ec9-f598660c32a8\",\n      \"externalReference\": \"string\",\n      \"amountInMinorUnits\": 8407.738349844414,\n      \"purpose\": \"MERCHANT_TOPUP\",\n      \"expiresAt\": \"2018-08-23T00:18:16.779Z\",\n      \"metadata\": {\n        \"key_0\": \"z#N3PtD? z\"\n      },\n      \"successUrl\": \"string\",\n      \"failureUrl\": \"string\",\n      \"cancelUrl\": \"string\",\n      \"url\": \"string\",\n      \"paymentReferences\": [\n        {\n          \"paymentIntentId\": \"e60d1e90-f2d7-4893-2bb9-00bf7b16742b\",\n          \"receiptReference\": \"string\"\n        },\n        {\n          \"paymentIntentId\": \"f45c940f-3cd5-5a9f-5ccd-07427edbb142\",\n          \"receiptReference\": \"string\"\n        }\n      ],\n      \"status\": \"PAID\",\n      \"billingAddress\": {\n        \"addressLine1\": \"string\",\n        \"addressLine2\": \"string\",\n        \"addressLine3\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"postCode\": \"string\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\"\n      },\n      \"shippingAddress\": {\n        \"addressLine1\": \"string\",\n        \"addressLine2\": \"string\",\n        \"addressLine3\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"string\",\n        \"postCode\": \"string\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\"\n      },\n      \"lineItems\": [\n        {\n          \"type\": \"string\",\n          \"data\": {\n            \"flightNumber\": \"string\",\n            \"flightDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"travellers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"totalPrice\": 5717.414249948626,\n            \"currency\": \"string\"\n          }\n        },\n        {\n          \"type\": \"string\",\n          \"data\": {\n            \"flightNumber\": \"string\",\n            \"flightDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"travellers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"totalPrice\": 3345.3181185250346,\n            \"currency\": \"string\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f69eeced-3c07-4a5b-aab3-62bf2df72140",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d98bbf5d-99c9-43e7-8d24-02f8c90660ff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf77d517-1193-4236-a5e3-3182f40c2be3",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77cfa305-bbc2-4269-8b36-63eb7d42b4b6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60023334-6253-4bd5-af1d-5e53828b8147",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0a9e614-7c1b-4745-b153-c2bc0a99515f",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2649b83-5816-4d45-9762-947dad5874cf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "brandId",
+                      "value": "<string,null-uuid>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad05fcd0-5182-4bf2-bed0-dd87c57f75d3",
+          "name": "Delete Payment Link",
+          "request": {
+            "name": "Delete Payment Link",
+            "description": {
+              "content": "Deletes a payment link by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-links",
+                ":linkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "linkId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/problem+json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8224b6ab-3ab3-43a3-9d81-0fc0cd2d92a1",
+              "name": "Link deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9816295f-b674-4208-aebc-e13eb419b3e3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60f61e21-462f-457c-a2f1-b50e7502c87b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e66169dc-b140-43bd-8f55-d6d6d9fa15e6",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4935c5b7-22be-445d-9126-ac80b73a7ee3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2115c779-2349-44cc-9b10-69e67e1a98f5",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fda30f35-ef88-4a94-b6b9-46b6fa5ac7c0",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "878be05a-6db8-497e-be5f-95c45c9d1ca3",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c56117c-18c0-4860-a9b2-936153303d64",
+          "name": "Get Payment Link by ID",
+          "request": {
+            "name": "Get Payment Link by ID",
+            "description": {
+              "content": "Retrieves a payment link by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-links",
+                ":linkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "linkId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0ee53c09-73dc-45b4-bd14-e28331568623",
+              "name": "Returns the payment link with the specified ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"9295dabb-888e-c22c-c167-299f99c533ed\",\n  \"createdAt\": \"2011-06-13T01:38:29.717Z\",\n  \"updatedAt\": \"2004-10-11T17:12:57.031Z\",\n  \"brandId\": \"bc8c51f4-ac32-d2a6-c73e-dbf1e94237fb\",\n  \"externalReference\": \"string\",\n  \"amountInMinorUnits\": 1539.8175929935621,\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"2024-09-20T07:39:26.655Z\",\n  \"metadata\": {\n    \"key_0\": \"~r6-V{W\",\n    \"key_1\": \"jN&01B\"\n  },\n  \"successUrl\": \"string\",\n  \"failureUrl\": \"string\",\n  \"cancelUrl\": \"string\",\n  \"url\": \"string\",\n  \"paymentReferences\": [\n    {\n      \"paymentIntentId\": \"97653ace-8f07-cdad-b9b3-49643c8876d3\",\n      \"receiptReference\": \"string\"\n    },\n    {\n      \"paymentIntentId\": \"30618856-f50c-db19-e76e-6b1b6b2e8ad5\",\n      \"receiptReference\": \"string\"\n    }\n  ],\n  \"status\": \"PAID\",\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2004-05-04\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2685.2367239456175,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1970-12-25\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1753.151714822232,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8b63918-b33a-4619-96c3-f55faeffeb5f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7832a0ab-4ff0-4bfc-adc3-1b772fe2a1f3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f256e6a3-6cef-47ee-990c-8eda5db1d383",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ed85e32-eeda-4529-b217-0eecbb8dbc7f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "676426de-da23-4eaa-9a82-db6e30cf57c2",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc671ca8-701d-4f59-bbaf-d6c683e13276",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad32b701-0f41-4b4e-8495-544f5b7ea0eb",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dcb69b1-7eea-4d99-80e2-e3d87efff734",
+          "name": "Update a link",
+          "request": {
+            "name": "Update a link",
+            "description": {
+              "content": "Updates an existing link with the provided data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-links",
+                ":linkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "linkId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"<string,null>\",\n    \"addressLine2\": \"<string,null>\",\n    \"addressLine3\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"country\": \"<string,null>\",\n    \"postCode\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"email\": \"<string,null>\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"<string,null>\",\n    \"addressLine2\": \"<string,null>\",\n    \"addressLine3\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"country\": \"<string,null>\",\n    \"postCode\": \"<string,null>\",\n    \"firstName\": \"<string,null>\",\n    \"lastName\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"email\": \"<string,null>\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<date>\",\n        \"travellers\": [\n          {\n            \"name\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\"\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"data\": {\n        \"flightNumber\": \"<string>\",\n        \"flightDate\": \"<date>\",\n        \"travellers\": [\n          {\n            \"name\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\"\n          }\n        ],\n        \"totalPrice\": \"<number>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3c787228-2038-4745-a24c-f9987a0070b2",
+              "name": "Returns the updated payment link.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"9295dabb-888e-c22c-c167-299f99c533ed\",\n  \"createdAt\": \"2011-06-13T01:38:29.717Z\",\n  \"updatedAt\": \"2004-10-11T17:12:57.031Z\",\n  \"brandId\": \"bc8c51f4-ac32-d2a6-c73e-dbf1e94237fb\",\n  \"externalReference\": \"string\",\n  \"amountInMinorUnits\": 1539.8175929935621,\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"2024-09-20T07:39:26.655Z\",\n  \"metadata\": {\n    \"key_0\": \"~r6-V{W\",\n    \"key_1\": \"jN&01B\"\n  },\n  \"successUrl\": \"string\",\n  \"failureUrl\": \"string\",\n  \"cancelUrl\": \"string\",\n  \"url\": \"string\",\n  \"paymentReferences\": [\n    {\n      \"paymentIntentId\": \"97653ace-8f07-cdad-b9b3-49643c8876d3\",\n      \"receiptReference\": \"string\"\n    },\n    {\n      \"paymentIntentId\": \"30618856-f50c-db19-e76e-6b1b6b2e8ad5\",\n      \"receiptReference\": \"string\"\n    }\n  ],\n  \"status\": \"PAID\",\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2004-05-04\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 2685.2367239456175,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1970-12-25\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1753.151714822232,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f59dbb87-0325-4d33-be73-dde2008307a6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 400,\n  \"type\": \"https://api.superpayments.com/errors/request_validation_error\",\n  \"title\": \"Bad Request\",\n  \"detail\": \"Request validation failed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85db5a1f-6b15-46a8-be08-cf301aaf8f0e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"type\": \"https://api.superpayments.com/errors/unauthorized\",\n  \"title\": \"Unauthorized\",\n  \"detail\": \"Invalid credentials provided\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ad09d17-6dc1-4a05-81c6-a0d51000582f",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1fe9a8e-01ae-4215-955e-3bb69df5cfc2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 403,\n  \"type\": \"https://api.superpayments.com/errors/forbidden\",\n  \"title\": \"Forbidden\",\n  \"detail\": \"Action not allowed\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9d6eb51-5c22-4104-b67c-87c52e053756",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 404,\n  \"type\": \"https://api.superpayments.com/errors/not_found\",\n  \"title\": \"Not Found\",\n  \"detail\": \"Resource not found\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d89dd88a-7d6d-45c9-941c-88d20bb65dde",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0aee80b9-8374-4322-a355-63d2fe5b5252",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-links",
+                    ":linkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "linkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brandId\": \"<uuid>\",\n  \"amountInMinorUnits\": \"<number>\",\n  \"externalReference\": \"<string,null>\",\n  \"purpose\": \"PURCHASE\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"successUrl\": \"<string,null-uri>\",\n  \"failureUrl\": \"<string,null-uri>\",\n  \"cancelUrl\": \"<string,null-uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"shippingAddress\": {\n    \"addressLine1\": \"string\",\n    \"addressLine2\": \"string\",\n    \"addressLine3\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"string\",\n    \"postCode\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  },\n  \"lineItems\": [\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"2023-03-19\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 1675.5014354016485,\n        \"currency\": \"string\"\n      }\n    },\n    {\n      \"type\": \"string\",\n      \"data\": {\n        \"flightNumber\": \"string\",\n        \"flightDate\": \"1971-08-12\",\n        \"travellers\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ],\n        \"totalPrice\": 9397.877047736663,\n        \"currency\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"status\": 500,\n  \"type\": \"https://api.superpayments.com/errors/internal_server_error\",\n  \"title\": \"Internal Server Error\",\n  \"detail\": \"An unexpected error occurred\",\n  \"instance\": \"4186980260999334757\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.superpayments.com/2026-04-01",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ff221585-f52a-4238-91d9-2ef4a125ec84",
+    "name": "Super Payments Checkout Sessions Payment Links API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.",
+      "type": "text/plain"
+    }
+  }
+}
