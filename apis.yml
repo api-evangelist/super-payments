@@ -69,6 +69,8 @@ apis:
   humanURL: https://docs.superpayments.com/docs
   baseURL: https://api.superpayments.com/2026-04-01
   tags:
+  - Customers
+  tags_raw:
   - Customer
   properties:
   - type: OpenAPI
@@ -177,6 +179,8 @@ apis:
   humanURL: https://docs.superpayments.com/docs
   baseURL: https://api.superpayments.com/2026-04-01
   tags:
+  - Settlement
+  tags_raw:
   - Settlements
   properties:
   - type: OpenAPI
