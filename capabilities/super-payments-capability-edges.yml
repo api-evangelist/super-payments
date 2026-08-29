@@ -1,0 +1,85 @@
+slug: super-payments
+provider: Super Payments
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 7
+edges:
+- tag: Payments
+  spec_file: super-payments-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /payments create-payment-intent 'Create Payment Intent'; GET /payments/{transactionId}
+    'Get payment transaction'; schemas CreatePaymentIntentInput, ThreeDSDto, OpenBankingPaymentType
+  reason: Capture and authorisation of payment instructions (payment intents, 3DS, card and open-banking
+    funding) is payment initiation.
+- tag: Checkout Sessions
+  spec_file: super-payments-checkout-sessions-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.78
+  evidence: POST /checkout-sessions/{checkoutSessionId}/proceed "Proceed with payment via checkout session";
+    CreateCheckoutSessionRequestDto
+  reason: Creates and progresses checkout sessions that capture and authorise a payment for a merchant
+    order — payment instruction capture and authorisation.
+- tag: Refunds
+  spec_file: super-payments-refunds-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.78
+  evidence: POST /refunds create-refund 'Create Refund'; InitiateRefundInputDto; CardRefundFundingDetails;
+    OpenBankingRefundFundingDetails
+  reason: Initiating and tracking refunds of card / open-banking transactions is payment processing work;
+    L2 left open as refunds span initiation and processing.
+- tag: Payment Links
+  spec_file: super-payments-payment-links-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.72
+  evidence: POST /payment-links "Create Payment Link"; schemas LinkInputDto, PaymentLinkLineItemDto
+  reason: No-code payment links used to request and initiate customer payments for an order — payment
+    initiation capture.
+- tag: Payment Methods
+  spec_file: super-payments-payment-methods-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.72
+  evidence: POST /payment-methods create-payment-method 'Create Payment Method'; 'Create Setup Intent';
+    schema CreatePaymentMethodRequestDto — reusable payment instruments for a UK payments provider
+  reason: Operations register and retrieve reusable payment instruments (cards / pay-by-bank) used to
+    initiate payments, which sits under Payments & Card Management; too instrument-focused to safely pin
+    a single L2.
+- tag: Customer
+  spec_file: super-payments-customer-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: POST /customers "Create Customer"; GET /customers "List Customers"; PATCH /customers/{id}
+    "Update Customer"
+  reason: CRUD over merchant customer records held by the payment provider — customer master data management;
+    not KYC or onboarding of a bank customer.
+- tag: Rewards
+  spec_file: super-payments-rewards-api-openapi.yml
+  capability_id: BC-420.40
+  capability_id_l1: BC-420
+  capability_name: Loyalty & Retention Management
+  confidence: 0.7
+  evidence: POST /reward-calculations 'Generate a reward calculation for a given amount and brand'; 'Cash
+    Rewards boost customer loyalty and retention'
+  reason: Configuring per-brand cash-reward rates and computing customer rewards is a loyalty programme
+    mechanic rather than payment execution.

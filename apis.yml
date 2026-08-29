@@ -221,6 +221,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/super-payments-capability-edges.yml
+  name: Super Payments Business Capability Map
 - type: Overlay
   url: overlays/super-payments-openapi-overlay.yaml
 - type: PostmanWorkspace
