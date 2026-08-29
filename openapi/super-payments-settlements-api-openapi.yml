@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Super Payments Checkout Sessions Settlements API
+  title: Super Payments Settlements API
   description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
   version: '2026-04-01'
   contact:
@@ -221,6 +221,45 @@ paths:
       - Settlements
 components:
   schemas:
+    SettlementStatus:
+      description: Current status of the settlement batch.
+      type: string
+      enum:
+      - CREATED
+      - ERRORED
+      - SETTLED
+      - SETTLED_AFTER_RETRY
+    SettlementPaymentStatus:
+      description: Status of an individual payment included in a settlement.
+      type: string
+      enum:
+      - CREATED
+      - FAILED
+      - PENDING
+      - SETTLED
+    SettlementListResponse:
+      type: object
+      properties:
+        pageSize:
+          description: Number of items per page.
+          type: integer
+        nextPage:
+          description: Token for the next page of results.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results.
+          type: boolean
+        items:
+          description: List of settlements.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementListItem'
+      required:
+      - pageSize
+      - hasNext
+      - items
     SettlementListItem:
       type: object
       properties:
@@ -260,14 +299,14 @@ components:
       - minorUnitAmount
       - currency
       - createdAt
-    SettlementListResponse:
+    SettlementReconciliationResponse:
       type: object
       properties:
         pageSize:
-          description: Number of items per page.
+          description: Number of reconciliation rows per page.
           type: integer
         nextPage:
-          description: Token for the next page of results.
+          description: Opaque cursor returned by previous responses.
           type:
           - string
           - 'null'
@@ -275,50 +314,14 @@ components:
           description: Whether there are more pages of results.
           type: boolean
         items:
-          description: List of settlements.
+          description: Reconciliation items for the settlement.
           type: array
           items:
-            $ref: '#/components/schemas/SettlementListItem'
+            $ref: '#/components/schemas/SettlementReconciliationItem'
       required:
       - pageSize
       - hasNext
       - items
-    ProblemDetails:
-      type: object
-      properties:
-        status:
-          description: The HTTP status code.
-          type: integer
-          examples:
-          - 400
-        type:
-          description: A URI reference that identifies the problem type.
-          type: string
-          examples:
-          - https://api.superpayments.com/errors/request_validation_error
-        title:
-          description: A short, human-readable summary of the problem type.
-          type: string
-          examples:
-          - Bad Request
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.
-          type: string
-          examples:
-          - Request validation failed
-        instance:
-          description: A unique identifier for the error.
-          type: string
-          examples:
-          - '4186980260999334757'
-    SettlementPaymentStatus:
-      description: Status of an individual payment included in a settlement.
-      type: string
-      enum:
-      - CREATED
-      - FAILED
-      - PENDING
-      - SETTLED
     SettlementReconciliationItem:
       type: object
       properties:
@@ -409,14 +412,34 @@ components:
       - amountScale
       - currency
       - isCredit
-    SettlementStatus:
-      description: Current status of the settlement batch.
-      type: string
-      enum:
-      - CREATED
-      - ERRORED
-      - SETTLED
-      - SETTLED_AFTER_RETRY
+    ProblemDetails:
+      type: object
+      properties:
+        status:
+          description: The HTTP status code.
+          type: integer
+          examples:
+          - 400
+        type:
+          description: A URI reference that identifies the problem type.
+          type: string
+          examples:
+          - https://api.superpayments.com/errors/request_validation_error
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+          examples:
+          - Bad Request
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - Request validation failed
+        instance:
+          description: A unique identifier for the error.
+          type: string
+          examples:
+          - '4186980260999334757'
     SettlementPayment:
       type: object
       properties:
@@ -505,29 +528,6 @@ components:
       - payments
       - settlementStatistics
       - createdAt
-    SettlementReconciliationResponse:
-      type: object
-      properties:
-        pageSize:
-          description: Number of reconciliation rows per page.
-          type: integer
-        nextPage:
-          description: Opaque cursor returned by previous responses.
-          type:
-          - string
-          - 'null'
-        hasNext:
-          description: Whether there are more pages of results.
-          type: boolean
-        items:
-          description: Reconciliation items for the settlement.
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementReconciliationItem'
-      required:
-      - pageSize
-      - hasNext
-      - items
   securitySchemes:
     api_key:
       type: apiKey

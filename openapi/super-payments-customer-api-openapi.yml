@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Super Payments Checkout Sessions Customer API
+  title: Super Payments Customer API
   description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
   version: '2026-04-01'
   contact:
@@ -162,9 +162,15 @@ paths:
       - Customer
 components:
   schemas:
-    UpdateCustomer20260401RequestDto:
+    CreateCustomer20260401RequestDto:
       type: object
       properties:
+        externalReference:
+          type: string
+          minLength: 1
+        brandId:
+          type: string
+          format: uuid
         metadata:
           type:
           - object
@@ -196,6 +202,9 @@ components:
           - 'null'
           maxLength: 20
           pattern: ^\+?[\d\s\-().]+$
+      required:
+      - externalReference
+      - brandId
     Customer20260401ResponseDto:
       type: object
       properties:
@@ -286,6 +295,42 @@ components:
       - phoneNumber
       - createdAt
       - updatedAt
+    CustomerIdParam:
+      type: string
+    UpdateCustomer20260401RequestDto:
+      type: object
+      properties:
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        firstName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        lastName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          format: email
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+          pattern: ^\+?[\d\s\-().]+$
     PaginatedCustomer20260401ListResponse:
       type: object
       properties:
@@ -403,51 +448,6 @@ components:
       - pageInfo
       - totalCount
       - items
-    CustomerIdParam:
-      type: string
-    CreateCustomer20260401RequestDto:
-      type: object
-      properties:
-        externalReference:
-          type: string
-          minLength: 1
-        brandId:
-          type: string
-          format: uuid
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-        firstName:
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-          minLength: 1
-        lastName:
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-          minLength: 1
-        emailAddress:
-          type:
-          - string
-          - 'null'
-          format: email
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          maxLength: 20
-          pattern: ^\+?[\d\s\-().]+$
-      required:
-      - externalReference
-      - brandId
   securitySchemes:
     api_key:
       type: apiKey

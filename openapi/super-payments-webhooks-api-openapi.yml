@@ -1,0 +1,892 @@
+openapi: 3.2.0
+info:
+  title: Super Payments Webhooks API
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  version: '2026-04-01'
+  contact:
+    url: https://docs.superpayments.com
+  license:
+    name: Super Payments
+    identifier: https://www.superpayments.com/terms-and-conditions
+servers:
+- url: https://api.superpayments.com/2026-04-01
+  description: Live Environment
+- url: https://api.test.superpayments.com/2026-04-01
+  description: Sandbox Environment
+tags:
+- name: Webhooks
+paths: {}
+webhooks:
+  PaymentStatus (integration-specific):
+    post:
+      operationId: paymentStatusUpdateWebhook
+      summary: Payment Status Update Webhook
+      description: "Configure this webhook against a specific Integration in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        description: This webhook is called by our payment gateway to inform you of a payment status changes, prior to our payments frontend redirecting the customer back to the given return URL, as specified in the initiate-payment-transaction request body.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventType:
+                  description: 'This will be set to: PaymentStatus'
+                  type: string
+                  examples:
+                  - PaymentStatus
+                  const: PaymentStatus
+                transactionId:
+                  description: A unique ID for the payment transaction.
+                  type: string
+                  examples:
+                  - 27b2ae04-cb8e-4bcb-a976-d14a40518db1
+                transactionReference:
+                  description: An 18 character payment transaction reference allocated by us, used/visible on the associated bank transaction.
+                  type: string
+                  examples:
+                  - CKZ3IS1UB205Y2Y3KU
+                transactionStatus:
+                  description: 'The payment status of the given payment transaction, specified by the super-transaction_id field above. The payment status can be one of:
+
+                    - PaymentSuccess:   The payment transaction was successful, money has moved from the customer to your holding account.
+
+                    - PaymentCancelled: The payment transaction was cancelled by the customer, in their banking app.
+
+                    - PaymentFailed:    The payment transaction failed due to a technical error, either on our side or with the customer''s bank
+
+                    - PaymentDelayed:   The payment transaction was not resolved by the bank within 15 seconds (<2% of transactions). Open banking can take up to 4 hours to resolve. The customer has the funds, but this is usually due to additional fraud checks within the banking system.
+
+                    - PaymentAbandoned: The payment transaction was abandoned by the customer. They closed the browser or just left the page open without explicitly clicking cancel.'
+                  type: string
+                  examples:
+                  - PaymentSuccess
+                  enum:
+                  - PaymentAbandoned
+                  - PaymentCancelled
+                  - PaymentDelayed
+                  - PaymentFailed
+                  - PaymentSuccess
+                transactionAmount:
+                  description: The payment transaction amount in minor units.
+                  type: integer
+                  examples:
+                  - 10000
+                externalReference:
+                  description: Your unique reference for the payment transaction e.g. your orderId
+                  type: string
+                  examples:
+                  - order101
+              required:
+              - eventType
+              - transactionId
+              - transactionReference
+              - transactionStatus
+              - transactionAmount
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully, any other response will be deemed a failure and retried
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+  RefundStatus (integration-specific):
+    post:
+      operationId: refundStatusUpdateWebhook
+      summary: Refund Status Update Webhook
+      description: "Configure this webhook against a specific Integration in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        description: Payment status notification data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                eventType:
+                  description: 'This will be set to: RefundStatus'
+                  type: string
+                  examples:
+                  - RefundStatus
+                  const: RefundStatus
+                transactionId:
+                  description: A unique ID for the refund transaction.
+                  type: string
+                  format: uuid
+                  examples:
+                  - 27b2ae04-cb8e-4bcb-a976-d14a40518db1
+                transactionReference:
+                  description: An 18 character refund transaction reference allocated by us, used/visible on the associated bank transaction.
+                  type: string
+                  examples:
+                  - RFZ3IS1UB205Y2Y3KU
+                transactionStatus:
+                  description: 'The status of the refund transaction. The refund status will be one of:
+
+                    - RefundSuccess: The refund transaction was successful, money has moved from your holding account to the customer''s bank account.
+
+                    - RefundFailed: The refund transaction failed.
+
+                    - RefundAbandoned: The refund transaction timed out.'
+                  type: string
+                  examples:
+                  - RefundSuccess
+                  enum:
+                  - RefundAbandoned
+                  - RefundFailed
+                  - RefundSuccess
+                externalReference:
+                  description: Your unique reference for the refund transaction, e.g. your refundId
+                  type: string
+                  examples:
+                  - refund101
+              required:
+              - eventType
+              - transactionId
+              - transactionReference
+              - transactionStatus
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully, any other response will be deemed a failure and retried
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+  payment.success:
+    post:
+      operationId: webhookPaymentSuccess
+      summary: Sent when a payment is successfully completed
+      description: "Configure this webhook in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentSuccessWebhookDto'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+  payment.failed:
+    post:
+      operationId: webhookPaymentFailed
+      summary: Sent when a payment fails
+      description: "Configure this webhook in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentFailedWebhookDto'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+  refund.success:
+    post:
+      operationId: webhookRefundSuccess
+      summary: Sent when a refund is successfully completed
+      description: "Configure this webhook in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundSuccessWebhookDto'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+  refund.failed:
+    post:
+      operationId: webhookRefundFailed
+      summary: Sent when a refund fails
+      description: "Configure this webhook in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundFailedWebhookDto'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+  customer.payment_method.requires_action:
+    post:
+      operationId: webhookCustomerPaymentMethodRequiresAction
+      summary: Sent when a customer payment method is created and requires action to complete setup
+      description: "Configure this webhook in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerPaymentMethodRequiresActionWebhookDto'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+  customer.payment_method.enabled:
+    post:
+      operationId: webhookCustomerPaymentMethodEnabled
+      summary: Sent when a customer payment method becomes enabled and ready for use
+      description: "Configure this webhook in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerPaymentMethodEnabledWebhookDto'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+  customer.payment_method.disabled:
+    post:
+      operationId: webhookCustomerPaymentMethodDisabled
+      summary: Sent when a customer payment method is disabled
+      description: "Configure this webhook in your Business Portal.\n\n<details>\n<summary>HMAC signature verification</summary>\n\n\nEvery webhook request includes a super-signature header so you can verify it came from Super and hasn't been tampered with.\n\n## Header format\n\nThe header contains a timestamp and a signature, separated by a comma:\n\n```super-signature: t:1669219987926,v1:vCcZMqom...base64...```\n\n- `t:` — Unix timestamp in milliseconds, generated when the request was signed\n- `v1:` — HMAC-SHA256 signature, base64-encoded\n\n## Verifying a request\n\n1. Parse the header. Split on \",\" to get the timestamp and signature parts, then split each on \":\" to extract the values.\n2. Build the signed message. Concatenate the timestamp and the raw request body, with no separator: \"message = timestamp + raw_body\"\n2. Use the raw bytes of the request body — do not re-serialize parsed JSON, as whitespace or key ordering changes will invalidate the signature.\n3. Compute the expected signature. Generate an HMAC-SHA256 of message using your webhook secret as the key, and base64-encode the result.\n4. Compare signatures. Use a constant-time comparison (e.g. crypto.timingSafeEqual in Node, hmac.compare_digest in Python) to avoid timing attacks. Reject the request if they\ndon't match.\n5. Check the timestamp. Reject requests whose timestamp is more than 5 minutes old to prevent replay attacks.\n\n## Example (Node.js)\n\n```js\nconst crypto = require('crypto');\n\nfunction verifySuperSignature(rawBody, header, secret) {\n  const parts = Object.fromEntries(\n    header.split(',').map((p) => { return p.split(':'); })\n  );\n  const timestamp = parts.t;\n  const signature = parts.v1;\n\n  if (Math.abs(Date.now() - Number(timestamp)) > 5 * 60 * 1000) {\n    return false;\n  }\n\n  const expected = crypto\n    .createHmac('sha256', secret)\n    .update(`${timestamp}${rawBody}`)\n    .digest('base64');\n\n  const expectedBuf = Buffer.from(expected, 'base64');\n  const actualBuf = Buffer.from(signature, 'base64');\n\n  if (expectedBuf.length !== actualBuf.length) {\n    return false;\n  }\n\n  return crypto.timingSafeEqual(expectedBuf, actualBuf);\n}\n```\n</details>\n"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerPaymentMethodDisabledWebhookDto'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      security:
+      - HMAC: []
+      tags:
+      - Webhooks
+components:
+  schemas:
+    CustomerPaymentMethodDisabledWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: customer.payment_method.disabled
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            paymentMethodId:
+              type: string
+            customerId:
+              type: string
+            merchantId:
+              type: string
+            type:
+              type: string
+            usage:
+              type: string
+            status:
+              type: string
+          required:
+          - paymentMethodId
+          - customerId
+          - merchantId
+          - type
+          - usage
+          - status
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
+    RefundFailedWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: refund.failed
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            brandId:
+              type: string
+            refundId:
+              type: string
+            status:
+              type: string
+            refundReference:
+              type: string
+            externalReference:
+              type: string
+            originatingPaymentId:
+              type: string
+            originatingPaymentExternalReference:
+              type: string
+            originatingPaymentSource:
+              type: string
+            amount:
+              type: object
+              properties:
+                amount:
+                  type: number
+                amountMultiplier:
+                  type: number
+                currency:
+                  type: string
+              required:
+              - amount
+              - amountMultiplier
+              - currency
+            refundComponents:
+              type: object
+              properties:
+                merchantAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+                customerAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+                superAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+              required:
+              - merchantAmount
+              - customerAmount
+              - superAmount
+          required:
+          - brandId
+          - refundId
+          - status
+          - refundReference
+          - externalReference
+          - originatingPaymentId
+          - originatingPaymentExternalReference
+          - originatingPaymentSource
+          - amount
+          - refundComponents
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
+    PaymentFailedWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: payment.failed
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            brandId:
+              type: string
+            paymentInitiatorId:
+              type: string
+            paymentId:
+              type: string
+            paymentReference:
+              type: string
+            source:
+              type: string
+            amount:
+              type: object
+              properties:
+                amount:
+                  type: number
+                amountMultiplier:
+                  type: number
+                currency:
+                  type: string
+              required:
+              - amount
+              - amountMultiplier
+              - currency
+            status:
+              type: string
+            fundingSummary:
+              anyOf:
+              - type: object
+                properties:
+                  cashPayableToMerchant:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      amountMultiplier:
+                        type: number
+                      currency:
+                        type: string
+                    required:
+                    - amount
+                    - amountMultiplier
+                    - currency
+                  customerFundedAmount:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      amountMultiplier:
+                        type: number
+                      currency:
+                        type: string
+                    required:
+                    - amount
+                    - amountMultiplier
+                    - currency
+                  superFundedAmount:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      amountMultiplier:
+                        type: number
+                      currency:
+                        type: string
+                    required:
+                    - amount
+                    - amountMultiplier
+                    - currency
+                  merchantFundedAmount:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      amountMultiplier:
+                        type: number
+                      currency:
+                        type: string
+                    required:
+                    - amount
+                    - amountMultiplier
+                    - currency
+                required:
+                - cashPayableToMerchant
+                - customerFundedAmount
+                - superFundedAmount
+                - merchantFundedAmount
+              - type: 'null'
+            surchargeAmount:
+              anyOf:
+              - type: object
+                properties:
+                  amount:
+                    type: number
+                  amountMultiplier:
+                    type: number
+                  currency:
+                    type: string
+                required:
+                - amount
+                - amountMultiplier
+                - currency
+              - type: 'null'
+            externalReference:
+              type: string
+          required:
+          - brandId
+          - paymentInitiatorId
+          - paymentId
+          - paymentReference
+          - source
+          - amount
+          - status
+          - fundingSummary
+          - surchargeAmount
+          - externalReference
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
+    CustomerPaymentMethodRequiresActionWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: customer.payment_method.requires_action
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            paymentMethodId:
+              type: string
+            customerId:
+              type: string
+            merchantId:
+              type: string
+            type:
+              type: string
+            usage:
+              type: string
+            status:
+              type: string
+          required:
+          - paymentMethodId
+          - customerId
+          - merchantId
+          - type
+          - usage
+          - status
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
+    RefundSuccessWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: refund.success
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            brandId:
+              type: string
+            refundId:
+              type: string
+            status:
+              type: string
+            refundReference:
+              type: string
+            externalReference:
+              type: string
+            originatingPaymentId:
+              type: string
+            originatingPaymentExternalReference:
+              type: string
+            originatingPaymentSource:
+              type: string
+            amount:
+              type: object
+              properties:
+                amount:
+                  type: number
+                amountMultiplier:
+                  type: number
+                currency:
+                  type: string
+              required:
+              - amount
+              - amountMultiplier
+              - currency
+            refundComponents:
+              type: object
+              properties:
+                merchantAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+                customerAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+                superAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+              required:
+              - merchantAmount
+              - customerAmount
+              - superAmount
+          required:
+          - brandId
+          - refundId
+          - status
+          - refundReference
+          - externalReference
+          - originatingPaymentId
+          - originatingPaymentExternalReference
+          - originatingPaymentSource
+          - amount
+          - refundComponents
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
+    CustomerPaymentMethodEnabledWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: customer.payment_method.enabled
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            paymentMethodId:
+              type: string
+            customerId:
+              type: string
+            merchantId:
+              type: string
+            type:
+              type: string
+            usage:
+              type: string
+            status:
+              type: string
+          required:
+          - paymentMethodId
+          - customerId
+          - merchantId
+          - type
+          - usage
+          - status
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
+    PaymentSuccessWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: payment.success
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            brandId:
+              type: string
+            paymentInitiatorId:
+              type: string
+            paymentId:
+              type: string
+            paymentReference:
+              type: string
+            source:
+              type: string
+            amount:
+              type: object
+              properties:
+                amount:
+                  type: number
+                amountMultiplier:
+                  type: number
+                currency:
+                  type: string
+              required:
+              - amount
+              - amountMultiplier
+              - currency
+            status:
+              type: string
+            fundingSummary:
+              anyOf:
+              - type: object
+                properties:
+                  cashPayableToMerchant:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      amountMultiplier:
+                        type: number
+                      currency:
+                        type: string
+                    required:
+                    - amount
+                    - amountMultiplier
+                    - currency
+                  customerFundedAmount:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      amountMultiplier:
+                        type: number
+                      currency:
+                        type: string
+                    required:
+                    - amount
+                    - amountMultiplier
+                    - currency
+                  superFundedAmount:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      amountMultiplier:
+                        type: number
+                      currency:
+                        type: string
+                    required:
+                    - amount
+                    - amountMultiplier
+                    - currency
+                  merchantFundedAmount:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                      amountMultiplier:
+                        type: number
+                      currency:
+                        type: string
+                    required:
+                    - amount
+                    - amountMultiplier
+                    - currency
+                required:
+                - cashPayableToMerchant
+                - customerFundedAmount
+                - superFundedAmount
+                - merchantFundedAmount
+              - type: 'null'
+            surchargeAmount:
+              anyOf:
+              - type: object
+                properties:
+                  amount:
+                    type: number
+                  amountMultiplier:
+                    type: number
+                  currency:
+                    type: string
+                required:
+                - amount
+                - amountMultiplier
+                - currency
+              - type: 'null'
+            externalReference:
+              type: string
+          required:
+          - brandId
+          - paymentInitiatorId
+          - paymentId
+          - paymentReference
+          - source
+          - amount
+          - status
+          - fundingSummary
+          - surchargeAmount
+          - externalReference
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Merchant API key
+    HMAC:
+      type: apiKey
+      in: header
+      name: super-signature
+      description: Header used to validate the webhook request

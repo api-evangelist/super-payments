@@ -1,14 +1,7 @@
 {
   "provider": "super-payments",
   "sources": [
-    "super-payments-checkout-sessions-api-openapi.yml",
-    "super-payments-customer-api-openapi.yml",
-    "super-payments-payment-links-api-openapi.yml",
-    "super-payments-payment-methods-api-openapi.yml",
-    "super-payments-payments-api-openapi.yml",
-    "super-payments-refunds-api-openapi.yml",
-    "super-payments-rewards-api-openapi.yml",
-    "super-payments-settlements-api-openapi.yml"
+    "_original/super-payments-openapi.yml"
   ],
   "outputs": [
     "super-payments-checkout-sessions-api-openapi.yml",
@@ -18,11 +11,27 @@
     "super-payments-payments-api-openapi.yml",
     "super-payments-refunds-api-openapi.yml",
     "super-payments-rewards-api-openapi.yml",
-    "super-payments-settlements-api-openapi.yml"
+    "super-payments-settlements-api-openapi.yml",
+    "super-payments-webhooks-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "super-payments-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "super-payments-openapi.yml: declared missing tag: Customer",
+    "super-payments-openapi.yml: declared missing tag: Payment Methods",
+    "super-payments-openapi.yml: declared missing tag: Webhooks"
+  ],
+  "skipped": [
+    "super-payments-checkout-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "super-payments-customer-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "super-payments-payment-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "super-payments-payment-methods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "super-payments-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "super-payments-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "super-payments-rewards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "super-payments-settlements-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

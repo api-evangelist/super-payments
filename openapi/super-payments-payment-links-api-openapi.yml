@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Super Payments Checkout Sessions Payment Links API
+  title: Super Payments Payment Links API
   description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
   version: '2026-04-01'
   contact:
@@ -1039,6 +1039,109 @@ paths:
       - Payment Links
 components:
   schemas:
+    LinkResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        brandId:
+          type: string
+          format: uuid
+        externalReference:
+          type:
+          - string
+          - 'null'
+        amountInMinorUnits:
+          type: number
+        purpose:
+          type: string
+          enum:
+          - MERCHANT_TOPUP
+          - PURCHASE
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        successUrl:
+          type:
+          - string
+          - 'null'
+        failureUrl:
+          type:
+          - string
+          - 'null'
+        cancelUrl:
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+        paymentReferences:
+          type: array
+          items:
+            type: object
+            properties:
+              paymentIntentId:
+                type: string
+                format: uuid
+              receiptReference:
+                type:
+                - string
+                - 'null'
+            required:
+            - paymentIntentId
+        status:
+          type: string
+          enum:
+          - PAID
+          - UNPAID
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLinkAddressDto'
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLinkAddressDto'
+        lineItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentLinkLineItemDto'
+      required:
+      - id
+      - createdAt
+      - updatedAt
+      - brandId
+      - externalReference
+      - amountInMinorUnits
+      - purpose
+      - expiresAt
+      - metadata
+      - successUrl
+      - failureUrl
+      - cancelUrl
+      - url
+      - paymentReferences
+      - status
+      - billingAddress
+      - shippingAddress
+      - lineItems
     LinkInputDto:
       type: object
       properties:
@@ -1310,109 +1413,6 @@ components:
         required:
         - type
         - data
-    LinkResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        brandId:
-          type: string
-          format: uuid
-        externalReference:
-          type:
-          - string
-          - 'null'
-        amountInMinorUnits:
-          type: number
-        purpose:
-          type: string
-          enum:
-          - MERCHANT_TOPUP
-          - PURCHASE
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-        successUrl:
-          type:
-          - string
-          - 'null'
-        failureUrl:
-          type:
-          - string
-          - 'null'
-        cancelUrl:
-          type:
-          - string
-          - 'null'
-        url:
-          type: string
-        paymentReferences:
-          type: array
-          items:
-            type: object
-            properties:
-              paymentIntentId:
-                type: string
-                format: uuid
-              receiptReference:
-                type:
-                - string
-                - 'null'
-            required:
-            - paymentIntentId
-        status:
-          type: string
-          enum:
-          - PAID
-          - UNPAID
-        billingAddress:
-          allOf:
-          - $ref: '#/components/schemas/PaymentLinkAddressDto'
-        shippingAddress:
-          allOf:
-          - $ref: '#/components/schemas/PaymentLinkAddressDto'
-        lineItems:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PaymentLinkLineItemDto'
-      required:
-      - id
-      - createdAt
-      - updatedAt
-      - brandId
-      - externalReference
-      - amountInMinorUnits
-      - purpose
-      - expiresAt
-      - metadata
-      - successUrl
-      - failureUrl
-      - cancelUrl
-      - url
-      - paymentReferences
-      - status
-      - billingAddress
-      - shippingAddress
-      - lineItems
   securitySchemes:
     api_key:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Super Payments Checkout Sessions Rewards API
+  title: Super Payments Rewards API
   description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
   version: '2026-04-01'
   contact:
@@ -468,44 +468,6 @@ components:
       - brandId
       - currency
       - amount
-    RewardConfigurationOutputDto:
-      type: object
-      properties:
-        rewardPercentage:
-          description: The percentage of the transaction amount that will be rewarded
-          type: number
-          examples:
-          - 2.5
-        minimumSpend:
-          description: The minimum spend required to qualify for the reward
-          type: object
-          examples:
-          - currency: GBP
-            amount: 1000
-          properties:
-            currency:
-              description: The currency code for the minimum spend amount
-              type: string
-              examples:
-              - GBP
-              const: GBP
-            amount:
-              description: The minimum spend amount
-              type: number
-              examples:
-              - 1000
-          required:
-          - currency
-          - amount
-        rewardsExpireAfter:
-          description: The number of seconds after which the rewards will expire
-          type: number
-          examples:
-          - 31536000
-      required:
-      - rewardPercentage
-      - minimumSpend
-      - rewardsExpireAfter
     PutRewardConfigurationInputBody:
       type: object
       properties:
@@ -544,6 +506,44 @@ components:
           examples:
           - 31536000
           minimum: 0
+      required:
+      - rewardPercentage
+      - minimumSpend
+      - rewardsExpireAfter
+    RewardConfigurationOutputDto:
+      type: object
+      properties:
+        rewardPercentage:
+          description: The percentage of the transaction amount that will be rewarded
+          type: number
+          examples:
+          - 2.5
+        minimumSpend:
+          description: The minimum spend required to qualify for the reward
+          type: object
+          examples:
+          - currency: GBP
+            amount: 1000
+          properties:
+            currency:
+              description: The currency code for the minimum spend amount
+              type: string
+              examples:
+              - GBP
+              const: GBP
+            amount:
+              description: The minimum spend amount
+              type: number
+              examples:
+              - 1000
+          required:
+          - currency
+          - amount
+        rewardsExpireAfter:
+          description: The number of seconds after which the rewards will expire
+          type: number
+          examples:
+          - 31536000
       required:
       - rewardPercentage
       - minimumSpend

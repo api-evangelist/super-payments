@@ -205,6 +205,16 @@ apis:
     url: https://docs.superpayments.com/docs/getting-started
   - type: AsyncAPI
     url: asyncapi/super-payments-webhooks-asyncapi.yml
+- aid: super-payments:super-payments-webhooks-api
+  name: Super Payments Webhooks API
+  description: The Webhooks API from Super Payments — 0 operation(s) for webhooks.
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-webhooks-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
