@@ -211,6 +211,8 @@ apis:
   humanURL: https://docs.superpayments.com/docs
   baseURL: https://api.superpayments.com/2026-04-01
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
