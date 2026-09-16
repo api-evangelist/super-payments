@@ -1,16 +1,12 @@
 aid: super-payments
 name: Super Payments
-description: >-
-  Super Payments is a UK payments provider offering free card and open-banking
-  (pay-by-bank) payment processing for businesses, funded by a customer-acquisition
-  and cash-rewards model rather than per-transaction fees. Its REST API lets
-  merchants create payments and checkout sessions, issue refunds, manage
-  customers and reusable payment methods, run settlements and reconciliation,
-  create no-code payment links, and configure cash rewards. The API uses
-  date-based URL versioning, static API-key authentication, RFC 9457 problem+json
-  errors, cursor pagination, HMAC-signed webhooks, an embedded super-card web
-  component and hosted payment page, and a React Native SDK. Backed by Accel and
-  Union Square Ventures.
+description: Super Payments is a UK payments provider offering free card and open-banking (pay-by-bank)
+  payment processing for businesses, funded by a customer-acquisition and cash-rewards model rather than
+  per-transaction fees. Its REST API lets merchants create payments and checkout sessions, issue refunds,
+  manage customers and reusable payment methods, run settlements and reconciliation, create no-code payment
+  links, and configure cash rewards. The API uses date-based URL versioning, static API-key authentication,
+  RFC 9457 problem+json errors, cursor pagination, HMAC-signed webhooks, an embedded super-card web component
+  and hosted payment page, and a React Native SDK. Backed by Accel and Union Square Ventures.
 url: https://raw.githubusercontent.com/api-evangelist/super-payments/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -48,7 +44,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 image: https://framerusercontent.com/images/eAdDRGD6sLo1NlXEu8bPS71k.png
 tags:
 - Company
@@ -135,7 +131,7 @@ apis:
   - type: AsyncAPI
     url: asyncapi/super-payments-webhooks-asyncapi.yml
 - aid: super-payments:super-payments-payments-api
-  name: Super Payments Payments API
+  name: Super Payments API
   description: Payment processing and management
   humanURL: https://docs.superpayments.com/docs
   baseURL: https://api.superpayments.com/2026-04-01
@@ -299,7 +295,10 @@ common:
   url: packages/super-payments-packages.yml
 - type: X-MCPServerCandidate
   url: mcp/super-payments-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/super-payments-llms.txt
 - type: AgentSkill
