@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Super Payments Rewards API
-  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super.
   version: '2026-04-01'
   contact:
     url: https://docs.superpayments.com
@@ -439,35 +439,6 @@ components:
       - id
       - rewardPercentage
       - rewardsIssuable
-    GenerateRewardCalculationInput:
-      type: object
-      properties:
-        brandId:
-          description: The unique identifier for the brand
-          type: string
-          examples:
-          - f47ac10b-58cc-4372-a567-0e02b2c3d479
-        currency:
-          description: The currency code, currently only GBP is supported
-          type: string
-          examples:
-          - GBP
-          const: GBP
-        amount:
-          description: The transaction amount in the specified currency
-          type: number
-          examples:
-          - 25.99
-          minimum: 0
-        externalReference:
-          description: Optional external reference for tracking purposes
-          type: string
-          examples:
-          - order-12345
-      required:
-      - brandId
-      - currency
-      - amount
     PutRewardConfigurationInputBody:
       type: object
       properties:
@@ -548,6 +519,35 @@ components:
       - rewardPercentage
       - minimumSpend
       - rewardsExpireAfter
+    GenerateRewardCalculationInput:
+      type: object
+      properties:
+        brandId:
+          description: The unique identifier for the brand
+          type: string
+          examples:
+          - f47ac10b-58cc-4372-a567-0e02b2c3d479
+        currency:
+          description: The currency code, currently only GBP is supported
+          type: string
+          examples:
+          - GBP
+          const: GBP
+        amount:
+          description: The transaction amount in the specified currency
+          type: number
+          examples:
+          - 25.99
+          minimum: 0
+        externalReference:
+          description: Optional external reference for tracking purposes
+          type: string
+          examples:
+          - order-12345
+      required:
+      - brandId
+      - currency
+      - amount
   securitySchemes:
     api_key:
       type: apiKey

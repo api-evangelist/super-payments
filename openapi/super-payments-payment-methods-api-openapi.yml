@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Super Payments Payment Methods API
-  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super.
   version: '2026-04-01'
   contact:
     url: https://docs.superpayments.com
@@ -142,7 +142,7 @@ paths:
     post:
       operationId: create-setup-intent
       summary: Create Setup Intent
-      description: This endpoint creates a setup intent against a previously created payment method. The setup intent is used to orchestrate the process that allows a customer to set up their payment method (e.g. debit card) for future usage in off-session payments. It returns a session token that may be passed to the <super-card> Web Component to begin the setup process.
+      description: This endpoint creates a setup intent against a previously created payment method. The setup intent is used to orchestrate the process that allows a customer to set up their payment method (e.g. debit card) for future usage in off-session payments. It returns a session token that may be passed to the Web Component to begin the setup process.
       parameters:
       - name: id
         in: path
@@ -207,6 +207,50 @@ paths:
       - Payment Methods
 components:
   schemas:
+    PaymentMethodResponseDto:
+      type: object
+      properties:
+        id: {}
+        customerId: {}
+        type:
+          type: string
+          const: CARD
+          x-enumNames:
+          - CARD
+        usage:
+          type: string
+          const: OFF_SESSION
+          x-enumNames:
+          - OFF_SESSION
+        status:
+          type: string
+          enum:
+          - DISABLED
+          - ENABLED
+          - REQUIRES_ACTION
+          x-enumNames:
+          - DISABLED
+          - ENABLED
+          - REQUIRES_ACTION
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        createdAt: {}
+        updatedAt: {}
+      required:
+      - id
+      - customerId
+      - type
+      - usage
+      - status
+      - metadata
+      - createdAt
+      - updatedAt
     PaginatedPaymentMethodListOutput:
       type: object
       properties:
@@ -278,19 +322,8 @@ components:
       - pageInfo
       - totalCount
       - items
-    SetupIntentSessionOutputDto:
-      type: object
-      properties:
-        id:
-          type: string
-        sessionToken:
-          type: string
-        redirectUrl:
-          type: string
-          format: uri
-      required:
-      - id
-      - sessionToken
+    PaymentMethodIdParam:
+      type: string
     CreatePaymentMethodRequestDto:
       type: object
       properties:
@@ -318,58 +351,12 @@ components:
       - customerId
       - type
       - usage
-    PaymentMethodResponseDto:
-      type: object
-      properties:
-        id: {}
-        customerId: {}
-        type:
-          type: string
-          const: CARD
-          x-enumNames:
-          - CARD
-        usage:
-          type: string
-          const: OFF_SESSION
-          x-enumNames:
-          - OFF_SESSION
-        status:
-          type: string
-          enum:
-          - DISABLED
-          - ENABLED
-          - REQUIRES_ACTION
-          x-enumNames:
-          - DISABLED
-          - ENABLED
-          - REQUIRES_ACTION
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-        createdAt: {}
-        updatedAt: {}
-      required:
-      - id
-      - customerId
-      - type
-      - usage
-      - status
-      - metadata
-      - createdAt
-      - updatedAt
     SetupIntentSessionInputDto:
       type: object
       properties:
         redirectUrl:
           type: string
           format: uri
-    PaymentMethodIdParam:
-      type: string
     SetupIntentSessionListOutputDto:
       type: object
       properties:
@@ -417,6 +404,19 @@ components:
             - brandId
       required:
       - items
+    SetupIntentSessionOutputDto:
+      type: object
+      properties:
+        id:
+          type: string
+        sessionToken:
+          type: string
+        redirectUrl:
+          type: string
+          format: uri
+      required:
+      - id
+      - sessionToken
   securitySchemes:
     api_key:
       type: apiKey

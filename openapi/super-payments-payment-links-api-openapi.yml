@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Super Payments Payment Links API
-  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super.
   version: '2026-04-01'
   contact:
     url: https://docs.superpayments.com
@@ -1039,6 +1039,139 @@ paths:
       - Payment Links
 components:
   schemas:
+    PaymentLinkAddressDto:
+      type: object
+      properties:
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        addressLine3:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        postCode:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+    LinkInputDto:
+      type: object
+      properties:
+        brandId:
+          type: string
+          format: uuid
+        externalReference:
+          type:
+          - string
+          - 'null'
+        amountInMinorUnits:
+          type: number
+        purpose:
+          type: string
+          default: PURCHASE
+          enum:
+          - MERCHANT_TOPUP
+          - PURCHASE
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        successUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+        failureUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+        cancelUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLinkAddressDto'
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLinkAddressDto'
+        lineItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentLinkLineItemDto'
+      required:
+      - brandId
+      - amountInMinorUnits
+    PaginatedLinksOutput:
+      type: object
+      properties:
+        pageInfo:
+          type: object
+          properties:
+            hasNextPage:
+              type: boolean
+            currentPage:
+              type: number
+            lastPage:
+              type: number
+            pageSize:
+              type: number
+          required:
+          - hasNextPage
+          - currentPage
+          - lastPage
+          - pageSize
+        totalCount:
+          type: number
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkResponseDto'
+      required:
+      - pageInfo
+      - totalCount
+      - items
     LinkResponseDto:
       type: object
       properties:
@@ -1142,139 +1275,6 @@ components:
       - billingAddress
       - shippingAddress
       - lineItems
-    LinkInputDto:
-      type: object
-      properties:
-        brandId:
-          type: string
-          format: uuid
-        externalReference:
-          type:
-          - string
-          - 'null'
-        amountInMinorUnits:
-          type: number
-        purpose:
-          type: string
-          default: PURCHASE
-          enum:
-          - MERCHANT_TOPUP
-          - PURCHASE
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        successUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        failureUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        cancelUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-        billingAddress:
-          allOf:
-          - $ref: '#/components/schemas/PaymentLinkAddressDto'
-        shippingAddress:
-          allOf:
-          - $ref: '#/components/schemas/PaymentLinkAddressDto'
-        lineItems:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PaymentLinkLineItemDto'
-      required:
-      - brandId
-      - amountInMinorUnits
-    PaginatedLinksOutput:
-      type: object
-      properties:
-        pageInfo:
-          type: object
-          properties:
-            hasNextPage:
-              type: boolean
-            currentPage:
-              type: number
-            lastPage:
-              type: number
-            pageSize:
-              type: number
-          required:
-          - hasNextPage
-          - currentPage
-          - lastPage
-          - pageSize
-        totalCount:
-          type: number
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LinkResponseDto'
-      required:
-      - pageInfo
-      - totalCount
-      - items
-    PaymentLinkAddressDto:
-      type: object
-      properties:
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        addressLine3:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-        postCode:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
     PaymentLinkLineItemDto:
       oneOf:
       - type: object

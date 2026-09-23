@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Super Payments API
-  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super.
   version: '2026-04-01'
   contact:
     url: https://docs.superpayments.com
@@ -661,104 +661,16 @@ paths:
       - Payments
 components:
   schemas:
-    PaymentIntentAirlineDto:
-      description: Airline line item with type and data fields
-      type: object
-      properties:
-        type:
-          description: The line item type
-          type: string
-          const: AIRLINE
-        data:
-          description: Airline data for enhanced scheme data
-          type: object
-          properties:
-            flightNumber:
-              description: The flight identifier
-              type: string
-            flightDate:
-              description: Date of the flight, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T10:30:00+00:00)
-              oneOf:
-              - type: string
-                format: date
-              - type: string
-                format: date-time
-            travellers:
-              description: List of travellers
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                required:
-                - name
-            totalPrice:
-              description: Total price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
-      required:
-      - type
-      - data
-    GetPaymentTransactionOutput:
-      type: object
-      properties:
-        transactionId:
-          description: Unique identifier for the payment transaction
-          type: string
-        transactionReference:
-          description: Reference code for the transaction
-          type: string
-        externalReference:
-          description: External Reference, usually the order identifier associated with the transaction
-          type:
-          - string
-          - 'null'
-        transactionStatus:
-          description: Current status of the payment transaction
-          allOf:
-          - $ref: '#/components/schemas/PaymentOutputStatus'
-        transactionAmount:
-          description: Amount of the transaction
-          type: number
-        metadata:
-          description: Additional metadata associated with the transaction
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-        brandId:
-          description: Brand identifier associated with the transaction
-          type:
-          - string
-          - 'null'
-          format: uuid
-        fees:
-          description: Fees associated with the transaction
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PaymentIntentFeeDto'
-        funding:
-          description: Funding sources for the transaction
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentFunding'
-      required:
-      - transactionId
-      - transactionReference
-      - transactionStatus
-      - transactionAmount
-      - metadata
-      - brandId
-      - fees
-      - funding
+    PaymentOutputStatus:
+      description: Current status of the payment transaction
+      type: string
+      enum:
+      - PaymentAbandoned
+      - PaymentCancelled
+      - PaymentDelayed
+      - PaymentFailed
+      - PaymentPending
+      - PaymentSuccess
     DisputeDto:
       type: object
       properties:
@@ -823,56 +735,37 @@ components:
       - createdAt
       - updatedAt
       - stripeDestinationPaymentId
-    PaymentOutputStatus:
-      description: Current status of the payment transaction
-      type: string
-      enum:
-      - PaymentAbandoned
-      - PaymentCancelled
-      - PaymentDelayed
-      - PaymentFailed
-      - PaymentPending
-      - PaymentSuccess
-    OpenBankingPaymentFundingDetailsDto:
+    CreateOnSessionPaymentIntentOutput:
+      description: On Session Payment Intent
       type: object
       properties:
-        type:
-          description: Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank account through secure bank APIs without using cards.
-          example: OPEN_BANKING
-          allOf:
-          - $ref: '#/components/schemas/OpenBankingPaymentType'
-        institutionId:
-          description: Identifier of the financial institution used for the open banking payment
-          type:
-          - string
-          - 'null'
-          examples:
-          - barclays_uk
-        institutionName:
-          description: Display name of the financial institution used for the open banking payment
-          type:
-          - string
-          - 'null'
-          examples:
-          - Barclays Bank
+        id:
+          type: string
+        paymentInitiatorId:
+          type: string
+        brandId:
+          type: string
+        externalReference:
+          type: string
+        status:
+          type: string
+          enum:
+          - PaymentAbandoned
+          - PaymentFailed
+          - PaymentPending
+          - PaymentSuccess
+        offSession:
+          type: boolean
+          const: false
+        redirectUrl:
+          type: string
       required:
-      - type
-      - institutionId
-      - institutionName
-    CardPaymentType:
-      description: Type of funding details - always "CARD" for card payments. Card payments include credit and debit card transactions processed through payment networks like Visa, Mastercard, etc.
-      type: string
-      const: CARD
-    CashRewardPaymentFundingDetailsDto:
-      type: object
-      properties:
-        type:
-          description: Type identifier for cash reward payment funding details. Cash rewards payments use stored value from the customer's Super Payments account balance.
-          example: CASH_REWARD
-          allOf:
-          - $ref: '#/components/schemas/CashRewardPaymentType'
-      required:
-      - type
+      - id
+      - paymentInitiatorId
+      - brandId
+      - status
+      - offSession
+      - redirectUrl
     PaymentIntentAddressDto:
       description: Address information for shipping or billing
       type: object
@@ -928,182 +821,32 @@ components:
           - 'null'
           format: email
           default: null
-    CreateOnSessionPaymentIntentInput:
-      type: object
-      properties:
-        externalReference:
-          description: External reference for the payment
-          type: string
-          examples:
-          - order-12345
-          maxLength: 255
-        amount:
-          description: Amount in minor units (pence for GBP)
-          type: integer
-          examples:
-          - 1234
-          maximum: 9999999
-          minimum: 1
-        currency:
-          description: Currency code
-          type: string
-          examples:
-          - GBP
-          const: GBP
-        metadata:
-          description: Additional metadata for the payment
-          type: object
-          examples:
-          - customerId: customer-123
-            orderId: '12345'
-          additionalProperties:
-            type: string
-        successUrl:
-          description: URL to redirect to on successful payment
-          type: string
-          examples:
-          - https://example.com/success
-          pattern: ^https?:\/\/.+$
-        failureUrl:
-          description: URL to redirect to on failed payment
-          type: string
-          examples:
-          - https://example.com/failure
-          pattern: ^https?:\/\/.+$
-        cancelUrl:
-          description: URL to redirect to on cancelled payment
-          type: string
-          examples:
-          - https://example.com/cancel
-          pattern: ^https?:\/\/.+$
-        brandId:
-          description: Brand ID to use for this payment
-          type: string
-          examples:
-          - 123e4567-e89b-12d3-a456-426614174000
-        paymentInitiatorId:
-          description: The payment initiator ID (integration ID) to use for this payment
-          type: string
-          format: uuid
-          examples:
-          - 123e4567-e89b-12d3-a456-426614174000
-        offSession:
-          description: Whether or not the payment is an 'off session' payment. An off session payment is when the customer Payment Method is charged separately from collecting their Payment Method (e.g. card details).
-          type: boolean
-          examples:
-          - false
-          const: false
-        shippingAddress:
-          description: The shipping address
-          allOf:
-          - $ref: '#/components/schemas/PaymentIntentAddressDto'
-        billingAddress:
-          description: The billing address
-          allOf:
-          - $ref: '#/components/schemas/PaymentIntentAddressDto'
-        lineItems:
-          description: Array of line items, each being either airline, car rental, lodging, or product data
-          type:
-          - array
-          - 'null'
-          items:
-            discriminator:
-              propertyName: type
-              mapping:
-                AIRLINE: '#/components/schemas/PaymentIntentAirlineDto'
-                CAR_RENTAL: '#/components/schemas/PaymentIntentCarRentalDto'
-                LODGING: '#/components/schemas/PaymentIntentLodgingDto'
-                PRODUCT: '#/components/schemas/PaymentIntentProductDto'
-            oneOf:
-            - $ref: '#/components/schemas/PaymentIntentAirlineDto'
-            - $ref: '#/components/schemas/PaymentIntentCarRentalDto'
-            - $ref: '#/components/schemas/PaymentIntentLodgingDto'
-            - $ref: '#/components/schemas/PaymentIntentProductDto'
-        rewardCalculationId:
-          description: Reward calculation ID
-          type: string
-          examples:
-          - 123e4567-e89b-12d3-a456-426614174000
-        paymentMethodId: {}
-        customer:
-          description: '**Warning: This feature is not yet implemented.** To save this payment method for later use, use the customer ID from a previous call to /customers'
-          type:
-          - object
-          - 'null'
-          properties:
-            id:
-              description: The customer ID (cus_...) to assign the payment method to
-              type: string
-              examples:
-              - cus_01kaxxrevce8dt6vp581rhnznx
-            savePaymentMethod:
-              description: Save the payment method for later off-session payments
-              type:
-              - boolean
-              - 'null'
-              default: false
-            paymentMethodMetadata:
-              description: 'Additional metadata for the payment method (only for savePaymentMethod: true)'
-              type:
-              - object
-              - 'null'
-              examples:
-              - mySubscriptionId: sub-123
-              additionalProperties:
-                type: string
-          required:
-          - id
-      required:
-      - amount
-      - currency
-      - paymentInitiatorId
-    PaymentIntentCarRentalDto:
-      description: Car rental line item with type and data fields
+    BuyNowPayLaterPaymentFundingDetailsDto:
       type: object
       properties:
         type:
-          description: The line item type
-          type: string
-          const: CAR_RENTAL
-        data:
-          description: Car rental reservation data
-          type: object
-          properties:
-            travellers:
-              description: List of travellers
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                required:
-                - name
-            checkInDate:
-              description: Pickup date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T15:00:00+00:00)
-              oneOf:
-              - type: string
-                format: date
-              - type: string
-                format: date-time
-            checkOutDate:
-              description: Return date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-22T11:00:00+00:00)
-              oneOf:
-              - type: string
-                format: date
-              - type: string
-                format: date-time
-            totalPrice:
-              description: Total price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
+          description: Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often in installments through providers like Klarna, Afterpay, etc.
+          example: BUY_NOW_PAY_LATER
+          allOf:
+          - $ref: '#/components/schemas/BuyNowPayLaterPaymentType'
+        institutionId:
+          description: Identifier of the BNPL provider used for the payment
+          type:
+          - string
+          - 'null'
+          examples:
+          - frasers_uk
+        institutionName:
+          description: Display name of the BNPL provider used for the payment
+          type:
+          - string
+          - 'null'
+          examples:
+          - Frasers
       required:
       - type
-      - data
+      - institutionId
+      - institutionName
     GetPaymentsListTransaction:
       type: object
       properties:
@@ -1182,86 +925,79 @@ components:
       - payerName
       - settlementReference
       - brandId
+    CashRewardPaymentFundingDetailsDto:
+      type: object
+      properties:
+        type:
+          description: Type identifier for cash reward payment funding details. Cash rewards payments use stored value from the customer's Super Payments account balance.
+          example: CASH_REWARD
+          allOf:
+          - $ref: '#/components/schemas/CashRewardPaymentType'
+      required:
+      - type
+    GetPaymentTransactionOutput:
+      type: object
+      properties:
+        transactionId:
+          description: Unique identifier for the payment transaction
+          type: string
+        transactionReference:
+          description: Reference code for the transaction
+          type: string
+        externalReference:
+          description: External Reference, usually the order identifier associated with the transaction
+          type:
+          - string
+          - 'null'
+        transactionStatus:
+          description: Current status of the payment transaction
+          allOf:
+          - $ref: '#/components/schemas/PaymentOutputStatus'
+        transactionAmount:
+          description: Amount of the transaction
+          type: number
+        metadata:
+          description: Additional metadata associated with the transaction
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        brandId:
+          description: Brand identifier associated with the transaction
+          type:
+          - string
+          - 'null'
+          format: uuid
+        fees:
+          description: Fees associated with the transaction
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentIntentFeeDto'
+        funding:
+          description: Funding sources for the transaction
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentFunding'
+      required:
+      - transactionId
+      - transactionReference
+      - transactionStatus
+      - transactionAmount
+      - metadata
+      - brandId
+      - fees
+      - funding
+    CardPaymentType:
+      description: Type of funding details - always "CARD" for card payments. Card payments include credit and debit card transactions processed through payment networks like Visa, Mastercard, etc.
+      type: string
+      const: CARD
     CashRewardPaymentType:
       description: Type identifier for cash reward payment funding details. Cash rewards payments use stored value from the customer's Super Payments account balance.
       type: string
       const: CASH_REWARD
-    PaymentFunding:
-      type: object
-      properties:
-        amount:
-          description: Amount of funds transferred with this funding source
-          example:
-            amount: '1000'
-            currency: GBP
-          allOf:
-          - $ref: '#/components/schemas/TransactionCurrencyAmount'
-        reference:
-          description: Reference identifier for the funding transaction
-          type:
-          - string
-          - 'null'
-          examples:
-          - INV-12345
-        institutionId:
-          description: 'Identifier of the financial institution used for the payment. Deprecated: use the institutionId field in the fundingDetails object instead.'
-          type:
-          - string
-          - 'null'
-          examples:
-          - uk_ob_aib
-          deprecated: true
-        institutionName:
-          description: 'Display name of the financial institution used for the payment. Deprecated: use the institutionName field in the fundingDetails object instead.'
-          type:
-          - string
-          - 'null'
-          examples:
-          - Allied Irish Bank
-          deprecated: true
-        dispute:
-          description: Information about an associated dispute, if any
-          allOf:
-          - $ref: '#/components/schemas/DisputeDto'
-        type:
-          description: Type of funding source used for the payment or refund
-          type: string
-          examples:
-          - CARD
-          enum:
-          - BNPL
-          - CARD
-          - CASH_REWARD
-          - OPEN_BANKING
-        fundingDetails:
-          description: Detailed metadata about the specific funding method used. The type field determines which schema to use.
-          discriminator:
-            propertyName: type
-            mapping:
-              CARD: '#/components/schemas/CardPaymentFundingDetailsDto'
-              OPEN_BANKING: '#/components/schemas/OpenBankingPaymentFundingDetailsDto'
-              CASH_REWARD: '#/components/schemas/CashRewardPaymentFundingDetailsDto'
-              BUY_NOW_PAY_LATER: '#/components/schemas/BuyNowPayLaterPaymentFundingDetailsDto'
-          oneOf:
-          - $ref: '#/components/schemas/CardPaymentFundingDetailsDto'
-            title: Card Payment
-          - $ref: '#/components/schemas/OpenBankingPaymentFundingDetailsDto'
-            title: Open Banking Payment
-          - $ref: '#/components/schemas/CashRewardPaymentFundingDetailsDto'
-            title: Cash Reward Payment
-          - $ref: '#/components/schemas/BuyNowPayLaterPaymentFundingDetailsDto'
-            title: Buy Now Pay Later Payment
-          - type: 'null'
-      required:
-      - amount
-      - reference
-      - institutionId
-      - institutionName
-      - type
-    OpenBankingPaymentType:
-      description: Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank account through secure bank APIs without using cards.
-      type: string
-      const: OPEN_BANKING
     CreateOffSessionPaymentIntentOutput:
       description: Off Session Payment Intent
       type: object
@@ -1293,376 +1029,10 @@ components:
       - status
       - offSession
       - paymentReference
-    CreatePaymentIntentInput:
-      discriminator:
-        propertyName: offSession
-        mapping:
-          'true': '#/components/schemas/CreateOffSessionPaymentIntentInput'
-          'false': '#/components/schemas/CreateOnSessionPaymentIntentInput'
-      oneOf:
-      - $ref: '#/components/schemas/CreateOffSessionPaymentIntentInput'
-      - $ref: '#/components/schemas/CreateOnSessionPaymentIntentInput'
-    ThreeDSDto:
-      type: object
-      properties:
-        status:
-          description: Status of 3DS authentication (e.g., authenticated, attempted, failed)
-          type:
-          - string
-          - 'null'
-        version:
-          description: Version of 3DS used for authentication
-          type:
-          - string
-          - 'null'
-        authentication_flow:
-          description: Authentication flow (e.g., challenge, frictionless)
-          type:
-          - string
-          - 'null'
-        electronic_commerce_indicator:
-          description: Electronic commerce indicator
-          type:
-          - string
-          - 'null'
-        exemption_indicator:
-          description: Exemption indicator
-          type:
-          - string
-          - 'null'
-        result:
-          description: Authentication result
-          type:
-          - string
-          - 'null'
-        result_reason:
-          description: Reason for the authentication result
-          type:
-          - string
-          - 'null'
-        transaction_id:
-          description: Transaction ID for the 3DS authentication
-          type:
-          - string
-          - 'null'
-      required:
-      - status
-      - version
-      - authentication_flow
-      - electronic_commerce_indicator
-      - exemption_indicator
-      - result
-      - result_reason
-      - transaction_id
-    PaymentIntentProductDto:
-      description: Product line item with type and data fields
-      type: object
-      properties:
-        type:
-          description: The line item type
-          type: string
-          const: PRODUCT
-        data:
-          description: Product line item data
-          type: object
-          properties:
-            productDescription:
-              description: Description of the product
-              type: string
-            sku:
-              description: Stock Keeping Unit (SKU) identifier for the product
-              type: string
-            quantity:
-              description: Quantity of the product
-              type: number
-              minimum: 1
-            unitPrice:
-              description: Unit price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
-            expectedDeliveryDate:
-              description: When delivery is expected to take place, either as a date (YYYY-MM-DD) or datetime with timezone
-              oneOf:
-              - type: string
-                format: date
-              - type: string
-                format: date-time
-              - type: 'null'
-      required:
-      - type
-      - data
-    GetPaymentsListOutput:
-      type: object
-      properties:
-        pageSize:
-          description: Number of items per page
-          type: number
-        nextPage:
-          description: Token for the next page of results.
-          type:
-          - string
-          - 'null'
-        hasNext:
-          description: Whether there are more pages of results
-          type: boolean
-        items:
-          description: List of payment transactions
-          type: array
-          items:
-            $ref: '#/components/schemas/GetPaymentsListTransaction'
-      required:
-      - pageSize
-      - nextPage
-      - hasNext
-      - items
-    PaymentIntentFeeDto:
-      type: object
-      properties:
-        currency:
-          description: The currency of the fee
-          type: string
-        feeCode:
-          description: The fee code
-          type: string
-        feeAmountInMinorUnits:
-          description: The calculated fee amount before VAT. Calculated as (fixedAmountInEffectInMinorUnits + rateInEffect * chargeableAmountInMinorUnits)
-          type: number
-        chargeableAmountInMinorUnits:
-          description: the amount from which the fee amount was calculated eg. the payment amount for an AMEX transaction.
-          type: number
-        fixedAmountInEffectInMinorUnits:
-          description: A fixed charge applied for the fee code
-          type: number
-        vatAmountInMinorUnits:
-          description: The VAT amount calculated from the feeAmountInMinorUnits
-          type:
-          - number
-          - 'null'
-        vatRateInEffect:
-          description: The VAT rate e.g. for 20% the rateInEffect is "20.0000"
-          type:
-          - number
-          - 'null'
-        rateInEffect:
-          description: The rate used to calculate the variable portion of the fee from the chargeableAmountInMinorUnits eg. for 2.49% the rateInEffect is "2.4900"
-          type: number
-        totalFeeAmountInclVatInMinorUnits:
-          description: The total fee amount including VAT
-          type: number
-      required:
-      - currency
-      - feeCode
-      - feeAmountInMinorUnits
-      - chargeableAmountInMinorUnits
-      - fixedAmountInEffectInMinorUnits
-      - vatAmountInMinorUnits
-      - vatRateInEffect
-      - rateInEffect
-      - totalFeeAmountInclVatInMinorUnits
-    BuyNowPayLaterPaymentType:
-      description: Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often in installments through providers like Klarna, Afterpay, etc.
+    OpenBankingPaymentType:
+      description: Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank account through secure bank APIs without using cards.
       type: string
-      const: BUY_NOW_PAY_LATER
-    CreateOffSessionPaymentIntentInput:
-      type: object
-      properties:
-        externalReference:
-          description: External reference for the payment
-          type: string
-          examples:
-          - order-12345
-          maxLength: 255
-        amount:
-          description: Amount in minor units (pence for GBP)
-          type: integer
-          examples:
-          - 1234
-          maximum: 9999999
-          minimum: 1
-        currency:
-          description: Currency code
-          type: string
-          examples:
-          - GBP
-          const: GBP
-        metadata:
-          description: Additional metadata for the payment
-          type: object
-          examples:
-          - customerId: customer-123
-            orderId: '12345'
-          additionalProperties:
-            type: string
-        paymentInitiatorId:
-          description: The payment initiator ID (integration ID) to use for this payment
-          type: string
-          format: uuid
-          examples:
-          - 123e4567-e89b-12d3-a456-426614174000
-        offSession:
-          description: Whether or not the payment is an 'off session' payment. An off session payment is when the customer Payment Method is charged separately from collecting their Payment Method (e.g. card details).
-          type: boolean
-          examples:
-          - true
-          const: true
-        shippingAddress:
-          description: The shipping address
-          allOf:
-          - $ref: '#/components/schemas/PaymentIntentAddressDto'
-        billingAddress:
-          description: The billing address
-          allOf:
-          - $ref: '#/components/schemas/PaymentIntentAddressDto'
-        lineItems:
-          description: Array of line items, each being either airline, car rental, lodging, or product data
-          type:
-          - array
-          - 'null'
-          items:
-            discriminator:
-              propertyName: type
-              mapping:
-                AIRLINE: '#/components/schemas/PaymentIntentAirlineDto'
-                CAR_RENTAL: '#/components/schemas/PaymentIntentCarRentalDto'
-                LODGING: '#/components/schemas/PaymentIntentLodgingDto'
-                PRODUCT: '#/components/schemas/PaymentIntentProductDto'
-            oneOf:
-            - $ref: '#/components/schemas/PaymentIntentAirlineDto'
-            - $ref: '#/components/schemas/PaymentIntentCarRentalDto'
-            - $ref: '#/components/schemas/PaymentIntentLodgingDto'
-            - $ref: '#/components/schemas/PaymentIntentProductDto'
-        paymentMethodId:
-          description: The payment method ID to charge for this payment.
-          type: string
-          examples:
-          - pm_01kaxxrevce8dt6vp581rhnznr
-      required:
-      - amount
-      - currency
-      - paymentInitiatorId
-      - offSession
-      - paymentMethodId
-    TransactionCurrencyAmount:
-      type: object
-      properties:
-        amount:
-          description: Integer after multiplying the value with amountMultiplier
-          type: number
-          examples:
-          - 10000
-        amountMultiplier:
-          description: Divide amount with amountMultiplier to get the decimal value
-          type: number
-          examples:
-          - 100
-        currency:
-          type: string
-          const: GBP
-      required:
-      - amount
-      - amountMultiplier
-      - currency
-    AddressDto:
-      type: object
-      properties:
-        city:
-          description: City of the billing address
-          type:
-          - string
-          - 'null'
-        line1:
-          description: First line of the billing address
-          type:
-          - string
-          - 'null'
-        line2:
-          description: Second line of the billing address
-          type:
-          - string
-          - 'null'
-        postalCode:
-          description: Postal or ZIP code
-          type:
-          - string
-          - 'null'
-        state:
-          description: State, county, province, or region
-          type:
-          - string
-          - 'null'
-        country:
-          description: Two-letter country code (ISO 3166-1 alpha-2)
-          type:
-          - string
-          - 'null'
-      required:
-      - city
-      - line1
-      - line2
-      - postalCode
-      - state
-      - country
-    BuyNowPayLaterPaymentFundingDetailsDto:
-      type: object
-      properties:
-        type:
-          description: Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often in installments through providers like Klarna, Afterpay, etc.
-          example: BUY_NOW_PAY_LATER
-          allOf:
-          - $ref: '#/components/schemas/BuyNowPayLaterPaymentType'
-        institutionId:
-          description: Identifier of the BNPL provider used for the payment
-          type:
-          - string
-          - 'null'
-          examples:
-          - frasers_uk
-        institutionName:
-          description: Display name of the BNPL provider used for the payment
-          type:
-          - string
-          - 'null'
-          examples:
-          - Frasers
-      required:
-      - type
-      - institutionId
-      - institutionName
-    CreateOnSessionPaymentIntentOutput:
-      description: On Session Payment Intent
-      type: object
-      properties:
-        id:
-          type: string
-        paymentInitiatorId:
-          type: string
-        brandId:
-          type: string
-        externalReference:
-          type: string
-        status:
-          type: string
-          enum:
-          - PaymentAbandoned
-          - PaymentFailed
-          - PaymentPending
-          - PaymentSuccess
-        offSession:
-          type: boolean
-          const: false
-        redirectUrl:
-          type: string
-      required:
-      - id
-      - paymentInitiatorId
-      - brandId
-      - status
-      - offSession
-      - redirectUrl
+      const: OPEN_BANKING
     CardPaymentFundingDetailsDto:
       type: object
       properties:
@@ -1796,6 +1166,373 @@ components:
       - walletType
       - walletLast4
       - providerData
+    AddressDto:
+      type: object
+      properties:
+        city:
+          description: City of the billing address
+          type:
+          - string
+          - 'null'
+        line1:
+          description: First line of the billing address
+          type:
+          - string
+          - 'null'
+        line2:
+          description: Second line of the billing address
+          type:
+          - string
+          - 'null'
+        postalCode:
+          description: Postal or ZIP code
+          type:
+          - string
+          - 'null'
+        state:
+          description: State, county, province, or region
+          type:
+          - string
+          - 'null'
+        country:
+          description: Two-letter country code (ISO 3166-1 alpha-2)
+          type:
+          - string
+          - 'null'
+      required:
+      - city
+      - line1
+      - line2
+      - postalCode
+      - state
+      - country
+    GetPaymentsListOutput:
+      type: object
+      properties:
+        pageSize:
+          description: Number of items per page
+          type: number
+        nextPage:
+          description: Token for the next page of results.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results
+          type: boolean
+        items:
+          description: List of payment transactions
+          type: array
+          items:
+            $ref: '#/components/schemas/GetPaymentsListTransaction'
+      required:
+      - pageSize
+      - nextPage
+      - hasNext
+      - items
+    BuyNowPayLaterPaymentType:
+      description: Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often in installments through providers like Klarna, Afterpay, etc.
+      type: string
+      const: BUY_NOW_PAY_LATER
+    PaymentIntentCarRentalDto:
+      description: Car rental line item with type and data fields
+      type: object
+      properties:
+        type:
+          description: The line item type
+          type: string
+          const: CAR_RENTAL
+        data:
+          description: Car rental reservation data
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Pickup date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+            checkOutDate:
+              description: Return date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    PaymentIntentFeeDto:
+      type: object
+      properties:
+        currency:
+          description: The currency of the fee
+          type: string
+        feeCode:
+          description: The fee code
+          type: string
+        feeAmountInMinorUnits:
+          description: The calculated fee amount before VAT. Calculated as (fixedAmountInEffectInMinorUnits + rateInEffect * chargeableAmountInMinorUnits)
+          type: number
+        chargeableAmountInMinorUnits:
+          description: the amount from which the fee amount was calculated eg. the payment amount for an AMEX transaction.
+          type: number
+        fixedAmountInEffectInMinorUnits:
+          description: A fixed charge applied for the fee code
+          type: number
+        vatAmountInMinorUnits:
+          description: The VAT amount calculated from the feeAmountInMinorUnits
+          type:
+          - number
+          - 'null'
+        vatRateInEffect:
+          description: The VAT rate e.g. for 20% the rateInEffect is "20.0000"
+          type:
+          - number
+          - 'null'
+        rateInEffect:
+          description: The rate used to calculate the variable portion of the fee from the chargeableAmountInMinorUnits eg. for 2.49% the rateInEffect is "2.4900"
+          type: number
+        totalFeeAmountInclVatInMinorUnits:
+          description: The total fee amount including VAT
+          type: number
+      required:
+      - currency
+      - feeCode
+      - feeAmountInMinorUnits
+      - chargeableAmountInMinorUnits
+      - fixedAmountInEffectInMinorUnits
+      - vatAmountInMinorUnits
+      - vatRateInEffect
+      - rateInEffect
+      - totalFeeAmountInclVatInMinorUnits
+    ThreeDSDto:
+      type: object
+      properties:
+        status:
+          description: Status of 3DS authentication (e.g., authenticated, attempted, failed)
+          type:
+          - string
+          - 'null'
+        version:
+          description: Version of 3DS used for authentication
+          type:
+          - string
+          - 'null'
+        authentication_flow:
+          description: Authentication flow (e.g., challenge, frictionless)
+          type:
+          - string
+          - 'null'
+        electronic_commerce_indicator:
+          description: Electronic commerce indicator
+          type:
+          - string
+          - 'null'
+        exemption_indicator:
+          description: Exemption indicator
+          type:
+          - string
+          - 'null'
+        result:
+          description: Authentication result
+          type:
+          - string
+          - 'null'
+        result_reason:
+          description: Reason for the authentication result
+          type:
+          - string
+          - 'null'
+        transaction_id:
+          description: Transaction ID for the 3DS authentication
+          type:
+          - string
+          - 'null'
+      required:
+      - status
+      - version
+      - authentication_flow
+      - electronic_commerce_indicator
+      - exemption_indicator
+      - result
+      - result_reason
+      - transaction_id
+    PaymentIntentProductDto:
+      description: Product line item with type and data fields
+      type: object
+      properties:
+        type:
+          description: The line item type
+          type: string
+          const: PRODUCT
+        data:
+          description: Product line item data
+          type: object
+          properties:
+            productDescription:
+              description: Description of the product
+              type: string
+            sku:
+              description: Stock Keeping Unit (SKU) identifier for the product
+              type: string
+            quantity:
+              description: Quantity of the product
+              type: number
+              minimum: 1
+            unitPrice:
+              description: Unit price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+            expectedDeliveryDate:
+              description: When delivery is expected to take place, either as a date (YYYY-MM-DD) or datetime with timezone
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+              - type: 'null'
+      required:
+      - type
+      - data
+    PaymentIntentAirlineDto:
+      description: Airline line item with type and data fields
+      type: object
+      properties:
+        type:
+          description: The line item type
+          type: string
+          const: AIRLINE
+        data:
+          description: Airline data for enhanced scheme data
+          type: object
+          properties:
+            flightNumber:
+              description: The flight identifier
+              type: string
+            flightDate:
+              description: Date of the flight, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T10:30:00+00:00)
+              oneOf:
+              - type: string
+                format: date
+              - type: string
+                format: date-time
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    PaymentFunding:
+      type: object
+      properties:
+        amount:
+          description: Amount of funds transferred with this funding source
+          example:
+            amount: '1000'
+            currency: GBP
+          allOf:
+          - $ref: '#/components/schemas/TransactionCurrencyAmount'
+        reference:
+          description: Reference identifier for the funding transaction
+          type:
+          - string
+          - 'null'
+          examples:
+          - INV-12345
+        institutionId:
+          description: 'Identifier of the financial institution used for the payment. Deprecated: use the institutionId field in the fundingDetails object instead.'
+          type:
+          - string
+          - 'null'
+          examples:
+          - uk_ob_aib
+          deprecated: true
+        institutionName:
+          description: 'Display name of the financial institution used for the payment. Deprecated: use the institutionName field in the fundingDetails object instead.'
+          type:
+          - string
+          - 'null'
+          examples:
+          - Allied Irish Bank
+          deprecated: true
+        dispute:
+          description: Information about an associated dispute, if any
+          allOf:
+          - $ref: '#/components/schemas/DisputeDto'
+        type:
+          description: Type of funding source used for the payment or refund
+          type: string
+          examples:
+          - CARD
+          enum:
+          - BNPL
+          - CARD
+          - CASH_REWARD
+          - OPEN_BANKING
+        fundingDetails:
+          description: Detailed metadata about the specific funding method used. The type field determines which schema to use.
+          discriminator:
+            propertyName: type
+            mapping:
+              CARD: '#/components/schemas/CardPaymentFundingDetailsDto'
+              OPEN_BANKING: '#/components/schemas/OpenBankingPaymentFundingDetailsDto'
+              CASH_REWARD: '#/components/schemas/CashRewardPaymentFundingDetailsDto'
+              BUY_NOW_PAY_LATER: '#/components/schemas/BuyNowPayLaterPaymentFundingDetailsDto'
+          oneOf:
+          - $ref: '#/components/schemas/CardPaymentFundingDetailsDto'
+            title: Card Payment
+          - $ref: '#/components/schemas/OpenBankingPaymentFundingDetailsDto'
+            title: Open Banking Payment
+          - $ref: '#/components/schemas/CashRewardPaymentFundingDetailsDto'
+            title: Cash Reward Payment
+          - $ref: '#/components/schemas/BuyNowPayLaterPaymentFundingDetailsDto'
+            title: Buy Now Pay Later Payment
+          - type: 'null'
+      required:
+      - amount
+      - reference
+      - institutionId
+      - institutionName
+      - type
     PaymentIntentLodgingDto:
       description: Lodging line item with type and data fields
       type: object
@@ -1843,6 +1580,269 @@ components:
       required:
       - type
       - data
+    CreatePaymentIntentInput:
+      discriminator:
+        propertyName: offSession
+        mapping:
+          'true': '#/components/schemas/CreateOffSessionPaymentIntentInput'
+          'false': '#/components/schemas/CreateOnSessionPaymentIntentInput'
+      oneOf:
+      - $ref: '#/components/schemas/CreateOffSessionPaymentIntentInput'
+      - $ref: '#/components/schemas/CreateOnSessionPaymentIntentInput'
+    CreateOnSessionPaymentIntentInput:
+      type: object
+      properties:
+        externalReference:
+          description: External reference for the payment
+          type: string
+          examples:
+          - order-12345
+          maxLength: 255
+        amount:
+          description: Amount in minor units (pence for GBP)
+          type: integer
+          examples:
+          - 1234
+          maximum: 9999999
+          minimum: 1
+        currency:
+          description: Currency code
+          type: string
+          examples:
+          - GBP
+          const: GBP
+        metadata:
+          description: Additional metadata for the payment
+          type: object
+          examples:
+          - customerId: customer-123
+            orderId: '12345'
+          additionalProperties:
+            type: string
+        successUrl:
+          description: URL to redirect to on successful payment
+          type: string
+          examples:
+          - https://example.com/success
+          pattern: ^https?:\/\/.+$
+        failureUrl:
+          description: URL to redirect to on failed payment
+          type: string
+          examples:
+          - https://example.com/failure
+          pattern: ^https?:\/\/.+$
+        cancelUrl:
+          description: URL to redirect to on cancelled payment
+          type: string
+          examples:
+          - https://example.com/cancel
+          pattern: ^https?:\/\/.+$
+        brandId:
+          description: Brand ID to use for this payment
+          type: string
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        paymentInitiatorId:
+          description: The payment initiator ID (integration ID) to use for this payment
+          type: string
+          format: uuid
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        offSession:
+          description: Whether or not the payment is an 'off session' payment. An off session payment is when the customer Payment Method is charged separately from collecting their Payment Method (e.g. card details).
+          type: boolean
+          examples:
+          - false
+          const: false
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/PaymentIntentAddressDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/PaymentIntentAddressDto'
+        lineItems:
+          description: Array of line items, each being either airline, car rental, lodging, or product data
+          type:
+          - array
+          - 'null'
+          items:
+            discriminator:
+              propertyName: type
+              mapping:
+                AIRLINE: '#/components/schemas/PaymentIntentAirlineDto'
+                CAR_RENTAL: '#/components/schemas/PaymentIntentCarRentalDto'
+                LODGING: '#/components/schemas/PaymentIntentLodgingDto'
+                PRODUCT: '#/components/schemas/PaymentIntentProductDto'
+            oneOf:
+            - $ref: '#/components/schemas/PaymentIntentAirlineDto'
+            - $ref: '#/components/schemas/PaymentIntentCarRentalDto'
+            - $ref: '#/components/schemas/PaymentIntentLodgingDto'
+            - $ref: '#/components/schemas/PaymentIntentProductDto'
+        rewardCalculationId:
+          description: Reward calculation ID
+          type: string
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        paymentMethodId: {}
+        customer:
+          description: '**Warning: This feature is not yet implemented.** To save this payment method for later use, use the customer ID from a previous call to /customers'
+          type:
+          - object
+          - 'null'
+          properties:
+            id:
+              description: The customer ID (cus_...) to assign the payment method to
+              type: string
+              examples:
+              - cus_01kaxxrevce8dt6vp581rhnznx
+            savePaymentMethod:
+              description: Save the payment method for later off-session payments
+              type:
+              - boolean
+              - 'null'
+              default: false
+            paymentMethodMetadata:
+              description: 'Additional metadata for the payment method (only for savePaymentMethod: true)'
+              type:
+              - object
+              - 'null'
+              examples:
+              - mySubscriptionId: sub-123
+              additionalProperties:
+                type: string
+          required:
+          - id
+      required:
+      - amount
+      - currency
+      - paymentInitiatorId
+    TransactionCurrencyAmount:
+      type: object
+      properties:
+        amount:
+          description: Integer after multiplying the value with amountMultiplier
+          type: number
+          examples:
+          - 10000
+        amountMultiplier:
+          description: Divide amount with amountMultiplier to get the decimal value
+          type: number
+          examples:
+          - 100
+        currency:
+          type: string
+          const: GBP
+      required:
+      - amount
+      - amountMultiplier
+      - currency
+    CreateOffSessionPaymentIntentInput:
+      type: object
+      properties:
+        externalReference:
+          description: External reference for the payment
+          type: string
+          examples:
+          - order-12345
+          maxLength: 255
+        amount:
+          description: Amount in minor units (pence for GBP)
+          type: integer
+          examples:
+          - 1234
+          maximum: 9999999
+          minimum: 1
+        currency:
+          description: Currency code
+          type: string
+          examples:
+          - GBP
+          const: GBP
+        metadata:
+          description: Additional metadata for the payment
+          type: object
+          examples:
+          - customerId: customer-123
+            orderId: '12345'
+          additionalProperties:
+            type: string
+        paymentInitiatorId:
+          description: The payment initiator ID (integration ID) to use for this payment
+          type: string
+          format: uuid
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        offSession:
+          description: Whether or not the payment is an 'off session' payment. An off session payment is when the customer Payment Method is charged separately from collecting their Payment Method (e.g. card details).
+          type: boolean
+          examples:
+          - true
+          const: true
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/PaymentIntentAddressDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/PaymentIntentAddressDto'
+        lineItems:
+          description: Array of line items, each being either airline, car rental, lodging, or product data
+          type:
+          - array
+          - 'null'
+          items:
+            discriminator:
+              propertyName: type
+              mapping:
+                AIRLINE: '#/components/schemas/PaymentIntentAirlineDto'
+                CAR_RENTAL: '#/components/schemas/PaymentIntentCarRentalDto'
+                LODGING: '#/components/schemas/PaymentIntentLodgingDto'
+                PRODUCT: '#/components/schemas/PaymentIntentProductDto'
+            oneOf:
+            - $ref: '#/components/schemas/PaymentIntentAirlineDto'
+            - $ref: '#/components/schemas/PaymentIntentCarRentalDto'
+            - $ref: '#/components/schemas/PaymentIntentLodgingDto'
+            - $ref: '#/components/schemas/PaymentIntentProductDto'
+        paymentMethodId:
+          description: The payment method ID to charge for this payment.
+          type: string
+          examples:
+          - pm_01kaxxrevce8dt6vp581rhnznr
+      required:
+      - amount
+      - currency
+      - paymentInitiatorId
+      - offSession
+      - paymentMethodId
+    OpenBankingPaymentFundingDetailsDto:
+      type: object
+      properties:
+        type:
+          description: Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank account through secure bank APIs without using cards.
+          example: OPEN_BANKING
+          allOf:
+          - $ref: '#/components/schemas/OpenBankingPaymentType'
+        institutionId:
+          description: Identifier of the financial institution used for the open banking payment
+          type:
+          - string
+          - 'null'
+          examples:
+          - barclays_uk
+        institutionName:
+          description: Display name of the financial institution used for the open banking payment
+          type:
+          - string
+          - 'null'
+          examples:
+          - Barclays Bank
+      required:
+      - type
+      - institutionId
+      - institutionName
   securitySchemes:
     api_key:
       type: apiKey

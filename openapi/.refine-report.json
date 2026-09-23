@@ -22,7 +22,8 @@
     "super-payments-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "super-payments-openapi.yml: declared missing tag: Customer",
     "super-payments-openapi.yml: declared missing tag: Payment Methods",
-    "super-payments-openapi.yml: declared missing tag: Webhooks"
+    "super-payments-openapi.yml: declared missing tag: Webhooks",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "super-payments-checkout-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -32,6 +33,7 @@
     "super-payments-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "super-payments-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "super-payments-rewards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "super-payments-settlements-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "super-payments-settlements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "super-payments-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

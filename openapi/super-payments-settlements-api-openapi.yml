@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Super Payments Settlements API
-  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super. By rewarding customers in this way, they shop more often and buy more with a business. In addition, Cash Rewards boost customer loyalty and retention, with better conversion rates at typically higher average order values. Cash Rewards also increase adoption of Super Payments as the checkout method, meaning more free payments for your business.
+  description: Super Payments is empowering businesses with free payments, allowing them to offer customers a % Cash Reward, which is automatically deducted from their next purchase when they pay with Super.
   version: '2026-04-01'
   contact:
     url: https://docs.superpayments.com
@@ -221,22 +221,6 @@ paths:
       - Settlements
 components:
   schemas:
-    SettlementStatus:
-      description: Current status of the settlement batch.
-      type: string
-      enum:
-      - CREATED
-      - ERRORED
-      - SETTLED
-      - SETTLED_AFTER_RETRY
-    SettlementPaymentStatus:
-      description: Status of an individual payment included in a settlement.
-      type: string
-      enum:
-      - CREATED
-      - FAILED
-      - PENDING
-      - SETTLED
     SettlementListResponse:
       type: object
       properties:
@@ -260,19 +244,27 @@ components:
       - pageSize
       - hasNext
       - items
-    SettlementListItem:
+    SettlementStatus:
+      description: Current status of the settlement batch.
+      type: string
+      enum:
+      - CREATED
+      - ERRORED
+      - SETTLED
+      - SETTLED_AFTER_RETRY
+    SettlementDetailResponse:
       type: object
       properties:
         settlementId:
           description: Unique identifier for the settlement.
           type: string
         settlementReference:
-          description: Settlement reference supplied by the merchant, when available.
+          description: External reference for the settlement, if provided.
           type:
           - string
           - 'null'
-        settledAt:
-          description: ISO timestamp when the settlement was completed.
+        settlementTs:
+          description: ISO timestamp when the settlement was processed. Same timestamp as settledAt in list responses.
           type:
           - string
           - 'null'
@@ -287,6 +279,14 @@ components:
         currency:
           description: Currency code.
           type: string
+        payments:
+          description: List of payments included in this settlement.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementPayment'
+        settlementStatistics:
+          description: Statistical information for the settlement.
+          $ref: '#/components/schemas/SettlementStatistics'
         createdAt:
           description: ISO timestamp when the settlement row was created.
           type: string
@@ -294,34 +294,67 @@ components:
       required:
       - settlementId
       - settlementReference
-      - settledAt
+      - settlementTs
       - status
       - minorUnitAmount
       - currency
+      - payments
+      - settlementStatistics
       - createdAt
-    SettlementReconciliationResponse:
+    ProblemDetails:
       type: object
       properties:
-        pageSize:
-          description: Number of reconciliation rows per page.
+        status:
+          description: The HTTP status code.
           type: integer
-        nextPage:
-          description: Opaque cursor returned by previous responses.
-          type:
-          - string
-          - 'null'
-        hasNext:
-          description: Whether there are more pages of results.
-          type: boolean
-        items:
-          description: Reconciliation items for the settlement.
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementReconciliationItem'
+          examples:
+          - 400
+        type:
+          description: A URI reference that identifies the problem type.
+          type: string
+          examples:
+          - https://api.superpayments.com/errors/request_validation_error
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+          examples:
+          - Bad Request
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - Request validation failed
+        instance:
+          description: A unique identifier for the error.
+          type: string
+          examples:
+          - '4186980260999334757'
+    SettlementPaymentStatus:
+      description: Status of an individual payment included in a settlement.
+      type: string
+      enum:
+      - CREATED
+      - FAILED
+      - PENDING
+      - SETTLED
+    SettlementStatistics:
+      type: object
+      properties:
+        openingBalanceAmount:
+          description: Opening balance as an integer. Interpret using amountScale.
+          type: integer
+        reservedFeesAmount:
+          description: Reserved fees amount as an integer. Interpret using amountScale.
+          type: integer
+        amountScale:
+          description: Scale (number of decimal places) shared by the statistics amounts.
+          type: integer
+          examples:
+          - 2
       required:
-      - pageSize
-      - hasNext
-      - items
+      - openingBalanceAmount
+      - reservedFeesAmount
+      - amountScale
     SettlementReconciliationItem:
       type: object
       properties:
@@ -412,34 +445,6 @@ components:
       - amountScale
       - currency
       - isCredit
-    ProblemDetails:
-      type: object
-      properties:
-        status:
-          description: The HTTP status code.
-          type: integer
-          examples:
-          - 400
-        type:
-          description: A URI reference that identifies the problem type.
-          type: string
-          examples:
-          - https://api.superpayments.com/errors/request_validation_error
-        title:
-          description: A short, human-readable summary of the problem type.
-          type: string
-          examples:
-          - Bad Request
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.
-          type: string
-          examples:
-          - Request validation failed
-        instance:
-          description: A unique identifier for the error.
-          type: string
-          examples:
-          - '4186980260999334757'
     SettlementPayment:
       type: object
       properties:
@@ -461,37 +466,19 @@ components:
       - status
       - minorUnitAmount
       - currency
-    SettlementStatistics:
-      type: object
-      properties:
-        openingBalanceAmount:
-          description: Opening balance as an integer. Interpret using amountScale.
-          type: integer
-        reservedFeesAmount:
-          description: Reserved fees amount as an integer. Interpret using amountScale.
-          type: integer
-        amountScale:
-          description: Scale (number of decimal places) shared by the statistics amounts.
-          type: integer
-          examples:
-          - 2
-      required:
-      - openingBalanceAmount
-      - reservedFeesAmount
-      - amountScale
-    SettlementDetailResponse:
+    SettlementListItem:
       type: object
       properties:
         settlementId:
           description: Unique identifier for the settlement.
           type: string
         settlementReference:
-          description: External reference for the settlement, if provided.
+          description: Settlement reference supplied by the merchant, when available.
           type:
           - string
           - 'null'
-        settlementTs:
-          description: ISO timestamp when the settlement was processed. Same timestamp as settledAt in list responses.
+        settledAt:
+          description: ISO timestamp when the settlement was completed.
           type:
           - string
           - 'null'
@@ -506,14 +493,6 @@ components:
         currency:
           description: Currency code.
           type: string
-        payments:
-          description: List of payments included in this settlement.
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementPayment'
-        settlementStatistics:
-          description: Statistical information for the settlement.
-          $ref: '#/components/schemas/SettlementStatistics'
         createdAt:
           description: ISO timestamp when the settlement row was created.
           type: string
@@ -521,13 +500,34 @@ components:
       required:
       - settlementId
       - settlementReference
-      - settlementTs
+      - settledAt
       - status
       - minorUnitAmount
       - currency
-      - payments
-      - settlementStatistics
       - createdAt
+    SettlementReconciliationResponse:
+      type: object
+      properties:
+        pageSize:
+          description: Number of reconciliation rows per page.
+          type: integer
+        nextPage:
+          description: Opaque cursor returned by previous responses.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results.
+          type: boolean
+        items:
+          description: Reconciliation items for the settlement.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementReconciliationItem'
+      required:
+      - pageSize
+      - hasNext
+      - items
   securitySchemes:
     api_key:
       type: apiKey
