@@ -221,37 +221,6 @@ paths:
       - Settlements
 components:
   schemas:
-    SettlementListResponse:
-      type: object
-      properties:
-        pageSize:
-          description: Number of items per page.
-          type: integer
-        nextPage:
-          description: Token for the next page of results.
-          type:
-          - string
-          - 'null'
-        hasNext:
-          description: Whether there are more pages of results.
-          type: boolean
-        items:
-          description: List of settlements.
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementListItem'
-      required:
-      - pageSize
-      - hasNext
-      - items
-    SettlementStatus:
-      description: Current status of the settlement batch.
-      type: string
-      enum:
-      - CREATED
-      - ERRORED
-      - SETTLED
-      - SETTLED_AFTER_RETRY
     SettlementDetailResponse:
       type: object
       properties:
@@ -301,6 +270,32 @@ components:
       - payments
       - settlementStatistics
       - createdAt
+    SettlementStatistics:
+      type: object
+      properties:
+        openingBalanceAmount:
+          description: Opening balance as an integer. Interpret using amountScale.
+          type: integer
+        reservedFeesAmount:
+          description: Reserved fees amount as an integer. Interpret using amountScale.
+          type: integer
+        amountScale:
+          description: Scale (number of decimal places) shared by the statistics amounts.
+          type: integer
+          examples:
+          - 2
+      required:
+      - openingBalanceAmount
+      - reservedFeesAmount
+      - amountScale
+    SettlementStatus:
+      description: Current status of the settlement batch.
+      type: string
+      enum:
+      - CREATED
+      - ERRORED
+      - SETTLED
+      - SETTLED_AFTER_RETRY
     ProblemDetails:
       type: object
       properties:
@@ -329,32 +324,112 @@ components:
           type: string
           examples:
           - '4186980260999334757'
-    SettlementPaymentStatus:
-      description: Status of an individual payment included in a settlement.
-      type: string
-      enum:
-      - CREATED
-      - FAILED
-      - PENDING
-      - SETTLED
-    SettlementStatistics:
+    SettlementListItem:
       type: object
       properties:
-        openingBalanceAmount:
-          description: Opening balance as an integer. Interpret using amountScale.
+        settlementId:
+          description: Unique identifier for the settlement.
+          type: string
+        settlementReference:
+          description: Settlement reference supplied by the merchant, when available.
+          type:
+          - string
+          - 'null'
+        settledAt:
+          description: ISO timestamp when the settlement was completed.
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          description: Current status of the settlement.
+          allOf:
+          - $ref: '#/components/schemas/SettlementStatus'
+        minorUnitAmount:
+          description: Amount in minor units (integer).
           type: integer
-        reservedFeesAmount:
-          description: Reserved fees amount as an integer. Interpret using amountScale.
-          type: integer
-        amountScale:
-          description: Scale (number of decimal places) shared by the statistics amounts.
-          type: integer
-          examples:
-          - 2
+        currency:
+          description: Currency code.
+          type: string
+        createdAt:
+          description: ISO timestamp when the settlement row was created.
+          type: string
+          format: date-time
       required:
-      - openingBalanceAmount
-      - reservedFeesAmount
-      - amountScale
+      - settlementId
+      - settlementReference
+      - settledAt
+      - status
+      - minorUnitAmount
+      - currency
+      - createdAt
+    SettlementReconciliationResponse:
+      type: object
+      properties:
+        pageSize:
+          description: Number of reconciliation rows per page.
+          type: integer
+        nextPage:
+          description: Opaque cursor returned by previous responses.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results.
+          type: boolean
+        items:
+          description: Reconciliation items for the settlement.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementReconciliationItem'
+      required:
+      - pageSize
+      - hasNext
+      - items
+    SettlementPayment:
+      type: object
+      properties:
+        paymentReference:
+          description: Reference for the payment or payout included in the settlement.
+          type: string
+        status:
+          description: Payment status within the settlement.
+          allOf:
+          - $ref: '#/components/schemas/SettlementPaymentStatus'
+        minorUnitAmount:
+          description: Amount in minor units (integer).
+          type: integer
+        currency:
+          description: Currency code for the payment.
+          type: string
+      required:
+      - paymentReference
+      - status
+      - minorUnitAmount
+      - currency
+    SettlementListResponse:
+      type: object
+      properties:
+        pageSize:
+          description: Number of items per page.
+          type: integer
+        nextPage:
+          description: Token for the next page of results.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results.
+          type: boolean
+        items:
+          description: List of settlements.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementListItem'
+      required:
+      - pageSize
+      - hasNext
+      - items
     SettlementReconciliationItem:
       type: object
       properties:
@@ -445,89 +520,14 @@ components:
       - amountScale
       - currency
       - isCredit
-    SettlementPayment:
-      type: object
-      properties:
-        paymentReference:
-          description: Reference for the payment or payout included in the settlement.
-          type: string
-        status:
-          description: Payment status within the settlement.
-          allOf:
-          - $ref: '#/components/schemas/SettlementPaymentStatus'
-        minorUnitAmount:
-          description: Amount in minor units (integer).
-          type: integer
-        currency:
-          description: Currency code for the payment.
-          type: string
-      required:
-      - paymentReference
-      - status
-      - minorUnitAmount
-      - currency
-    SettlementListItem:
-      type: object
-      properties:
-        settlementId:
-          description: Unique identifier for the settlement.
-          type: string
-        settlementReference:
-          description: Settlement reference supplied by the merchant, when available.
-          type:
-          - string
-          - 'null'
-        settledAt:
-          description: ISO timestamp when the settlement was completed.
-          type:
-          - string
-          - 'null'
-          format: date-time
-        status:
-          description: Current status of the settlement.
-          allOf:
-          - $ref: '#/components/schemas/SettlementStatus'
-        minorUnitAmount:
-          description: Amount in minor units (integer).
-          type: integer
-        currency:
-          description: Currency code.
-          type: string
-        createdAt:
-          description: ISO timestamp when the settlement row was created.
-          type: string
-          format: date-time
-      required:
-      - settlementId
-      - settlementReference
-      - settledAt
-      - status
-      - minorUnitAmount
-      - currency
-      - createdAt
-    SettlementReconciliationResponse:
-      type: object
-      properties:
-        pageSize:
-          description: Number of reconciliation rows per page.
-          type: integer
-        nextPage:
-          description: Opaque cursor returned by previous responses.
-          type:
-          - string
-          - 'null'
-        hasNext:
-          description: Whether there are more pages of results.
-          type: boolean
-        items:
-          description: Reconciliation items for the settlement.
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementReconciliationItem'
-      required:
-      - pageSize
-      - hasNext
-      - items
+    SettlementPaymentStatus:
+      description: Status of an individual payment included in a settlement.
+      type: string
+      enum:
+      - CREATED
+      - FAILED
+      - PENDING
+      - SETTLED
   securitySchemes:
     api_key:
       type: apiKey

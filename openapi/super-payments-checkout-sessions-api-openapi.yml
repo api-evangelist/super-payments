@@ -884,164 +884,20 @@ paths:
       - Checkout Sessions
 components:
   schemas:
-    CheckoutSessionAddressDto:
-      description: Address with all fields optional
-      type: object
-      properties:
-        addressLine1:
-          type:
-          - string
-          - 'null'
-          default: null
-        addressLine2:
-          type:
-          - string
-          - 'null'
-          default: null
-        addressLine3:
-          type:
-          - string
-          - 'null'
-          default: null
-        city:
-          type:
-          - string
-          - 'null'
-          default: null
-        country:
-          type:
-          - string
-          - 'null'
-          default: null
-        postCode:
-          type:
-          - string
-          - 'null'
-          default: null
-        firstName:
-          type:
-          - string
-          - 'null'
-          default: null
-        lastName:
-          type:
-          - string
-          - 'null'
-          default: null
-        phone:
-          type:
-          - string
-          - 'null'
-          default: null
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          default: null
-    GetCheckoutSessionResponseDto:
-      type: object
-      properties:
-        checkoutSessionId:
-          description: The unique identifier for the checkout session
-          type: string
-          format: uuid
-      required:
-      - checkoutSessionId
-    UpsertOrderDetailsRequestDto:
-      type: object
-      properties:
-        shippingAddress:
-          description: The shipping address
-          allOf:
-          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
-        billingAddress:
-          description: The billing address
-          allOf:
-          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
-        lineItems:
-          description: Array of line items, each being either airline, car rental, lodging, or product data
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/LineItemDto'
-    LodgingLineItemDto:
-      type: object
-      properties:
-        type:
-          type: string
-          const: LODGING
-        data:
-          type: object
-          properties:
-            travellers:
-              description: List of travellers
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                required:
-                - name
-            checkInDate:
-              description: Check-in date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
-              type: string
-              format: date-time
-            checkOutDate:
-              description: Check-out date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
-              type: string
-              format: date-time
-            totalPrice:
-              description: Total price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
-      required:
-      - type
-      - data
-    CarRentalLineItemDto:
-      type: object
-      properties:
-        type:
-          type: string
-          const: CAR_RENTAL
-        data:
-          type: object
-          properties:
-            travellers:
-              description: List of travellers
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                required:
-                - name
-            checkInDate:
-              description: Pickup date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
-              type: string
-              format: date-time
-            checkOutDate:
-              description: Return date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
-              type: string
-              format: date-time
-            totalPrice:
-              description: Total price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
-      required:
-      - type
-      - data
+    LineItemDto:
+      description: 'A line item, one of: airline, car rental, lodging, or product'
+      discriminator:
+        propertyName: type
+        mapping:
+          AIRLINE: '#/components/schemas/AirlineLineItemDto'
+          CAR_RENTAL: '#/components/schemas/CarRentalLineItemDto'
+          LODGING: '#/components/schemas/LodgingLineItemDto'
+          PRODUCT: '#/components/schemas/ProductLineItemDto'
+      oneOf:
+      - $ref: '#/components/schemas/AirlineLineItemDto'
+      - $ref: '#/components/schemas/CarRentalLineItemDto'
+      - $ref: '#/components/schemas/LodgingLineItemDto'
+      - $ref: '#/components/schemas/ProductLineItemDto'
     CheckoutSessionCustomerDto:
       description: To save this payment method for later use, use the customer ID from a previous call to /customers
       type: object
@@ -1063,40 +919,15 @@ components:
             type: string
       required:
       - id
-    ProceedPaymentViaCheckoutSessionResponseDto:
+    GetCheckoutSessionResponseDto:
       type: object
       properties:
         checkoutSessionId:
           description: The unique identifier for the checkout session
           type: string
           format: uuid
-        paymentIntentId:
-          description: The unique identifier for the payment intent
-          type: string
-          format: uuid
-        redirectUrl:
-          description: URL to redirect the user to the payment provider
-          type: string
-          format: uri
-        shippingAddress:
-          description: The shipping address
-          allOf:
-          - $ref: '#/components/schemas/CheckoutSessionAddressResponseDto'
-        billingAddress:
-          description: The billing address
-          allOf:
-          - $ref: '#/components/schemas/CheckoutSessionAddressResponseDto'
-        lineItems:
-          description: Line items provided
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/LineItemDto'
       required:
       - checkoutSessionId
-      - paymentIntentId
-      - redirectUrl
     ProceedPaymentViaCheckoutSessionRequestDto:
       type: object
       properties:
@@ -1158,6 +989,162 @@ components:
       - successUrl
       - failureUrl
       - cancelUrl
+    CheckoutSessionAddressDto:
+      description: Address with all fields optional
+      type: object
+      properties:
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          default: null
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          default: null
+        addressLine3:
+          type:
+          - string
+          - 'null'
+          default: null
+        city:
+          type:
+          - string
+          - 'null'
+          default: null
+        country:
+          type:
+          - string
+          - 'null'
+          default: null
+        postCode:
+          type:
+          - string
+          - 'null'
+          default: null
+        firstName:
+          type:
+          - string
+          - 'null'
+          default: null
+        lastName:
+          type:
+          - string
+          - 'null'
+          default: null
+        phone:
+          type:
+          - string
+          - 'null'
+          default: null
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          default: null
+    UpsertOrderDetailsRequestDto:
+      type: object
+      properties:
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
+        lineItems:
+          description: Array of line items, each being either airline, car rental, lodging, or product data
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LineItemDto'
+    LodgingLineItemDto:
+      type: object
+      properties:
+        type:
+          type: string
+          const: LODGING
+        data:
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Check-in date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              type: string
+              format: date-time
+            checkOutDate:
+              description: Check-out date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              type: string
+              format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    CheckoutSessionAddressResponseDto:
+      description: Address with all fields present but nullable
+      type: object
+      properties:
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        addressLine3:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        postCode:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
     CreateCheckoutSessionResponseDto:
       type: object
       properties:
@@ -1183,43 +1170,6 @@ components:
           - $ref: '#/components/schemas/CheckoutSessionCustomerDto'
       required:
       - paymentInitiatorId
-    AirlineLineItemDto:
-      type: object
-      properties:
-        type:
-          type: string
-          const: AIRLINE
-        data:
-          type: object
-          properties:
-            flightNumber:
-              description: The flight identifier
-              type: string
-            flightDate:
-              description: Date and time of the flight in ISO 8601 format with timezone (e.g., 2026-03-15T10:30:00+00:00)
-              type: string
-              format: date-time
-            travellers:
-              description: List of travellers
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                required:
-                - name
-            totalPrice:
-              description: Total price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
-      required:
-      - type
-      - data
     UpsertOrderDetailsResponseDto:
       type: object
       properties:
@@ -1279,65 +1229,115 @@ components:
       required:
       - type
       - data
-    CheckoutSessionAddressResponseDto:
-      description: Address with all fields present but nullable
+    AirlineLineItemDto:
       type: object
       properties:
-        addressLine1:
+        type:
+          type: string
+          const: AIRLINE
+        data:
+          type: object
+          properties:
+            flightNumber:
+              description: The flight identifier
+              type: string
+            flightDate:
+              description: Date and time of the flight in ISO 8601 format with timezone (e.g., 2026-03-15T10:30:00+00:00)
+              type: string
+              format: date-time
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    CarRentalLineItemDto:
+      type: object
+      properties:
+        type:
+          type: string
+          const: CAR_RENTAL
+        data:
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Pickup date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              type: string
+              format: date-time
+            checkOutDate:
+              description: Return date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              type: string
+              format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
+    ProceedPaymentViaCheckoutSessionResponseDto:
+      type: object
+      properties:
+        checkoutSessionId:
+          description: The unique identifier for the checkout session
+          type: string
+          format: uuid
+        paymentIntentId:
+          description: The unique identifier for the payment intent
+          type: string
+          format: uuid
+        redirectUrl:
+          description: URL to redirect the user to the payment provider
+          type: string
+          format: uri
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressResponseDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressResponseDto'
+        lineItems:
+          description: Line items provided
           type:
-          - string
+          - array
           - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        addressLine3:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-        postCode:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-    LineItemDto:
-      description: 'A line item, one of: airline, car rental, lodging, or product'
-      discriminator:
-        propertyName: type
-        mapping:
-          AIRLINE: '#/components/schemas/AirlineLineItemDto'
-          CAR_RENTAL: '#/components/schemas/CarRentalLineItemDto'
-          LODGING: '#/components/schemas/LodgingLineItemDto'
-          PRODUCT: '#/components/schemas/ProductLineItemDto'
-      oneOf:
-      - $ref: '#/components/schemas/AirlineLineItemDto'
-      - $ref: '#/components/schemas/CarRentalLineItemDto'
-      - $ref: '#/components/schemas/LodgingLineItemDto'
-      - $ref: '#/components/schemas/ProductLineItemDto'
+          items:
+            $ref: '#/components/schemas/LineItemDto'
+      required:
+      - checkoutSessionId
+      - paymentIntentId
+      - redirectUrl
   securitySchemes:
     api_key:
       type: apiKey

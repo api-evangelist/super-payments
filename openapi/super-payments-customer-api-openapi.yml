@@ -162,98 +162,6 @@ paths:
       - Customer
 components:
   schemas:
-    CustomerIdParam:
-      type: string
-    Customer20260401ResponseDto:
-      type: object
-      properties:
-        id: {}
-        externalReference:
-          type: string
-        paymentMethods:
-          type: array
-          items:
-            type: object
-            properties:
-              id: {}
-              type:
-                type: string
-                const: CARD
-                x-enumNames:
-                - CARD
-              usage:
-                type: string
-                const: OFF_SESSION
-                x-enumNames:
-                - OFF_SESSION
-              status:
-                type: string
-                enum:
-                - DISABLED
-                - ENABLED
-                - REQUIRES_ACTION
-                x-enumNames:
-                - DISABLED
-                - ENABLED
-                - REQUIRES_ACTION
-              metadata:
-                type:
-                - object
-                - 'null'
-                additionalProperties:
-                  type: string
-                  pattern: ^[^\r\n\t\b\f\v]+$
-                  maxLength: 200
-              createdAt: {}
-              updatedAt: {}
-            required:
-            - id
-            - type
-            - usage
-            - status
-            - metadata
-            - createdAt
-            - updatedAt
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-        brandId:
-          type: string
-          format: uuid
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        emailAddress:
-          type:
-          - string
-          - 'null'
-          format: email
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-        createdAt: {}
-        updatedAt: {}
-      required:
-      - id
-      - externalReference
-      - paymentMethods
-      - metadata
-      - brandId
-      - firstName
-      - lastName
-      - emailAddress
-      - phoneNumber
-      - createdAt
-      - updatedAt
     UpdateCustomer20260401RequestDto:
       type: object
       properties:
@@ -288,6 +196,49 @@ components:
           - 'null'
           maxLength: 20
           pattern: ^\+?[\d\s\-().]+$
+    CreateCustomer20260401RequestDto:
+      type: object
+      properties:
+        externalReference:
+          type: string
+          minLength: 1
+        brandId:
+          type: string
+          format: uuid
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        firstName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        lastName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          format: email
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+          pattern: ^\+?[\d\s\-().]+$
+      required:
+      - externalReference
+      - brandId
     PaginatedCustomer20260401ListResponse:
       type: object
       properties:
@@ -405,35 +356,75 @@ components:
       - pageInfo
       - totalCount
       - items
-    CreateCustomer20260401RequestDto:
+    CustomerIdParam:
+      type: string
+    Customer20260401ResponseDto:
       type: object
       properties:
+        id: {}
         externalReference:
           type: string
-          minLength: 1
-        brandId:
-          type: string
-          format: uuid
+        paymentMethods:
+          type: array
+          items:
+            type: object
+            properties:
+              id: {}
+              type:
+                type: string
+                const: CARD
+                x-enumNames:
+                - CARD
+              usage:
+                type: string
+                const: OFF_SESSION
+                x-enumNames:
+                - OFF_SESSION
+              status:
+                type: string
+                enum:
+                - DISABLED
+                - ENABLED
+                - REQUIRES_ACTION
+                x-enumNames:
+                - DISABLED
+                - ENABLED
+                - REQUIRES_ACTION
+              metadata:
+                type:
+                - object
+                - 'null'
+                additionalProperties:
+                  type: string
+                  pattern: ^[^\r\n\t\b\f\v]+$
+                  maxLength: 200
+              createdAt: {}
+              updatedAt: {}
+            required:
+            - id
+            - type
+            - usage
+            - status
+            - metadata
+            - createdAt
+            - updatedAt
         metadata:
           type:
           - object
           - 'null'
           additionalProperties:
             type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
+        brandId:
+          type: string
+          format: uuid
         firstName:
           type:
           - string
           - 'null'
-          maxLength: 255
-          minLength: 1
         lastName:
           type:
           - string
           - 'null'
-          maxLength: 255
-          minLength: 1
         emailAddress:
           type:
           - string
@@ -443,11 +434,20 @@ components:
           type:
           - string
           - 'null'
-          maxLength: 20
-          pattern: ^\+?[\d\s\-().]+$
+        createdAt: {}
+        updatedAt: {}
       required:
+      - id
       - externalReference
+      - paymentMethods
+      - metadata
       - brandId
+      - firstName
+      - lastName
+      - emailAddress
+      - phoneNumber
+      - createdAt
+      - updatedAt
   securitySchemes:
     api_key:
       type: apiKey
