@@ -1039,18 +1039,9 @@ paths:
       - Payment Links
 components:
   schemas:
-    LinkResponseDto:
+    LinkInputDto:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
         brandId:
           type: string
           format: uuid
@@ -1062,6 +1053,7 @@ components:
           type: number
         purpose:
           type: string
+          default: PURCHASE
           enum:
           - MERCHANT_TOPUP
           - PURCHASE
@@ -1070,6 +1062,21 @@ components:
           - string
           - 'null'
           format: date-time
+        successUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+        failureUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+        cancelUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
         metadata:
           type:
           - object
@@ -1078,39 +1085,6 @@ components:
             type: string
             pattern: ^[^\r\n\t\b\f\v]+$
             maxLength: 200
-        successUrl:
-          type:
-          - string
-          - 'null'
-        failureUrl:
-          type:
-          - string
-          - 'null'
-        cancelUrl:
-          type:
-          - string
-          - 'null'
-        url:
-          type: string
-        paymentReferences:
-          type: array
-          items:
-            type: object
-            properties:
-              paymentIntentId:
-                type: string
-                format: uuid
-              receiptReference:
-                type:
-                - string
-                - 'null'
-            required:
-            - paymentIntentId
-        status:
-          type: string
-          enum:
-          - PAID
-          - UNPAID
         billingAddress:
           allOf:
           - $ref: '#/components/schemas/PaymentLinkAddressDto'
@@ -1124,24 +1098,37 @@ components:
           items:
             $ref: '#/components/schemas/PaymentLinkLineItemDto'
       required:
-      - id
-      - createdAt
-      - updatedAt
       - brandId
-      - externalReference
       - amountInMinorUnits
-      - purpose
-      - expiresAt
-      - metadata
-      - successUrl
-      - failureUrl
-      - cancelUrl
-      - url
-      - paymentReferences
-      - status
-      - billingAddress
-      - shippingAddress
-      - lineItems
+    PaginatedLinksOutput:
+      type: object
+      properties:
+        pageInfo:
+          type: object
+          properties:
+            hasNextPage:
+              type: boolean
+            currentPage:
+              type: number
+            lastPage:
+              type: number
+            pageSize:
+              type: number
+          required:
+          - hasNextPage
+          - currentPage
+          - lastPage
+          - pageSize
+        totalCount:
+          type: number
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkResponseDto'
+      required:
+      - pageInfo
+      - totalCount
+      - items
     PaymentLinkLineItemDto:
       oneOf:
       - type: object
@@ -1280,6 +1267,109 @@ components:
         required:
         - type
         - data
+    LinkResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        brandId:
+          type: string
+          format: uuid
+        externalReference:
+          type:
+          - string
+          - 'null'
+        amountInMinorUnits:
+          type: number
+        purpose:
+          type: string
+          enum:
+          - MERCHANT_TOPUP
+          - PURCHASE
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        successUrl:
+          type:
+          - string
+          - 'null'
+        failureUrl:
+          type:
+          - string
+          - 'null'
+        cancelUrl:
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+        paymentReferences:
+          type: array
+          items:
+            type: object
+            properties:
+              paymentIntentId:
+                type: string
+                format: uuid
+              receiptReference:
+                type:
+                - string
+                - 'null'
+            required:
+            - paymentIntentId
+        status:
+          type: string
+          enum:
+          - PAID
+          - UNPAID
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLinkAddressDto'
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLinkAddressDto'
+        lineItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentLinkLineItemDto'
+      required:
+      - id
+      - createdAt
+      - updatedAt
+      - brandId
+      - externalReference
+      - amountInMinorUnits
+      - purpose
+      - expiresAt
+      - metadata
+      - successUrl
+      - failureUrl
+      - cancelUrl
+      - url
+      - paymentReferences
+      - status
+      - billingAddress
+      - shippingAddress
+      - lineItems
     PaymentLinkAddressDto:
       type: object
       properties:
@@ -1323,96 +1413,6 @@ components:
           type:
           - string
           - 'null'
-    LinkInputDto:
-      type: object
-      properties:
-        brandId:
-          type: string
-          format: uuid
-        externalReference:
-          type:
-          - string
-          - 'null'
-        amountInMinorUnits:
-          type: number
-        purpose:
-          type: string
-          default: PURCHASE
-          enum:
-          - MERCHANT_TOPUP
-          - PURCHASE
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        successUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        failureUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        cancelUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-        billingAddress:
-          allOf:
-          - $ref: '#/components/schemas/PaymentLinkAddressDto'
-        shippingAddress:
-          allOf:
-          - $ref: '#/components/schemas/PaymentLinkAddressDto'
-        lineItems:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PaymentLinkLineItemDto'
-      required:
-      - brandId
-      - amountInMinorUnits
-    PaginatedLinksOutput:
-      type: object
-      properties:
-        pageInfo:
-          type: object
-          properties:
-            hasNextPage:
-              type: boolean
-            currentPage:
-              type: number
-            lastPage:
-              type: number
-            pageSize:
-              type: number
-          required:
-          - hasNextPage
-          - currentPage
-          - lastPage
-          - pageSize
-        totalCount:
-          type: number
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LinkResponseDto'
-      required:
-      - pageInfo
-      - totalCount
-      - items
   securitySchemes:
     api_key:
       type: apiKey

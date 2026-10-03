@@ -725,6 +725,132 @@ paths:
       - Refunds
 components:
   schemas:
+    BuyNowPayLaterRefundFundingDetails:
+      type: object
+      properties:
+        type:
+          description: Type identifier for Buy Now, Pay Later refund funding details. Used when refunds are processed through a BNPL provider like Klarna or Afterpay, typically reducing or canceling the customer's outstanding balance.
+          example: BUY_NOW_PAY_LATER
+          allOf:
+          - $ref: '#/components/schemas/BuyNowPayLaterRefundType'
+        institutionName:
+          description: Display name of the financial institution used for the buy now, pay later refund provider
+          type:
+          - string
+          - 'null'
+          examples:
+          - Frasers Plus
+      required:
+      - type
+      - institutionName
+    OpenBankingRefundFundingDetails:
+      type: object
+      properties:
+        type:
+          description: Type identifier for open banking refund funding details. Used when refunds are processed directly to a customer's bank account using Open Banking payment rails.
+          example: OPEN_BANKING
+          allOf:
+          - $ref: '#/components/schemas/OpenBankingRefundType'
+        institutionName:
+          description: Display name of the financial institution used for the open banking refund provider
+          type:
+          - string
+          - 'null'
+          examples:
+          - Barclays Bank
+      required:
+      - type
+      - institutionName
+    CashRewardRefundFundingDetails:
+      type: object
+      properties:
+        type:
+          description: Type identifier for cash reward refund funding details. Used when refunds are credited back to the customer's Super Payments cash reward balance instead of their original payment method.
+          example: CASH_REWARD
+          allOf:
+          - $ref: '#/components/schemas/CashRewardRefundType'
+        institutionName:
+          description: Display name of the financial institution used for the cash reward refund provider
+          type:
+          - string
+          - 'null'
+          examples:
+          - Super Payments
+      required:
+      - type
+      - institutionName
+    CashRewardRefundType:
+      description: Type identifier for cash reward refund funding details. Used when refunds are credited back to the customer's Super Payments cash reward balance instead of their original payment method.
+      type: string
+      const: CASH_REWARD
+    CardRefundFundingDetails:
+      type: object
+      properties:
+        type:
+          description: Type identifier for card refund funding details. Used when refunds are processed back to the original payment card or to a different card specified by the customer.
+          example: CARD
+          allOf:
+          - $ref: '#/components/schemas/CardRefundType'
+        brand:
+          description: Card brand (e.g., Visa, MasterCard, etc.)
+          type:
+          - string
+          - 'null'
+          examples:
+          - visa
+        last4:
+          description: Last 4 digits of the card number
+          type:
+          - string
+          - 'null'
+          examples:
+          - '4242'
+        reference:
+          description: '[DEPRECATED] A reference identifier for this refund, if applicable. Use the top-level reference field instead. Nullable.'
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        referenceStatus:
+          description: '[DEPRECATED] The status of the reference for this refund, if applicable. Use the top-level referenceStatus field instead. Nullable.'
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        referenceType:
+          description: '[DEPRECATED] The type of reference for this refund, if applicable. Use the top-level referenceType field instead. Nullable.'
+          type:
+          - string
+          - 'null'
+          deprecated: true
+      required:
+      - type
+      - brand
+      - last4
+    GetRefundsListOutput:
+      type: object
+      properties:
+        pageSize:
+          description: Number of items per page
+          type: number
+        nextPage:
+          description: Token for the next page of results.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results
+          type: boolean
+        items:
+          description: List of refund transactions
+          type: array
+          items:
+            $ref: '#/components/schemas/GetRefundsListTransaction'
+      required:
+      - pageSize
+      - nextPage
+      - hasNext
+      - items
     GetRefundsListTransaction:
       type: object
       properties:
@@ -790,50 +916,95 @@ components:
       required:
       - transactionId
       - transactionReference
-    CardRefundFundingDetails:
+    RefundOutputStatus:
+      description: Current status of the refund transaction
+      type: string
+      enum:
+      - RefundAbandoned
+      - RefundFailed
+      - RefundPending
+      - RefundSuccess
+    RefundPaymentCard:
       type: object
       properties:
-        type:
-          description: Type identifier for card refund funding details. Used when refunds are processed back to the original payment card or to a different card specified by the customer.
-          example: CARD
-          allOf:
-          - $ref: '#/components/schemas/CardRefundType'
+        lastFourDigits:
+          description: The last four digits of the card used for the refund payment.
+          type: string
         brand:
-          description: Card brand (e.g., Visa, MasterCard, etc.)
-          type:
-          - string
-          - 'null'
-          examples:
-          - visa
-        last4:
-          description: Last 4 digits of the card number
-          type:
-          - string
-          - 'null'
-          examples:
-          - '4242'
-        reference:
-          description: '[DEPRECATED] A reference identifier for this refund, if applicable. Use the top-level reference field instead. Nullable.'
-          type:
-          - string
-          - 'null'
-          deprecated: true
-        referenceStatus:
-          description: '[DEPRECATED] The status of the reference for this refund, if applicable. Use the top-level referenceStatus field instead. Nullable.'
-          type:
-          - string
-          - 'null'
-          deprecated: true
-        referenceType:
-          description: '[DEPRECATED] The type of reference for this refund, if applicable. Use the top-level referenceType field instead. Nullable.'
-          type:
-          - string
-          - 'null'
-          deprecated: true
+          description: The brand of the card used for the refund payment (e.g., Visa, Mastercard).
+          type: string
       required:
-      - type
+      - lastFourDigits
       - brand
-      - last4
+    CardRefundType:
+      description: Type identifier for card refund funding details. Used when refunds are processed back to the original payment card or to a different card specified by the customer.
+      type: string
+      const: CARD
+    InitiatePayoutRefundInputDto:
+      type: object
+      properties:
+        paymentMethodId:
+          description: A previously charged payment method ID to refund
+          type: string
+          format: uuid
+        amount:
+          description: The amount to refund in minor units (e.g. pence for GBP)
+          type: integer
+          exclusiveMinimum: 0
+        currency:
+          description: The currency of the refund
+          type: string
+          const: GBP
+        externalReference:
+          description: The merchant's reference for the refund
+          type: string
+      required:
+      - paymentMethodId
+      - amount
+      - currency
+    BuyNowPayLaterRefundType:
+      description: Type identifier for Buy Now, Pay Later refund funding details. Used when refunds are processed through a BNPL provider like Klarna or Afterpay, typically reducing or canceling the customer's outstanding balance.
+      type: string
+      const: BUY_NOW_PAY_LATER
+    GetRefundTransactionOutput:
+      type: object
+      properties:
+        transactionId:
+          description: Unique identifier for the payment transaction
+          type: string
+        transactionReference:
+          description: Reference code for the transaction
+          type: string
+        transactionStatus:
+          description: Current status of the refund transaction
+          allOf:
+          - $ref: '#/components/schemas/RefundOutputStatus'
+        brandId:
+          description: Brand identifier associated with the transaction
+          type:
+          - string
+          - 'null'
+          format: uuid
+        payments:
+          description: List of refund payments
+          type: array
+          items:
+            $ref: '#/components/schemas/RefundPayment'
+        paymentMethodId:
+          description: Payment method identifier associated with the refund, if applicable
+          type:
+          - string
+          - 'null'
+      required:
+      - transactionId
+      - transactionReference
+      - transactionStatus
+      - brandId
+      - payments
+    OpenBankingRefundType:
+      description: Type identifier for open banking refund funding details. Used when refunds are processed directly to a customer's bank account using Open Banking payment rails.
+      type: string
+      const: OPEN_BANKING
     RefundPayment:
       type: object
       properties:
@@ -889,30 +1060,31 @@ components:
       - amountInMinorUnits
       - fundingInstitution
       - fundingCard
-    GetRefundsListOutput:
+    InitiateRefundInputDto:
       type: object
       properties:
-        pageSize:
-          description: Number of items per page
-          type: number
-        nextPage:
-          description: Token for the next page of results.
-          type:
-          - string
-          - 'null'
-        hasNext:
-          description: Whether there are more pages of results
-          type: boolean
-        items:
-          description: List of refund transactions
-          type: array
-          items:
-            $ref: '#/components/schemas/GetRefundsListTransaction'
+        transactionId:
+          description: The transaction ID to refund
+          type: string
+          format: uuid
+        amount:
+          description: The amount to refund in minor units (e.g. pence for GBP)
+          type: integer
+          exclusiveMinimum: 0
+        currency:
+          description: The currency of the refund
+          type: string
+          const: GBP
+        externalReference:
+          description: The merchant's reference for the refund
+          type: string
+        brandId:
+          description: Brand ID for the refund
+          type: string
       required:
-      - pageSize
-      - nextPage
-      - hasNext
-      - items
+      - transactionId
+      - amount
+      - currency
     InitiateRefundOutputDto:
       type: object
       properties:
@@ -996,178 +1168,6 @@ components:
       - transactionId
       - transactionReference
       - fundingSummary
-    InitiatePayoutRefundInputDto:
-      type: object
-      properties:
-        paymentMethodId:
-          description: A previously charged payment method ID to refund
-          type: string
-          format: uuid
-        amount:
-          description: The amount to refund in minor units (e.g. pence for GBP)
-          type: integer
-          exclusiveMinimum: 0
-        currency:
-          description: The currency of the refund
-          type: string
-          const: GBP
-        externalReference:
-          description: The merchant's reference for the refund
-          type: string
-      required:
-      - paymentMethodId
-      - amount
-      - currency
-    RefundOutputStatus:
-      description: Current status of the refund transaction
-      type: string
-      enum:
-      - RefundAbandoned
-      - RefundFailed
-      - RefundPending
-      - RefundSuccess
-    OpenBankingRefundFundingDetails:
-      type: object
-      properties:
-        type:
-          description: Type identifier for open banking refund funding details. Used when refunds are processed directly to a customer's bank account using Open Banking payment rails.
-          example: OPEN_BANKING
-          allOf:
-          - $ref: '#/components/schemas/OpenBankingRefundType'
-        institutionName:
-          description: Display name of the financial institution used for the open banking refund provider
-          type:
-          - string
-          - 'null'
-          examples:
-          - Barclays Bank
-      required:
-      - type
-      - institutionName
-    BuyNowPayLaterRefundFundingDetails:
-      type: object
-      properties:
-        type:
-          description: Type identifier for Buy Now, Pay Later refund funding details. Used when refunds are processed through a BNPL provider like Klarna or Afterpay, typically reducing or canceling the customer's outstanding balance.
-          example: BUY_NOW_PAY_LATER
-          allOf:
-          - $ref: '#/components/schemas/BuyNowPayLaterRefundType'
-        institutionName:
-          description: Display name of the financial institution used for the buy now, pay later refund provider
-          type:
-          - string
-          - 'null'
-          examples:
-          - Frasers Plus
-      required:
-      - type
-      - institutionName
-    BuyNowPayLaterRefundType:
-      description: Type identifier for Buy Now, Pay Later refund funding details. Used when refunds are processed through a BNPL provider like Klarna or Afterpay, typically reducing or canceling the customer's outstanding balance.
-      type: string
-      const: BUY_NOW_PAY_LATER
-    RefundPaymentCard:
-      type: object
-      properties:
-        lastFourDigits:
-          description: The last four digits of the card used for the refund payment.
-          type: string
-        brand:
-          description: The brand of the card used for the refund payment (e.g., Visa, Mastercard).
-          type: string
-      required:
-      - lastFourDigits
-      - brand
-    CashRewardRefundFundingDetails:
-      type: object
-      properties:
-        type:
-          description: Type identifier for cash reward refund funding details. Used when refunds are credited back to the customer's Super Payments cash reward balance instead of their original payment method.
-          example: CASH_REWARD
-          allOf:
-          - $ref: '#/components/schemas/CashRewardRefundType'
-        institutionName:
-          description: Display name of the financial institution used for the cash reward refund provider
-          type:
-          - string
-          - 'null'
-          examples:
-          - Super Payments
-      required:
-      - type
-      - institutionName
-    OpenBankingRefundType:
-      description: Type identifier for open banking refund funding details. Used when refunds are processed directly to a customer's bank account using Open Banking payment rails.
-      type: string
-      const: OPEN_BANKING
-    GetRefundTransactionOutput:
-      type: object
-      properties:
-        transactionId:
-          description: Unique identifier for the payment transaction
-          type: string
-        transactionReference:
-          description: Reference code for the transaction
-          type: string
-        transactionStatus:
-          description: Current status of the refund transaction
-          allOf:
-          - $ref: '#/components/schemas/RefundOutputStatus'
-        brandId:
-          description: Brand identifier associated with the transaction
-          type:
-          - string
-          - 'null'
-          format: uuid
-        payments:
-          description: List of refund payments
-          type: array
-          items:
-            $ref: '#/components/schemas/RefundPayment'
-        paymentMethodId:
-          description: Payment method identifier associated with the refund, if applicable
-          type:
-          - string
-          - 'null'
-      required:
-      - transactionId
-      - transactionReference
-      - transactionStatus
-      - brandId
-      - payments
-    CardRefundType:
-      description: Type identifier for card refund funding details. Used when refunds are processed back to the original payment card or to a different card specified by the customer.
-      type: string
-      const: CARD
-    InitiateRefundInputDto:
-      type: object
-      properties:
-        transactionId:
-          description: The transaction ID to refund
-          type: string
-          format: uuid
-        amount:
-          description: The amount to refund in minor units (e.g. pence for GBP)
-          type: integer
-          exclusiveMinimum: 0
-        currency:
-          description: The currency of the refund
-          type: string
-          const: GBP
-        externalReference:
-          description: The merchant's reference for the refund
-          type: string
-        brandId:
-          description: Brand ID for the refund
-          type: string
-      required:
-      - transactionId
-      - amount
-      - currency
-    CashRewardRefundType:
-      description: Type identifier for cash reward refund funding details. Used when refunds are credited back to the customer's Super Payments cash reward balance instead of their original payment method.
-      type: string
-      const: CASH_REWARD
   securitySchemes:
     api_key:
       type: apiKey

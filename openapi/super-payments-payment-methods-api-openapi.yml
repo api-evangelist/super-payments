@@ -207,8 +207,33 @@ paths:
       - Payment Methods
 components:
   schemas:
-    PaymentMethodIdParam:
-      type: string
+    CreatePaymentMethodRequestDto:
+      type: object
+      properties:
+        customerId:
+          type: string
+        type:
+          type: string
+          const: CARD
+          x-enumNames:
+          - CARD
+        usage:
+          type: string
+          const: OFF_SESSION
+          x-enumNames:
+          - OFF_SESSION
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+      required:
+      - customerId
+      - type
+      - usage
     PaymentMethodResponseDto:
       type: object
       properties:
@@ -253,33 +278,6 @@ components:
       - metadata
       - createdAt
       - updatedAt
-    CreatePaymentMethodRequestDto:
-      type: object
-      properties:
-        customerId:
-          type: string
-        type:
-          type: string
-          const: CARD
-          x-enumNames:
-          - CARD
-        usage:
-          type: string
-          const: OFF_SESSION
-          x-enumNames:
-          - OFF_SESSION
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-      required:
-      - customerId
-      - type
-      - usage
     SetupIntentSessionOutputDto:
       type: object
       properties:
@@ -299,53 +297,6 @@ components:
         redirectUrl:
           type: string
           format: uri
-    SetupIntentSessionListOutputDto:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              status:
-                type: string
-                enum:
-                - FAILED
-                - PROCESSING
-                - SUCCESS
-              createdAt: {}
-              updatedAt: {}
-              paymentMethodId:
-                type: string
-              customerId:
-                type: string
-              brandId:
-                type: string
-              providerData:
-                type:
-                - object
-                - 'null'
-                properties:
-                  provider:
-                    type: string
-                    const: STRIPE
-                  providerPaymentMethodId:
-                    type: string
-                required:
-                - provider
-                - providerPaymentMethodId
-            required:
-            - id
-            - status
-            - createdAt
-            - updatedAt
-            - paymentMethodId
-            - customerId
-            - brandId
-      required:
-      - items
     PaginatedPaymentMethodListOutput:
       type: object
       properties:
@@ -417,6 +368,55 @@ components:
       - pageInfo
       - totalCount
       - items
+    SetupIntentSessionListOutputDto:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              status:
+                type: string
+                enum:
+                - FAILED
+                - PROCESSING
+                - SUCCESS
+              createdAt: {}
+              updatedAt: {}
+              paymentMethodId:
+                type: string
+              customerId:
+                type: string
+              brandId:
+                type: string
+              providerData:
+                type:
+                - object
+                - 'null'
+                properties:
+                  provider:
+                    type: string
+                    const: STRIPE
+                  providerPaymentMethodId:
+                    type: string
+                required:
+                - provider
+                - providerPaymentMethodId
+            required:
+            - id
+            - status
+            - createdAt
+            - updatedAt
+            - paymentMethodId
+            - customerId
+            - brandId
+      required:
+      - items
+    PaymentMethodIdParam:
+      type: string
   securitySchemes:
     api_key:
       type: apiKey

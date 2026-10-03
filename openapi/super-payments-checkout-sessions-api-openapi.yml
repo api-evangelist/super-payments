@@ -884,6 +884,44 @@ paths:
       - Checkout Sessions
 components:
   schemas:
+    CarRentalLineItemDto:
+      type: object
+      properties:
+        type:
+          type: string
+          const: CAR_RENTAL
+        data:
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Pickup date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              type: string
+              format: date-time
+            checkOutDate:
+              description: Return date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              type: string
+              format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
+      required:
+      - type
+      - data
     LineItemDto:
       description: 'A line item, one of: airline, car rental, lodging, or product'
       discriminator:
@@ -898,36 +936,99 @@ components:
       - $ref: '#/components/schemas/CarRentalLineItemDto'
       - $ref: '#/components/schemas/LodgingLineItemDto'
       - $ref: '#/components/schemas/ProductLineItemDto'
-    CheckoutSessionCustomerDto:
-      description: To save this payment method for later use, use the customer ID from a previous call to /customers
+    AirlineLineItemDto:
       type: object
       properties:
-        id:
-          description: The customer ID (cus_...) to assign the payment method to
+        type:
           type: string
-        savePaymentMethod:
-          description: Save the payment method for later off-session payments
-          type:
-          - boolean
-          - 'null'
-        paymentMethodMetadata:
-          description: Additional metadata for the payment method (only for savePaymentMethod true)
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
+          const: AIRLINE
+        data:
+          type: object
+          properties:
+            flightNumber:
+              description: The flight identifier
+              type: string
+            flightDate:
+              description: Date and time of the flight in ISO 8601 format with timezone (e.g., 2026-03-15T10:30:00+00:00)
+              type: string
+              format: date-time
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
       required:
-      - id
-    GetCheckoutSessionResponseDto:
+      - type
+      - data
+    LodgingLineItemDto:
       type: object
       properties:
-        checkoutSessionId:
-          description: The unique identifier for the checkout session
+        type:
           type: string
-          format: uuid
+          const: LODGING
+        data:
+          type: object
+          properties:
+            travellers:
+              description: List of travellers
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                required:
+                - name
+            checkInDate:
+              description: Check-in date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
+              type: string
+              format: date-time
+            checkOutDate:
+              description: Check-out date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
+              type: string
+              format: date-time
+            totalPrice:
+              description: Total price in minor units (e.g., pence for GBP)
+              type: number
+              minimum: 0
+            currency:
+              description: Currency code
+              type: string
+              const: GBP
       required:
-      - checkoutSessionId
+      - type
+      - data
+    UpsertOrderDetailsRequestDto:
+      type: object
+      properties:
+        shippingAddress:
+          description: The shipping address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
+        billingAddress:
+          description: The billing address
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
+        lineItems:
+          description: Array of line items, each being either airline, car rental, lodging, or product data
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/LineItemDto'
     ProceedPaymentViaCheckoutSessionRequestDto:
       type: object
       properties:
@@ -989,187 +1090,36 @@ components:
       - successUrl
       - failureUrl
       - cancelUrl
-    CheckoutSessionAddressDto:
-      description: Address with all fields optional
+    CheckoutSessionCustomerDto:
+      description: To save this payment method for later use, use the customer ID from a previous call to /customers
       type: object
       properties:
-        addressLine1:
-          type:
-          - string
-          - 'null'
-          default: null
-        addressLine2:
-          type:
-          - string
-          - 'null'
-          default: null
-        addressLine3:
-          type:
-          - string
-          - 'null'
-          default: null
-        city:
-          type:
-          - string
-          - 'null'
-          default: null
-        country:
-          type:
-          - string
-          - 'null'
-          default: null
-        postCode:
-          type:
-          - string
-          - 'null'
-          default: null
-        firstName:
-          type:
-          - string
-          - 'null'
-          default: null
-        lastName:
-          type:
-          - string
-          - 'null'
-          default: null
-        phone:
-          type:
-          - string
-          - 'null'
-          default: null
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          default: null
-    UpsertOrderDetailsRequestDto:
-      type: object
-      properties:
-        shippingAddress:
-          description: The shipping address
-          allOf:
-          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
-        billingAddress:
-          description: The billing address
-          allOf:
-          - $ref: '#/components/schemas/CheckoutSessionAddressDto'
-        lineItems:
-          description: Array of line items, each being either airline, car rental, lodging, or product data
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/LineItemDto'
-    LodgingLineItemDto:
-      type: object
-      properties:
-        type:
+        id:
+          description: The customer ID (cus_...) to assign the payment method to
           type: string
-          const: LODGING
-        data:
-          type: object
-          properties:
-            travellers:
-              description: List of travellers
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                required:
-                - name
-            checkInDate:
-              description: Check-in date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
-              type: string
-              format: date-time
-            checkOutDate:
-              description: Check-out date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
-              type: string
-              format: date-time
-            totalPrice:
-              description: Total price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
+        savePaymentMethod:
+          description: Save the payment method for later off-session payments
+          type:
+          - boolean
+          - 'null'
+        paymentMethodMetadata:
+          description: Additional metadata for the payment method (only for savePaymentMethod true)
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
       required:
-      - type
-      - data
-    CheckoutSessionAddressResponseDto:
-      description: Address with all fields present but nullable
-      type: object
-      properties:
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        addressLine3:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-        postCode:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-    CreateCheckoutSessionResponseDto:
+      - id
+    GetCheckoutSessionResponseDto:
       type: object
       properties:
         checkoutSessionId:
           description: The unique identifier for the checkout session
           type: string
           format: uuid
-        checkoutSessionToken:
-          description: The token used to authenticate the checkout session
-          type: string
       required:
       - checkoutSessionId
-      - checkoutSessionToken
-    CreateCheckoutSessionRequestDto:
-      type: object
-      properties:
-        paymentInitiatorId:
-          description: The ID of the payment initiator
-          type: string
-          format: uuid
-        customer:
-          allOf:
-          - $ref: '#/components/schemas/CheckoutSessionCustomerDto'
-      required:
-      - paymentInitiatorId
     UpsertOrderDetailsResponseDto:
       type: object
       properties:
@@ -1229,81 +1179,18 @@ components:
       required:
       - type
       - data
-    AirlineLineItemDto:
+    CreateCheckoutSessionRequestDto:
       type: object
       properties:
-        type:
+        paymentInitiatorId:
+          description: The ID of the payment initiator
           type: string
-          const: AIRLINE
-        data:
-          type: object
-          properties:
-            flightNumber:
-              description: The flight identifier
-              type: string
-            flightDate:
-              description: Date and time of the flight in ISO 8601 format with timezone (e.g., 2026-03-15T10:30:00+00:00)
-              type: string
-              format: date-time
-            travellers:
-              description: List of travellers
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                required:
-                - name
-            totalPrice:
-              description: Total price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
+          format: uuid
+        customer:
+          allOf:
+          - $ref: '#/components/schemas/CheckoutSessionCustomerDto'
       required:
-      - type
-      - data
-    CarRentalLineItemDto:
-      type: object
-      properties:
-        type:
-          type: string
-          const: CAR_RENTAL
-        data:
-          type: object
-          properties:
-            travellers:
-              description: List of travellers
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                required:
-                - name
-            checkInDate:
-              description: Pickup date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)
-              type: string
-              format: date-time
-            checkOutDate:
-              description: Return date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)
-              type: string
-              format: date-time
-            totalPrice:
-              description: Total price in minor units (e.g., pence for GBP)
-              type: number
-              minimum: 0
-            currency:
-              description: Currency code
-              type: string
-              const: GBP
-      required:
-      - type
-      - data
+      - paymentInitiatorId
     ProceedPaymentViaCheckoutSessionResponseDto:
       type: object
       properties:
@@ -1338,6 +1225,119 @@ components:
       - checkoutSessionId
       - paymentIntentId
       - redirectUrl
+    CreateCheckoutSessionResponseDto:
+      type: object
+      properties:
+        checkoutSessionId:
+          description: The unique identifier for the checkout session
+          type: string
+          format: uuid
+        checkoutSessionToken:
+          description: The token used to authenticate the checkout session
+          type: string
+      required:
+      - checkoutSessionId
+      - checkoutSessionToken
+    CheckoutSessionAddressResponseDto:
+      description: Address with all fields present but nullable
+      type: object
+      properties:
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        addressLine3:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        postCode:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+    CheckoutSessionAddressDto:
+      description: Address with all fields optional
+      type: object
+      properties:
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          default: null
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          default: null
+        addressLine3:
+          type:
+          - string
+          - 'null'
+          default: null
+        city:
+          type:
+          - string
+          - 'null'
+          default: null
+        country:
+          type:
+          - string
+          - 'null'
+          default: null
+        postCode:
+          type:
+          - string
+          - 'null'
+          default: null
+        firstName:
+          type:
+          - string
+          - 'null'
+          default: null
+        lastName:
+          type:
+          - string
+          - 'null'
+          default: null
+        phone:
+          type:
+          - string
+          - 'null'
+          default: null
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          default: null
   securitySchemes:
     api_key:
       type: apiKey

@@ -450,37 +450,6 @@ components:
       - rewardPercentage
       - minimumSpend
       - rewardsExpireAfter
-    GenerateRewardCalculationOutputDto:
-      type: object
-      properties:
-        id:
-          description: Unique identifier for the reward calculation
-          type: string
-          examples:
-          - 687a0a84-88f2-40f7-8c3b-e74c7388d63d
-        rewardPercentage:
-          description: The percentage rate used for the reward calculation
-          type: number
-          examples:
-          - 2.5
-        rewardsIssuable:
-          type: object
-          properties:
-            amount:
-              description: The amount
-              type: number
-            currency:
-              description: The currency code
-              type: string
-              examples:
-              - GBP
-          required:
-          - amount
-          - currency
-      required:
-      - id
-      - rewardPercentage
-      - rewardsIssuable
     GenerateRewardCalculationInput:
       type: object
       properties:
@@ -548,6 +517,37 @@ components:
       - rewardPercentage
       - minimumSpend
       - rewardsExpireAfter
+    GenerateRewardCalculationOutputDto:
+      type: object
+      properties:
+        id:
+          description: Unique identifier for the reward calculation
+          type: string
+          examples:
+          - 687a0a84-88f2-40f7-8c3b-e74c7388d63d
+        rewardPercentage:
+          description: The percentage rate used for the reward calculation
+          type: number
+          examples:
+          - 2.5
+        rewardsIssuable:
+          type: object
+          properties:
+            amount:
+              description: The amount
+              type: number
+            currency:
+              description: The currency code
+              type: string
+              examples:
+              - GBP
+          required:
+          - amount
+          - currency
+      required:
+      - id
+      - rewardPercentage
+      - rewardsIssuable
   securitySchemes:
     api_key:
       type: apiKey
