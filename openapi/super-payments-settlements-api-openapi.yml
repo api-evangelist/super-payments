@@ -221,29 +221,32 @@ paths:
       - Settlements
 components:
   schemas:
-    SettlementReconciliationResponse:
+    SettlementStatus:
+      description: Current status of the settlement batch.
+      type: string
+      enum:
+      - CREATED
+      - ERRORED
+      - SETTLED
+      - SETTLED_AFTER_RETRY
+    SettlementStatistics:
       type: object
       properties:
-        pageSize:
-          description: Number of reconciliation rows per page.
+        openingBalanceAmount:
+          description: Opening balance as an integer. Interpret using amountScale.
           type: integer
-        nextPage:
-          description: Opaque cursor returned by previous responses.
-          type:
-          - string
-          - 'null'
-        hasNext:
-          description: Whether there are more pages of results.
-          type: boolean
-        items:
-          description: Reconciliation items for the settlement.
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementReconciliationItem'
+        reservedFeesAmount:
+          description: Reserved fees amount as an integer. Interpret using amountScale.
+          type: integer
+        amountScale:
+          description: Scale (number of decimal places) shared by the statistics amounts.
+          type: integer
+          examples:
+          - 2
       required:
-      - pageSize
-      - hasNext
-      - items
+      - openingBalanceAmount
+      - reservedFeesAmount
+      - amountScale
     SettlementPayment:
       type: object
       properties:
@@ -265,112 +268,6 @@ components:
       - status
       - minorUnitAmount
       - currency
-    SettlementPaymentStatus:
-      description: Status of an individual payment included in a settlement.
-      type: string
-      enum:
-      - CREATED
-      - FAILED
-      - PENDING
-      - SETTLED
-    SettlementListResponse:
-      type: object
-      properties:
-        pageSize:
-          description: Number of items per page.
-          type: integer
-        nextPage:
-          description: Token for the next page of results.
-          type:
-          - string
-          - 'null'
-        hasNext:
-          description: Whether there are more pages of results.
-          type: boolean
-        items:
-          description: List of settlements.
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementListItem'
-      required:
-      - pageSize
-      - hasNext
-      - items
-    SettlementStatistics:
-      type: object
-      properties:
-        openingBalanceAmount:
-          description: Opening balance as an integer. Interpret using amountScale.
-          type: integer
-        reservedFeesAmount:
-          description: Reserved fees amount as an integer. Interpret using amountScale.
-          type: integer
-        amountScale:
-          description: Scale (number of decimal places) shared by the statistics amounts.
-          type: integer
-          examples:
-          - 2
-      required:
-      - openingBalanceAmount
-      - reservedFeesAmount
-      - amountScale
-    SettlementStatus:
-      description: Current status of the settlement batch.
-      type: string
-      enum:
-      - CREATED
-      - ERRORED
-      - SETTLED
-      - SETTLED_AFTER_RETRY
-    SettlementDetailResponse:
-      type: object
-      properties:
-        settlementId:
-          description: Unique identifier for the settlement.
-          type: string
-        settlementReference:
-          description: External reference for the settlement, if provided.
-          type:
-          - string
-          - 'null'
-        settlementTs:
-          description: ISO timestamp when the settlement was processed. Same timestamp as settledAt in list responses.
-          type:
-          - string
-          - 'null'
-          format: date-time
-        status:
-          description: Current status of the settlement.
-          allOf:
-          - $ref: '#/components/schemas/SettlementStatus'
-        minorUnitAmount:
-          description: Amount in minor units (integer).
-          type: integer
-        currency:
-          description: Currency code.
-          type: string
-        payments:
-          description: List of payments included in this settlement.
-          type: array
-          items:
-            $ref: '#/components/schemas/SettlementPayment'
-        settlementStatistics:
-          description: Statistical information for the settlement.
-          $ref: '#/components/schemas/SettlementStatistics'
-        createdAt:
-          description: ISO timestamp when the settlement row was created.
-          type: string
-          format: date-time
-      required:
-      - settlementId
-      - settlementReference
-      - settlementTs
-      - status
-      - minorUnitAmount
-      - currency
-      - payments
-      - settlementStatistics
-      - createdAt
     SettlementListItem:
       type: object
       properties:
@@ -410,6 +307,65 @@ components:
       - minorUnitAmount
       - currency
       - createdAt
+    SettlementReconciliationResponse:
+      type: object
+      properties:
+        pageSize:
+          description: Number of reconciliation rows per page.
+          type: integer
+        nextPage:
+          description: Opaque cursor returned by previous responses.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results.
+          type: boolean
+        items:
+          description: Reconciliation items for the settlement.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementReconciliationItem'
+      required:
+      - pageSize
+      - hasNext
+      - items
+    ProblemDetails:
+      type: object
+      properties:
+        status:
+          description: The HTTP status code.
+          type: integer
+          examples:
+          - 400
+        type:
+          description: A URI reference that identifies the problem type.
+          type: string
+          examples:
+          - https://api.superpayments.com/errors/request_validation_error
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+          examples:
+          - Bad Request
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+          examples:
+          - Request validation failed
+        instance:
+          description: A unique identifier for the error.
+          type: string
+          examples:
+          - '4186980260999334757'
+    SettlementPaymentStatus:
+      description: Status of an individual payment included in a settlement.
+      type: string
+      enum:
+      - CREATED
+      - FAILED
+      - PENDING
+      - SETTLED
     SettlementReconciliationItem:
       type: object
       properties:
@@ -500,34 +456,78 @@ components:
       - amountScale
       - currency
       - isCredit
-    ProblemDetails:
+    SettlementListResponse:
       type: object
       properties:
-        status:
-          description: The HTTP status code.
+        pageSize:
+          description: Number of items per page.
           type: integer
-          examples:
-          - 400
-        type:
-          description: A URI reference that identifies the problem type.
+        nextPage:
+          description: Token for the next page of results.
+          type:
+          - string
+          - 'null'
+        hasNext:
+          description: Whether there are more pages of results.
+          type: boolean
+        items:
+          description: List of settlements.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementListItem'
+      required:
+      - pageSize
+      - hasNext
+      - items
+    SettlementDetailResponse:
+      type: object
+      properties:
+        settlementId:
+          description: Unique identifier for the settlement.
           type: string
-          examples:
-          - https://api.superpayments.com/errors/request_validation_error
-        title:
-          description: A short, human-readable summary of the problem type.
+        settlementReference:
+          description: External reference for the settlement, if provided.
+          type:
+          - string
+          - 'null'
+        settlementTs:
+          description: ISO timestamp when the settlement was processed. Same timestamp as settledAt in list responses.
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          description: Current status of the settlement.
+          allOf:
+          - $ref: '#/components/schemas/SettlementStatus'
+        minorUnitAmount:
+          description: Amount in minor units (integer).
+          type: integer
+        currency:
+          description: Currency code.
           type: string
-          examples:
-          - Bad Request
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.
+        payments:
+          description: List of payments included in this settlement.
+          type: array
+          items:
+            $ref: '#/components/schemas/SettlementPayment'
+        settlementStatistics:
+          description: Statistical information for the settlement.
+          $ref: '#/components/schemas/SettlementStatistics'
+        createdAt:
+          description: ISO timestamp when the settlement row was created.
           type: string
-          examples:
-          - Request validation failed
-        instance:
-          description: A unique identifier for the error.
-          type: string
-          examples:
-          - '4186980260999334757'
+          format: date-time
+      required:
+      - settlementId
+      - settlementReference
+      - settlementTs
+      - status
+      - minorUnitAmount
+      - currency
+      - payments
+      - settlementStatistics
+      - createdAt
   securitySchemes:
     api_key:
       type: apiKey

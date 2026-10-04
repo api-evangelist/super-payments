@@ -162,8 +162,6 @@ paths:
       - Customer
 components:
   schemas:
-    CustomerIdParam:
-      type: string
     PaginatedCustomer20260401ListResponse:
       type: object
       properties:
@@ -315,6 +313,51 @@ components:
           - 'null'
           maxLength: 20
           pattern: ^\+?[\d\s\-().]+$
+    CreateCustomer20260401RequestDto:
+      type: object
+      properties:
+        externalReference:
+          type: string
+          minLength: 1
+        brandId:
+          type: string
+          format: uuid
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        firstName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        lastName:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          minLength: 1
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          format: email
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+          pattern: ^\+?[\d\s\-().]+$
+      required:
+      - externalReference
+      - brandId
+    CustomerIdParam:
+      type: string
     Customer20260401ResponseDto:
       type: object
       properties:
@@ -405,49 +448,6 @@ components:
       - phoneNumber
       - createdAt
       - updatedAt
-    CreateCustomer20260401RequestDto:
-      type: object
-      properties:
-        externalReference:
-          type: string
-          minLength: 1
-        brandId:
-          type: string
-          format: uuid
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-        firstName:
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-          minLength: 1
-        lastName:
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-          minLength: 1
-        emailAddress:
-          type:
-          - string
-          - 'null'
-          format: email
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          maxLength: 20
-          pattern: ^\+?[\d\s\-().]+$
-      required:
-      - externalReference
-      - brandId
   securitySchemes:
     api_key:
       type: apiKey

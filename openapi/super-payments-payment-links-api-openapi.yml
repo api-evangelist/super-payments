@@ -1039,234 +1039,6 @@ paths:
       - Payment Links
 components:
   schemas:
-    LinkInputDto:
-      type: object
-      properties:
-        brandId:
-          type: string
-          format: uuid
-        externalReference:
-          type:
-          - string
-          - 'null'
-        amountInMinorUnits:
-          type: number
-        purpose:
-          type: string
-          default: PURCHASE
-          enum:
-          - MERCHANT_TOPUP
-          - PURCHASE
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        successUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        failureUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        cancelUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-        billingAddress:
-          allOf:
-          - $ref: '#/components/schemas/PaymentLinkAddressDto'
-        shippingAddress:
-          allOf:
-          - $ref: '#/components/schemas/PaymentLinkAddressDto'
-        lineItems:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PaymentLinkLineItemDto'
-      required:
-      - brandId
-      - amountInMinorUnits
-    PaginatedLinksOutput:
-      type: object
-      properties:
-        pageInfo:
-          type: object
-          properties:
-            hasNextPage:
-              type: boolean
-            currentPage:
-              type: number
-            lastPage:
-              type: number
-            pageSize:
-              type: number
-          required:
-          - hasNextPage
-          - currentPage
-          - lastPage
-          - pageSize
-        totalCount:
-          type: number
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LinkResponseDto'
-      required:
-      - pageInfo
-      - totalCount
-      - items
-    PaymentLinkLineItemDto:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            const: AIRLINE
-          data:
-            type: object
-            properties:
-              flightNumber:
-                type: string
-              flightDate:
-                oneOf:
-                - type: string
-                  format: date
-                - type: string
-                  format: date-time
-              travellers:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                  required:
-                  - name
-              totalPrice:
-                type: number
-              currency:
-                type: string
-                const: GBP
-        required:
-        - type
-        - data
-      - type: object
-        properties:
-          type:
-            type: string
-            const: CAR_RENTAL
-          data:
-            type: object
-            properties:
-              travellers:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                  required:
-                  - name
-              checkInDate:
-                oneOf:
-                - type: string
-                  format: date
-                - type: string
-                  format: date-time
-              checkOutDate:
-                oneOf:
-                - type: string
-                  format: date
-                - type: string
-                  format: date-time
-              totalPrice:
-                type: number
-              currency:
-                type: string
-                const: GBP
-        required:
-        - type
-        - data
-      - type: object
-        properties:
-          type:
-            type: string
-            const: LODGING
-          data:
-            type: object
-            properties:
-              travellers:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                  required:
-                  - name
-              checkInDate:
-                oneOf:
-                - type: string
-                  format: date
-                - type: string
-                  format: date-time
-              checkOutDate:
-                oneOf:
-                - type: string
-                  format: date
-                - type: string
-                  format: date-time
-              totalPrice:
-                type: number
-              currency:
-                type: string
-                const: GBP
-        required:
-        - type
-        - data
-      - type: object
-        properties:
-          type:
-            type: string
-            const: PRODUCT
-          data:
-            type: object
-            properties:
-              productDescription:
-                type: string
-              sku:
-                type: string
-              quantity:
-                type: number
-              unitPrice:
-                type: number
-              currency:
-                type: string
-                const: GBP
-              expectedDeliveryDate:
-                oneOf:
-                - type: string
-                  format: date
-                - type: string
-                  format: date-time
-                - type: 'null'
-        required:
-        - type
-        - data
     LinkResponseDto:
       type: object
       properties:
@@ -1413,6 +1185,234 @@ components:
           type:
           - string
           - 'null'
+    PaymentLinkLineItemDto:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            const: AIRLINE
+          data:
+            type: object
+            properties:
+              flightNumber:
+                type: string
+              flightDate:
+                oneOf:
+                - type: string
+                  format: date
+                - type: string
+                  format: date-time
+              travellers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              totalPrice:
+                type: number
+              currency:
+                type: string
+                const: GBP
+        required:
+        - type
+        - data
+      - type: object
+        properties:
+          type:
+            type: string
+            const: CAR_RENTAL
+          data:
+            type: object
+            properties:
+              travellers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              checkInDate:
+                oneOf:
+                - type: string
+                  format: date
+                - type: string
+                  format: date-time
+              checkOutDate:
+                oneOf:
+                - type: string
+                  format: date
+                - type: string
+                  format: date-time
+              totalPrice:
+                type: number
+              currency:
+                type: string
+                const: GBP
+        required:
+        - type
+        - data
+      - type: object
+        properties:
+          type:
+            type: string
+            const: LODGING
+          data:
+            type: object
+            properties:
+              travellers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              checkInDate:
+                oneOf:
+                - type: string
+                  format: date
+                - type: string
+                  format: date-time
+              checkOutDate:
+                oneOf:
+                - type: string
+                  format: date
+                - type: string
+                  format: date-time
+              totalPrice:
+                type: number
+              currency:
+                type: string
+                const: GBP
+        required:
+        - type
+        - data
+      - type: object
+        properties:
+          type:
+            type: string
+            const: PRODUCT
+          data:
+            type: object
+            properties:
+              productDescription:
+                type: string
+              sku:
+                type: string
+              quantity:
+                type: number
+              unitPrice:
+                type: number
+              currency:
+                type: string
+                const: GBP
+              expectedDeliveryDate:
+                oneOf:
+                - type: string
+                  format: date
+                - type: string
+                  format: date-time
+                - type: 'null'
+        required:
+        - type
+        - data
+    LinkInputDto:
+      type: object
+      properties:
+        brandId:
+          type: string
+          format: uuid
+        externalReference:
+          type:
+          - string
+          - 'null'
+        amountInMinorUnits:
+          type: number
+        purpose:
+          type: string
+          default: PURCHASE
+          enum:
+          - MERCHANT_TOPUP
+          - PURCHASE
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        successUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+        failureUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+        cancelUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLinkAddressDto'
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLinkAddressDto'
+        lineItems:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentLinkLineItemDto'
+      required:
+      - brandId
+      - amountInMinorUnits
+    PaginatedLinksOutput:
+      type: object
+      properties:
+        pageInfo:
+          type: object
+          properties:
+            hasNextPage:
+              type: boolean
+            currentPage:
+              type: number
+            lastPage:
+              type: number
+            pageSize:
+              type: number
+          required:
+          - hasNextPage
+          - currentPage
+          - lastPage
+          - pageSize
+        totalCount:
+          type: number
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkResponseDto'
+      required:
+      - pageInfo
+      - totalCount
+      - items
   securitySchemes:
     api_key:
       type: apiKey

@@ -207,96 +207,8 @@ paths:
       - Payment Methods
 components:
   schemas:
-    CreatePaymentMethodRequestDto:
-      type: object
-      properties:
-        customerId:
-          type: string
-        type:
-          type: string
-          const: CARD
-          x-enumNames:
-          - CARD
-        usage:
-          type: string
-          const: OFF_SESSION
-          x-enumNames:
-          - OFF_SESSION
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-      required:
-      - customerId
-      - type
-      - usage
-    PaymentMethodResponseDto:
-      type: object
-      properties:
-        id: {}
-        customerId: {}
-        type:
-          type: string
-          const: CARD
-          x-enumNames:
-          - CARD
-        usage:
-          type: string
-          const: OFF_SESSION
-          x-enumNames:
-          - OFF_SESSION
-        status:
-          type: string
-          enum:
-          - DISABLED
-          - ENABLED
-          - REQUIRES_ACTION
-          x-enumNames:
-          - DISABLED
-          - ENABLED
-          - REQUIRES_ACTION
-        metadata:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n\t\b\f\v]+$
-            maxLength: 200
-        createdAt: {}
-        updatedAt: {}
-      required:
-      - id
-      - customerId
-      - type
-      - usage
-      - status
-      - metadata
-      - createdAt
-      - updatedAt
-    SetupIntentSessionOutputDto:
-      type: object
-      properties:
-        id:
-          type: string
-        sessionToken:
-          type: string
-        redirectUrl:
-          type: string
-          format: uri
-      required:
-      - id
-      - sessionToken
-    SetupIntentSessionInputDto:
-      type: object
-      properties:
-        redirectUrl:
-          type: string
-          format: uri
+    PaymentMethodIdParam:
+      type: string
     PaginatedPaymentMethodListOutput:
       type: object
       properties:
@@ -415,8 +327,96 @@ components:
             - brandId
       required:
       - items
-    PaymentMethodIdParam:
-      type: string
+    CreatePaymentMethodRequestDto:
+      type: object
+      properties:
+        customerId:
+          type: string
+        type:
+          type: string
+          const: CARD
+          x-enumNames:
+          - CARD
+        usage:
+          type: string
+          const: OFF_SESSION
+          x-enumNames:
+          - OFF_SESSION
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+      required:
+      - customerId
+      - type
+      - usage
+    SetupIntentSessionOutputDto:
+      type: object
+      properties:
+        id:
+          type: string
+        sessionToken:
+          type: string
+        redirectUrl:
+          type: string
+          format: uri
+      required:
+      - id
+      - sessionToken
+    PaymentMethodResponseDto:
+      type: object
+      properties:
+        id: {}
+        customerId: {}
+        type:
+          type: string
+          const: CARD
+          x-enumNames:
+          - CARD
+        usage:
+          type: string
+          const: OFF_SESSION
+          x-enumNames:
+          - OFF_SESSION
+        status:
+          type: string
+          enum:
+          - DISABLED
+          - ENABLED
+          - REQUIRES_ACTION
+          x-enumNames:
+          - DISABLED
+          - ENABLED
+          - REQUIRES_ACTION
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n\t\b\f\v]+$
+            maxLength: 200
+        createdAt: {}
+        updatedAt: {}
+      required:
+      - id
+      - customerId
+      - type
+      - usage
+      - status
+      - metadata
+      - createdAt
+      - updatedAt
+    SetupIntentSessionInputDto:
+      type: object
+      properties:
+        redirectUrl:
+          type: string
+          format: uri
   securitySchemes:
     api_key:
       type: apiKey

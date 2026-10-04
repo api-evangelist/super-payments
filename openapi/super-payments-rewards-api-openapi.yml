@@ -408,48 +408,6 @@ paths:
       - Rewards
 components:
   schemas:
-    PutRewardConfigurationInputBody:
-      type: object
-      properties:
-        rewardPercentage:
-          description: The percentage of the transaction amount that will be rewarded
-          type: number
-          examples:
-          - 2.5
-          maximum: 100
-          minimum: 0
-        minimumSpend:
-          description: The minimum spend required to qualify for the reward
-          type: object
-          examples:
-          - currency: GBP
-            amount: 1000
-          properties:
-            currency:
-              description: The currency code for the minimum spend amount
-              type: string
-              examples:
-              - GBP
-              default: GBP
-              const: GBP
-            amount:
-              description: The minimum spend amount
-              type: integer
-              examples:
-              - 1000
-              minimum: 0
-          required:
-          - amount
-        rewardsExpireAfter:
-          description: The number of seconds after which the rewards will expire
-          type: integer
-          examples:
-          - 31536000
-          minimum: 0
-      required:
-      - rewardPercentage
-      - minimumSpend
-      - rewardsExpireAfter
     GenerateRewardCalculationInput:
       type: object
       properties:
@@ -513,6 +471,48 @@ components:
           type: number
           examples:
           - 31536000
+      required:
+      - rewardPercentage
+      - minimumSpend
+      - rewardsExpireAfter
+    PutRewardConfigurationInputBody:
+      type: object
+      properties:
+        rewardPercentage:
+          description: The percentage of the transaction amount that will be rewarded
+          type: number
+          examples:
+          - 2.5
+          maximum: 100
+          minimum: 0
+        minimumSpend:
+          description: The minimum spend required to qualify for the reward
+          type: object
+          examples:
+          - currency: GBP
+            amount: 1000
+          properties:
+            currency:
+              description: The currency code for the minimum spend amount
+              type: string
+              examples:
+              - GBP
+              default: GBP
+              const: GBP
+            amount:
+              description: The minimum spend amount
+              type: integer
+              examples:
+              - 1000
+              minimum: 0
+          required:
+          - amount
+        rewardsExpireAfter:
+          description: The number of seconds after which the rewards will expire
+          type: integer
+          examples:
+          - 31536000
+          minimum: 0
       required:
       - rewardPercentage
       - minimumSpend
