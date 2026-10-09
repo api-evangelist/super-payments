@@ -77,3 +77,102 @@ plans:
   price_text: You choose
   period: per-use
   unit: new customer
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  - metered
+  - subscription
+  units:
+  - transaction
+  plans:
+  - name: UK Visa & Mastercard cards
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: International Visa & Mastercard cards
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Apple Pay and Google Pay
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Pay Later with Super Credit (BNPL)
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Super Terminals
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - one-time
+  - name: Amex Payments
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Corporate surcharging
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Recurring Payments
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Refunds for Foreign Exchange
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Chargebacks for card payments
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Customer acquisition
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
