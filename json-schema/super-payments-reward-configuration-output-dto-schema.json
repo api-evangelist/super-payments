@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-reward-configuration-output-dto-schema.json",
+  "title": "RewardConfigurationOutputDto",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-rewards-api-openapi.yml#/components/schemas/RewardConfigurationOutputDto",
+  "type": "object",
+  "properties": {
+    "rewardPercentage": {
+      "description": "The percentage of the transaction amount that will be rewarded",
+      "type": "number"
+    },
+    "minimumSpend": {
+      "description": "The minimum spend required to qualify for the reward",
+      "type": "object",
+      "properties": {
+        "currency": {
+          "description": "The currency code for the minimum spend amount",
+          "type": "string",
+          "const": "GBP"
+        },
+        "amount": {
+          "description": "The minimum spend amount",
+          "type": "number"
+        }
+      },
+      "required": [
+        "currency",
+        "amount"
+      ]
+    },
+    "rewardsExpireAfter": {
+      "description": "The number of seconds after which the rewards will expire",
+      "type": "number"
+    }
+  },
+  "required": [
+    "rewardPercentage",
+    "minimumSpend",
+    "rewardsExpireAfter"
+  ]
+}

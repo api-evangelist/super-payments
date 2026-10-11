@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-settlement-reconciliation-response-schema.json",
+  "title": "SettlementReconciliationResponse",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-settlements-api-openapi.yml#/components/schemas/SettlementReconciliationResponse",
+  "type": "object",
+  "properties": {
+    "pageSize": {
+      "description": "Number of reconciliation rows per page.",
+      "type": "integer"
+    },
+    "nextPage": {
+      "description": "Opaque cursor returned by previous responses.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hasNext": {
+      "description": "Whether there are more pages of results.",
+      "type": "boolean"
+    },
+    "items": {
+      "description": "Reconciliation items for the settlement.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SettlementReconciliationItem"
+      }
+    }
+  },
+  "required": [
+    "pageSize",
+    "hasNext",
+    "items"
+  ],
+  "$defs": {
+    "SettlementReconciliationItem": {
+      "type": "object",
+      "properties": {
+        "reconciliationItemId": {
+          "description": "Unique identifier for the reconciliation item.",
+          "type": "string"
+        },
+        "transactionId": {
+          "description": "Identifier of the transaction associated with this reconciliation item.",
+          "type": "string"
+        },
+        "transactionType": {
+          "description": "Type of transaction represented by this reconciliation row.",
+          "type": "string",
+          "enum": [
+            "ABOUND_REFUND_HOLD",
+            "ABOUND_REFUND_HOLD_RELEASE",
+            "DISPUTE_AMOUNT_COLLECTION",
+            "DISPUTE_AMOUNT_RETURN",
+            "FEE_COLLECTION",
+            "FEE_LIABILITY_HOLD",
+            "FLOAT_HOLD",
+            "MANUAL_ADJUSTMENT_CREDIT",
+            "MANUAL_ADJUSTMENT_DEBIT",
+            "MANUAL_ALLOCATION",
+            "PAYMENT",
+            "PAYOUT",
+            "PUBLISHER_COMMISSION_PAYOUT",
+            "REFUND",
+            "REFUND_RESERVATION_RELEASE",
+            "REFUND_TOPUP_TRANSFER_CLAWBACK",
+            "REWARD_SETTLEMENT",
+            "ROUNDING_ADJUSTMENT",
+            "TOPUP_TRANSFER"
+          ]
+        },
+        "paymentIntentId": {
+          "description": "Payment intent identifier associated with the transaction. Will be null when not applicable to the transaction type.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "paymentIntentReference": {
+          "description": "Payment intent reference associated with the transaction. Will be null when not applicable to the transaction type.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "paymentIntentExternalReference": {
+          "description": "Payment intent external reference provided when the payment intent was created. Will be null when not applicable.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "refundId": {
+          "description": "Refund identifier associated with the transaction. Will be null when not applicable to the transaction type.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "refundReference": {
+          "description": "Refund reference associated with the transaction. Will be null when not applicable to the transaction type.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "refundExternalReference": {
+          "description": "Refund external reference provided when the refund was created. Will be null when not applicable.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amountSettled": {
+          "description": "Amount settled as an integer. Interpret using amountScale.",
+          "type": "integer"
+        },
+        "amountScale": {
+          "description": "Scale (number of decimal places) applied to amountSettled.",
+          "type": "integer"
+        },
+        "currency": {
+          "description": "Currency code.",
+          "type": "string"
+        },
+        "isCredit": {
+          "description": "True when the row represents a credit, false for a debit.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "reconciliationItemId",
+        "transactionId",
+        "transactionType",
+        "paymentIntentId",
+        "paymentIntentReference",
+        "paymentIntentExternalReference",
+        "refundId",
+        "refundReference",
+        "refundExternalReference",
+        "amountSettled",
+        "amountScale",
+        "currency",
+        "isCredit"
+      ]
+    }
+  }
+}

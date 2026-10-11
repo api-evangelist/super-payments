@@ -1,0 +1,439 @@
+generated: '2026-10-12'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/super-payments-checkout-sessions-api-openapi.yml
+- openapi/super-payments-customer-api-openapi.yml
+- openapi/super-payments-payment-links-api-openapi.yml
+- openapi/super-payments-payment-methods-api-openapi.yml
+- openapi/super-payments-payments-api-openapi.yml
+vocabulary:
+  name: Super Payments Domain Vocabulary
+  description: 'Terms declared by Super Payments''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-12'
+  terms:
+  - term: Checkout Sessions
+    definition: Checkout Session management
+    tags:
+    - Resource Group
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml
+  - term: Payment Links
+    definition: Manage payment links for one-time payments
+    tags:
+    - Resource Group
+    source: openapi/super-payments-payment-links-api-openapi.yml
+  - term: Payments
+    definition: Payment processing and management
+    tags:
+    - Resource Group
+    source: openapi/super-payments-payments-api-openapi.yml
+  - term: Refunds
+    definition: Refund management
+    tags:
+    - Resource Group
+    source: openapi/super-payments-refunds-api-openapi.yml
+  - term: Rewards
+    definition: Rewards configuration and calculation and management
+    tags:
+    - Resource Group
+    source: openapi/super-payments-rewards-api-openapi.yml
+  - term: Settlements
+    definition: Settlement batches, details, and reconciliation
+    tags:
+    - Resource Group
+    source: openapi/super-payments-settlements-api-openapi.yml
+  - term: CheckoutSessionAddressResponseDto
+    definition: Address with all fields present but nullable
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/CheckoutSessionAddressResponseDto
+  - term: ProceedPaymentViaCheckoutSessionRequestDto
+    definition: 'Object declared by the contract with fields: paymentInitiatorId, amount, currency, successUrl, failureUrl, cancelUrl, externalReference,
+      metadata, shippingAddress, billingAddress, lineItems.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/ProceedPaymentViaCheckoutSessionRequestDto
+  - term: CheckoutSessionAddressDto
+    definition: Address with all fields optional
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/CheckoutSessionAddressDto
+  - term: CreateCheckoutSessionRequestDto
+    definition: 'Object declared by the contract with fields: paymentInitiatorId, customer.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/CreateCheckoutSessionRequestDto
+  - term: CarRentalLineItemDto
+    definition: 'Object declared by the contract with fields: type, data.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/CarRentalLineItemDto
+  - term: ProceedPaymentViaCheckoutSessionResponseDto
+    definition: 'Object declared by the contract with fields: checkoutSessionId, paymentIntentId, redirectUrl, shippingAddress, billingAddress,
+      lineItems.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/ProceedPaymentViaCheckoutSessionResponseDto
+  - term: UpsertOrderDetailsRequestDto
+    definition: 'Object declared by the contract with fields: shippingAddress, billingAddress, lineItems.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/UpsertOrderDetailsRequestDto
+  - term: LineItemDto
+    definition: 'A line item, one of: airline, car rental, lodging, or product'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/LineItemDto
+  - term: GetCheckoutSessionResponseDto
+    definition: 'Object declared by the contract with fields: checkoutSessionId.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/GetCheckoutSessionResponseDto
+  - term: UpsertOrderDetailsResponseDto
+    definition: 'Object declared by the contract with fields: checkoutSessionId, shippingAddress, billingAddress, lineItems.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/UpsertOrderDetailsResponseDto
+  - term: AirlineLineItemDto
+    definition: 'Object declared by the contract with fields: type, data.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/AirlineLineItemDto
+  - term: CreateCheckoutSessionResponseDto
+    definition: 'Object declared by the contract with fields: checkoutSessionId, checkoutSessionToken.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/CreateCheckoutSessionResponseDto
+  - term: CheckoutSessionCustomerDto
+    definition: To save this payment method for later use, use the customer ID from a previous call to /customers
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/CheckoutSessionCustomerDto
+  - term: LodgingLineItemDto
+    definition: 'Object declared by the contract with fields: type, data.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/LodgingLineItemDto
+  - term: ProductLineItemDto
+    definition: 'Object declared by the contract with fields: type, data.'
+    tags:
+    - Object
+    source: openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/ProductLineItemDto
+  - term: PaginatedCustomer20260401ListResponse
+    definition: 'Object declared by the contract with fields: pageInfo, totalCount, items.'
+    tags:
+    - Object
+    source: openapi/super-payments-customer-api-openapi.yml#/components/schemas/PaginatedCustomer20260401ListResponse
+  - term: UpdateCustomer20260401RequestDto
+    definition: 'Object declared by the contract with fields: metadata, firstName, lastName, emailAddress, phoneNumber.'
+    tags:
+    - Object
+    source: openapi/super-payments-customer-api-openapi.yml#/components/schemas/UpdateCustomer20260401RequestDto
+  - term: CreateCustomer20260401RequestDto
+    definition: 'Object declared by the contract with fields: externalReference, brandId, metadata, firstName, lastName, emailAddress, phoneNumber.'
+    tags:
+    - Object
+    source: openapi/super-payments-customer-api-openapi.yml#/components/schemas/CreateCustomer20260401RequestDto
+  - term: Customer20260401ResponseDto
+    definition: 'Object declared by the contract with fields: id, externalReference, paymentMethods, metadata, brandId, firstName, lastName, emailAddress,
+      phoneNumber, createdAt, updatedAt.'
+    tags:
+    - Object
+    source: openapi/super-payments-customer-api-openapi.yml#/components/schemas/Customer20260401ResponseDto
+  - term: LinkResponseDto
+    definition: 'Object declared by the contract with fields: id, createdAt, updatedAt, brandId, externalReference, amountInMinorUnits, purpose,
+      expiresAt, metadata, successUrl, failureUrl, cancelUrl. (6 more)'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-links-api-openapi.yml#/components/schemas/LinkResponseDto
+  - term: PaymentLinkAddressDto
+    definition: 'Object declared by the contract with fields: addressLine1, addressLine2, addressLine3, city, country, postCode, firstName, lastName,
+      phone, email.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-links-api-openapi.yml#/components/schemas/PaymentLinkAddressDto
+  - term: LinkInputDto
+    definition: 'Object declared by the contract with fields: brandId, externalReference, amountInMinorUnits, purpose, expiresAt, successUrl,
+      failureUrl, cancelUrl, metadata, billingAddress, shippingAddress, lineItems.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-links-api-openapi.yml#/components/schemas/LinkInputDto
+  - term: PaginatedLinksOutput
+    definition: 'Object declared by the contract with fields: pageInfo, totalCount, items.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-links-api-openapi.yml#/components/schemas/PaginatedLinksOutput
+  - term: PaginatedPaymentMethodListOutput
+    definition: 'Object declared by the contract with fields: pageInfo, totalCount, items.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-methods-api-openapi.yml#/components/schemas/PaginatedPaymentMethodListOutput
+  - term: SetupIntentSessionListOutputDto
+    definition: 'Object declared by the contract with fields: items.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-methods-api-openapi.yml#/components/schemas/SetupIntentSessionListOutputDto
+  - term: CreatePaymentMethodRequestDto
+    definition: 'Object declared by the contract with fields: customerId, type, usage, metadata.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-methods-api-openapi.yml#/components/schemas/CreatePaymentMethodRequestDto
+  - term: SetupIntentSessionOutputDto
+    definition: 'Object declared by the contract with fields: id, sessionToken, redirectUrl.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-methods-api-openapi.yml#/components/schemas/SetupIntentSessionOutputDto
+  - term: PaymentMethodResponseDto
+    definition: 'Object declared by the contract with fields: id, customerId, type, usage, status, metadata, createdAt, updatedAt.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-methods-api-openapi.yml#/components/schemas/PaymentMethodResponseDto
+  - term: SetupIntentSessionInputDto
+    definition: 'Object declared by the contract with fields: redirectUrl.'
+    tags:
+    - Object
+    source: openapi/super-payments-payment-methods-api-openapi.yml#/components/schemas/SetupIntentSessionInputDto
+  - term: PaymentIntentFeeDto
+    definition: 'Object declared by the contract with fields: currency, feeCode, feeAmountInMinorUnits, chargeableAmountInMinorUnits, fixedAmountInEffectInMinorUnits,
+      vatAmountInMinorUnits, vatRateInEffect, rateInEffect, totalFeeAmountInclVatInMinorUnits.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/PaymentIntentFeeDto
+  - term: CreateOffSessionPaymentIntentInput
+    definition: 'Object declared by the contract with fields: externalReference, amount, currency, metadata, paymentInitiatorId, offSession, shippingAddress,
+      billingAddress, lineItems, paymentMethodId.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/CreateOffSessionPaymentIntentInput
+  - term: BuyNowPayLaterPaymentType
+    definition: Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often
+      in installments through providers like Klarna, Afterpay, etc.
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/BuyNowPayLaterPaymentType
+  - term: AddressDto
+    definition: 'Object declared by the contract with fields: city, line1, line2, postalCode, state, country.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/AddressDto
+  - term: PaymentOutputStatus
+    definition: Current status of the payment transaction
+    tags:
+    - Enumeration
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/PaymentOutputStatus
+  - term: CreateOnSessionPaymentIntentInput
+    definition: 'Object declared by the contract with fields: externalReference, amount, currency, metadata, successUrl, failureUrl, cancelUrl,
+      brandId, paymentInitiatorId, offSession, shippingAddress, billingAddress. (4 more)'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/CreateOnSessionPaymentIntentInput
+  - term: PaymentFunding
+    definition: 'Object declared by the contract with fields: amount, reference, institutionId, institutionName, dispute, type, fundingDetails.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/PaymentFunding
+  - term: TransactionCurrencyAmount
+    definition: 'Object declared by the contract with fields: amount, amountMultiplier, currency.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/TransactionCurrencyAmount
+  - term: CardPaymentType
+    definition: Type of funding details - always "CARD" for card payments. Card payments include credit and debit card transactions processed
+      through payment networks like Visa, Mastercard, etc.
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/CardPaymentType
+  - term: PaymentIntentLodgingDto
+    definition: Lodging line item with type and data fields
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/PaymentIntentLodgingDto
+  - term: GetPaymentsListTransaction
+    definition: 'Object declared by the contract with fields: metadata, transactionId, transactionReference, externalReference, minorUnitAmount,
+      currency, discountedAmount, discountPercentage, transactionStatus, transactionStatusChangedAt, createdAt, payerName. (2 more)'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/GetPaymentsListTransaction
+  - term: CardPaymentFundingDetailsDto
+    definition: 'Object declared by the contract with fields: type, threeDSAuthentication, cvcCheck, zipCheck, riskFactor, riskLevel, fingerprint,
+      issuer, address, country, nameOnCard, product. (9 more)'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/CardPaymentFundingDetailsDto
+  - term: CashRewardPaymentFundingDetailsDto
+    definition: 'Object declared by the contract with fields: type.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/CashRewardPaymentFundingDetailsDto
+  - term: ThreeDSDto
+    definition: 'Object declared by the contract with fields: status, version, authentication_flow, electronic_commerce_indicator, exemption_indicator,
+      result, result_reason, transaction_id.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/ThreeDSDto
+  - term: PaymentIntentCarRentalDto
+    definition: Car rental line item with type and data fields
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/PaymentIntentCarRentalDto
+  - term: GetPaymentTransactionOutput
+    definition: 'Object declared by the contract with fields: transactionId, transactionReference, externalReference, transactionStatus, transactionAmount,
+      metadata, brandId, fees, funding.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/GetPaymentTransactionOutput
+  - term: OpenBankingPaymentType
+    definition: Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank
+      account through secure bank APIs without using cards.
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/OpenBankingPaymentType
+  - term: CreateOffSessionPaymentIntentOutput
+    definition: Off Session Payment Intent
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/CreateOffSessionPaymentIntentOutput
+  - term: PaymentIntentProductDto
+    definition: Product line item with type and data fields
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/PaymentIntentProductDto
+  - term: PaymentIntentAddressDto
+    definition: Address information for shipping or billing
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/PaymentIntentAddressDto
+  - term: BuyNowPayLaterPaymentFundingDetailsDto
+    definition: 'Object declared by the contract with fields: type, institutionId, institutionName.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/BuyNowPayLaterPaymentFundingDetailsDto
+  - term: DisputeDto
+    definition: 'Object declared by the contract with fields: disputeId, fundingAttemptId, provider, providerRef, disputeReason, disputeStatus,
+      disputedAmount, feeAmount, hasEvidence, submissionDeadline, submissionCount, resolved. (4 more)'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/DisputeDto
+  - term: GetPaymentsListOutput
+    definition: 'Object declared by the contract with fields: pageSize, nextPage, hasNext, items.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/GetPaymentsListOutput
+  - term: CreateOnSessionPaymentIntentOutput
+    definition: On Session Payment Intent
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/CreateOnSessionPaymentIntentOutput
+  - term: OpenBankingPaymentFundingDetailsDto
+    definition: 'Object declared by the contract with fields: type, institutionId, institutionName.'
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/OpenBankingPaymentFundingDetailsDto
+  - term: PaymentIntentAirlineDto
+    definition: Airline line item with type and data fields
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/PaymentIntentAirlineDto
+  - term: CashRewardPaymentType
+    definition: Type identifier for cash reward payment funding details. Cash rewards payments use stored value from the customer's Super Payments
+      account balance.
+    tags:
+    - Object
+    source: openapi/super-payments-payments-api-openapi.yml#/components/schemas/CashRewardPaymentType
+  - term: InitiatePayoutRefundOutputDto
+    definition: 'Object declared by the contract with fields: transactionId, transactionReference.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/InitiatePayoutRefundOutputDto
+  - term: CashRewardRefundType
+    definition: Type identifier for cash reward refund funding details. Used when refunds are credited back to the customer's Super Payments cash
+      reward balance instead of their original payment method.
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/CashRewardRefundType
+  - term: OpenBankingRefundType
+    definition: Type identifier for open banking refund funding details. Used when refunds are processed directly to a customer's bank account
+      using Open Banking payment rails.
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/OpenBankingRefundType
+  - term: RefundPayment
+    definition: 'Object declared by the contract with fields: amountInMinorUnits, fundingInstitution, fundingCard, reference, referenceStatus,
+      referenceType, fundingDetails.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/RefundPayment
+  - term: InitiateRefundOutputDto
+    definition: 'Object declared by the contract with fields: transactionId, transactionReference, fundingSummary.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/InitiateRefundOutputDto
+  - term: InitiatePayoutRefundInputDto
+    definition: 'Object declared by the contract with fields: paymentMethodId, amount, currency, externalReference.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/InitiatePayoutRefundInputDto
+  - term: OpenBankingRefundFundingDetails
+    definition: 'Object declared by the contract with fields: type, institutionName.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/OpenBankingRefundFundingDetails
+  - term: CashRewardRefundFundingDetails
+    definition: 'Object declared by the contract with fields: type, institutionName.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/CashRewardRefundFundingDetails
+  - term: CardRefundType
+    definition: Type identifier for card refund funding details. Used when refunds are processed back to the original payment card or to a different
+      card specified by the customer.
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/CardRefundType
+  - term: InitiateRefundInputDto
+    definition: 'Object declared by the contract with fields: transactionId, amount, currency, externalReference, brandId.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/InitiateRefundInputDto
+  - term: RefundOutputStatus
+    definition: Current status of the refund transaction
+    tags:
+    - Enumeration
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/RefundOutputStatus
+  - term: GetRefundsListOutput
+    definition: 'Object declared by the contract with fields: pageSize, nextPage, hasNext, items.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/GetRefundsListOutput
+  - term: RefundPaymentCard
+    definition: 'Object declared by the contract with fields: lastFourDigits, brand.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/RefundPaymentCard
+  - term: GetRefundsListTransaction
+    definition: 'Object declared by the contract with fields: transactionId, paymentTransactionId, paymentExternalReference, transactionReference,
+      minorUnitAmount, currency, transactionStatus, transactionStatusChangedAt, brandId, paymentMethodId.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/GetRefundsListTransaction
+  - term: BuyNowPayLaterRefundType
+    definition: Type identifier for Buy Now, Pay Later refund funding details. Used when refunds are processed through a BNPL provider like Klarna
+      or Afterpay, typically reducing or canceling the customer's outstanding balance.
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/BuyNowPayLaterRefundType
+  - term: CardRefundFundingDetails
+    definition: 'Object declared by the contract with fields: type, brand, last4, reference, referenceStatus, referenceType.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/CardRefundFundingDetails
+  - term: BuyNowPayLaterRefundFundingDetails
+    definition: 'Object declared by the contract with fields: type, institutionName.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/BuyNowPayLaterRefundFundingDetails
+  - term: GetRefundTransactionOutput
+    definition: 'Object declared by the contract with fields: transactionId, transactionReference, transactionStatus, brandId, payments, paymentMethodId.'
+    tags:
+    - Object
+    source: openapi/super-payments-refunds-api-openapi.yml#/components/schemas/GetRefundTransactionOutput

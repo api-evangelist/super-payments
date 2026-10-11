@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-settlement-detail-response-schema.json",
+  "title": "SettlementDetailResponse",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-settlements-api-openapi.yml#/components/schemas/SettlementDetailResponse",
+  "type": "object",
+  "properties": {
+    "settlementId": {
+      "description": "Unique identifier for the settlement.",
+      "type": "string"
+    },
+    "settlementReference": {
+      "description": "External reference for the settlement, if provided.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "settlementTs": {
+      "description": "ISO timestamp when the settlement was processed. Same timestamp as settledAt in list responses.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "status": {
+      "description": "Current status of the settlement.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/SettlementStatus"
+        }
+      ]
+    },
+    "minorUnitAmount": {
+      "description": "Amount in minor units (integer).",
+      "type": "integer"
+    },
+    "currency": {
+      "description": "Currency code.",
+      "type": "string"
+    },
+    "payments": {
+      "description": "List of payments included in this settlement.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SettlementPayment"
+      }
+    },
+    "settlementStatistics": {
+      "description": "Statistical information for the settlement.",
+      "$ref": "#/$defs/SettlementStatistics"
+    },
+    "createdAt": {
+      "description": "ISO timestamp when the settlement row was created.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "settlementId",
+    "settlementReference",
+    "settlementTs",
+    "status",
+    "minorUnitAmount",
+    "currency",
+    "payments",
+    "settlementStatistics",
+    "createdAt"
+  ],
+  "$defs": {
+    "SettlementPayment": {
+      "type": "object",
+      "properties": {
+        "paymentReference": {
+          "description": "Reference for the payment or payout included in the settlement.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Payment status within the settlement.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/SettlementPaymentStatus"
+            }
+          ]
+        },
+        "minorUnitAmount": {
+          "description": "Amount in minor units (integer).",
+          "type": "integer"
+        },
+        "currency": {
+          "description": "Currency code for the payment.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "paymentReference",
+        "status",
+        "minorUnitAmount",
+        "currency"
+      ]
+    },
+    "SettlementPaymentStatus": {
+      "description": "Status of an individual payment included in a settlement.",
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "FAILED",
+        "PENDING",
+        "SETTLED"
+      ]
+    },
+    "SettlementStatistics": {
+      "type": "object",
+      "properties": {
+        "openingBalanceAmount": {
+          "description": "Opening balance as an integer. Interpret using amountScale.",
+          "type": "integer"
+        },
+        "reservedFeesAmount": {
+          "description": "Reserved fees amount as an integer. Interpret using amountScale.",
+          "type": "integer"
+        },
+        "amountScale": {
+          "description": "Scale (number of decimal places) shared by the statistics amounts.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "openingBalanceAmount",
+        "reservedFeesAmount",
+        "amountScale"
+      ]
+    },
+    "SettlementStatus": {
+      "description": "Current status of the settlement batch.",
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "ERRORED",
+        "SETTLED",
+        "SETTLED_AFTER_RETRY"
+      ]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-create-off-session-payment-intent-output-schema.json",
+  "title": "CreateOffSessionPaymentIntentOutput",
+  "description": "Off Session Payment Intent",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-payments-api-openapi.yml#/components/schemas/CreateOffSessionPaymentIntentOutput",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "paymentInitiatorId": {
+      "type": "string"
+    },
+    "brandId": {
+      "type": "string"
+    },
+    "externalReference": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PaymentAbandoned",
+        "PaymentFailed",
+        "PaymentPending",
+        "PaymentSuccess"
+      ]
+    },
+    "offSession": {
+      "type": "boolean",
+      "const": true
+    },
+    "paymentReference": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "paymentInitiatorId",
+    "brandId",
+    "status",
+    "offSession",
+    "paymentReference"
+  ]
+}

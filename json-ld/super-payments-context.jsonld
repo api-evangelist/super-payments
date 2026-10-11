@@ -1,0 +1,731 @@
+{
+  "@context": {
+    "@vocab": "https://superpayments.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "super": "https://superpayments.com/schema#",
+    "CheckoutSessionAddressResponseDto": "super:CheckoutSessionAddressResponseDto",
+    "addressLine1": {
+      "@id": "super:addressLine1",
+      "@type": "xsd:string"
+    },
+    "addressLine2": {
+      "@id": "super:addressLine2",
+      "@type": "xsd:string"
+    },
+    "addressLine3": {
+      "@id": "super:addressLine3",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "super:city",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "super:country",
+      "@type": "xsd:string"
+    },
+    "postCode": {
+      "@id": "super:postCode",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "super:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "super:lastName",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "super:phone",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "super:email",
+      "@type": "xsd:string"
+    },
+    "ProceedPaymentViaCheckoutSessionRequestDto": "super:ProceedPaymentViaCheckoutSessionRequestDto",
+    "paymentInitiatorId": {
+      "@id": "super:paymentInitiatorId",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "super:amount",
+      "@type": "xsd:integer"
+    },
+    "currency": {
+      "@id": "super:currency",
+      "@type": "xsd:string"
+    },
+    "successUrl": {
+      "@id": "super:successUrl",
+      "@type": "@id"
+    },
+    "failureUrl": {
+      "@id": "super:failureUrl",
+      "@type": "@id"
+    },
+    "cancelUrl": {
+      "@id": "super:cancelUrl",
+      "@type": "@id"
+    },
+    "externalReference": {
+      "@id": "super:externalReference",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "super:metadata"
+    },
+    "shippingAddress": {
+      "@id": "super:shippingAddress"
+    },
+    "billingAddress": {
+      "@id": "super:billingAddress"
+    },
+    "lineItems": {
+      "@id": "super:lineItems",
+      "@container": "@list"
+    },
+    "CheckoutSessionAddressDto": "super:CheckoutSessionAddressDto",
+    "CreateCheckoutSessionRequestDto": "super:CreateCheckoutSessionRequestDto",
+    "customer": {
+      "@id": "super:customer"
+    },
+    "CarRentalLineItemDto": "super:CarRentalLineItemDto",
+    "type": {
+      "@id": "super:type",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "super:data"
+    },
+    "ProceedPaymentViaCheckoutSessionResponseDto": "super:ProceedPaymentViaCheckoutSessionResponseDto",
+    "checkoutSessionId": {
+      "@id": "super:checkoutSessionId",
+      "@type": "xsd:string"
+    },
+    "paymentIntentId": {
+      "@id": "super:paymentIntentId",
+      "@type": "xsd:string"
+    },
+    "redirectUrl": {
+      "@id": "super:redirectUrl",
+      "@type": "@id"
+    },
+    "UpsertOrderDetailsRequestDto": "super:UpsertOrderDetailsRequestDto",
+    "GetCheckoutSessionResponseDto": "super:GetCheckoutSessionResponseDto",
+    "UpsertOrderDetailsResponseDto": "super:UpsertOrderDetailsResponseDto",
+    "AirlineLineItemDto": "super:AirlineLineItemDto",
+    "CreateCheckoutSessionResponseDto": "super:CreateCheckoutSessionResponseDto",
+    "checkoutSessionToken": {
+      "@id": "super:checkoutSessionToken",
+      "@type": "xsd:string"
+    },
+    "CheckoutSessionCustomerDto": "super:CheckoutSessionCustomerDto",
+    "id": {
+      "@id": "super:id",
+      "@type": "xsd:string"
+    },
+    "savePaymentMethod": {
+      "@id": "super:savePaymentMethod",
+      "@type": "xsd:boolean"
+    },
+    "paymentMethodMetadata": {
+      "@id": "super:paymentMethodMetadata"
+    },
+    "LodgingLineItemDto": "super:LodgingLineItemDto",
+    "ProductLineItemDto": "super:ProductLineItemDto",
+    "PaginatedCustomer20260401ListResponse": "super:PaginatedCustomer20260401ListResponse",
+    "pageInfo": {
+      "@id": "super:pageInfo"
+    },
+    "totalCount": {
+      "@id": "super:totalCount",
+      "@type": "xsd:decimal"
+    },
+    "items": {
+      "@id": "super:items",
+      "@container": "@list"
+    },
+    "UpdateCustomer20260401RequestDto": "super:UpdateCustomer20260401RequestDto",
+    "emailAddress": {
+      "@id": "super:emailAddress",
+      "@type": "xsd:string"
+    },
+    "phoneNumber": {
+      "@id": "super:phoneNumber",
+      "@type": "xsd:string"
+    },
+    "CreateCustomer20260401RequestDto": "super:CreateCustomer20260401RequestDto",
+    "brandId": {
+      "@id": "super:brandId",
+      "@type": "xsd:string"
+    },
+    "Customer20260401ResponseDto": "super:Customer20260401ResponseDto",
+    "paymentMethods": {
+      "@id": "super:paymentMethods",
+      "@container": "@list"
+    },
+    "createdAt": {
+      "@id": "super:createdAt"
+    },
+    "updatedAt": {
+      "@id": "super:updatedAt"
+    },
+    "LinkResponseDto": "super:LinkResponseDto",
+    "amountInMinorUnits": {
+      "@id": "super:amountInMinorUnits",
+      "@type": "xsd:decimal"
+    },
+    "purpose": {
+      "@id": "super:purpose",
+      "@type": "xsd:string"
+    },
+    "expiresAt": {
+      "@id": "super:expiresAt",
+      "@type": "xsd:dateTime"
+    },
+    "url": {
+      "@id": "super:url",
+      "@type": "xsd:string"
+    },
+    "paymentReferences": {
+      "@id": "super:paymentReferences",
+      "@container": "@list"
+    },
+    "status": {
+      "@id": "super:status",
+      "@type": "xsd:string"
+    },
+    "PaymentLinkAddressDto": "super:PaymentLinkAddressDto",
+    "LinkInputDto": "super:LinkInputDto",
+    "PaginatedLinksOutput": "super:PaginatedLinksOutput",
+    "PaginatedPaymentMethodListOutput": "super:PaginatedPaymentMethodListOutput",
+    "SetupIntentSessionListOutputDto": "super:SetupIntentSessionListOutputDto",
+    "CreatePaymentMethodRequestDto": "super:CreatePaymentMethodRequestDto",
+    "customerId": {
+      "@id": "super:customerId",
+      "@type": "xsd:string"
+    },
+    "usage": {
+      "@id": "super:usage",
+      "@type": "xsd:string"
+    },
+    "SetupIntentSessionOutputDto": "super:SetupIntentSessionOutputDto",
+    "sessionToken": {
+      "@id": "super:sessionToken",
+      "@type": "xsd:string"
+    },
+    "PaymentMethodResponseDto": "super:PaymentMethodResponseDto",
+    "SetupIntentSessionInputDto": "super:SetupIntentSessionInputDto",
+    "PaymentIntentFeeDto": "super:PaymentIntentFeeDto",
+    "feeCode": {
+      "@id": "super:feeCode",
+      "@type": "xsd:string"
+    },
+    "feeAmountInMinorUnits": {
+      "@id": "super:feeAmountInMinorUnits",
+      "@type": "xsd:decimal"
+    },
+    "chargeableAmountInMinorUnits": {
+      "@id": "super:chargeableAmountInMinorUnits",
+      "@type": "xsd:decimal"
+    },
+    "fixedAmountInEffectInMinorUnits": {
+      "@id": "super:fixedAmountInEffectInMinorUnits",
+      "@type": "xsd:decimal"
+    },
+    "vatAmountInMinorUnits": {
+      "@id": "super:vatAmountInMinorUnits",
+      "@type": "xsd:decimal"
+    },
+    "vatRateInEffect": {
+      "@id": "super:vatRateInEffect",
+      "@type": "xsd:decimal"
+    },
+    "rateInEffect": {
+      "@id": "super:rateInEffect",
+      "@type": "xsd:decimal"
+    },
+    "totalFeeAmountInclVatInMinorUnits": {
+      "@id": "super:totalFeeAmountInclVatInMinorUnits",
+      "@type": "xsd:decimal"
+    },
+    "CreateOffSessionPaymentIntentInput": "super:CreateOffSessionPaymentIntentInput",
+    "offSession": {
+      "@id": "super:offSession",
+      "@type": "xsd:boolean"
+    },
+    "paymentMethodId": {
+      "@id": "super:paymentMethodId",
+      "@type": "xsd:string"
+    },
+    "AddressDto": "super:AddressDto",
+    "line1": {
+      "@id": "super:line1",
+      "@type": "xsd:string"
+    },
+    "line2": {
+      "@id": "super:line2",
+      "@type": "xsd:string"
+    },
+    "postalCode": {
+      "@id": "super:postalCode",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "super:state",
+      "@type": "xsd:string"
+    },
+    "PaymentOutputStatus": "super:PaymentOutputStatus",
+    "CreateOnSessionPaymentIntentInput": "super:CreateOnSessionPaymentIntentInput",
+    "rewardCalculationId": {
+      "@id": "super:rewardCalculationId",
+      "@type": "xsd:string"
+    },
+    "PaymentFunding": "super:PaymentFunding",
+    "reference": {
+      "@id": "super:reference",
+      "@type": "xsd:string"
+    },
+    "institutionId": {
+      "@id": "super:institutionId",
+      "@type": "xsd:string"
+    },
+    "institutionName": {
+      "@id": "super:institutionName",
+      "@type": "xsd:string"
+    },
+    "dispute": {
+      "@id": "super:dispute"
+    },
+    "fundingDetails": {
+      "@id": "super:fundingDetails"
+    },
+    "TransactionCurrencyAmount": "super:TransactionCurrencyAmount",
+    "amountMultiplier": {
+      "@id": "super:amountMultiplier",
+      "@type": "xsd:decimal"
+    },
+    "PaymentIntentLodgingDto": "super:PaymentIntentLodgingDto",
+    "GetPaymentsListTransaction": "super:GetPaymentsListTransaction",
+    "transactionId": {
+      "@id": "super:transactionId",
+      "@type": "xsd:string"
+    },
+    "transactionReference": {
+      "@id": "super:transactionReference",
+      "@type": "xsd:string"
+    },
+    "minorUnitAmount": {
+      "@id": "super:minorUnitAmount",
+      "@type": "xsd:decimal"
+    },
+    "discountedAmount": {
+      "@id": "super:discountedAmount",
+      "@type": "xsd:decimal"
+    },
+    "discountPercentage": {
+      "@id": "super:discountPercentage",
+      "@type": "xsd:decimal"
+    },
+    "transactionStatus": {
+      "@id": "super:transactionStatus"
+    },
+    "transactionStatusChangedAt": {
+      "@id": "super:transactionStatusChangedAt",
+      "@type": "xsd:dateTime"
+    },
+    "payerName": {
+      "@id": "super:payerName",
+      "@type": "xsd:string"
+    },
+    "settlementReference": {
+      "@id": "super:settlementReference",
+      "@type": "xsd:string"
+    },
+    "CardPaymentFundingDetailsDto": "super:CardPaymentFundingDetailsDto",
+    "threeDSAuthentication": {
+      "@id": "super:threeDSAuthentication"
+    },
+    "cvcCheck": {
+      "@id": "super:cvcCheck",
+      "@type": "xsd:string"
+    },
+    "zipCheck": {
+      "@id": "super:zipCheck",
+      "@type": "xsd:string"
+    },
+    "riskFactor": {
+      "@id": "super:riskFactor",
+      "@type": "xsd:decimal"
+    },
+    "riskLevel": {
+      "@id": "super:riskLevel",
+      "@type": "xsd:string"
+    },
+    "fingerprint": {
+      "@id": "super:fingerprint",
+      "@type": "xsd:string"
+    },
+    "issuer": {
+      "@id": "super:issuer",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "super:address"
+    },
+    "nameOnCard": {
+      "@id": "super:nameOnCard",
+      "@type": "xsd:string"
+    },
+    "product": {
+      "@id": "super:product",
+      "@type": "xsd:string"
+    },
+    "funding": {
+      "@id": "super:funding",
+      "@type": "xsd:string"
+    },
+    "authorisationCode": {
+      "@id": "super:authorisationCode",
+      "@type": "xsd:string"
+    },
+    "failureCode": {
+      "@id": "super:failureCode",
+      "@type": "xsd:string"
+    },
+    "last4": {
+      "@id": "super:last4",
+      "@type": "xsd:string"
+    },
+    "cardDescription": {
+      "@id": "super:cardDescription",
+      "@type": "xsd:string"
+    },
+    "cardClassification": {
+      "@id": "super:cardClassification",
+      "@type": "xsd:string"
+    },
+    "walletType": {
+      "@id": "super:walletType",
+      "@type": "xsd:string"
+    },
+    "walletLast4": {
+      "@id": "super:walletLast4",
+      "@type": "xsd:string"
+    },
+    "providerData": {
+      "@id": "super:providerData"
+    },
+    "CashRewardPaymentFundingDetailsDto": "super:CashRewardPaymentFundingDetailsDto",
+    "ThreeDSDto": "super:ThreeDSDto",
+    "version": {
+      "@id": "super:version",
+      "@type": "xsd:string"
+    },
+    "authentication_flow": {
+      "@id": "super:authentication_flow",
+      "@type": "xsd:string"
+    },
+    "electronic_commerce_indicator": {
+      "@id": "super:electronic_commerce_indicator",
+      "@type": "xsd:string"
+    },
+    "exemption_indicator": {
+      "@id": "super:exemption_indicator",
+      "@type": "xsd:string"
+    },
+    "result": {
+      "@id": "super:result",
+      "@type": "xsd:string"
+    },
+    "result_reason": {
+      "@id": "super:result_reason",
+      "@type": "xsd:string"
+    },
+    "transaction_id": {
+      "@id": "super:transaction_id",
+      "@type": "xsd:string"
+    },
+    "PaymentIntentCarRentalDto": "super:PaymentIntentCarRentalDto",
+    "GetPaymentTransactionOutput": "super:GetPaymentTransactionOutput",
+    "transactionAmount": {
+      "@id": "super:transactionAmount",
+      "@type": "xsd:decimal"
+    },
+    "fees": {
+      "@id": "super:fees",
+      "@container": "@list"
+    },
+    "CreateOffSessionPaymentIntentOutput": "super:CreateOffSessionPaymentIntentOutput",
+    "paymentReference": {
+      "@id": "super:paymentReference",
+      "@type": "xsd:string"
+    },
+    "PaymentIntentProductDto": "super:PaymentIntentProductDto",
+    "PaymentIntentAddressDto": "super:PaymentIntentAddressDto",
+    "BuyNowPayLaterPaymentFundingDetailsDto": "super:BuyNowPayLaterPaymentFundingDetailsDto",
+    "DisputeDto": "super:DisputeDto",
+    "disputeId": {
+      "@id": "super:disputeId",
+      "@type": "xsd:string"
+    },
+    "fundingAttemptId": {
+      "@id": "super:fundingAttemptId",
+      "@type": "xsd:string"
+    },
+    "provider": {
+      "@id": "super:provider",
+      "@type": "xsd:string"
+    },
+    "providerRef": {
+      "@id": "super:providerRef",
+      "@type": "xsd:string"
+    },
+    "disputeReason": {
+      "@id": "super:disputeReason",
+      "@type": "xsd:string"
+    },
+    "disputeStatus": {
+      "@id": "super:disputeStatus",
+      "@type": "xsd:string"
+    },
+    "disputedAmount": {
+      "@id": "super:disputedAmount",
+      "@type": "@id"
+    },
+    "feeAmount": {
+      "@id": "super:feeAmount",
+      "@type": "@id"
+    },
+    "hasEvidence": {
+      "@id": "super:hasEvidence",
+      "@type": "xsd:boolean"
+    },
+    "submissionDeadline": {
+      "@id": "super:submissionDeadline",
+      "@type": "xsd:string"
+    },
+    "submissionCount": {
+      "@id": "super:submissionCount",
+      "@type": "xsd:decimal"
+    },
+    "resolved": {
+      "@id": "super:resolved",
+      "@type": "xsd:boolean"
+    },
+    "isRefundable": {
+      "@id": "super:isRefundable",
+      "@type": "xsd:boolean"
+    },
+    "stripeDestinationPaymentId": {
+      "@id": "super:stripeDestinationPaymentId",
+      "@type": "xsd:string"
+    },
+    "GetPaymentsListOutput": "super:GetPaymentsListOutput",
+    "pageSize": {
+      "@id": "super:pageSize",
+      "@type": "xsd:decimal"
+    },
+    "nextPage": {
+      "@id": "super:nextPage",
+      "@type": "xsd:string"
+    },
+    "hasNext": {
+      "@id": "super:hasNext",
+      "@type": "xsd:boolean"
+    },
+    "CreateOnSessionPaymentIntentOutput": "super:CreateOnSessionPaymentIntentOutput",
+    "OpenBankingPaymentFundingDetailsDto": "super:OpenBankingPaymentFundingDetailsDto",
+    "PaymentIntentAirlineDto": "super:PaymentIntentAirlineDto",
+    "InitiatePayoutRefundOutputDto": "super:InitiatePayoutRefundOutputDto",
+    "RefundPayment": "super:RefundPayment",
+    "fundingInstitution": {
+      "@id": "super:fundingInstitution",
+      "@type": "xsd:string"
+    },
+    "fundingCard": {
+      "@id": "super:fundingCard"
+    },
+    "referenceStatus": {
+      "@id": "super:referenceStatus",
+      "@type": "xsd:string"
+    },
+    "referenceType": {
+      "@id": "super:referenceType",
+      "@type": "xsd:string"
+    },
+    "InitiateRefundOutputDto": "super:InitiateRefundOutputDto",
+    "fundingSummary": {
+      "@id": "super:fundingSummary"
+    },
+    "InitiatePayoutRefundInputDto": "super:InitiatePayoutRefundInputDto",
+    "OpenBankingRefundFundingDetails": "super:OpenBankingRefundFundingDetails",
+    "CashRewardRefundFundingDetails": "super:CashRewardRefundFundingDetails",
+    "InitiateRefundInputDto": "super:InitiateRefundInputDto",
+    "RefundOutputStatus": "super:RefundOutputStatus",
+    "GetRefundsListOutput": "super:GetRefundsListOutput",
+    "RefundPaymentCard": "super:RefundPaymentCard",
+    "lastFourDigits": {
+      "@id": "super:lastFourDigits",
+      "@type": "xsd:string"
+    },
+    "brand": {
+      "@id": "super:brand",
+      "@type": "xsd:string"
+    },
+    "GetRefundsListTransaction": "super:GetRefundsListTransaction",
+    "paymentTransactionId": {
+      "@id": "super:paymentTransactionId",
+      "@type": "xsd:string"
+    },
+    "paymentExternalReference": {
+      "@id": "super:paymentExternalReference",
+      "@type": "xsd:string"
+    },
+    "CardRefundFundingDetails": "super:CardRefundFundingDetails",
+    "BuyNowPayLaterRefundFundingDetails": "super:BuyNowPayLaterRefundFundingDetails",
+    "GetRefundTransactionOutput": "super:GetRefundTransactionOutput",
+    "payments": {
+      "@id": "super:payments",
+      "@container": "@list"
+    },
+    "GenerateRewardCalculationInput": "super:GenerateRewardCalculationInput",
+    "RewardConfigurationOutputDto": "super:RewardConfigurationOutputDto",
+    "rewardPercentage": {
+      "@id": "super:rewardPercentage",
+      "@type": "xsd:decimal"
+    },
+    "minimumSpend": {
+      "@id": "super:minimumSpend"
+    },
+    "rewardsExpireAfter": {
+      "@id": "super:rewardsExpireAfter",
+      "@type": "xsd:decimal"
+    },
+    "PutRewardConfigurationInputBody": "super:PutRewardConfigurationInputBody",
+    "GenerateRewardCalculationOutputDto": "super:GenerateRewardCalculationOutputDto",
+    "rewardsIssuable": {
+      "@id": "super:rewardsIssuable"
+    },
+    "SettlementStatus": "super:SettlementStatus",
+    "SettlementStatistics": "super:SettlementStatistics",
+    "openingBalanceAmount": {
+      "@id": "super:openingBalanceAmount",
+      "@type": "xsd:integer"
+    },
+    "reservedFeesAmount": {
+      "@id": "super:reservedFeesAmount",
+      "@type": "xsd:integer"
+    },
+    "amountScale": {
+      "@id": "super:amountScale",
+      "@type": "xsd:integer"
+    },
+    "SettlementPayment": "super:SettlementPayment",
+    "SettlementListItem": "super:SettlementListItem",
+    "settlementId": {
+      "@id": "super:settlementId",
+      "@type": "xsd:string"
+    },
+    "settledAt": {
+      "@id": "super:settledAt",
+      "@type": "xsd:dateTime"
+    },
+    "SettlementReconciliationResponse": "super:SettlementReconciliationResponse",
+    "ProblemDetails": "super:ProblemDetails",
+    "title": {
+      "@id": "super:title",
+      "@type": "xsd:string"
+    },
+    "detail": {
+      "@id": "super:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "super:instance",
+      "@type": "xsd:string"
+    },
+    "SettlementPaymentStatus": "super:SettlementPaymentStatus",
+    "SettlementReconciliationItem": "super:SettlementReconciliationItem",
+    "reconciliationItemId": {
+      "@id": "super:reconciliationItemId",
+      "@type": "xsd:string"
+    },
+    "transactionType": {
+      "@id": "super:transactionType",
+      "@type": "xsd:string"
+    },
+    "paymentIntentReference": {
+      "@id": "super:paymentIntentReference",
+      "@type": "xsd:string"
+    },
+    "paymentIntentExternalReference": {
+      "@id": "super:paymentIntentExternalReference",
+      "@type": "xsd:string"
+    },
+    "refundId": {
+      "@id": "super:refundId",
+      "@type": "xsd:string"
+    },
+    "refundReference": {
+      "@id": "super:refundReference",
+      "@type": "xsd:string"
+    },
+    "refundExternalReference": {
+      "@id": "super:refundExternalReference",
+      "@type": "xsd:string"
+    },
+    "amountSettled": {
+      "@id": "super:amountSettled",
+      "@type": "xsd:integer"
+    },
+    "isCredit": {
+      "@id": "super:isCredit",
+      "@type": "xsd:boolean"
+    },
+    "SettlementListResponse": "super:SettlementListResponse",
+    "SettlementDetailResponse": "super:SettlementDetailResponse",
+    "settlementTs": {
+      "@id": "super:settlementTs",
+      "@type": "xsd:dateTime"
+    },
+    "settlementStatistics": {
+      "@id": "super:settlementStatistics",
+      "@type": "@id"
+    },
+    "CustomerPaymentMethodDisabledWebhookDto": "super:CustomerPaymentMethodDisabledWebhookDto",
+    "eventType": {
+      "@id": "super:eventType",
+      "@type": "xsd:string"
+    },
+    "eventId": {
+      "@id": "super:eventId",
+      "@type": "xsd:string"
+    },
+    "eventDatetime": {
+      "@id": "super:eventDatetime",
+      "@type": "xsd:dateTime"
+    },
+    "CustomerPaymentMethodRequiresActionWebhookDto": "super:CustomerPaymentMethodRequiresActionWebhookDto",
+    "RefundSuccessWebhookDto": "super:RefundSuccessWebhookDto",
+    "RefundFailedWebhookDto": "super:RefundFailedWebhookDto",
+    "PaymentFailedWebhookDto": "super:PaymentFailedWebhookDto",
+    "PaymentSuccessWebhookDto": "super:PaymentSuccessWebhookDto",
+    "CustomerPaymentMethodEnabledWebhookDto": "super:CustomerPaymentMethodEnabledWebhookDto"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Super Payments API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Super Payments's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-12) from openapi/super-payments-checkout-sessions-api-openapi.yml, openapi/super-payments-customer-api-openapi.yml, openapi/super-payments-payment-links-api-openapi.yml.",
+  "dcterms:created": "2026-10-12",
+  "dcterms:source": [
+    "openapi/super-payments-checkout-sessions-api-openapi.yml",
+    "openapi/super-payments-customer-api-openapi.yml",
+    "openapi/super-payments-payment-links-api-openapi.yml",
+    "openapi/super-payments-payment-methods-api-openapi.yml",
+    "openapi/super-payments-payments-api-openapi.yml"
+  ]
+}

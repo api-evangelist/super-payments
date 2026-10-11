@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-generate-reward-calculation-input-schema.json",
+  "title": "GenerateRewardCalculationInput",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-rewards-api-openapi.yml#/components/schemas/GenerateRewardCalculationInput",
+  "type": "object",
+  "properties": {
+    "brandId": {
+      "description": "The unique identifier for the brand",
+      "type": "string"
+    },
+    "currency": {
+      "description": "The currency code, currently only GBP is supported",
+      "type": "string",
+      "const": "GBP"
+    },
+    "amount": {
+      "description": "The transaction amount in the specified currency",
+      "type": "number",
+      "minimum": 0
+    },
+    "externalReference": {
+      "description": "Optional external reference for tracking purposes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "brandId",
+    "currency",
+    "amount"
+  ]
+}

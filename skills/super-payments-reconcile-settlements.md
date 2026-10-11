@@ -1,5 +1,5 @@
 ---
-name: Reconcile settlements
+name: reconcile-settlements
 description: List settlement batches, fetch a settlement's detail, and pull its reconciliation rows to match payouts to payments.
 api: openapi/super-payments-openapi.yml
 operations: [list-settlements-2025-11-01, get-settlement-detail-2025-11-01, get-settlement-reconciliation-2025-11-01]

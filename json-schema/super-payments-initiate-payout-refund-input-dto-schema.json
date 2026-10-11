@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-initiate-payout-refund-input-dto-schema.json",
+  "title": "InitiatePayoutRefundInputDto",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-refunds-api-openapi.yml#/components/schemas/InitiatePayoutRefundInputDto",
+  "type": "object",
+  "properties": {
+    "paymentMethodId": {
+      "description": "A previously charged payment method ID to refund",
+      "type": "string",
+      "format": "uuid"
+    },
+    "amount": {
+      "description": "The amount to refund in minor units (e.g. pence for GBP)",
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "currency": {
+      "description": "The currency of the refund",
+      "type": "string",
+      "const": "GBP"
+    },
+    "externalReference": {
+      "description": "The merchant's reference for the refund",
+      "type": "string"
+    }
+  },
+  "required": [
+    "paymentMethodId",
+    "amount",
+    "currency"
+  ]
+}

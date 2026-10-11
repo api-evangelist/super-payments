@@ -1,5 +1,5 @@
 ---
-name: Refund a payment
+name: refund-a-payment
 description: Find a settled payment transaction and issue a full or partial refund, then confirm it.
 api: openapi/super-payments-openapi.yml
 operations: [search-payment-transactions-2025-11-01, create-refund, get-refund-transaction-2025-11-01]

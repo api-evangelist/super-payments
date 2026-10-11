@@ -1,16 +1,50 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
-- https://zapier.com/apps/super-payments/integrations
-- https://n8n.io/integrations/super-payments/
-- https://composio.dev/toolkits/super-payments
-- https://monid.ai/tools/super-payments
+- https://apps.shopify.com/super-payments
+- https://wordpress.org/plugins/super-payments/
 checked:
+- https://apps.shopify.com/super-payments
 - https://composio.dev/toolkits/super-payments
+- https://docs.superpayments.com/docs/bigcommerce.md
+- https://docs.superpayments.com/docs/magento.md
+- https://docs.superpayments.com/docs/shopify.md
+- https://docs.superpayments.com/docs/woo-commerce.md
 - https://monid.ai/tools/super-payments
 - https://n8n.io/integrations/super-payments/
+- https://wordpress.org/plugins/super-payments/
+- https://www.superpayments.com/integrations
 - https://zapier.com/apps/super-payments/integrations
-summary: null
-marketplace_apps: []
-edges: []
+summary: Super Payments publishes first-party ecommerce-platform plugins (Shopify, WooCommerce, Magento 2, BigCommerce)
+  documented on its own docs site; it is listed on the Shopify App Store and WordPress.org plugin directory, and
+  is absent from Zapier and n8n (both 404).
+marketplace_apps:
+- marketplace: shopify
+  url: https://apps.shopify.com/super-payments
+  app: Super Payments
+- marketplace: wordpress
+  url: https://wordpress.org/plugins/super-payments/
+  app: super-payments
+edges:
+- partner_name: Shopify
+  partner: shopify
+  type: marketplace
+  marketplace: shopify
+  direction: provider-built
+  evidence: https://apps.shopify.com/super-payments
+- partner_name: WooCommerce
+  partner: woocommerce
+  type: claimed
+  direction: provider-built
+  evidence: https://docs.superpayments.com/docs/woo-commerce.md
+- partner_name: Magento 2
+  partner: null
+  type: claimed
+  direction: provider-built
+  evidence: https://docs.superpayments.com/docs/magento.md
+- partner_name: BigCommerce
+  partner: bigcommerce
+  type: claimed
+  direction: provider-built
+  evidence: https://docs.superpayments.com/docs/bigcommerce.md
 templates: []

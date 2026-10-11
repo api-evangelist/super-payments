@@ -1,0 +1,591 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-create-payment-intent-input-schema.json",
+  "title": "CreatePaymentIntentInput",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-payments-api-openapi.yml#/components/schemas/CreatePaymentIntentInput",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/CreateOffSessionPaymentIntentInput"
+    },
+    {
+      "$ref": "#/$defs/CreateOnSessionPaymentIntentInput"
+    }
+  ],
+  "$defs": {
+    "CreateOffSessionPaymentIntentInput": {
+      "type": "object",
+      "properties": {
+        "externalReference": {
+          "description": "External reference for the payment",
+          "type": "string",
+          "maxLength": 255
+        },
+        "amount": {
+          "description": "Amount in minor units (pence for GBP)",
+          "type": "integer",
+          "maximum": 9999999,
+          "minimum": 1
+        },
+        "currency": {
+          "description": "Currency code",
+          "type": "string",
+          "const": "GBP"
+        },
+        "metadata": {
+          "description": "Additional metadata for the payment",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "paymentInitiatorId": {
+          "description": "The payment initiator ID (integration ID) to use for this payment",
+          "type": "string",
+          "format": "uuid"
+        },
+        "offSession": {
+          "description": "Whether or not the payment is an 'off session' payment. An off session payment is when the customer Payment Method is charged separately from collecting their Payment Method (e.g. card details).",
+          "type": "boolean",
+          "const": true
+        },
+        "shippingAddress": {
+          "description": "The shipping address",
+          "allOf": [
+            {
+              "$ref": "#/$defs/PaymentIntentAddressDto"
+            }
+          ]
+        },
+        "billingAddress": {
+          "description": "The billing address",
+          "allOf": [
+            {
+              "$ref": "#/$defs/PaymentIntentAddressDto"
+            }
+          ]
+        },
+        "lineItems": {
+          "description": "Array of line items, each being either airline, car rental, lodging, or product data",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/PaymentIntentAirlineDto"
+              },
+              {
+                "$ref": "#/$defs/PaymentIntentCarRentalDto"
+              },
+              {
+                "$ref": "#/$defs/PaymentIntentLodgingDto"
+              },
+              {
+                "$ref": "#/$defs/PaymentIntentProductDto"
+              }
+            ]
+          }
+        },
+        "paymentMethodId": {
+          "description": "The payment method ID to charge for this payment.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency",
+        "paymentInitiatorId",
+        "offSession",
+        "paymentMethodId"
+      ]
+    },
+    "CreateOnSessionPaymentIntentInput": {
+      "type": "object",
+      "properties": {
+        "externalReference": {
+          "description": "External reference for the payment",
+          "type": "string",
+          "maxLength": 255
+        },
+        "amount": {
+          "description": "Amount in minor units (pence for GBP)",
+          "type": "integer",
+          "maximum": 9999999,
+          "minimum": 1
+        },
+        "currency": {
+          "description": "Currency code",
+          "type": "string",
+          "const": "GBP"
+        },
+        "metadata": {
+          "description": "Additional metadata for the payment",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "successUrl": {
+          "description": "URL to redirect to on successful payment",
+          "type": "string",
+          "pattern": "^https?:\\/\\/.+$"
+        },
+        "failureUrl": {
+          "description": "URL to redirect to on failed payment",
+          "type": "string",
+          "pattern": "^https?:\\/\\/.+$"
+        },
+        "cancelUrl": {
+          "description": "URL to redirect to on cancelled payment",
+          "type": "string",
+          "pattern": "^https?:\\/\\/.+$"
+        },
+        "brandId": {
+          "description": "Brand ID to use for this payment",
+          "type": "string"
+        },
+        "paymentInitiatorId": {
+          "description": "The payment initiator ID (integration ID) to use for this payment",
+          "type": "string",
+          "format": "uuid"
+        },
+        "offSession": {
+          "description": "Whether or not the payment is an 'off session' payment. An off session payment is when the customer Payment Method is charged separately from collecting their Payment Method (e.g. card details).",
+          "type": "boolean",
+          "const": false
+        },
+        "shippingAddress": {
+          "description": "The shipping address",
+          "allOf": [
+            {
+              "$ref": "#/$defs/PaymentIntentAddressDto"
+            }
+          ]
+        },
+        "billingAddress": {
+          "description": "The billing address",
+          "allOf": [
+            {
+              "$ref": "#/$defs/PaymentIntentAddressDto"
+            }
+          ]
+        },
+        "lineItems": {
+          "description": "Array of line items, each being either airline, car rental, lodging, or product data",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/PaymentIntentAirlineDto"
+              },
+              {
+                "$ref": "#/$defs/PaymentIntentCarRentalDto"
+              },
+              {
+                "$ref": "#/$defs/PaymentIntentLodgingDto"
+              },
+              {
+                "$ref": "#/$defs/PaymentIntentProductDto"
+              }
+            ]
+          }
+        },
+        "rewardCalculationId": {
+          "description": "Reward calculation ID",
+          "type": "string"
+        },
+        "paymentMethodId": {},
+        "customer": {
+          "description": "**Warning: This feature is not yet implemented.** To save this payment method for later use, use the customer ID from a previous call to /customers",
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "id": {
+              "description": "The customer ID (cus_...) to assign the payment method to",
+              "type": "string"
+            },
+            "savePaymentMethod": {
+              "description": "Save the payment method for later off-session payments",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": false
+            },
+            "paymentMethodMetadata": {
+              "description": "Additional metadata for the payment method (only for savePaymentMethod: true)",
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "amount",
+        "currency",
+        "paymentInitiatorId"
+      ]
+    },
+    "PaymentIntentAddressDto": {
+      "description": "Address information for shipping or billing",
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "addressLine2": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "addressLine3": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "postCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "email",
+          "default": null
+        }
+      }
+    },
+    "PaymentIntentAirlineDto": {
+      "description": "Airline line item with type and data fields",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The line item type",
+          "type": "string",
+          "const": "AIRLINE"
+        },
+        "data": {
+          "description": "Airline data for enhanced scheme data",
+          "type": "object",
+          "properties": {
+            "flightNumber": {
+              "description": "The flight identifier",
+              "type": "string"
+            },
+            "flightDate": {
+              "description": "Date of the flight, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T10:30:00+00:00)",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            "travellers": {
+              "description": "List of travellers",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "totalPrice": {
+              "description": "Total price in minor units (e.g., pence for GBP)",
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "data"
+      ]
+    },
+    "PaymentIntentCarRentalDto": {
+      "description": "Car rental line item with type and data fields",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The line item type",
+          "type": "string",
+          "const": "CAR_RENTAL"
+        },
+        "data": {
+          "description": "Car rental reservation data",
+          "type": "object",
+          "properties": {
+            "travellers": {
+              "description": "List of travellers",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "checkInDate": {
+              "description": "Pickup date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T15:00:00+00:00)",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            "checkOutDate": {
+              "description": "Return date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-22T11:00:00+00:00)",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            "totalPrice": {
+              "description": "Total price in minor units (e.g., pence for GBP)",
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "data"
+      ]
+    },
+    "PaymentIntentLodgingDto": {
+      "description": "Lodging line item with type and data fields",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The line item type",
+          "type": "string",
+          "const": "LODGING"
+        },
+        "data": {
+          "description": "Lodging reservation data",
+          "type": "object",
+          "properties": {
+            "travellers": {
+              "description": "List of travellers",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "checkInDate": {
+              "description": "Check-in date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-15T15:00:00+00:00)",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            "checkOutDate": {
+              "description": "Check-out date, either as a date (YYYY-MM-DD) or datetime with timezone (e.g., 2026-03-22T11:00:00+00:00)",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            "totalPrice": {
+              "description": "Total price in minor units (e.g., pence for GBP)",
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "data"
+      ]
+    },
+    "PaymentIntentProductDto": {
+      "description": "Product line item with type and data fields",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The line item type",
+          "type": "string",
+          "const": "PRODUCT"
+        },
+        "data": {
+          "description": "Product line item data",
+          "type": "object",
+          "properties": {
+            "productDescription": {
+              "description": "Description of the product",
+              "type": "string"
+            },
+            "sku": {
+              "description": "Stock Keeping Unit (SKU) identifier for the product",
+              "type": "string"
+            },
+            "quantity": {
+              "description": "Quantity of the product",
+              "type": "number",
+              "minimum": 1
+            },
+            "unitPrice": {
+              "description": "Unit price in minor units (e.g., pence for GBP)",
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            },
+            "expectedDeliveryDate": {
+              "description": "When delivery is expected to take place, either as a date (YYYY-MM-DD) or datetime with timezone",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "data"
+      ]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 ---
-name: Accept a payment via a checkout session
+name: accept-a-payment
 description: Create a Super Payments checkout session, attach order details, take the payment, and confirm the result.
 api: openapi/super-payments-openapi.yml
 operations: [create-checkout-session, upsert-order-details, proceed-payment-via-checkout-session, get-payment-transaction-2025-11-01]

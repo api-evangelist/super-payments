@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-get-refunds-list-output-schema.json",
+  "title": "GetRefundsListOutput",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-refunds-api-openapi.yml#/components/schemas/GetRefundsListOutput",
+  "type": "object",
+  "properties": {
+    "pageSize": {
+      "description": "Number of items per page",
+      "type": "number"
+    },
+    "nextPage": {
+      "description": "Token for the next page of results.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hasNext": {
+      "description": "Whether there are more pages of results",
+      "type": "boolean"
+    },
+    "items": {
+      "description": "List of refund transactions",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/GetRefundsListTransaction"
+      }
+    }
+  },
+  "required": [
+    "pageSize",
+    "nextPage",
+    "hasNext",
+    "items"
+  ],
+  "$defs": {
+    "GetRefundsListTransaction": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "description": "Unique identifier for the refund transaction",
+          "type": "string"
+        },
+        "paymentTransactionId": {
+          "description": "Identifier of the original payment transaction",
+          "type": "string"
+        },
+        "paymentExternalReference": {
+          "description": "External reference of the payment",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transactionReference": {
+          "description": "Reference code for the refund transaction",
+          "type": "string"
+        },
+        "minorUnitAmount": {
+          "description": "Amount in minor units of the currency",
+          "type": "number"
+        },
+        "currency": {
+          "description": "Currency code",
+          "type": "string"
+        },
+        "transactionStatus": {
+          "description": "Current status of the refund transaction",
+          "allOf": [
+            {
+              "$ref": "#/$defs/RefundOutputStatus"
+            }
+          ]
+        },
+        "transactionStatusChangedAt": {
+          "description": "Date when the transaction status was last changed",
+          "type": "string",
+          "format": "date-time"
+        },
+        "brandId": {
+          "description": "Brand identifier associated with the transaction",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid"
+        },
+        "paymentMethodId": {
+          "description": "Identifier for the refunded payment method",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "transactionId",
+        "paymentTransactionId",
+        "paymentExternalReference",
+        "transactionReference",
+        "minorUnitAmount",
+        "currency",
+        "transactionStatus",
+        "transactionStatusChangedAt",
+        "brandId"
+      ]
+    },
+    "RefundOutputStatus": {
+      "description": "Current status of the refund transaction",
+      "type": "string",
+      "enum": [
+        "RefundAbandoned",
+        "RefundFailed",
+        "RefundPending",
+        "RefundSuccess"
+      ]
+    }
+  }
+}

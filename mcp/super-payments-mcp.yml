@@ -2,10 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/super-payments-openapi.yml
-description: No official hosted/remote MCP server was found for Super Payments (no mcp.superpayments.com,
-  no @superpayments MCP package in npm, not in the MCP registry). This is a CANDIDATE tool surface derived
-  one-tool-per-operation from the harvested OpenAPI so an agent toolkit can be generated; it is not a
-  provider-published server.
+description: No official hosted/remote MCP server was found for Super Payments (no mcp.superpayments.com, no @superpayments
+  MCP package in npm, not in the MCP registry). This is a CANDIDATE tool surface derived one-tool-per-operation
+  from the harvested OpenAPI so an agent toolkit can be generated; it is not a provider-published server.
 server:
   name: super-payments
   transport: http
@@ -105,8 +104,11 @@ tools:
   description: Upsert order details for a checkout session
   source_operation: openapi/super-payments-openapi.yml#upsert-order-details
 deployment:
-  mode: none
-  verified: derived
-  tools: 31
-  checked: '2026-08-12'
-  source: catalog MCP census
+  mode: remote
+  endpoint: https://docs.superpayments.com/mcp
+  auth: unknown
+  verified: probed
+  note: Docs-host MCP endpoint (ReadMe-hosted docs site). GET returns "This URL can only be accessed with a MCP
+    client."; anonymous POST tools/list returned HTTP 401 JSON-RPC -32001 "Authorization required" on 2026-10-12,
+    and /.well-known/oauth-protected-resource on the docs host is 404, so its live tool list and auth scheme are
+    unverified. The tools below remain a candidate derived from the OpenAPI, not this server's tools.

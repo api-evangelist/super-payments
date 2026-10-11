@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-paginated-customer20260401-list-response-schema.json",
+  "title": "PaginatedCustomer20260401ListResponse",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-customer-api-openapi.yml#/components/schemas/PaginatedCustomer20260401ListResponse",
+  "type": "object",
+  "properties": {
+    "pageInfo": {
+      "type": "object",
+      "properties": {
+        "hasNextPage": {
+          "type": "boolean"
+        },
+        "currentPage": {
+          "type": "number"
+        },
+        "lastPage": {
+          "type": "number"
+        },
+        "pageSize": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "hasNextPage",
+        "currentPage",
+        "lastPage",
+        "pageSize"
+      ]
+    },
+    "totalCount": {
+      "type": "number"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {},
+          "externalReference": {
+            "type": "string"
+          },
+          "paymentMethods": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {},
+                "type": {
+                  "type": "string",
+                  "const": "CARD",
+                  "x-enumNames": [
+                    "CARD"
+                  ]
+                },
+                "usage": {
+                  "type": "string",
+                  "const": "OFF_SESSION",
+                  "x-enumNames": [
+                    "OFF_SESSION"
+                  ]
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "DISABLED",
+                    "ENABLED",
+                    "REQUIRES_ACTION"
+                  ],
+                  "x-enumNames": [
+                    "DISABLED",
+                    "ENABLED",
+                    "REQUIRES_ACTION"
+                  ]
+                },
+                "metadata": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "^[^\\r\\n\\t\\b\\f\\v]+$",
+                    "maxLength": 200
+                  }
+                },
+                "createdAt": {},
+                "updatedAt": {}
+              },
+              "required": [
+                "id",
+                "type",
+                "usage",
+                "status",
+                "metadata",
+                "createdAt",
+                "updatedAt"
+              ]
+            }
+          },
+          "metadata": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "brandId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "emailAddress": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "email"
+          },
+          "phoneNumber": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {},
+          "updatedAt": {}
+        },
+        "required": [
+          "id",
+          "externalReference",
+          "paymentMethods",
+          "metadata",
+          "brandId",
+          "firstName",
+          "lastName",
+          "emailAddress",
+          "phoneNumber",
+          "createdAt",
+          "updatedAt"
+        ]
+      }
+    }
+  },
+  "required": [
+    "pageInfo",
+    "totalCount",
+    "items"
+  ]
+}

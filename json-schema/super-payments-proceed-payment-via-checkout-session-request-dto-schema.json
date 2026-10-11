@@ -1,0 +1,394 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-proceed-payment-via-checkout-session-request-dto-schema.json",
+  "title": "ProceedPaymentViaCheckoutSessionRequestDto",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/ProceedPaymentViaCheckoutSessionRequestDto",
+  "type": "object",
+  "properties": {
+    "paymentInitiatorId": {
+      "description": "The ID of the payment initiator",
+      "type": "string",
+      "format": "uuid"
+    },
+    "amount": {
+      "description": "The payment amount in the smallest currency unit (e.g., pence for GBP)",
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "currency": {
+      "description": "The currency code",
+      "type": "string",
+      "const": "GBP"
+    },
+    "successUrl": {
+      "description": "URL to redirect the user after successful payment",
+      "type": "string",
+      "format": "uri"
+    },
+    "failureUrl": {
+      "description": "URL to redirect the user after failed payment",
+      "type": "string",
+      "format": "uri"
+    },
+    "cancelUrl": {
+      "description": "URL to redirect the user after cancelled payment",
+      "type": "string",
+      "format": "uri"
+    },
+    "externalReference": {
+      "description": "External reference for the payment",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metadata": {
+      "description": "Custom metadata for the payment (max 10 key-value pairs, keys 1-30 chars, values 1-200 chars)",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "shippingAddress": {
+      "description": "The shipping address",
+      "allOf": [
+        {
+          "$ref": "#/$defs/CheckoutSessionAddressDto"
+        }
+      ]
+    },
+    "billingAddress": {
+      "description": "The billing address",
+      "allOf": [
+        {
+          "$ref": "#/$defs/CheckoutSessionAddressDto"
+        }
+      ]
+    },
+    "lineItems": {
+      "description": "Array of line items, each being either airline, car rental, lodging, or product data",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/LineItemDto"
+      }
+    }
+  },
+  "required": [
+    "paymentInitiatorId",
+    "amount",
+    "currency",
+    "successUrl",
+    "failureUrl",
+    "cancelUrl"
+  ],
+  "$defs": {
+    "AirlineLineItemDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "AIRLINE"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "flightNumber": {
+              "description": "The flight identifier",
+              "type": "string"
+            },
+            "flightDate": {
+              "description": "Date and time of the flight in ISO 8601 format with timezone (e.g., 2026-03-15T10:30:00+00:00)",
+              "type": "string",
+              "format": "date-time"
+            },
+            "travellers": {
+              "description": "List of travellers",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "totalPrice": {
+              "description": "Total price in minor units (e.g., pence for GBP)",
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "data"
+      ]
+    },
+    "CarRentalLineItemDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "CAR_RENTAL"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "travellers": {
+              "description": "List of travellers",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "checkInDate": {
+              "description": "Pickup date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)",
+              "type": "string",
+              "format": "date-time"
+            },
+            "checkOutDate": {
+              "description": "Return date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)",
+              "type": "string",
+              "format": "date-time"
+            },
+            "totalPrice": {
+              "description": "Total price in minor units (e.g., pence for GBP)",
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "data"
+      ]
+    },
+    "CheckoutSessionAddressDto": {
+      "description": "Address with all fields optional",
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "addressLine2": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "addressLine3": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "postCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "email",
+          "default": null
+        }
+      }
+    },
+    "LineItemDto": {
+      "description": "A line item, one of: airline, car rental, lodging, or product",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/AirlineLineItemDto"
+        },
+        {
+          "$ref": "#/$defs/CarRentalLineItemDto"
+        },
+        {
+          "$ref": "#/$defs/LodgingLineItemDto"
+        },
+        {
+          "$ref": "#/$defs/ProductLineItemDto"
+        }
+      ]
+    },
+    "LodgingLineItemDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "LODGING"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "travellers": {
+              "description": "List of travellers",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            },
+            "checkInDate": {
+              "description": "Check-in date and time in ISO 8601 format with timezone (e.g., 2026-03-15T15:00:00+00:00)",
+              "type": "string",
+              "format": "date-time"
+            },
+            "checkOutDate": {
+              "description": "Check-out date and time in ISO 8601 format with timezone (e.g., 2026-03-22T11:00:00+00:00)",
+              "type": "string",
+              "format": "date-time"
+            },
+            "totalPrice": {
+              "description": "Total price in minor units (e.g., pence for GBP)",
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "data"
+      ]
+    },
+    "ProductLineItemDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "PRODUCT"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "productDescription": {
+              "description": "Description of the product",
+              "type": "string"
+            },
+            "sku": {
+              "description": "Stock Keeping Unit (SKU) identifier for the product",
+              "type": "string"
+            },
+            "quantity": {
+              "description": "Quantity of the product",
+              "type": "number",
+              "minimum": 1
+            },
+            "unitPrice": {
+              "description": "Unit price in minor units (e.g., pence for GBP)",
+              "type": "number",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            },
+            "expectedDeliveryDate": {
+              "description": "When delivery is expected to take place (YYYY-MM-DD)",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "type",
+        "data"
+      ]
+    }
+  }
+}

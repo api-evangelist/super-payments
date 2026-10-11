@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-put-reward-configuration-input-body-schema.json",
+  "title": "PutRewardConfigurationInputBody",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-rewards-api-openapi.yml#/components/schemas/PutRewardConfigurationInputBody",
+  "type": "object",
+  "properties": {
+    "rewardPercentage": {
+      "description": "The percentage of the transaction amount that will be rewarded",
+      "type": "number",
+      "maximum": 100,
+      "minimum": 0
+    },
+    "minimumSpend": {
+      "description": "The minimum spend required to qualify for the reward",
+      "type": "object",
+      "properties": {
+        "currency": {
+          "description": "The currency code for the minimum spend amount",
+          "type": "string",
+          "default": "GBP",
+          "const": "GBP"
+        },
+        "amount": {
+          "description": "The minimum spend amount",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "amount"
+      ]
+    },
+    "rewardsExpireAfter": {
+      "description": "The number of seconds after which the rewards will expire",
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "rewardPercentage",
+    "minimumSpend",
+    "rewardsExpireAfter"
+  ]
+}

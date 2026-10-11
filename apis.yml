@@ -1,20 +1,28 @@
 aid: super-payments
+
 name: Super Payments
-description: Super Payments is a UK payments provider offering free card and open-banking (pay-by-bank)
-  payment processing for businesses, funded by a customer-acquisition and cash-rewards model rather than
-  per-transaction fees. Its REST API lets merchants create payments and checkout sessions, issue refunds,
-  manage customers and reusable payment methods, run settlements and reconciliation, create no-code payment
-  links, and configure cash rewards. The API uses date-based URL versioning, static API-key authentication,
-  RFC 9457 problem+json errors, cursor pagination, HMAC-signed webhooks, an embedded super-card web component
-  and hosted payment page, and a React Native SDK. Backed by Accel and Union Square Ventures.
+
+description: Super Payments is a UK payments provider offering free card and open-banking (pay-by-bank) payment processing for businesses, funded
+  by a customer-acquisition and cash-rewards model rather than per-transaction fees. Its REST API lets merchants create payments and checkout
+  sessions, issue refunds, manage customers and reusable payment methods, run settlements and reconciliation, create no-code payment links, and
+  configure cash rewards. The API uses date-based URL versioning, static API-key authentication, RFC 9457 problem+json errors, cursor pagination,
+  HMAC-signed webhooks, an embedded super-card web component and hosted payment page, and a React Native SDK. Backed by Accel and Union Square
+  Ventures.
+
 url: https://raw.githubusercontent.com/api-evangelist/super-payments/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: vc-portfolio
+
 x-backed-by:
 - accel
 - union-square-ventures
+
 x-tier: enriched
+
 x-tier-reason: portfolio-lead
+
 deliveryModel:
   model: saas
   open_source: false
@@ -27,6 +35,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -42,10 +51,15 @@ accessModel:
   - sandbox
   generated: '2026-09-03'
   method: derived
+
 specificationVersion: '0.23'
+
 created: '2026-07-17'
+
 modified: '2026-09-16'
+
 image: https://framerusercontent.com/images/eAdDRGD6sLo1NlXEu8bPS71k.png
+
 tags:
 - Company
 - Payments
@@ -55,173 +69,28 @@ tags:
 - Fintech
 - United Kingdom
 - Pay by Bank
-apis:
-- aid: super-payments:super-payments-checkout-sessions-api
-  name: Super Payments Checkout Sessions API
-  description: Checkout Session management
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Checkout Sessions
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-checkout-sessions-api-openapi.yml
-  - type: Documentation
-    url: https://docs.superpayments.com/docs
-  - type: APIReference
-    url: https://docs.superpayments.com/reference
-  - type: GettingStarted
-    url: https://docs.superpayments.com/docs/getting-started
-  - type: AsyncAPI
-    url: asyncapi/super-payments-webhooks-asyncapi.yml
-- aid: super-payments:super-payments-customer-api
-  name: Super Payments Customer API
-  description: The Customer API from Super Payments — 2 operation(s) for customer.
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Customers
-  tags_raw:
-  - Customer
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-customer-api-openapi.yml
-  - type: Documentation
-    url: https://docs.superpayments.com/docs
-  - type: APIReference
-    url: https://docs.superpayments.com/reference
-  - type: GettingStarted
-    url: https://docs.superpayments.com/docs/getting-started
-  - type: AsyncAPI
-    url: asyncapi/super-payments-webhooks-asyncapi.yml
-- aid: super-payments:super-payments-payment-links-api
-  name: Super Payments Payment Links API
-  description: Manage payment links for one-time payments
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Payment Links
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-payment-links-api-openapi.yml
-  - type: Documentation
-    url: https://docs.superpayments.com/docs
-  - type: APIReference
-    url: https://docs.superpayments.com/reference
-  - type: GettingStarted
-    url: https://docs.superpayments.com/docs/getting-started
-  - type: AsyncAPI
-    url: asyncapi/super-payments-webhooks-asyncapi.yml
-- aid: super-payments:super-payments-payment-methods-api
-  name: Super Payments Payment Methods API
-  description: The Payment Methods API from Super Payments — 4 operation(s) for payment methods.
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Payment Methods
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-payment-methods-api-openapi.yml
-  - type: Documentation
-    url: https://docs.superpayments.com/docs
-  - type: APIReference
-    url: https://docs.superpayments.com/reference
-  - type: GettingStarted
-    url: https://docs.superpayments.com/docs/getting-started
-  - type: AsyncAPI
-    url: asyncapi/super-payments-webhooks-asyncapi.yml
-- aid: super-payments:super-payments-payments-api
-  name: Super Payments API
-  description: Payment processing and management
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Payments
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-payments-api-openapi.yml
-  - type: Documentation
-    url: https://docs.superpayments.com/docs
-  - type: APIReference
-    url: https://docs.superpayments.com/reference
-  - type: GettingStarted
-    url: https://docs.superpayments.com/docs/getting-started
-  - type: AsyncAPI
-    url: asyncapi/super-payments-webhooks-asyncapi.yml
-- aid: super-payments:super-payments-refunds-api
-  name: Super Payments Refunds API
-  description: Refund management
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Refunds
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-refunds-api-openapi.yml
-  - type: Documentation
-    url: https://docs.superpayments.com/docs
-  - type: APIReference
-    url: https://docs.superpayments.com/reference
-  - type: GettingStarted
-    url: https://docs.superpayments.com/docs/getting-started
-  - type: AsyncAPI
-    url: asyncapi/super-payments-webhooks-asyncapi.yml
-- aid: super-payments:super-payments-rewards-api
-  name: Super Payments Rewards API
-  description: Rewards configuration and calculation and management
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Rewards
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-rewards-api-openapi.yml
-  - type: Documentation
-    url: https://docs.superpayments.com/docs
-  - type: APIReference
-    url: https://docs.superpayments.com/reference
-  - type: GettingStarted
-    url: https://docs.superpayments.com/docs/getting-started
-  - type: AsyncAPI
-    url: asyncapi/super-payments-webhooks-asyncapi.yml
-- aid: super-payments:super-payments-settlements-api
-  name: Super Payments Settlements API
-  description: Settlement batches, details, and reconciliation
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Settlement
-  tags_raw:
-  - Settlements
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-settlements-api-openapi.yml
-  - type: Documentation
-    url: https://docs.superpayments.com/docs
-  - type: APIReference
-    url: https://docs.superpayments.com/reference
-  - type: GettingStarted
-    url: https://docs.superpayments.com/docs/getting-started
-  - type: AsyncAPI
-    url: asyncapi/super-payments-webhooks-asyncapi.yml
-- aid: super-payments:super-payments-webhooks-api
-  name: Super Payments Webhooks API
-  description: The Webhooks API from Super Payments — 0 operation(s) for webhooks.
-  humanURL: https://docs.superpayments.com/docs
-  baseURL: https://api.superpayments.com/2026-04-01
-  tags:
-  - Webhook
-  tags_raw:
-  - Webhooks
-  properties:
-  - type: OpenAPI
-    url: openapi/super-payments-webhooks-api-openapi.yml
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: AgenticAccess
+  url: agentic-access/super-payments-agentic-access.yml
+- type: Spectral
+  url: rules/super-payments-rules.yml
+- type: JSONLD
+  url: json-ld/super-payments-context.jsonld
+- type: Vocabulary
+  url: vocabulary/super-payments-vocabulary.yml
+- type: MCPServer
+  url: mcp/super-payments-mcp.yml
+- type: IntegrationEdges
+  url: integrations/super-payments-integration-edges.yml
+- type: Vendors
+  url: vendors/super-payments-vendors.yml
 - type: Plans
   url: plans/super-payments-plans-pricing.yml
 - type: CapabilityMap
@@ -297,16 +166,251 @@ common:
   url: packages/super-payments-packages.yml
 - type: X-MCPServerCandidate
   url: mcp/super-payments-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
-    — a tool list derived from the published API contracts, not an existing server. The scorer already
-    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
-    surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+    API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+    the artifact-type surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/super-payments-llms.txt
 - type: AgentSkill
   url: skills/_index.yml
+
+apis:
+- aid: super-payments:super-payments-checkout-sessions-api
+  name: Super Payments Checkout Sessions API
+  description: Checkout Session management
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Checkout Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-checkout-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.superpayments.com/docs
+  - type: APIReference
+    url: https://docs.superpayments.com/reference
+  - type: GettingStarted
+    url: https://docs.superpayments.com/docs/getting-started
+  - type: AsyncAPI
+    url: asyncapi/super-payments-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/super-payments-proceed-payment-via-checkout-session-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-proceed-payment-via-checkout-session-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-upsert-order-details-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-upsert-order-details-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-create-checkout-session-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-create-checkout-session-request-dto-schema.json
+- aid: super-payments:super-payments-customer-api
+  name: Super Payments Customer API
+  description: The Customer API from Super Payments — 2 operation(s) for customer.
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Customers
+  tags_raw:
+  - Customer
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-customer-api-openapi.yml
+  - type: Documentation
+    url: https://docs.superpayments.com/docs
+  - type: APIReference
+    url: https://docs.superpayments.com/reference
+  - type: GettingStarted
+    url: https://docs.superpayments.com/docs/getting-started
+  - type: AsyncAPI
+    url: asyncapi/super-payments-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/super-payments-paginated-customer20260401-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-customer20260401-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-create-customer20260401-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-update-customer20260401-request-dto-schema.json
+- aid: super-payments:super-payments-payment-links-api
+  name: Super Payments Payment Links API
+  description: Manage payment links for one-time payments
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Payment Links
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-payment-links-api-openapi.yml
+  - type: Documentation
+    url: https://docs.superpayments.com/docs
+  - type: APIReference
+    url: https://docs.superpayments.com/reference
+  - type: GettingStarted
+    url: https://docs.superpayments.com/docs/getting-started
+  - type: AsyncAPI
+    url: asyncapi/super-payments-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/super-payments-link-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-link-input-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-paginated-links-output-schema.json
+- aid: super-payments:super-payments-payment-methods-api
+  name: Super Payments Payment Methods API
+  description: The Payment Methods API from Super Payments — 4 operation(s) for payment methods.
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Payment Methods
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-payment-methods-api-openapi.yml
+  - type: Documentation
+    url: https://docs.superpayments.com/docs
+  - type: APIReference
+    url: https://docs.superpayments.com/reference
+  - type: GettingStarted
+    url: https://docs.superpayments.com/docs/getting-started
+  - type: AsyncAPI
+    url: asyncapi/super-payments-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/super-payments-paginated-payment-method-list-output-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-setup-intent-session-list-output-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-payment-method-response-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-create-payment-method-request-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-setup-intent-session-output-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-setup-intent-session-input-dto-schema.json
+- aid: super-payments:super-payments-payments-api
+  name: Super Payments API
+  description: Payment processing and management
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.superpayments.com/docs
+  - type: APIReference
+    url: https://docs.superpayments.com/reference
+  - type: GettingStarted
+    url: https://docs.superpayments.com/docs/getting-started
+  - type: AsyncAPI
+    url: asyncapi/super-payments-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/super-payments-get-payment-transaction-output-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-create-off-session-payment-intent-output-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-create-on-session-payment-intent-output-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-get-payments-list-output-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-create-payment-intent-input-schema.json
+- aid: super-payments:super-payments-refunds-api
+  name: Super Payments Refunds API
+  description: Refund management
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Refunds
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-refunds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.superpayments.com/docs
+  - type: APIReference
+    url: https://docs.superpayments.com/reference
+  - type: GettingStarted
+    url: https://docs.superpayments.com/docs/getting-started
+  - type: AsyncAPI
+    url: asyncapi/super-payments-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/super-payments-initiate-refund-output-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-get-refund-transaction-output-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-initiate-refund-input-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-initiate-payout-refund-input-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-get-refunds-list-output-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-initiate-payout-refund-output-dto-schema.json
+- aid: super-payments:super-payments-rewards-api
+  name: Super Payments Rewards API
+  description: Rewards configuration and calculation and management
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Rewards
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-rewards-api-openapi.yml
+  - type: Documentation
+    url: https://docs.superpayments.com/docs
+  - type: APIReference
+    url: https://docs.superpayments.com/reference
+  - type: GettingStarted
+    url: https://docs.superpayments.com/docs/getting-started
+  - type: AsyncAPI
+    url: asyncapi/super-payments-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/super-payments-put-reward-configuration-input-body-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-reward-configuration-output-dto-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-generate-reward-calculation-input-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-generate-reward-calculation-output-dto-schema.json
+- aid: super-payments:super-payments-settlements-api
+  name: Super Payments Settlements API
+  description: Settlement batches, details, and reconciliation
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Settlement
+  tags_raw:
+  - Settlements
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-settlements-api-openapi.yml
+  - type: Documentation
+    url: https://docs.superpayments.com/docs
+  - type: APIReference
+    url: https://docs.superpayments.com/reference
+  - type: GettingStarted
+    url: https://docs.superpayments.com/docs/getting-started
+  - type: AsyncAPI
+    url: asyncapi/super-payments-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/super-payments-settlement-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-settlement-reconciliation-response-schema.json
+  - type: JSONSchema
+    url: json-schema/super-payments-settlement-list-response-schema.json
+- aid: super-payments:super-payments-webhooks-api
+  name: Super Payments Webhooks API
+  description: The Webhooks API from Super Payments — 0 operation(s) for webhooks.
+  humanURL: https://docs.superpayments.com/docs
+  baseURL: https://api.superpayments.com/2026-04-01
+  tags:
+  - Webhook
+  tags_raw:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/super-payments-webhooks-api-openapi.yml
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-10-12'
   status: enriched
-  artifacts_added: 24
-  pass: local-v1
+  artifacts_added: 1
+  pass: local-v5

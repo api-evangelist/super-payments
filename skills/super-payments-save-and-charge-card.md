@@ -1,5 +1,5 @@
 ---
-name: Save a card and charge it off-session
+name: save-and-charge-card
 description: Create a customer, register a reusable payment method, set it up with the super-card component, then charge it off-session.
 api: openapi/super-payments-openapi.yml
 operations: [create-customer, create-payment-method, create-setup-intent, create-payment-intent]

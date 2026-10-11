@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-create-checkout-session-request-dto-schema.json",
+  "title": "CreateCheckoutSessionRequestDto",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-checkout-sessions-api-openapi.yml#/components/schemas/CreateCheckoutSessionRequestDto",
+  "type": "object",
+  "properties": {
+    "paymentInitiatorId": {
+      "description": "The ID of the payment initiator",
+      "type": "string",
+      "format": "uuid"
+    },
+    "customer": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CheckoutSessionCustomerDto"
+        }
+      ]
+    }
+  },
+  "required": [
+    "paymentInitiatorId"
+  ],
+  "$defs": {
+    "CheckoutSessionCustomerDto": {
+      "description": "To save this payment method for later use, use the customer ID from a previous call to /customers",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The customer ID (cus_...) to assign the payment method to",
+          "type": "string"
+        },
+        "savePaymentMethod": {
+          "description": "Save the payment method for later off-session payments",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "paymentMethodMetadata": {
+          "description": "Additional metadata for the payment method (only for savePaymentMethod true)",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  }
+}

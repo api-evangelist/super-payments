@@ -1,0 +1,760 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-get-payment-transaction-output-schema.json",
+  "title": "GetPaymentTransactionOutput",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-payments-api-openapi.yml#/components/schemas/GetPaymentTransactionOutput",
+  "type": "object",
+  "properties": {
+    "transactionId": {
+      "description": "Unique identifier for the payment transaction",
+      "type": "string"
+    },
+    "transactionReference": {
+      "description": "Reference code for the transaction",
+      "type": "string"
+    },
+    "externalReference": {
+      "description": "External Reference, usually the order identifier associated with the transaction",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transactionStatus": {
+      "description": "Current status of the payment transaction",
+      "allOf": [
+        {
+          "$ref": "#/$defs/PaymentOutputStatus"
+        }
+      ]
+    },
+    "transactionAmount": {
+      "description": "Amount of the transaction",
+      "type": "number"
+    },
+    "metadata": {
+      "description": "Additional metadata associated with the transaction",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "brandId": {
+      "description": "Brand identifier associated with the transaction",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "fees": {
+      "description": "Fees associated with the transaction",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/PaymentIntentFeeDto"
+      }
+    },
+    "funding": {
+      "description": "Funding sources for the transaction",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PaymentFunding"
+      }
+    }
+  },
+  "required": [
+    "transactionId",
+    "transactionReference",
+    "transactionStatus",
+    "transactionAmount",
+    "metadata",
+    "brandId",
+    "fees",
+    "funding"
+  ],
+  "$defs": {
+    "AddressDto": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "description": "City of the billing address",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line1": {
+          "description": "First line of the billing address",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line2": {
+          "description": "Second line of the billing address",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postalCode": {
+          "description": "Postal or ZIP code",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state": {
+          "description": "State, county, province, or region",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country": {
+          "description": "Two-letter country code (ISO 3166-1 alpha-2)",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "city",
+        "line1",
+        "line2",
+        "postalCode",
+        "state",
+        "country"
+      ]
+    },
+    "BuyNowPayLaterPaymentFundingDetailsDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often in installments through providers like Klarna, Afterpay, etc.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/BuyNowPayLaterPaymentType"
+            }
+          ]
+        },
+        "institutionId": {
+          "description": "Identifier of the BNPL provider used for the payment",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "institutionName": {
+          "description": "Display name of the BNPL provider used for the payment",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "institutionId",
+        "institutionName"
+      ]
+    },
+    "BuyNowPayLaterPaymentType": {
+      "description": "Type identifier for Buy Now, Pay Later funding details. BNPL allows customers to make purchases and pay for them over time, often in installments through providers like Klarna, Afterpay, etc.",
+      "type": "string",
+      "const": "BUY_NOW_PAY_LATER"
+    },
+    "CardPaymentFundingDetailsDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of funding details - always \"CARD\" for card payments. Card payments include credit and debit card transactions processed through payment networks like Visa, Mastercard, etc.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/CardPaymentType"
+            }
+          ]
+        },
+        "threeDSAuthentication": {
+          "description": "3D Secure authentication details for the card payment",
+          "allOf": [
+            {
+              "$ref": "#/$defs/ThreeDSDto"
+            }
+          ]
+        },
+        "cvcCheck": {
+          "description": "Result of the CVC check (pass, fail, unavailable, etc.)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zipCheck": {
+          "description": "Result of the postal/zip code check (pass, fail, unavailable, etc.)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "riskFactor": {
+          "description": "Risk factor score for the transaction (higher indicates higher risk)",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "riskLevel": {
+          "description": "Risk level assessment for the transaction (e.g., low, medium, high)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fingerprint": {
+          "description": "Unique fingerprint identifier for the card",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "issuer": {
+          "description": "Issuing bank or financial institution for the card",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "address": {
+          "description": "Billing address associated with the card",
+          "allOf": [
+            {
+              "$ref": "#/$defs/AddressDto"
+            }
+          ]
+        },
+        "country": {
+          "description": "Country code where the card was issued",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nameOnCard": {
+          "description": "Cardholder name as it appears on the card",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "product": {
+          "description": "Card product type (e.g., credit, debit, prepaid)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "funding": {
+          "description": "Funding type of the card (e.g., credit, debit, prepaid)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "authorisationCode": {
+          "description": "Authorization code provided by the card issuer",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "failureCode": {
+          "description": "Code indicating the reason for transaction failure, if applicable",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last4": {
+          "description": "Last 4 digits of the card number",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cardDescription": {
+          "description": "Description of the card type (e.g., Visa Credit, Mastercard Debit)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cardClassification": {
+          "description": "Classification of the card as either CORPORATE or CONSUMER",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "CONSUMER",
+            "CORPORATE"
+          ]
+        },
+        "walletType": {
+          "description": "Type of digital wallet used (e.g., Apple Pay, Google Pay)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "walletLast4": {
+          "description": "Last 4 digits of the card stored in the digital wallet",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "providerData": {
+          "description": "Provider-specific data for the card payment (e.g. Stripe metadata)",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "threeDSAuthentication",
+        "cvcCheck",
+        "zipCheck",
+        "riskFactor",
+        "riskLevel",
+        "fingerprint",
+        "issuer",
+        "address",
+        "country",
+        "nameOnCard",
+        "product",
+        "funding",
+        "authorisationCode",
+        "failureCode",
+        "last4",
+        "cardDescription",
+        "cardClassification",
+        "walletType",
+        "walletLast4",
+        "providerData"
+      ]
+    },
+    "CardPaymentType": {
+      "description": "Type of funding details - always \"CARD\" for card payments. Card payments include credit and debit card transactions processed through payment networks like Visa, Mastercard, etc.",
+      "type": "string",
+      "const": "CARD"
+    },
+    "CashRewardPaymentFundingDetailsDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type identifier for cash reward payment funding details. Cash rewards payments use stored value from the customer's Super Payments account balance.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/CashRewardPaymentType"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CashRewardPaymentType": {
+      "description": "Type identifier for cash reward payment funding details. Cash rewards payments use stored value from the customer's Super Payments account balance.",
+      "type": "string",
+      "const": "CASH_REWARD"
+    },
+    "DisputeDto": {
+      "type": "object",
+      "properties": {
+        "disputeId": {
+          "type": "string"
+        },
+        "fundingAttemptId": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "providerRef": {
+          "type": "string"
+        },
+        "disputeReason": {
+          "type": "string"
+        },
+        "disputeStatus": {
+          "type": "string",
+          "enum": [
+            "lost",
+            "needs_response",
+            "under_review",
+            "warning_closed",
+            "warning_needs_response",
+            "warning_under_review",
+            "won"
+          ]
+        },
+        "disputedAmount": {
+          "$ref": "#/$defs/TransactionCurrencyAmount"
+        },
+        "feeAmount": {
+          "$ref": "#/$defs/TransactionCurrencyAmount"
+        },
+        "hasEvidence": {
+          "type": "boolean"
+        },
+        "submissionDeadline": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "submissionCount": {
+          "type": "number"
+        },
+        "resolved": {
+          "type": "boolean"
+        },
+        "isRefundable": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "stripeDestinationPaymentId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "disputeId",
+        "fundingAttemptId",
+        "provider",
+        "providerRef",
+        "disputeReason",
+        "disputeStatus",
+        "disputedAmount",
+        "feeAmount",
+        "hasEvidence",
+        "submissionDeadline",
+        "submissionCount",
+        "resolved",
+        "isRefundable",
+        "createdAt",
+        "updatedAt",
+        "stripeDestinationPaymentId"
+      ]
+    },
+    "OpenBankingPaymentFundingDetailsDto": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank account through secure bank APIs without using cards.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/OpenBankingPaymentType"
+            }
+          ]
+        },
+        "institutionId": {
+          "description": "Identifier of the financial institution used for the open banking payment",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "institutionName": {
+          "description": "Display name of the financial institution used for the open banking payment",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "institutionId",
+        "institutionName"
+      ]
+    },
+    "OpenBankingPaymentType": {
+      "description": "Type identifier for open banking payment funding details. Open Banking payments allow customers to pay directly from their bank account through secure bank APIs without using cards.",
+      "type": "string",
+      "const": "OPEN_BANKING"
+    },
+    "PaymentFunding": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "Amount of funds transferred with this funding source",
+          "allOf": [
+            {
+              "$ref": "#/$defs/TransactionCurrencyAmount"
+            }
+          ]
+        },
+        "reference": {
+          "description": "Reference identifier for the funding transaction",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "institutionId": {
+          "description": "Identifier of the financial institution used for the payment. Deprecated: use the institutionId field in the fundingDetails object instead.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "deprecated": true
+        },
+        "institutionName": {
+          "description": "Display name of the financial institution used for the payment. Deprecated: use the institutionName field in the fundingDetails object instead.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "deprecated": true
+        },
+        "dispute": {
+          "description": "Information about an associated dispute, if any",
+          "allOf": [
+            {
+              "$ref": "#/$defs/DisputeDto"
+            }
+          ]
+        },
+        "type": {
+          "description": "Type of funding source used for the payment or refund",
+          "type": "string",
+          "enum": [
+            "BNPL",
+            "CARD",
+            "CASH_REWARD",
+            "OPEN_BANKING"
+          ]
+        },
+        "fundingDetails": {
+          "description": "Detailed metadata about the specific funding method used. The type field determines which schema to use.",
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CardPaymentFundingDetailsDto",
+              "title": "Card Payment"
+            },
+            {
+              "$ref": "#/$defs/OpenBankingPaymentFundingDetailsDto",
+              "title": "Open Banking Payment"
+            },
+            {
+              "$ref": "#/$defs/CashRewardPaymentFundingDetailsDto",
+              "title": "Cash Reward Payment"
+            },
+            {
+              "$ref": "#/$defs/BuyNowPayLaterPaymentFundingDetailsDto",
+              "title": "Buy Now Pay Later Payment"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "amount",
+        "reference",
+        "institutionId",
+        "institutionName",
+        "type"
+      ]
+    },
+    "PaymentIntentFeeDto": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "description": "The currency of the fee",
+          "type": "string"
+        },
+        "feeCode": {
+          "description": "The fee code",
+          "type": "string"
+        },
+        "feeAmountInMinorUnits": {
+          "description": "The calculated fee amount before VAT. Calculated as (fixedAmountInEffectInMinorUnits + rateInEffect * chargeableAmountInMinorUnits)",
+          "type": "number"
+        },
+        "chargeableAmountInMinorUnits": {
+          "description": "the amount from which the fee amount was calculated eg. the payment amount for an AMEX transaction.",
+          "type": "number"
+        },
+        "fixedAmountInEffectInMinorUnits": {
+          "description": "A fixed charge applied for the fee code",
+          "type": "number"
+        },
+        "vatAmountInMinorUnits": {
+          "description": "The VAT amount calculated from the feeAmountInMinorUnits",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "vatRateInEffect": {
+          "description": "The VAT rate e.g. for 20% the rateInEffect is \"20.0000\"",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rateInEffect": {
+          "description": "The rate used to calculate the variable portion of the fee from the chargeableAmountInMinorUnits eg. for 2.49% the rateInEffect is \"2.4900\"",
+          "type": "number"
+        },
+        "totalFeeAmountInclVatInMinorUnits": {
+          "description": "The total fee amount including VAT",
+          "type": "number"
+        }
+      },
+      "required": [
+        "currency",
+        "feeCode",
+        "feeAmountInMinorUnits",
+        "chargeableAmountInMinorUnits",
+        "fixedAmountInEffectInMinorUnits",
+        "vatAmountInMinorUnits",
+        "vatRateInEffect",
+        "rateInEffect",
+        "totalFeeAmountInclVatInMinorUnits"
+      ]
+    },
+    "PaymentOutputStatus": {
+      "description": "Current status of the payment transaction",
+      "type": "string",
+      "enum": [
+        "PaymentAbandoned",
+        "PaymentCancelled",
+        "PaymentDelayed",
+        "PaymentFailed",
+        "PaymentPending",
+        "PaymentSuccess"
+      ]
+    },
+    "ThreeDSDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of 3DS authentication (e.g., authenticated, attempted, failed)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "version": {
+          "description": "Version of 3DS used for authentication",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "authentication_flow": {
+          "description": "Authentication flow (e.g., challenge, frictionless)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "electronic_commerce_indicator": {
+          "description": "Electronic commerce indicator",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exemption_indicator": {
+          "description": "Exemption indicator",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result": {
+          "description": "Authentication result",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result_reason": {
+          "description": "Reason for the authentication result",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "transaction_id": {
+          "description": "Transaction ID for the 3DS authentication",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "version",
+        "authentication_flow",
+        "electronic_commerce_indicator",
+        "exemption_indicator",
+        "result",
+        "result_reason",
+        "transaction_id"
+      ]
+    },
+    "TransactionCurrencyAmount": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "Integer after multiplying the value with amountMultiplier",
+          "type": "number"
+        },
+        "amountMultiplier": {
+          "description": "Divide amount with amountMultiplier to get the decimal value",
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "const": "GBP"
+        }
+      },
+      "required": [
+        "amount",
+        "amountMultiplier",
+        "currency"
+      ]
+    }
+  }
+}

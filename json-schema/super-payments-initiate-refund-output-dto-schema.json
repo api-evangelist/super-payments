@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-initiate-refund-output-dto-schema.json",
+  "title": "InitiateRefundOutputDto",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-refunds-api-openapi.yml#/components/schemas/InitiateRefundOutputDto",
+  "type": "object",
+  "properties": {
+    "transactionId": {
+      "description": "The unique identifier of the refund",
+      "type": "string",
+      "format": "uuid"
+    },
+    "transactionReference": {
+      "description": "The reference number for the refund",
+      "type": "string"
+    },
+    "fundingSummary": {
+      "description": "Summary of funding sources for the refund",
+      "type": "object",
+      "properties": {
+        "cashPayableToMerchant": {
+          "description": "Amount payable to merchant",
+          "type": "object",
+          "properties": {
+            "amount": {
+              "description": "Amount in minor units",
+              "type": "integer",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          },
+          "required": [
+            "amount",
+            "currency"
+          ]
+        },
+        "customerFundedAmount": {
+          "description": "Amount funded by customer",
+          "type": "object",
+          "properties": {
+            "amount": {
+              "description": "Amount in minor units",
+              "type": "integer",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          },
+          "required": [
+            "amount",
+            "currency"
+          ]
+        },
+        "superFundedAmount": {
+          "description": "Amount funded by Super",
+          "type": "object",
+          "properties": {
+            "amount": {
+              "description": "Amount in minor units",
+              "type": "integer",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          },
+          "required": [
+            "amount",
+            "currency"
+          ]
+        },
+        "merchantFundedAmount": {
+          "description": "Amount funded by merchant",
+          "type": "object",
+          "properties": {
+            "amount": {
+              "description": "Amount in minor units",
+              "type": "integer",
+              "minimum": 0
+            },
+            "currency": {
+              "description": "Currency code",
+              "type": "string",
+              "const": "GBP"
+            }
+          },
+          "required": [
+            "amount",
+            "currency"
+          ]
+        }
+      },
+      "required": [
+        "cashPayableToMerchant",
+        "customerFundedAmount",
+        "superFundedAmount",
+        "merchantFundedAmount"
+      ]
+    }
+  },
+  "required": [
+    "transactionId",
+    "transactionReference",
+    "fundingSummary"
+  ]
+}

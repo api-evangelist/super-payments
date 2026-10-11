@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-setup-intent-session-list-output-dto-schema.json",
+  "title": "SetupIntentSessionListOutputDto",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-payment-methods-api-openapi.yml#/components/schemas/SetupIntentSessionListOutputDto",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "FAILED",
+              "PROCESSING",
+              "SUCCESS"
+            ]
+          },
+          "createdAt": {},
+          "updatedAt": {},
+          "paymentMethodId": {
+            "type": "string"
+          },
+          "customerId": {
+            "type": "string"
+          },
+          "brandId": {
+            "type": "string"
+          },
+          "providerData": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "provider": {
+                "type": "string",
+                "const": "STRIPE"
+              },
+              "providerPaymentMethodId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "provider",
+              "providerPaymentMethodId"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "paymentMethodId",
+          "customerId",
+          "brandId"
+        ]
+      }
+    }
+  },
+  "required": [
+    "items"
+  ]
+}

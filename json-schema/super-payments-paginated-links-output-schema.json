@@ -1,0 +1,496 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-paginated-links-output-schema.json",
+  "title": "PaginatedLinksOutput",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-payment-links-api-openapi.yml#/components/schemas/PaginatedLinksOutput",
+  "type": "object",
+  "properties": {
+    "pageInfo": {
+      "type": "object",
+      "properties": {
+        "hasNextPage": {
+          "type": "boolean"
+        },
+        "currentPage": {
+          "type": "number"
+        },
+        "lastPage": {
+          "type": "number"
+        },
+        "pageSize": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "hasNextPage",
+        "currentPage",
+        "lastPage",
+        "pageSize"
+      ]
+    },
+    "totalCount": {
+      "type": "number"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/LinkResponseDto"
+      }
+    }
+  },
+  "required": [
+    "pageInfo",
+    "totalCount",
+    "items"
+  ],
+  "$defs": {
+    "LinkResponseDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "brandId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "externalReference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "amountInMinorUnits": {
+          "type": "number"
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "MERCHANT_TOPUP",
+            "PURCHASE"
+          ]
+        },
+        "expiresAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "metadata": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[^\\r\\n\\t\\b\\f\\v]+$",
+            "maxLength": 200
+          }
+        },
+        "successUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "failureUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cancelUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "paymentReferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "paymentIntentId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "receiptReference": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "paymentIntentId"
+            ]
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PAID",
+            "UNPAID"
+          ]
+        },
+        "billingAddress": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/PaymentLinkAddressDto"
+            }
+          ]
+        },
+        "shippingAddress": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/PaymentLinkAddressDto"
+            }
+          ]
+        },
+        "lineItems": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/PaymentLinkLineItemDto"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "createdAt",
+        "updatedAt",
+        "brandId",
+        "externalReference",
+        "amountInMinorUnits",
+        "purpose",
+        "expiresAt",
+        "metadata",
+        "successUrl",
+        "failureUrl",
+        "cancelUrl",
+        "url",
+        "paymentReferences",
+        "status",
+        "billingAddress",
+        "shippingAddress",
+        "lineItems"
+      ]
+    },
+    "PaymentLinkAddressDto": {
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "addressLine2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "addressLine3": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "PaymentLinkLineItemDto": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "AIRLINE"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "flightNumber": {
+                  "type": "string"
+                },
+                "flightDate": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                "travellers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ]
+                  }
+                },
+                "totalPrice": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string",
+                  "const": "GBP"
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "CAR_RENTAL"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "travellers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ]
+                  }
+                },
+                "checkInDate": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                "checkOutDate": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                "totalPrice": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string",
+                  "const": "GBP"
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "LODGING"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "travellers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ]
+                  }
+                },
+                "checkInDate": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                "checkOutDate": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  ]
+                },
+                "totalPrice": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string",
+                  "const": "GBP"
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "PRODUCT"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "productDescription": {
+                  "type": "string"
+                },
+                "sku": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "number"
+                },
+                "unitPrice": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string",
+                  "const": "GBP"
+                },
+                "expectedDeliveryDate": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "data"
+          ]
+        }
+      ]
+    }
+  }
+}

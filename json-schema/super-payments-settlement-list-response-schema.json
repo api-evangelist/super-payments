@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-settlement-list-response-schema.json",
+  "title": "SettlementListResponse",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-settlements-api-openapi.yml#/components/schemas/SettlementListResponse",
+  "type": "object",
+  "properties": {
+    "pageSize": {
+      "description": "Number of items per page.",
+      "type": "integer"
+    },
+    "nextPage": {
+      "description": "Token for the next page of results.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hasNext": {
+      "description": "Whether there are more pages of results.",
+      "type": "boolean"
+    },
+    "items": {
+      "description": "List of settlements.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SettlementListItem"
+      }
+    }
+  },
+  "required": [
+    "pageSize",
+    "hasNext",
+    "items"
+  ],
+  "$defs": {
+    "SettlementListItem": {
+      "type": "object",
+      "properties": {
+        "settlementId": {
+          "description": "Unique identifier for the settlement.",
+          "type": "string"
+        },
+        "settlementReference": {
+          "description": "Settlement reference supplied by the merchant, when available.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "settledAt": {
+          "description": "ISO timestamp when the settlement was completed.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "status": {
+          "description": "Current status of the settlement.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/SettlementStatus"
+            }
+          ]
+        },
+        "minorUnitAmount": {
+          "description": "Amount in minor units (integer).",
+          "type": "integer"
+        },
+        "currency": {
+          "description": "Currency code.",
+          "type": "string"
+        },
+        "createdAt": {
+          "description": "ISO timestamp when the settlement row was created.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "settlementId",
+        "settlementReference",
+        "settledAt",
+        "status",
+        "minorUnitAmount",
+        "currency",
+        "createdAt"
+      ]
+    },
+    "SettlementStatus": {
+      "description": "Current status of the settlement batch.",
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "ERRORED",
+        "SETTLED",
+        "SETTLED_AFTER_RETRY"
+      ]
+    }
+  }
+}

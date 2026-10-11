@@ -1,6 +1,7 @@
 generated: '2026-07-21'
 method: searched
 source: https://docs.superpayments.com/reference/rate-limiting
+name: Super Payments API Rate Limits
 description: >-
   Super Payments applies per-second request-rate limits plus a concurrency
   limiter to protect API stability. Exceeding a limit returns HTTP 429; clients

@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/super-payments/main/json-schema/super-payments-get-payments-list-output-schema.json",
+  "title": "GetPaymentsListOutput",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/super-payments-payments-api-openapi.yml#/components/schemas/GetPaymentsListOutput",
+  "type": "object",
+  "properties": {
+    "pageSize": {
+      "description": "Number of items per page",
+      "type": "number"
+    },
+    "nextPage": {
+      "description": "Token for the next page of results.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hasNext": {
+      "description": "Whether there are more pages of results",
+      "type": "boolean"
+    },
+    "items": {
+      "description": "List of payment transactions",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/GetPaymentsListTransaction"
+      }
+    }
+  },
+  "required": [
+    "pageSize",
+    "nextPage",
+    "hasNext",
+    "items"
+  ],
+  "$defs": {
+    "GetPaymentsListTransaction": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "description": "Additional metadata associated with the transaction",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "transactionId": {
+          "description": "Unique identifier for the payment transaction",
+          "type": "string"
+        },
+        "transactionReference": {
+          "description": "Reference code for the transaction",
+          "type": "string"
+        },
+        "externalReference": {
+          "description": "External reference (e.g., order ID)",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "minorUnitAmount": {
+          "description": "Amount in minor units of the currency",
+          "type": "number"
+        },
+        "currency": {
+          "description": "Currency code",
+          "type": "string"
+        },
+        "discountedAmount": {
+          "description": "Discounted amount in minor units",
+          "type": "number"
+        },
+        "discountPercentage": {
+          "description": "Discount percentage applied",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "transactionStatus": {
+          "description": "Current status of the payment transaction",
+          "allOf": [
+            {
+              "$ref": "#/$defs/PaymentOutputStatus"
+            }
+          ]
+        },
+        "transactionStatusChangedAt": {
+          "description": "Date when the transaction status was last changed",
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "description": "Date when the transaction was created",
+          "type": "string",
+          "format": "date-time"
+        },
+        "payerName": {
+          "description": "Name of the payer",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "settlementReference": {
+          "description": "Settlement reference",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "brandId": {
+          "description": "Brand identifier associated with the transaction",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "metadata",
+        "transactionId",
+        "transactionReference",
+        "externalReference",
+        "minorUnitAmount",
+        "currency",
+        "discountedAmount",
+        "discountPercentage",
+        "transactionStatus",
+        "transactionStatusChangedAt",
+        "createdAt",
+        "payerName",
+        "settlementReference",
+        "brandId"
+      ]
+    },
+    "PaymentOutputStatus": {
+      "description": "Current status of the payment transaction",
+      "type": "string",
+      "enum": [
+        "PaymentAbandoned",
+        "PaymentCancelled",
+        "PaymentDelayed",
+        "PaymentFailed",
+        "PaymentPending",
+        "PaymentSuccess"
+      ]
+    }
+  }
+}
