@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: Super Payments BigCommerce Order Checkout
+  summary: Open a Super Payments checkout session for a BigCommerce order.
+  description: Retrieves an order from BigCommerce, creates a Super Payments checkout
+    session for the merchant's payment initiator, and attaches the order's shipping
+    and billing addresses to that session. Recreates the Super Payments BigCommerce
+    integration as a forkable workflow.
+  version: 1.0.0
+sourceDescriptions:
+- name: bigcommerceOrder
+  url: https://raw.githubusercontent.com/api-evangelist/bigcommerce/refs/heads/main/openapi/bigcommerce-order-api-openapi.yml
+  type: openapi
+- name: superPaymentsCheckoutSessions
+  url: https://raw.githubusercontent.com/api-evangelist/super-payments/refs/heads/main/openapi/super-payments-checkout-sessions-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bigcommerce-order-to-super-payments-checkout
+  summary: Turn a BigCommerce order into a Super Payments checkout session.
+  description: Reads the BigCommerce order, opens a checkout session, and upserts
+    the order details onto it.
+  inputs:
+    type: object
+    required:
+    - orderId
+    - paymentInitiatorId
+    properties:
+      orderId:
+        type: string
+      paymentInitiatorId:
+        type: string
+        format: uuid
+      customerId:
+        type: string
+  steps:
+  - stepId: get-bigcommerce-order
+    description: Retrieve the order from BigCommerce.
+    operationId: $sourceDescriptions.bigcommerceOrder.getOrder
+    parameters:
+    - name: orderId
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      order: $response.body#
+      shippingAddress: $response.body#/shipping_addresses
+      billingAddress: $response.body#/billing_address
+  - stepId: create-checkout-session
+    description: Create a Super Payments checkout session.
+    operationId: $sourceDescriptions.superPaymentsCheckoutSessions.create-checkout-session
+    requestBody:
+      contentType: application/json
+      payload:
+        paymentInitiatorId: $inputs.paymentInitiatorId
+        customer:
+          id: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      checkoutSessionId: $response.body#/checkoutSessionId
+      checkoutSessionToken: $response.body#/checkoutSessionToken
+  - stepId: upsert-order-details
+    description: Attach the BigCommerce order addresses to the checkout session.
+    operationId: $sourceDescriptions.superPaymentsCheckoutSessions.upsert-order-details
+    parameters:
+    - name: checkoutSessionId
+      in: path
+      value: $steps.create-checkout-session.outputs.checkoutSessionId
+    - name: Authorization
+      in: header
+      value: $steps.create-checkout-session.outputs.checkoutSessionToken
+    requestBody:
+      contentType: application/json
+      payload:
+        shippingAddress: $steps.get-bigcommerce-order.outputs.shippingAddress
+        billingAddress: $steps.get-bigcommerce-order.outputs.billingAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      checkoutSessionId: $response.body#/checkoutSessionId
+  outputs:
+    checkoutSessionId: $steps.create-checkout-session.outputs.checkoutSessionId
+    checkoutSessionToken: $steps.create-checkout-session.outputs.checkoutSessionToken
+x-integration:
+  partner: bigcommerce
+  template: null
+  edge_evidence: https://docs.superpayments.com/docs/bigcommerce.md
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)

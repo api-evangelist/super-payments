@@ -11,8 +11,8 @@
   marketplace: shopify
   evidence: https://apps.shopify.com/super-payments
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: super-payments-shopify-order-checkout.yml
+  status: arazzo
 - slug: super-payments-woocommerce
   label: WooCommerce
   partner: woocommerce
@@ -20,8 +20,8 @@
   type: claimed
   evidence: https://docs.superpayments.com/docs/woo-commerce.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: super-payments-woocommerce-order-checkout.yml
+  status: arazzo
 - slug: super-payments-magento-2
   label: Magento 2
   partner_name: Magento 2
@@ -37,5 +37,5 @@
   type: claimed
   evidence: https://docs.superpayments.com/docs/bigcommerce.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: super-payments-bigcommerce-order-checkout.yml
+  status: arazzo

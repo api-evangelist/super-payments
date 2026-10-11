@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: Super Payments Shopify Order Checkout
+  summary: Open a Super Payments checkout session for a Shopify order.
+  description: Retrieves an order from Shopify, creates a Super Payments checkout
+    session for the merchant's payment initiator, and attaches the order's shipping
+    and billing addresses to that session. Recreates the Super Payments Shopify integration
+    as a forkable workflow.
+  version: 1.0.0
+sourceDescriptions:
+- name: shopifyOrders
+  url: https://raw.githubusercontent.com/api-evangelist/shopify/refs/heads/main/openapi/shopify-orders-api-openapi.yml
+  type: openapi
+- name: superPaymentsCheckoutSessions
+  url: https://raw.githubusercontent.com/api-evangelist/super-payments/refs/heads/main/openapi/super-payments-checkout-sessions-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: shopify-order-to-super-payments-checkout
+  summary: Turn a Shopify order into a Super Payments checkout session.
+  description: Reads the Shopify order, opens a checkout session, and upserts the
+    order details onto it.
+  inputs:
+    type: object
+    required:
+    - orderId
+    - paymentInitiatorId
+    properties:
+      orderId:
+        type: string
+      paymentInitiatorId:
+        type: string
+        format: uuid
+      customerId:
+        type: string
+  steps:
+  - stepId: get-shopify-order
+    description: Retrieve the order from Shopify.
+    operationId: $sourceDescriptions.shopifyOrders.getOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      order: $response.body#/order
+      shippingAddress: $response.body#/order/shipping_address
+      billingAddress: $response.body#/order/billing_address
+  - stepId: create-checkout-session
+    description: Create a Super Payments checkout session.
+    operationId: $sourceDescriptions.superPaymentsCheckoutSessions.create-checkout-session
+    requestBody:
+      contentType: application/json
+      payload:
+        paymentInitiatorId: $inputs.paymentInitiatorId
+        customer:
+          id: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      checkoutSessionId: $response.body#/checkoutSessionId
+      checkoutSessionToken: $response.body#/checkoutSessionToken
+  - stepId: upsert-order-details
+    description: Attach the Shopify order addresses to the checkout session.
+    operationId: $sourceDescriptions.superPaymentsCheckoutSessions.upsert-order-details
+    parameters:
+    - name: checkoutSessionId
+      in: path
+      value: $steps.create-checkout-session.outputs.checkoutSessionId
+    - name: Authorization
+      in: header
+      value: $steps.create-checkout-session.outputs.checkoutSessionToken
+    requestBody:
+      contentType: application/json
+      payload:
+        shippingAddress: $steps.get-shopify-order.outputs.shippingAddress
+        billingAddress: $steps.get-shopify-order.outputs.billingAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      checkoutSessionId: $response.body#/checkoutSessionId
+  outputs:
+    checkoutSessionId: $steps.create-checkout-session.outputs.checkoutSessionId
+    checkoutSessionToken: $steps.create-checkout-session.outputs.checkoutSessionToken
+x-integration:
+  partner: shopify
+  template: null
+  edge_evidence: https://apps.shopify.com/super-payments
+  edge_type: marketplace
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)
