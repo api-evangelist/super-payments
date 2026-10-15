@@ -15,6 +15,7 @@ checked:
 - https://wordpress.org/plugins/super-payments/
 - https://www.superpayments.com/integrations
 - https://zapier.com/apps/super-payments/integrations
+- shopify/integrations/shopify-integration-edges.yml
 summary: Super Payments publishes first-party ecommerce-platform plugins (Shopify, WooCommerce, Magento 2, BigCommerce)
   documented on its own docs site; it is listed on the Shopify App Store and WordPress.org plugin directory, and
   is absent from Zapier and n8n (both 404).
@@ -47,4 +48,22 @@ edges:
   type: claimed
   direction: provider-built
   evidence: https://docs.superpayments.com/docs/bigcommerce.md
+- partner_name: Shopify (own)
+  partner: shopify
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://apps.shopify.com/super-payments-marketing
+  mirror_of: shopify/integrations/shopify-integration-edges.yml
+  apps:
+  - Super Payments Marketing
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  publisher_verified:
+  - Built for Shopify
 templates: []

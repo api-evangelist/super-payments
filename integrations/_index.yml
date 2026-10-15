@@ -39,3 +39,15 @@
   source: edge
   arazzo: super-payments-bigcommerce-order-checkout.yml
   status: arazzo
+- slug: super-payments-shopify-own
+  label: Shopify (own)
+  partner: shopify
+  partner_name: Shopify (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://apps.shopify.com/super-payments-marketing
+  source: edge
+  relationship: platform-app
+  arazzo: super-payments-shopify-order-checkout.yml
+  status: arazzo
