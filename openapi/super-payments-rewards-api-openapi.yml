@@ -408,73 +408,6 @@ paths:
       - Rewards
 components:
   schemas:
-    GenerateRewardCalculationInput:
-      type: object
-      properties:
-        brandId:
-          description: The unique identifier for the brand
-          type: string
-          examples:
-          - f47ac10b-58cc-4372-a567-0e02b2c3d479
-        currency:
-          description: The currency code, currently only GBP is supported
-          type: string
-          examples:
-          - GBP
-          const: GBP
-        amount:
-          description: The transaction amount in the specified currency
-          type: number
-          examples:
-          - 25.99
-          minimum: 0
-        externalReference:
-          description: Optional external reference for tracking purposes
-          type: string
-          examples:
-          - order-12345
-      required:
-      - brandId
-      - currency
-      - amount
-    RewardConfigurationOutputDto:
-      type: object
-      properties:
-        rewardPercentage:
-          description: The percentage of the transaction amount that will be rewarded
-          type: number
-          examples:
-          - 2.5
-        minimumSpend:
-          description: The minimum spend required to qualify for the reward
-          type: object
-          examples:
-          - currency: GBP
-            amount: 1000
-          properties:
-            currency:
-              description: The currency code for the minimum spend amount
-              type: string
-              examples:
-              - GBP
-              const: GBP
-            amount:
-              description: The minimum spend amount
-              type: number
-              examples:
-              - 1000
-          required:
-          - currency
-          - amount
-        rewardsExpireAfter:
-          description: The number of seconds after which the rewards will expire
-          type: number
-          examples:
-          - 31536000
-      required:
-      - rewardPercentage
-      - minimumSpend
-      - rewardsExpireAfter
     PutRewardConfigurationInputBody:
       type: object
       properties:
@@ -548,6 +481,73 @@ components:
       - id
       - rewardPercentage
       - rewardsIssuable
+    GenerateRewardCalculationInput:
+      type: object
+      properties:
+        brandId:
+          description: The unique identifier for the brand
+          type: string
+          examples:
+          - f47ac10b-58cc-4372-a567-0e02b2c3d479
+        currency:
+          description: The currency code, currently only GBP is supported
+          type: string
+          examples:
+          - GBP
+          const: GBP
+        amount:
+          description: The transaction amount in the specified currency
+          type: number
+          examples:
+          - 25.99
+          minimum: 0
+        externalReference:
+          description: Optional external reference for tracking purposes
+          type: string
+          examples:
+          - order-12345
+      required:
+      - brandId
+      - currency
+      - amount
+    RewardConfigurationOutputDto:
+      type: object
+      properties:
+        rewardPercentage:
+          description: The percentage of the transaction amount that will be rewarded
+          type: number
+          examples:
+          - 2.5
+        minimumSpend:
+          description: The minimum spend required to qualify for the reward
+          type: object
+          examples:
+          - currency: GBP
+            amount: 1000
+          properties:
+            currency:
+              description: The currency code for the minimum spend amount
+              type: string
+              examples:
+              - GBP
+              const: GBP
+            amount:
+              description: The minimum spend amount
+              type: number
+              examples:
+              - 1000
+          required:
+          - currency
+          - amount
+        rewardsExpireAfter:
+          description: The number of seconds after which the rewards will expire
+          type: number
+          examples:
+          - 31536000
+      required:
+      - rewardPercentage
+      - minimumSpend
+      - rewardsExpireAfter
   securitySchemes:
     api_key:
       type: apiKey

@@ -1039,6 +1039,35 @@ paths:
       - Payment Links
 components:
   schemas:
+    PaginatedLinksOutput:
+      type: object
+      properties:
+        pageInfo:
+          type: object
+          properties:
+            hasNextPage:
+              type: boolean
+            currentPage:
+              type: number
+            lastPage:
+              type: number
+            pageSize:
+              type: number
+          required:
+          - hasNextPage
+          - currentPage
+          - lastPage
+          - pageSize
+        totalCount:
+          type: number
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LinkResponseDto'
+      required:
+      - pageInfo
+      - totalCount
+      - items
     LinkResponseDto:
       type: object
       properties:
@@ -1142,49 +1171,6 @@ components:
       - billingAddress
       - shippingAddress
       - lineItems
-    PaymentLinkAddressDto:
-      type: object
-      properties:
-        addressLine1:
-          type:
-          - string
-          - 'null'
-        addressLine2:
-          type:
-          - string
-          - 'null'
-        addressLine3:
-          type:
-          - string
-          - 'null'
-        city:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-        postCode:
-          type:
-          - string
-          - 'null'
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        phone:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
     PaymentLinkLineItemDto:
       oneOf:
       - type: object
@@ -1384,35 +1370,49 @@ components:
       required:
       - brandId
       - amountInMinorUnits
-    PaginatedLinksOutput:
+    PaymentLinkAddressDto:
       type: object
       properties:
-        pageInfo:
-          type: object
-          properties:
-            hasNextPage:
-              type: boolean
-            currentPage:
-              type: number
-            lastPage:
-              type: number
-            pageSize:
-              type: number
-          required:
-          - hasNextPage
-          - currentPage
-          - lastPage
-          - pageSize
-        totalCount:
-          type: number
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LinkResponseDto'
-      required:
-      - pageInfo
-      - totalCount
-      - items
+        addressLine1:
+          type:
+          - string
+          - 'null'
+        addressLine2:
+          type:
+          - string
+          - 'null'
+        addressLine3:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        postCode:
+          type:
+          - string
+          - 'null'
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
   securitySchemes:
     api_key:
       type: apiKey

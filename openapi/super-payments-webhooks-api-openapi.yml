@@ -1126,12 +1126,12 @@ webhooks:
       - Webhooks
 components:
   schemas:
-    CustomerPaymentMethodDisabledWebhookDto:
+    RefundFailedWebhookDto:
       type: object
       properties:
         eventType:
           type: string
-          const: customer.payment_method.disabled
+          const: refund.failed
         eventId:
           type: string
         eventDatetime:
@@ -1141,64 +1141,92 @@ components:
         data:
           type: object
           properties:
-            paymentMethodId:
+            brandId:
               type: string
-            customerId:
-              type: string
-            merchantId:
-              type: string
-            type:
-              type: string
-            usage:
+            refundId:
               type: string
             status:
               type: string
+            refundReference:
+              type: string
+            externalReference:
+              type: string
+            originatingPaymentId:
+              type: string
+            originatingPaymentExternalReference:
+              type: string
+            originatingPaymentSource:
+              type: string
+            amount:
+              type: object
+              properties:
+                amount:
+                  type: number
+                amountMultiplier:
+                  type: number
+                currency:
+                  type: string
+              required:
+              - amount
+              - amountMultiplier
+              - currency
+            refundComponents:
+              type: object
+              properties:
+                merchantAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+                customerAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+                superAmount:
+                  type: object
+                  properties:
+                    amount:
+                      type: number
+                    amountMultiplier:
+                      type: number
+                    currency:
+                      type: string
+                  required:
+                  - amount
+                  - amountMultiplier
+                  - currency
+              required:
+              - merchantAmount
+              - customerAmount
+              - superAmount
           required:
-          - paymentMethodId
-          - customerId
-          - merchantId
-          - type
-          - usage
+          - brandId
+          - refundId
           - status
-      required:
-      - eventType
-      - eventId
-      - eventDatetime
-      - data
-    CustomerPaymentMethodRequiresActionWebhookDto:
-      type: object
-      properties:
-        eventType:
-          type: string
-          const: customer.payment_method.requires_action
-        eventId:
-          type: string
-        eventDatetime:
-          type: string
-          format: date-time
-          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
-        data:
-          type: object
-          properties:
-            paymentMethodId:
-              type: string
-            customerId:
-              type: string
-            merchantId:
-              type: string
-            type:
-              type: string
-            usage:
-              type: string
-            status:
-              type: string
-          required:
-          - paymentMethodId
-          - customerId
-          - merchantId
-          - type
-          - usage
-          - status
+          - refundReference
+          - externalReference
+          - originatingPaymentId
+          - originatingPaymentExternalReference
+          - originatingPaymentSource
+          - amount
+          - refundComponents
       required:
       - eventType
       - eventId
@@ -1310,12 +1338,12 @@ components:
       - eventId
       - eventDatetime
       - data
-    RefundFailedWebhookDto:
+    CustomerPaymentMethodRequiresActionWebhookDto:
       type: object
       properties:
         eventType:
           type: string
-          const: refund.failed
+          const: customer.payment_method.requires_action
         eventId:
           type: string
         eventDatetime:
@@ -1325,92 +1353,64 @@ components:
         data:
           type: object
           properties:
-            brandId:
+            paymentMethodId:
               type: string
-            refundId:
+            customerId:
+              type: string
+            merchantId:
+              type: string
+            type:
+              type: string
+            usage:
               type: string
             status:
               type: string
-            refundReference:
-              type: string
-            externalReference:
-              type: string
-            originatingPaymentId:
-              type: string
-            originatingPaymentExternalReference:
-              type: string
-            originatingPaymentSource:
-              type: string
-            amount:
-              type: object
-              properties:
-                amount:
-                  type: number
-                amountMultiplier:
-                  type: number
-                currency:
-                  type: string
-              required:
-              - amount
-              - amountMultiplier
-              - currency
-            refundComponents:
-              type: object
-              properties:
-                merchantAmount:
-                  type: object
-                  properties:
-                    amount:
-                      type: number
-                    amountMultiplier:
-                      type: number
-                    currency:
-                      type: string
-                  required:
-                  - amount
-                  - amountMultiplier
-                  - currency
-                customerAmount:
-                  type: object
-                  properties:
-                    amount:
-                      type: number
-                    amountMultiplier:
-                      type: number
-                    currency:
-                      type: string
-                  required:
-                  - amount
-                  - amountMultiplier
-                  - currency
-                superAmount:
-                  type: object
-                  properties:
-                    amount:
-                      type: number
-                    amountMultiplier:
-                      type: number
-                    currency:
-                      type: string
-                  required:
-                  - amount
-                  - amountMultiplier
-                  - currency
-              required:
-              - merchantAmount
-              - customerAmount
-              - superAmount
           required:
-          - brandId
-          - refundId
+          - paymentMethodId
+          - customerId
+          - merchantId
+          - type
+          - usage
           - status
-          - refundReference
-          - externalReference
-          - originatingPaymentId
-          - originatingPaymentExternalReference
-          - originatingPaymentSource
-          - amount
-          - refundComponents
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
+    CustomerPaymentMethodEnabledWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: customer.payment_method.enabled
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            paymentMethodId:
+              type: string
+            customerId:
+              type: string
+            merchantId:
+              type: string
+            type:
+              type: string
+            usage:
+              type: string
+            status:
+              type: string
+          required:
+          - paymentMethodId
+          - customerId
+          - merchantId
+          - type
+          - usage
+          - status
       required:
       - eventType
       - eventId
@@ -1551,6 +1551,45 @@ components:
       - eventId
       - eventDatetime
       - data
+    CustomerPaymentMethodDisabledWebhookDto:
+      type: object
+      properties:
+        eventType:
+          type: string
+          const: customer.payment_method.disabled
+        eventId:
+          type: string
+        eventDatetime:
+          type: string
+          format: date-time
+          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        data:
+          type: object
+          properties:
+            paymentMethodId:
+              type: string
+            customerId:
+              type: string
+            merchantId:
+              type: string
+            type:
+              type: string
+            usage:
+              type: string
+            status:
+              type: string
+          required:
+          - paymentMethodId
+          - customerId
+          - merchantId
+          - type
+          - usage
+          - status
+      required:
+      - eventType
+      - eventId
+      - eventDatetime
+      - data
     PaymentSuccessWebhookDto:
       type: object
       properties:
@@ -1681,45 +1720,6 @@ components:
           - fundingSummary
           - surchargeAmount
           - externalReference
-      required:
-      - eventType
-      - eventId
-      - eventDatetime
-      - data
-    CustomerPaymentMethodEnabledWebhookDto:
-      type: object
-      properties:
-        eventType:
-          type: string
-          const: customer.payment_method.enabled
-        eventId:
-          type: string
-        eventDatetime:
-          type: string
-          format: date-time
-          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
-        data:
-          type: object
-          properties:
-            paymentMethodId:
-              type: string
-            customerId:
-              type: string
-            merchantId:
-              type: string
-            type:
-              type: string
-            usage:
-              type: string
-            status:
-              type: string
-          required:
-          - paymentMethodId
-          - customerId
-          - merchantId
-          - type
-          - usage
-          - status
       required:
       - eventType
       - eventId

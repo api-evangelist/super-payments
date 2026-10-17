@@ -207,79 +207,6 @@ paths:
       - Payment Methods
 components:
   schemas:
-    PaymentMethodIdParam:
-      type: string
-    PaginatedPaymentMethodListOutput:
-      type: object
-      properties:
-        pageInfo:
-          type: object
-          properties:
-            hasNextPage:
-              type: boolean
-            currentPage:
-              type: number
-            lastPage:
-              type: number
-            pageSize:
-              type: number
-          required:
-          - hasNextPage
-          - currentPage
-          - lastPage
-          - pageSize
-        totalCount:
-          type: number
-        items:
-          type: array
-          items:
-            type: object
-            properties:
-              id: {}
-              customerId: {}
-              type:
-                type: string
-                const: CARD
-                x-enumNames:
-                - CARD
-              usage:
-                type: string
-                const: OFF_SESSION
-                x-enumNames:
-                - OFF_SESSION
-              status:
-                type: string
-                enum:
-                - DISABLED
-                - ENABLED
-                - REQUIRES_ACTION
-                x-enumNames:
-                - DISABLED
-                - ENABLED
-                - REQUIRES_ACTION
-              metadata:
-                type:
-                - object
-                - 'null'
-                additionalProperties:
-                  type: string
-                  pattern: ^[^\r\n\t\b\f\v]+$
-                  maxLength: 200
-              createdAt: {}
-              updatedAt: {}
-            required:
-            - id
-            - customerId
-            - type
-            - usage
-            - status
-            - metadata
-            - createdAt
-            - updatedAt
-      required:
-      - pageInfo
-      - totalCount
-      - items
     SetupIntentSessionListOutputDto:
       type: object
       properties:
@@ -354,6 +281,12 @@ components:
       - customerId
       - type
       - usage
+    SetupIntentSessionInputDto:
+      type: object
+      properties:
+        redirectUrl:
+          type: string
+          format: uri
     SetupIntentSessionOutputDto:
       type: object
       properties:
@@ -411,12 +344,79 @@ components:
       - metadata
       - createdAt
       - updatedAt
-    SetupIntentSessionInputDto:
+    PaginatedPaymentMethodListOutput:
       type: object
       properties:
-        redirectUrl:
-          type: string
-          format: uri
+        pageInfo:
+          type: object
+          properties:
+            hasNextPage:
+              type: boolean
+            currentPage:
+              type: number
+            lastPage:
+              type: number
+            pageSize:
+              type: number
+          required:
+          - hasNextPage
+          - currentPage
+          - lastPage
+          - pageSize
+        totalCount:
+          type: number
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id: {}
+              customerId: {}
+              type:
+                type: string
+                const: CARD
+                x-enumNames:
+                - CARD
+              usage:
+                type: string
+                const: OFF_SESSION
+                x-enumNames:
+                - OFF_SESSION
+              status:
+                type: string
+                enum:
+                - DISABLED
+                - ENABLED
+                - REQUIRES_ACTION
+                x-enumNames:
+                - DISABLED
+                - ENABLED
+                - REQUIRES_ACTION
+              metadata:
+                type:
+                - object
+                - 'null'
+                additionalProperties:
+                  type: string
+                  pattern: ^[^\r\n\t\b\f\v]+$
+                  maxLength: 200
+              createdAt: {}
+              updatedAt: {}
+            required:
+            - id
+            - customerId
+            - type
+            - usage
+            - status
+            - metadata
+            - createdAt
+            - updatedAt
+      required:
+      - pageInfo
+      - totalCount
+      - items
+    PaymentMethodIdParam:
+      type: string
   securitySchemes:
     api_key:
       type: apiKey
