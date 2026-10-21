@@ -39,18 +39,6 @@
   source: edge
   arazzo: super-payments-bigcommerce-order-checkout.yml
   status: arazzo
-- slug: super-payments-shopify-own
-  label: Shopify (own)
-  partner: shopify
-  partner_name: Shopify (own)
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://apps.shopify.com/super-payments-marketing
-  source: edge
-  relationship: platform-app
-  arazzo: super-payments-shopify-order-checkout.yml
-  status: arazzo
 - slug: super-payments-npm-registry
   label: npm registry
   partner: npm
@@ -80,5 +68,43 @@
       24 months'
     detected_by: sweep-official-sdks.py
     detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: super-payments-shopify-own
+  label: Shopify (own)
+  partner: shopify
+  partner_name: Shopify (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://apps.shopify.com/super-payments-marketing
+  source: edge
+  relationship: platform-app
+  arazzo: super-payments-shopify-order-checkout.yml
+  status: arazzo
+- slug: super-payments-bigcommerce-own
+  label: BigCommerce (own)
+  partner: bigcommerce
+  partner_name: BigCommerce (own)
+  category: Payments & Security, Payment Processors & Gateways
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.bigcommerce.com/apps/super-payments/
+  source: edge
+  relationship: platform-app
+  arazzo: super-payments-bigcommerce-order-checkout.yml
+  status: arazzo
+- slug: super-payments-salesforce-commerce-cloud-own
+  label: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_name: Salesforce Commerce Cloud (own)
+  category: sales, eCommerce, paymentsProcessing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=190ba97d-23c8-4742-89a1-0ed0cd44fc85
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null

@@ -23,6 +23,8 @@ checked:
 - https://www.superpayments.com/integrations
 - https://zapier.com/apps/super-payments/integrations
 - shopify/integrations/shopify-integration-edges.yml
+- bigcommerce/integrations/bigcommerce-integration-edges.yml
+- salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
 summary: Super Payments publishes first-party ecommerce-platform plugins (Shopify, WooCommerce, Magento 2, BigCommerce)
   documented on its own docs site; it is listed on the Shopify App Store and WordPress.org plugin directory, and
   is absent from Zapier and n8n (both 404).
@@ -55,24 +57,6 @@ edges:
   type: claimed
   direction: provider-built
   evidence: https://docs.superpayments.com/docs/bigcommerce.md
-- partner_name: Shopify (own)
-  partner: shopify
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://apps.shopify.com/super-payments-marketing
-  mirror_of: shopify/integrations/shopify-integration-edges.yml
-  apps:
-  - Super Payments Marketing
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  publisher_verified:
-  - Built for Shopify
 - partner_name: npm registry
   partner: npm
   partner_match: register
@@ -103,4 +87,56 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
+- partner_name: Shopify (own)
+  partner: shopify
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://apps.shopify.com/super-payments-marketing
+  mirror_of: shopify/integrations/shopify-integration-edges.yml
+  apps:
+  - Super Payments Marketing
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  publisher_verified:
+  - Built for Shopify
+- partner_name: BigCommerce (own)
+  partner: bigcommerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.bigcommerce.com/apps/super-payments/
+  mirror_of: bigcommerce/integrations/bigcommerce-integration-edges.yml
+  apps:
+  - Super Payments
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Payments & Security, Payment Processors & Gateways
+- partner_name: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=190ba97d-23c8-4742-89a1-0ed0cd44fc85
+  mirror_of: salesforce-commerce-cloud/integrations/salesforce-commerce-cloud-integration-edges.yml
+  apps:
+  - Super Payments Cartridge for B2C Commerce
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: sales, eCommerce, paymentsProcessing
 templates: []
